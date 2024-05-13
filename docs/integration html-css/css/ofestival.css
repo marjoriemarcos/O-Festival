@@ -1,0 +1,106 @@
+/* Les variables */
+
+:root {
+    --dark_blue: #05608a;
+    --light_blue: #65C6DC;
+    --yellow: #efdca1;
+    --light_yellow: #EECE6A;
+    --dark_green: #03a35f;
+    --light_green: #009060;
+  }
+
+  /* FONT */
+
+  * {
+    font-family: 'Neutro', sans-serif;
+  }
+
+
+  /* NAVBAR */
+
+  .navbar {
+    background-color: var( --dark_blue);
+    height: 10vh;
+}
+  .navbar-logo {
+        width: 10vh;
+  }
+
+  .nav-link {
+    font-family: 'Neutro', sans-serif;
+    font-size: 20px;
+    color: white;
+  }
+
+  .nav-link:hover {
+    color: rgb(130, 129, 144);
+  }
+
+  /* BUTTONS */
+
+  .btn-primary {
+    background-color: var(--light_yellow);
+    color: var(--dark_blue);
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, color 0.3s ease; 
+
+  }
+
+  .btn-primary:hover {
+    background-color: white;
+    color: var(--dark_blue);
+  }
+
+  /* HOME VIDEO */
+  .container-fluid.text-center.position-relative {
+    height: 75vh;
+}
+  .home-video {
+   position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+  /* LINE UP SECTION */
+
+  .barre-blue {
+    background-color: var(--light_blue);
+    height: 5vh;
+  }
+
+    /* FOOTER */
+
+  footer {
+    background-color: var(--light_blue);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .menu-footer-container ul li {
+    list-style-type: none;
+    display: inline-block;
+  }
+
+  /* SOCIALS */
+
+  .fa-brands {
+    color: var(--light_yellow);
+    font-size: 35px;
+    display: flex;
+    transition: all 0.2s ease-out;
+}
+
+.fa-brands:hover {
+  color: var(--yellow);
+}
+
+a {
+	text-decoration: none;
+}
+
+  
