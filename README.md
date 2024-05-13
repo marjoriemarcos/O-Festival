@@ -45,3 +45,7 @@ Ils permettent de visualiser l'agencement des différentes pages, les fonctionna
 Les maquettes sont des représentations à taille de réelle de ce que va représenter le site.
 
 ## Sprint 1 - Développement
+
+### 1. Installation du framework _Symfony_
+
+En utilisant le framework _Symfony_, nous pourrions rapidement mettre en place les fonctionnalités clés telles que la vente de billets et la programmation musicale, tout en garantissant la protection des données des utilisateurs. En résumé, _Symfony_ nous permettrait de créer un site web pour **O'Festival** efficace, sécurisé et évolutif.
