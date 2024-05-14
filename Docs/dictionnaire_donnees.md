@@ -11,10 +11,10 @@
 
 ## Table d'association entre genre et artist (`artist_genre`)
 
-| Champ     | Type | Spécificités            | Description                    |
-| --------- | ---- | ----------------------- | ------------------------------ |
-| artist_id | INT  | FOREIGN KEY (artist.id) | L'identifiant de l'artiste     |
-| genre_id  | INT  | FOREIGN KEY (genre.id)  | L'identifiant du genre musical |
+| Champ     | Type  | Spécificités            | Description                    |
+| --------- | ----  | ----------------------- | ------------------------------ |
+| artist_id | ENTITY| FOREIGN KEY (artist.id) | L'identifiant de l'artiste     |
+| genre_id  | ENTITY| FOREIGN KEY (genre.id)  | L'identifiant du genre musical |
 
 ## Artist (`artist`)
 
@@ -41,8 +41,8 @@
 | id         | INT       | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | L'identifiant du créneau         |
 | date       | DATE      | NULL                                            | Le jour de la performance        |
 | hour       | TIME      | NULL                                            | L'horaire de la performance      |
-| artist_id  | INT       | FOREIGN KEY (artist.id)                         | Identifiant de l'artiste associé |
-| stage_id   | INT       | FOREIGN KEY (stage.id)                          | Identifiant de la scène associée |
+| artist_id  | ENTITY    | FOREIGN KEY (artist.id)                         | Identifiant de l'artiste associé |
+| stage_id   | ENTITY    | FOREIGN KEY (stage.id)                          | Identifiant de la scène associée |
 | created_at | TIMESTAMP | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de création de la table     |
 | updated_at | TIMESTAMP | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table  |
 
@@ -93,17 +93,17 @@
 | title                     | VARCHAR(64) | NOT NULL                                        | Le titre du billet                    |
 | price                     | FLOAT       | NOT NULL                                        | Le prix du billet                     |
 | quantity                  | INT         | NOT NULL                                        | La quantité de billets                |
-| duration_id               | INT         | FOREIGN KEY                                     | Identifiant de la durée               |
-| festival_goer_category_id | INT         | FOREIGN_KEY                                     | Identifiant de la catégorie du client |
+| duration_id               | ENTITY      | FOREIGN KEY                                     | Identifiant de la durée               |
+| festival_goer_category_id | ENTITY      | FOREIGN_KEY                                     | Identifiant de la catégorie du client |
 | created_at                | TIMESTAMP   | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de création de la table          |
 | updated_at                | TIMESTAMP   | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table       |
 
 ## Table d'association entre ticket et customer (`ticket_buy`)
 
-| Champ       | Type | Spécificités          | Description             |
-| ----------- | ---- | --------------------- | ----------------------- |
-| ticket_id   | INT  | FOREIGN KEY (role.id) | L'identifiant du billet |
-| customer_id | INT  | FOREIGN KEY (user.id) | L'identifiant du client |
+| Champ       | Type  | Spécificités          | Description             |
+| ----------- | ----  | --------------------- | ----------------------- |
+| ticket_id   | ENTITY| FOREIGN KEY (role.id) | L'identifiant du billet |
+| customer_id | ENTITY| FOREIGN KEY (user.id) | L'identifiant du client |
 
 ## Durée (`duration`)
 
