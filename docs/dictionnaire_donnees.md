@@ -24,23 +24,15 @@
 | name        | VARCHAR(64)  | NOT NULL                                        | Le nom de notre artiste               |
 | description | TEXT         | NOT NULL                                        | Présentation de notre artiste         |
 | picture     | VARCHAR(255) | NOT NULL                                        | Photo de l'artiste                    |
-| video       | VARCHAR(255) | NULL                                            | Lien vidéo d'une chanson de l'artiste |
+| video       | VARCHAR(255) | NULL                                            | Lien vidéo d'une chanson de l'artiste |  
+| website     | VARCHAR(255) | NULL                                            | Lien du site de l'artiste             |
+| facebook    | VARCHAR(255) | NULL                                            | Lien de la page Facebook de l'artiste |
+| twitter     | VARCHAR(255) | NULL                                            | Lien de la page Twitter/X de l'artiste|
+| instagram   | VARCHAR(255) | NULL                                            | Lien de la page Instagram de l'artiste|
+| spotify     | VARCHAR(255) | NULL                                            | Lien de la page Spotify de l'artiste  |
+| snapchat    | VARCHAR(255) | NULL                                            | Lien du profil Snapchat de l'artiste  |
+| tiktok      | VARCHAR(255) | NULL                                            | Lien du profil TikTok de l'artiste    |
 
-## Réseaux sociaux (`social_networks`)
-
-| Champ      | Type         | Spécificités                                    | Description                            |
-| ---------- | ------------ | ----------------------------------------------- | -------------------------------------- |
-| id         | INT          | PRIMARY KEY, NOT NULL, AUTO_INCREMENT, UNSIGNED | L'identifiant des réseaux sociaux      |
-| website    | VARCHAR(255) | NULL                                            | Lien du site de l'artiste              |
-| facebook   | VARCHAR(255) | NULL                                            | Lien de la page Facebook de l'artiste  |
-| twitter    | VARCHAR(255) | NULL                                            | Lien de la page Twitter/X de l'artiste |
-| instagram  | VARCHAR(255) | NULL                                            | Lien de la page Instagram de l'artiste |
-| spotify    | VARCHAR(255) | NULL                                            | Lien de la page Spotify de l'artiste   |
-| snapchat   | VARCHAR(255) | NULL                                            | Lien du profil Snapchat de l'artiste   |
-| tiktok     | VARCHAR(255) | NULL                                            | Lien du profil TikTok de l'artiste     |
-| artist_id  | INT          | FOREIGN KEY (artist.id)                         | Identifiant de l'artiste associé       |
-| created_at | TIMESTAMP    | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de création de la table           |
-| updated_at | TIMESTAMP    | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table        |
 
 ## Créneau (`slot`)
 
@@ -63,14 +55,6 @@
 | created_at | TIMESTAMP   | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de création de la table    |
 | updated_at | TIMESTAMP   | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table |
 
-## Rôle utilisateur (`role`)
-
-| Champ      | Type        | Spécificités                                    | Description                     |
-| ---------- | ----------- | ----------------------------------------------- | ------------------------------- |
-| id         | INT         | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | L'identifiant du rôle           |
-| name       | VARCHAR(64) | NOT NULL                                        | Le nom du rôle                  |
-| created_at | TIMESTAMP   | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de création de la table    |
-| updated_at | TIMESTAMP   | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table |
 
 ## Utilisateur (`user`)
 
@@ -80,16 +64,11 @@
 | firstname  | VARCHAR(64)  | NOT NULL                                        | Le prénom de l'utilisateur         |
 | lastname   | VARCHAR(64)  | NOT NULL                                        | Le nom de famille de l'utilisateur |
 | email      | VARCHAR(255) | NOT NULL                                        | L'e-mail de l'utilisateur          |
-| password   | VARCHAR(255) | NOT NULL                                        | Le mot de passe du client          |
+| password   | VARCHAR(255) | NOT NULL                                        | Le mot de passe de l'utilisateur   |
+| role       | VARCHAR(255) | NOT NULL                                        | Le rôle de l'utilisateur           |
 | created_at | TIMESTAMP    | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de création de la table       |
 | updated_at | TIMESTAMP    | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table    |
 
-## Table d'association entre role et user (`role_user`)
-
-| Champ   | Type | Spécificités          | Description                    |
-| ------- | ---- | --------------------- | ------------------------------ |
-| role_id | INT  | FOREIGN KEY (role.id) | L'identifiant du rôle          |
-| user_id | INT  | FOREIGN KEY (user.id) | L'identifiant de l'utilisateur |
 
 ## Client (`customer`)
 
