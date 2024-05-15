@@ -2,28 +2,35 @@
 
 :root {
     --dark_blue: #05608a;
+    --medium_blue: #4e7ba3;
     --light_blue: #65C6DC;
+    --dark_yellow: #FABB25;
     --yellow: #efdca1;
     --light_yellow: #EECE6A;
     --dark_green: #03a35f;
-    --light_green: #009060;
+    --light_green: #009060;  
+    
+    --font_neutro: 'Neutro', sans-serif;
+    --font_open: "Open Sans", sans-serif;
 }
 
 /* FONT */
 
+
 * {
-    font-family: 'Neutro', sans-serif;
+    font-family: var(--font_neutro);
 }
 
 .dark-blue-background {
-    background-color: var( --dark_blue);
+    background-color: var(--dark_blue);
 }
 
 /* NAVBAR */
 
 .navbar {
     height: 10vh;
-    background-color: var( --dark_blue);
+    background-color: var(--dark_blue);
+
 }
 .navbar-logo {
     width: 10vh;
@@ -35,7 +42,8 @@
     color: white;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link:focus {
     color: var( --light_yellow);
 }
 
@@ -52,10 +60,65 @@
     margin-bottom: 20px;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:focus {
     background-color: var(--yellow);
     color: var(--dark_blue);
 }
+
+.btn-secondary {
+    width: auto;
+    height: auto;
+    text-align: center;
+    white-space: normal;
+    color: black;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 40px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+   
+}
+
+.btn-day {   
+    background-color: var(--dark_yellow);
+}
+
+.btn-day:hover,
+.btn-day:focus {
+    background-color: var(--light_yellow);
+    color: white;    
+}
+
+.btn-stage {   
+    background-color: var(--light_green);
+}
+
+.btn-stage:hover,
+.btn-stage:focus {
+    background-color: var(--dark_green);
+    color: white;    
+}
+
+.btn-genre {   
+    background-color: var(--light_blue);
+}
+
+.btn-genre:hover,
+.btn-genre:focus {
+    background-color: var(--medium_blue);
+    color: white;    
+}
+
+.btn-ticket {
+
+    margin-top: 60px;
+    margin-bottom: 40px;
+
+}
+
+
 
 /* HOME VIDEO */
 .container-fluid.text-center.position-relative {
@@ -72,15 +135,23 @@
 }
 /* LINE UP SECTION & TICKET */
 
-.barre-blue {
+.bar-blue {
     background-color: var(--light_blue);
     height: 1.5em;
 }
 
-.title-blue-barre {
+.title-blue-bar-home {
     line-height: 1.5em;
     color: white;
     padding-left: 20px;
+}
+
+.title-blue-bar-programming {
+    line-height: 1.5em;
+    color: white;
+    padding-left: 20px;
+    margin: 15px 0 7.5px 0;
+
 }
 
 .card {
@@ -108,8 +179,6 @@
 .card p {
     font-size: 0.9em;
 }
-
-
 
 /* Artist PAGE */
 
@@ -166,11 +235,27 @@ font-size: 35px;
 .artist-video {
     height: 75vh;
 }
+
+/* TICKETING */
+
+.medium_blue {
+    background-color: var(--medium_blue);
+
+}
+
+/* LEGAL NOTICE & CVG */
+
+.medium-text {
+    font-family: var(--font_open);
+    font-size: 18px;
+}
+
 /* FOOTER */
 
 footer {
     background-color: var(--light_blue);
     padding: 20px;
+    margin-top: 20px;
     display: flex;
     justify-content: space-between;
 }
@@ -197,5 +282,41 @@ a {
     text-decoration: none;
 }
 
+/* PAGE INFOS */
+.bloc-info-img {
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
+    position: relative;
+}
 
+.info-img img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.content-info {
+    padding: 30px 50px;
+    color: var(--dark_blue);
+    background-color: white;
+}
+
+.contact-form, label {
+    color: var(--light_yellow);
+}
+
+.font-family-ss {
+    font-family: sans-serif;
+}
+
+figure {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+figure > img {
+    height: 240px;
+}
 
