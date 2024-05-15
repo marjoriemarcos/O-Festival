@@ -1,4 +1,4 @@
-/* Les variables */
+/* VARIABLES */
 
 :root {
     --dark_blue: #05608a;
@@ -8,8 +8,7 @@
     --yellow: #efdca1;
     --light_yellow: #EECE6A;
     --dark_green: #03a35f;
-    --light_green: #009060;  
-    
+    --light_green: #009060;      
     --font_neutro: 'Neutro', sans-serif;
     --font_open: "Open Sans", sans-serif;
 }
@@ -21,15 +20,54 @@
     font-family: var(--font_neutro);
 }
 
-.dark-blue-background {
+
+/* COLOURS */
+
+
+.dark-blue-txt {
+    color: var(--dark_blue)
+}
+
+.light-blue-txt {
+    color: var(--light_blue)
+}
+
+.light-green-txt {
+    color: var(--light_green)
+}
+
+.light-yellow-txt {
+    color: var(--light_yellow)
+}
+
+.light-blue-bg {
+    background-color: var(--light_blue);    
+}
+
+.medium-blue-bg {
+    background-color: var(--medium_blue);    
+}
+
+.dark-blue-bg {
     background-color: var(--dark_blue);
+}
+
+.light-yellow-bg {
+    background-color: var(--light_yellow);
+}      
+
+.dark-yellow-bg {
+    background-color: var(--dark_yellow);
+}
+
+.light-green-bg {
+    background-color: var(--light_green);
 }
 
 /* NAVBAR */
 
 .navbar {
-    height: 10vh;
-    background-color: var(--dark_blue);
+    height: 10vh;    
 
 }
 .navbar-logo {
@@ -50,9 +88,7 @@
 /* BUTTONS */
 
 .btn-primary {
-    width: 50%;
-    background-color: var(--light_yellow);
-    color: var(--dark_blue);
+    width: 50%; 
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -81,28 +117,16 @@
    
 }
 
-.btn-day {   
-    background-color: var(--dark_yellow);
-}
-
 .btn-day:hover,
 .btn-day:focus {
     background-color: var(--light_yellow);
     color: white;    
 }
 
-.btn-stage {   
-    background-color: var(--light_green);
-}
-
 .btn-stage:hover,
 .btn-stage:focus {
     background-color: var(--dark_green);
     color: white;    
-}
-
-.btn-genre {   
-    background-color: var(--light_blue);
 }
 
 .btn-genre:hover,
@@ -135,24 +159,15 @@
 }
 /* LINE UP SECTION & TICKET */
 
-.bar-blue {
-    background-color: var(--light_blue);
+
+.title-bar {
     height: 1.5em;
-}
-
-.title-blue-bar-home {
-    line-height: 1.5em;
-    color: white;
-    padding-left: 20px;
-}
-
-.title-blue-bar-programming {
     line-height: 1.5em;
     color: white;
     padding-left: 20px;
     margin: 15px 0 7.5px 0;
-
 }
+
 
 .card {
     border: none;
@@ -182,8 +197,8 @@
 
 /* Artist PAGE */
 
-main{
-    background-color: var(--dark_blue);
+.main-artist {
+    margin: 25px 0 25px 0;
 }
 
 .artist-image img {
@@ -198,20 +213,15 @@ main{
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.artist-informations-name{
-    color: var(--dark_blue);
+.artist-informations-name{    
     font-size: 2rem;
 }
 
-.artist-informations-show-day{
-    color:var(--dark_green);
+.artist-informations-show-day,
+.artist-informations-stage{  
     font-size: 1.25rem;
-}
+}    
 
-.artist-informations-stage{
-    color:var(--light_blue);
-    font-size: 1.25rem;
-}
 .artist-informations-genre {
     padding: 0.75rem 1.5rem;
 }
@@ -228,19 +238,11 @@ main{
 }
 
 .artist-informations-social-networks i{
-color:var(--dark_blue);
 font-size: 35px;
 }
 
 .artist-video {
     height: 75vh;
-}
-
-/* TICKETING */
-
-.medium_blue {
-    background-color: var(--medium_blue);
-
 }
 
 /* LEGAL NOTICE & CVG */
@@ -252,8 +254,7 @@ font-size: 35px;
 
 /* FOOTER */
 
-footer {
-    background-color: var(--light_blue);
+footer {    
     padding: 20px;
     margin-top: 20px;
     display: flex;
@@ -267,14 +268,19 @@ footer {
 
 /* SOCIALS */
 
-.fa-brands {
-    color: var(--light_yellow);
+.fa-brands {    
     font-size: 35px;
     display: flex;
     transition: all 0.2s ease-out;
 }
 
+
+.bi:hover,
 .fa-brands:hover {
+    color: var(--medium_blue);
+}
+
+footer .fa-brands:hover {
     color: var(--yellow);
 }
 
@@ -296,14 +302,16 @@ a {
     height: 100%;
 }
 
-.content-info {
-    padding: 30px 50px;
-    color: var(--dark_blue);
-    background-color: white;
+.title-white {
+    color: white;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px; 
 }
 
-.contact-form, label {
-    color: var(--light_yellow);
+.content-info {
+    padding: 30px 50px;    
+    background-color: white;
 }
 
 .font-family-ss {

@@ -33,7 +33,7 @@
     <body>
         <header>
             <!-- Nav -->
-            <nav class="navbar navbar-expand-lg dark-blue-background" data-bs-theme="light">
+            <nav class="navbar navbar-expand-lg dark-blue-bg" data-bs-theme="light">
                 <div class="container-fluid">
                     <!-- Logo à gauche -->
                     <a class="navbar-brand navbar-logo mr-auto" href="./index.html">
@@ -41,9 +41,11 @@
                     <!-- Liens à droite -->
                     <div class="collapse navbar-collapse d-flex " id="navbarNavAltMarkup">
                         <div class="navbar-nav justify-content-end flex-grow-1">
-                            <a class="nav-link mx-5" href="./programmation.html">Programmation</a>
-                            <a class="nav-link  mx-5" href="#">Billetterie</a>
-                            <a class="nav-link  mx-5" href="#">Infos pratiques</a>
+                            <a class="nav-link mx-5" href="./programming.html">Programmation</a>            
+    
+                            <a class="nav-link  mx-5" href="./ticketing.html">Billetterie</a>
+    
+                            <a class="nav-link  mx-5" href="./informations.html">Infos pratiques</a>
                         </div>
                     </div>
                 </div>
@@ -51,13 +53,11 @@
         </header>
 
         <main>
-
-            <div class="dark-blue-background">
-                <div class="d-flex flex-column">
-                    <h1 class="barre-blue title-blue-barre">Infos pratiques</h1>
-                </div>
-
-                <div class="dark-blue-background">
+        
+            <div class="medium-blue-bg">            
+                <h2 class="title-white">Infos pratiques</h2>               
+                <div class="medium-blue-bg">
+                      
 
                     <section class="bloc-info-img d-flex my-3">
 
@@ -65,7 +65,7 @@
                             <img src="../images/info-picture.jpg" alt="Photo festival">
                         </div>
 
-                        <article class="content-info col-6 font-family-ss">
+                        <article class="content-info col-6 font-family-ss dark-blue-txt">
                             <h2>OUVERTURE DES PORTES</h2>
                             <p>
                                 <strong>O'Fesitval 2024 ouvrira ses portes du X au X. Il aura lieu ........ L'entrée se fera par .....(10 minutes à pied de la gare SNCF)</strong>
@@ -91,31 +91,31 @@
                 </div>
 
                 <section>
-                <div class="text-center mt-5 contact-form">
+                <div class="text-center mt-5 contact-form light-yellow-txt">
                     <h2>CONTACT</h2>
                 </div>
                 <div class="container">
                     <form>
                         <div class="form-group mb-3">
-                            <label for="name">Nom</label>
+                            <label for="name" class="light-yellow-txt">Nom</label>
                             <input type="text"
                                    class="form-control font-family-ss"
                                    id="name"
                                    placeholder="Entrez votre nom">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="email">Email</label>
+                            <label for="email" class="light-yellow-txt">Email</label>
                             <input type="email"
                                    class="form-control font-family-ss"
                                    id="email"
                                    placeholder="Entrez votre email">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="message">Message</label>
+                            <label for="message" class="light-yellow-txt">Message</label>
                             <textarea class="form-control font-family-ss" id="message" rows="3"></textarea>
                         </div>
                         <div class="position-relative d-flex align-items-center justify-content-center p-3">
-                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                            <button type="submit" class="btn btn-primary light-yellow-bg dark-blue-txt">Envoyer</button>
                         </div>
 
                     </form>
@@ -125,25 +125,36 @@
             </div>
         </main>
 
-        <footer>
+        <footer class="light-blue-bg">
             <!-- TODO Nav Footer -->
-            <div class="">
-                <i class="fa-brands fa-facebook"></i>
-                <i class="fa-brands fa-square-x-twitter"></i>
-                <i class="fa-brands fa-square-instagram"></i>
-                <i class="fa-brands fa-square-snapchat"></i>
-                <i class="fa-brands fa-youtube"></i>
+            <div>
+                <a>
+                    <i class="fa-brands fa-facebook light-yellow-txt"></i>
+                </a>
+                <a>
+                    <i class="fa-brands fa-square-x-twitter light-yellow-txt"></i>
+                </a>
+                <a>
+                    <i class="fa-brands fa-square-instagram light-yellow-txt"></i>
+                </a>
+                <a>
+                    <i class="fa-brands fa-square-snapchat light-yellow-txt"></i>
+                </a>
+                <a>
+                    <i class="fa-brands fa-youtube light-yellow-txt"></i>
+                </a>
             </div>
             <div class="menu-footer-container">
                 <ul>
                     <li>
-                        <a class="nav-link" href="">Contact</a>
+                        <a class="nav-link" href="#">Contact</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="">Partenaires</a>
+                        <a class="nav-link" href="#">Partenaires</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="">Mentions légales</a>
+                        <a class="nav-link" href="./legal-notice.html">Mentions légales</a>
+
                     </li>
                 </ul>
             </div>

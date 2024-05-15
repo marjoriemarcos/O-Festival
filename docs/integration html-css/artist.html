@@ -31,7 +31,7 @@
 <body>
     <header>
         <!-- Nav -->
-        <nav class="navbar navbar-expand-lg dark-blue-background" data-bs-theme="light">
+        <nav class="navbar navbar-expand-lg dark-blue-bg" data-bs-theme="light">
             <div class="container-fluid">
                 <!-- Logo à gauche -->
                 <a class="navbar-brand navbar-logo mr-auto" href="./index.html">
@@ -39,15 +39,17 @@
                 <!-- Liens à droite -->
                 <div class="collapse navbar-collapse d-flex " id="navbarNavAltMarkup">
                     <div class="navbar-nav justify-content-end flex-grow-1">
-                        <a class="nav-link mx-5" href="./programmation.html">Programmation</a>
-                        <a class="nav-link  mx-5" href="#">Billetterie</a>
-                        <a class="nav-link  mx-5" href="#">Infos pratiques</a>
+                        <a class="nav-link mx-5" href="./programming.html">Programmation</a>            
+
+                        <a class="nav-link  mx-5" href="./ticketing.html">Billetterie</a>
+
+                        <a class="nav-link  mx-5" href="./informations.html">Infos pratiques</a>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
-    <main>
+    <main class="main-artist dark-blue-bg">
         <div class="container">
             <div class="row pt-5 gx-0">
                 <!-- Image à gauche -->
@@ -58,9 +60,9 @@
                 <!-- Informations à droite -->
                 <div class="col-md-6">
                     <div class="artist-informations p-4">
-                        <h1 class="artist-informations-name">Nom de l'artiste</h1>
-                        <h2 class="artist-informations-show-day">Jour de passage</h2>
-                        <h3 class="artist-informations-stage">Nom de la scène</h3>
+                        <h1 class="artist-informations-name dark-blue-txt">Nom de l'artiste</h1>
+                        <h2 class="artist-informations-show-day light-blue-txt">Jour de passage</h2>
+                        <h3 class="artist-informations-stage light-green-txt">Nom de la scène</h3>
                         <span class="artist-informations-genre badge bg-info mt-4">Genre 1</span>
                         <span class="artist-informations-genre badge bg-danger">Genre 2</span>
                         <!-- Description Artiste -->
@@ -103,13 +105,13 @@
                         <!-- Réseaux Artiste -->
                         <div class="artist-informations-social-networks">
                             <ul class="list-inline mb-0">
-                                <li class="list-inline-item"><i class="bi bi-globe"></i></li>
-                                <li class="list-inline-item"><i class="bi bi-spotify"></i></li>
-                                <li class="list-inline-item"><i class="bi bi-facebook"></i></li>
-                                <li class="list-inline-item"><i class="bi bi-instagram"></i></li>
-                                <li class="list-inline-item"><i class="bi bi-youtube"></i></li>
-                                <li class="list-inline-item"><i class="bi bi-snapchat"></i></li>
-                                <li class="list-inline-item"><i class="bi bi-tiktok"></i></li>
+                                <li class="list-inline-item"><i class="bi bi-globe dark-blue-txt"></i></li>
+                                <li class="list-inline-item"><i class="fa-brands fa-spotify dark-blue-txt"></i></li>
+                                <li class="list-inline-item"><i class="fa-brands fa-facebook dark-blue-txt"></i></li>
+                                <li class="list-inline-item"><i class="fa-brands fa-instagram dark-blue-txt"></i></li>
+                                <li class="list-inline-item"><i class="fa-brands fa-youtube dark-blue-txt"></i></li>
+                                <li class="list-inline-item"><i class="fa-brands fa-snapchat dark-blue-txt"></i></li>
+                                <li class="list-inline-item"><i class="fa-brands fa-tiktok dark-blue-txt"></i></li>
                             </ul>
                         </div>
                     </div>
@@ -126,7 +128,7 @@
                 </div>
                 <!-- Lien Billetterie -->
                 <div class="mt-5 mb-5">
-                    <a href="#" class="btn btn-primary btn-lg">Billetterie</a>
+                    <a href="#" class="btn btn-primary light-yellow-bg dark-blue-txt">Billetterie</a>
                 </div>
             </div>
         </div>
@@ -134,25 +136,36 @@
 
 
 
-    <footer>
+    <footer class="light-blue-bg">
         <!-- TODO Nav Footer -->
-        <div class="">
-            <i class="fa-brands fa-facebook"></i>
-            <i class="fa-brands fa-square-x-twitter"></i>
-            <i class="fa-brands fa-square-instagram"></i>
-            <i class="fa-brands fa-square-snapchat"></i>
-            <i class="fa-brands fa-youtube"></i>
+        <div>
+            <a>
+                <i class="fa-brands fa-facebook light-yellow-txt"></i>
+            </a>
+            <a>
+                <i class="fa-brands fa-square-x-twitter light-yellow-txt"></i>
+            </a>
+            <a>
+                <i class="fa-brands fa-square-instagram light-yellow-txt"></i>
+            </a>
+            <a>
+                <i class="fa-brands fa-square-snapchat light-yellow-txt"></i>
+            </a>
+            <a>
+                <i class="fa-brands fa-youtube light-yellow-txt"></i>
+            </a>
         </div>
         <div class="menu-footer-container">
             <ul>
                 <li>
-                    <a class="nav-link" href="">Contact</a>
+                    <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="">Partenaires</a>
+                    <a class="nav-link" href="#">Partenaires</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="">Mentions légales</a>
+                    <a class="nav-link" href="./legal-notice.html">Mentions légales</a>
+
                 </li>
             </ul>
         </div>
