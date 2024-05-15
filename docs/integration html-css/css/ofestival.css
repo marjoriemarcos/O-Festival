@@ -282,7 +282,7 @@ a {
     text-decoration: none;
 }
 
-/* PAGE INFOS */
+/** ------------ PAGE INFOS -----------**/
 .bloc-info-img {
     width: 100%;
     padding-left: 50px;
@@ -319,4 +319,44 @@ figure {
 figure > img {
     height: 240px;
 }
+
+/** ------------ END PAGE INFOS -----------**/
+
+/** ------------ PAGE 404 -----------**/
+
+.main-errorPage__white {
+     background-color: white;
+ }
+
+.error404-img-text {
+    position: relative;
+}
+
+.image_container {
+    height: 300px;
+}
+
+.img-errorPage {
+    object-fit: contain;
+}
+
+
+.card-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    /*TODO factoriser color*/
+    color: var(--dark_blue);
+}
+
+.footer-error404 {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+/** ------------ END PAGE 404 -----------**/
 
