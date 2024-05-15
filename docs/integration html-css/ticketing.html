@@ -33,7 +33,7 @@
     <body>
         <header>
             <!-- Nav -->
-            <nav class="navbar navbar-expand-lg dark-blue-background" data-bs-theme="light">
+            <nav class="navbar navbar-expand-lg dark-blue-bg" data-bs-theme="light">
                 <div class="container-fluid">
                     <!-- Logo à gauche -->
                     <a class="navbar-brand navbar-logo mr-auto" href="./index.html">
@@ -41,9 +41,11 @@
                     <!-- Liens à droite -->
                     <div class="collapse navbar-collapse d-flex " id="navbarNavAltMarkup">
                         <div class="navbar-nav justify-content-end flex-grow-1">
-                            <a class="nav-link mx-5" href="./programmation.html">Programmation</a>
-                            <a class="nav-link  mx-5" href="#">Billetterie</a>
-                            <a class="nav-link  mx-5" href="#">Infos pratiques</a>
+                            <a class="nav-link mx-5" href="./programming.html">Programmation</a>            
+    
+                            <a class="nav-link  mx-5" href="./ticketing.html">Billetterie</a>
+    
+                            <a class="nav-link  mx-5" href="./informations.html">Infos pratiques</a>
                         </div>
                     </div>
                 </div>
@@ -52,10 +54,9 @@
 
 
         <main>
-            <div class="container-fluid medium_blue">
-                <h2 class="text-center text-light py-5">Billetterie</h2>
-
-                <div class="d-flex flex-column">
+            <div class="d-flex flex-column">                        
+                    <div class="d-flex flex-column medium-blue-bg">
+                        <h2 class="title-white">Billetterie</h2>
                     <!-- TODO Lien Billetterie -->
                     <div class="row justify-content-around mx-3 mb-4 mt-3">
                         <div class="col-md-3">
@@ -91,7 +92,7 @@
                     </div>
             </div>
 
-            <div class="container-fluid medium_blue py-3">
+            <div class="container-fluid medium-blue-bg py-3">
                 <a title="Logiciel billetterie en ligne"
                 href="https://widget.weezevent.com/ticket/E1146829/?code=68626&locale=fr-FR&width_auto=1&color_primary=0032FA"
                 class="weezevent-widget-integration"
@@ -114,22 +115,23 @@
       
 
 
-        <footer>
-            <div class="">
-                <a href="" target="_blank">
-                    <i class="fa-brands fa-facebook"></i>
+        <footer class="light-blue-bg">
+            <!-- TODO Nav Footer -->
+            <div>
+                <a>
+                    <i class="fa-brands fa-facebook light-yellow-txt"></i>
                 </a>
-                <a href="" target="_blank">
-                    <i class="fa-brands fa-square-x-twitter"></i>
+                <a>
+                    <i class="fa-brands fa-square-x-twitter light-yellow-txt"></i>
                 </a>
-                <a href="" target="_blank">
-                    <i class="fa-brands fa-square-instagram"></i>
+                <a>
+                    <i class="fa-brands fa-square-instagram light-yellow-txt"></i>
                 </a>
-                <a href="" target="_blank">
-                    <i class="fa-brands fa-square-snapchat"></i>
+                <a>
+                    <i class="fa-brands fa-square-snapchat light-yellow-txt"></i>
                 </a>
-                <a href="" target="_blank">
-                    <i class="fa-brands fa-youtube"></i>
+                <a>
+                    <i class="fa-brands fa-youtube light-yellow-txt"></i>
                 </a>
             </div>
             <div class="menu-footer-container">
@@ -141,7 +143,8 @@
                         <a class="nav-link" href="#">Partenaires</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">Mentions légales</a>
+                        <a class="nav-link" href="./legal-notice.html">Mentions légales</a>
+
                     </li>
                 </ul>
             </div>
