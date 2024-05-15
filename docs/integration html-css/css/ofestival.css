@@ -8,13 +8,12 @@
     --yellow: #efdca1;
     --light_yellow: #EECE6A;
     --dark_green: #03a35f;
-    --light_green: #009060;      
+    --light_green: #009060;    
     --font_neutro: 'Neutro', sans-serif;
     --font_open: "Open Sans", sans-serif;
 }
 
 /* FONT */
-
 
 * {
     font-family: var(--font_neutro);
@@ -66,9 +65,8 @@
 
 /* NAVBAR */
 
-.navbar {
+.navbar { 
     height: 10vh;    
-
 }
 .navbar-logo {
     width: 10vh;
@@ -147,6 +145,7 @@
 /* HOME VIDEO */
 .container-fluid.text-center.position-relative {
     height: 75vh;
+    border: solid 3px red;
 }
 .home-video {
     position: absolute;
@@ -244,8 +243,6 @@ font-size: 35px;
 .artist-video {
     height: 75vh;
 }
-
-/* LEGAL NOTICE & CVG */
 
 .medium-text {
     font-family: var(--font_open);
