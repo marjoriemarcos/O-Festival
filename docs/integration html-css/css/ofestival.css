@@ -5,7 +5,8 @@
     --medium_blue: #4e7ba3;
     --light_blue: #65C6DC;
     --yellow: #efdca1;
-    --light_yellow: #EECE6A;
+    --light_yellow: #EECE6A;   
+    --dark_yellow: #FABB25;
     --dark_green: #03a35f;
     --light_green: #009060;
     --font_neutro: 'Neutro', sans-serif;
@@ -38,11 +39,13 @@
     color: white;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link:focus {
     color: var( --light_yellow);
 }
 
 /* BUTTONS */
+
 
 .btn-primary {
     width: 50%;
@@ -55,10 +58,68 @@
     margin-bottom: 20px;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:focus {
     background-color: var(--yellow);
     color: var(--dark_blue);
 }
+
+
+
+
+.btn-secondary {
+    width: auto;
+    height: auto;
+    text-align: center;
+    white-space: normal;
+    color: black;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 40px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+   
+}
+
+.btn-day {   
+    background-color: var(--dark_yellow);
+}
+
+.btn-day:hover,
+.btn-day:focus {
+    background-color: var(--light_yellow);
+    color: white;    
+}
+
+.btn-stage {   
+    background-color: var(--light_green);
+}
+
+.btn-stage:hover,
+.btn-stage:focus {
+    background-color: var(--dark_green);
+    color: white;    
+}
+
+.btn-genre {   
+    background-color: var(--light_blue);
+}
+
+.btn-genre:hover,
+.btn-genre:focus {
+    background-color: var(--blue);
+    color: white;    
+}
+
+.btn-ticket {
+
+    margin-top: 60px;
+    margin-bottom: 40px;
+
+}
+
+
 
 /* HOME VIDEO */
 .container-fluid.text-center.position-relative {
@@ -75,15 +136,22 @@
 }
 /* LINE UP SECTION & TICKET */
 
-.barre-blue {
+.bar-blue {
     background-color: var(--light_blue);
     height: 1.5em;
 }
 
-.title-blue-barre {
+.title-blue-bar-home {
     line-height: 1.5em;
     color: white;
     padding-left: 20px;
+}
+
+.title-blue-bar-programming {
+    line-height: 1.5em;
+    color: white;
+    padding-left: 20px;
+    margin: 15px 0 7.5px 0;
 }
 
 .card {
@@ -131,6 +199,7 @@
 footer {
     background-color: var(--light_blue);
     padding: 20px;
+    margin-top: 20px;
     display: flex;
     justify-content: space-between;
 }
