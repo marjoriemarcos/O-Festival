@@ -1,0 +1,327 @@
+/* VARIABLES */
+
+:root {
+    --dark_blue: #05608a;
+    --medium_blue: #4e7ba3;
+    --light_blue: #65C6DC;
+    --dark_yellow: #FABB25;
+    --yellow: #efdca1;
+    --light_yellow: #EECE6A;
+    --dark_green: #03a35f;
+    --light_green: #009060;    
+    --font_neutro: 'Neutro', sans-serif;
+    --font_open: "Open Sans", sans-serif;
+}
+
+/* FONT */
+
+* {
+    font-family: var(--font_neutro);
+}
+
+
+/* COLOURS */
+
+
+.dark-blue-txt {
+    color: var(--dark_blue)
+}
+
+.light-blue-txt {
+    color: var(--light_blue)
+}
+
+.light-green-txt {
+    color: var(--light_green)
+}
+
+.light-yellow-txt {
+    color: var(--light_yellow)
+}
+
+.light-blue-bg {
+    background-color: var(--light_blue);    
+}
+
+.medium-blue-bg {
+    background-color: var(--medium_blue);    
+}
+
+.dark-blue-bg {
+    background-color: var(--dark_blue);
+}
+
+.light-yellow-bg {
+    background-color: var(--light_yellow);
+}      
+
+.dark-yellow-bg {
+    background-color: var(--dark_yellow);
+}
+
+.light-green-bg {
+    background-color: var(--light_green);
+}
+
+/* NAVBAR */
+
+.navbar { 
+    height: 10vh;    
+}
+.navbar-logo {
+    width: 10vh;
+}
+
+.nav-link {
+    font-family: 'Neutro', sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+    color: var( --light_yellow);
+}
+
+/* BUTTONS */
+
+.btn-primary {
+    width: 50%; 
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 40px;
+    margin-bottom: 20px;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: var(--yellow);
+    color: var(--dark_blue);
+}
+
+.btn-secondary {
+    width: auto;
+    height: auto;
+    text-align: center;
+    white-space: normal;
+    color: black;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 40px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+   
+}
+
+.btn-day:hover,
+.btn-day:focus {
+    background-color: var(--light_yellow);
+    color: white;    
+}
+
+.btn-stage:hover,
+.btn-stage:focus {
+    background-color: var(--dark_green);
+    color: white;    
+}
+
+.btn-genre:hover,
+.btn-genre:focus {
+    background-color: var(--medium_blue);
+    color: white;    
+}
+
+.btn-ticket {
+
+    margin-top: 60px;
+    margin-bottom: 40px;
+
+}
+
+
+
+/* HOME VIDEO */
+.container-fluid.text-center.position-relative {
+    height: 75vh;
+    border: solid 3px red;
+}
+.home-video {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+/* LINE UP SECTION & TICKET */
+
+
+.title-bar {
+    height: 1.5em;
+    line-height: 1.5em;
+    color: white;
+    padding-left: 20px;
+    margin: 15px 0 7.5px 0;
+}
+
+
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.img-zoom {
+    overflow: hidden;
+}
+
+.img-zoom img {
+    width: 100%;
+    transition: transform .1s;
+}
+
+.img-zoom:hover img {
+    transform: scale(1.1);
+}
+
+.card h3 {
+    font-size: 1.4em;
+}
+
+.card p {
+    font-size: 0.9em;
+}
+
+/* Artist PAGE */
+
+.main-artist {
+    margin: 25px 0 25px 0;
+}
+
+.artist-image img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.artist-informations{
+    background-color: white;
+}
+.artist-informations p{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.artist-informations-name{    
+    font-size: 2rem;
+}
+
+.artist-informations-show-day,
+.artist-informations-stage{  
+    font-size: 1.25rem;
+}    
+
+.artist-informations-genre {
+    padding: 0.75rem 1.5rem;
+}
+
+.artist-informations-name,
+.artist-informations-show-day,
+.artist-informations-stage{
+    margin-bottom: 0;
+}
+
+.artist-informations-description {
+    max-height: 300px; /* Limite la hauteur à 300 pixels */
+    overflow-y: auto; /* Active la barre de défilement verticale si nécessaire */
+}
+
+.artist-informations-social-networks i{
+font-size: 35px;
+}
+
+.artist-video {
+    height: 75vh;
+}
+
+.medium-text {
+    font-family: var(--font_open);
+    font-size: 18px;
+}
+
+/* FOOTER */
+
+footer {    
+    padding: 20px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu-footer-container ul li {
+    list-style-type: none;
+    display: inline-block;
+}
+
+/* SOCIALS */
+
+.fa-brands {    
+    font-size: 35px;
+    display: flex;
+    transition: all 0.2s ease-out;
+}
+
+
+.bi:hover,
+.fa-brands:hover {
+    color: var(--medium_blue);
+}
+
+footer .fa-brands:hover {
+    color: var(--yellow);
+}
+
+a {
+    text-decoration: none;
+}
+
+/* PAGE INFOS */
+.bloc-info-img {
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
+    position: relative;
+}
+
+.info-img img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.title-white {
+    color: white;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px; 
+}
+
+.content-info {
+    padding: 30px 50px;    
+    background-color: white;
+}
+
+.font-family-ss {
+    font-family: sans-serif;
+}
+
+figure {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+figure > img {
+    height: 240px;
+}
+
