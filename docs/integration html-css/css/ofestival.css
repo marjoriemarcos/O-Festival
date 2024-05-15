@@ -8,23 +8,25 @@
     --light_yellow: #EECE6A;
     --dark_green: #03a35f;
     --light_green: #009060;
+    --font_neutro: 'Neutro', sans-serif;
+    --font_open: "Open Sans", sans-serif;
 }
 
 /* FONT */
 
 * {
-    font-family: 'Neutro', sans-serif;
+    font-family: var(--font_neutro);
 }
 
 .dark-blue-background {
-    background-color: var( --dark_blue);
+    background-color: var(--dark_blue);
 }
 
 /* NAVBAR */
 
 .navbar {
     height: 10vh;
-    background-color: var( --dark_blue);
+    background-color: var(--dark_blue);
 }
 .navbar-logo {
     width: 10vh;
@@ -117,6 +119,12 @@
 
 }
 
+/* LEGAL NOTICE & CVG */
+
+.medium-text {
+    font-family: var(--font_open);
+    font-size: 18px;
+}
 
 /* FOOTER */
 
