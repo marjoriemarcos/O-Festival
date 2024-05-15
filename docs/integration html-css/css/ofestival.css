@@ -196,57 +196,56 @@
 
 /* Artist PAGE */
 
-.main-artist {
-    margin: 25px 0 25px 0;
+.container-artist {
+    padding: 0 15% 0 15%;
 }
-
+    
 .artist-image img {
     height: 100%;
     object-fit: cover;
 }
-
+    
 .artist-informations{
     background-color: white;
+    height: 100%;
 }
+    
 .artist-informations p{
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family:var(--font_open)
 }
-
-.artist-informations-name{    
+    
+.artist-informations-name{
     font-size: 2rem;
 }
-
+    
 .artist-informations-show-day,
-.artist-informations-stage{  
+.artist-informations-stage{
     font-size: 1.25rem;
-}    
-
+    margin-bottom: 0;
+}
+    
 .artist-informations-genre {
     padding: 0.75rem 1.5rem;
 }
-
-.artist-informations-name,
-.artist-informations-show-day,
-.artist-informations-stage{
-    margin-bottom: 0;
-}
-
+    
 .artist-informations-description {
-    max-height: 300px; /* Limite la hauteur à 300 pixels */
+    height: 300px;
     overflow-y: auto; /* Active la barre de défilement verticale si nécessaire */
 }
-
+    
 .artist-informations-social-networks i{
-font-size: 35px;
+    font-size: 2.5rem;
 }
-
+    
 .artist-video {
     height: 75vh;
 }
-
-.medium-text {
-    font-family: var(--font_open);
-    font-size: 18px;
+      
+@media only screen and (max-width: 767px) {
+    .artist-video {
+        width: 100vh; /* Prend la largeur de l'écran */
+        height: 50vh; /* Hauteur automatique pour conserver les proportions */
+    }
 }
 
 /* FOOTER */
