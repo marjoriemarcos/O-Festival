@@ -2,6 +2,7 @@
 
 :root {
     --dark_blue: #05608a;
+    --medium_blue: #4e7ba3;
     --light_blue: #65C6DC;
     --yellow: #efdca1;
     --light_yellow: #EECE6A;
@@ -107,6 +108,13 @@
 
 .card p {
     font-size: 0.9em;
+}
+
+/* TICKETING */
+
+.medium_blue {
+    background-color: var(--medium_blue);
+
 }
 
 
