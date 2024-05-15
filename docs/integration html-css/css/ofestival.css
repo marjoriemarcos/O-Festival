@@ -108,7 +108,7 @@
 
 .btn-genre:hover,
 .btn-genre:focus {
-    background-color: var(--blue);
+    background-color: var(--medium_blue);
     color: white;    
 }
 
