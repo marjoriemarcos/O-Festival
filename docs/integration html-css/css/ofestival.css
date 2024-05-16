@@ -1,4 +1,4 @@
-/* VARIABLES */
+/** --------- VARIABLES --------- **/
 
 :root {
     --dark_blue: #05608a;
@@ -13,86 +13,77 @@
     --font_open: "Open Sans", sans-serif;
 }
 
-/* FONT */
+/** --------- FONT --------- **/
 
 * {
     font-family: var(--font_neutro);
 }
-
 .open-font {
     font-family: var(--font_open);
-
 }
 
-/* COLOURS */
-
+/** --------- COLORS --------- **/
 
 .dark-blue-txt {
     color: var(--dark_blue)
 }
-
 .light-blue-txt {
     color: var(--light_blue)
 }
-
 .light-green-txt {
     color: var(--light_green)
 }
-
 .light-yellow-txt {
     color: var(--light_yellow)
 }
-
 .light-blue-bg {
     background-color: var(--light_blue);    
 }
-
+.light-green-bg {
+    background-color: var(--light_green);
+}
+.light-yellow-bg {
+    background-color: var(--light_yellow);
+}  
 .medium-blue-bg {
     background-color: var(--medium_blue);    
 }
-
 .dark-blue-bg {
     background-color: var(--dark_blue);
-}
-
-.light-yellow-bg {
-    background-color: var(--light_yellow);
-}      
-
+}  
 .dark-yellow-bg {
     background-color: var(--dark_yellow);
-}
-
-.light-green-bg {
-    background-color: var(--light_green);
 }
 
 .background-img-bg{
     background-image:url(../../images/back-ground.png);
     background-size: cover;
-    background-attachment: fixed; 
+}
+.background-img-fixed-bg{
+    background-image:url(../../images/back-ground.png);
+    background-size: cover;
+    background-attachment: fixed;
 }
 
-
-/* GENERAL */
+/** --------- GENERAL --------- **/
 
 html, body {
     height: 100%;
     width: 100%;
     overflow-x: hidden;
 }    
-
 body {
     display: flex;
     flex-direction: column;
 }
-
-main {
-    flex: 1;
+.page-title {
+    line-height: 1.5em;
+    color: white;
+    padding: 2.5% 0 2.5% 0;
+    text-align: center;
 }
 
-
-/* NAVBAR */
+/** --------- NAV BAR --------- **/
 
 .navbar { 
     display: flex;
@@ -101,28 +92,22 @@ main {
     padding: 1rem 1.5rem;
     height: 10vh;    
 }
-
 .navbar-logo {
     width: 8vh;
     padding: 0;
 }
-
 .nav-link {
     font-family: 'Neutro', sans-serif;
     font-size: 20px;
     color: white;
 }
-
 .nav-link:hover,
 .nav-link:focus {
     color: var( --light_yellow);
 }
-
-
 .hamburger {
     display: none;
 }
-
 .bar {
     display: block;
     width: 25px;
@@ -132,13 +117,11 @@ main {
     transition: all 0.3s ease-in-out;
     background-color: #101010;
 }
-
 .nav-menu {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 .nav-item {
     margin-left: 5rem;
 }
@@ -157,37 +140,29 @@ main {
         transition: 0.3s;
         background-image:url(../../images/back-ground.png);
     }
-
     .nav-link {
         font-size: 25px;
         color: white;
     }
-
     .nav-menu.active {
         left: 0;
     }
-
     .nav-item {
         margin: 2.5rem 0;
     }
-
     .hamburger {
         display: block;
         cursor: pointer;
     }
-
     .hamburger.active .bar:nth-child(2) {
         opacity: 0;
     }
-
     .hamburger.active .bar:nth-child(1) {
         transform: translateY(8px) rotate(45deg);
     }
-
     .hamburger.active .bar:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
     }
-
 }
 
 @media only screen and (max-width: 500px) {
@@ -204,14 +179,12 @@ main {
         transition: 0.3s;
         background-image:url(../../images/back-ground.png);
     }
-
     .nav-link {
         font-size: 15px;
     }
-
 }
 
-/* BUTTONS */
+/** --------- BUTTONS --------- **/
 
 .btn-primary {
     padding: 1%;
@@ -222,14 +195,12 @@ main {
     border-radius: 40px;
     margin-bottom: 20px;
 }
-
 .btn-primary:hover,
 .btn-primary:focus {
     background-color: var(--yellow);
     color: var(--dark_blue);
     transform: scale(1.05)
 }
-
 .btn-secondary {
     width: auto;
     height: auto;
@@ -245,21 +216,18 @@ main {
     padding-left: 10px;
    
 }
-
 .btn-day:hover,
 .btn-day:focus {
     background-color: var(--light_yellow);
     color: white;  
     transform: scale(1.05)  
 }
-
 .btn-stage:hover,
 .btn-stage:focus {
     background-color: var(--dark_green);
     color: white;   
     transform: scale(1.05)  
 }
-
 .btn-genre:hover,
 .btn-genre:focus {
     background-color: var(--medium_blue);
@@ -267,42 +235,12 @@ main {
     transform: scale(1.05)   
 }
 
-.btn-ticket {
-    max-width: 200px;
-    width: 100%;
-    display: inline-block;
-    text-align: center;
-}
-
-@media (min-width: 576px) {
-    .btn-ticket {
-        width: auto;
-    }
-}
-
-
 /** --------- INDEX PAGE --------- **/
 
 /* HOME VIDEO */
 .container-home-video {
     height: 70vh;
 }
-
-@media (max-width: 790px) {
-    .container-home-video {
-        height: 35vh;
-    }
-    .container-home h2{
-        font-size: 1.25rem;
-    }
-}
-
-@media(max-width: 760px){
-    .home-programming-slide-artist:nth-child(n+2) {
-        display: none;
-    }
-}
-
 .home-video {
     position: absolute;
     right: 0;
@@ -312,12 +250,11 @@ main {
     object-fit: cover;
     z-index: 1;
 }
-
 .home-title{
     z-index: 2;
 }
 
-/** ------------ Slide -----------**/
+/* SLIDE LINE-UP */
 .home-programming-slide-prev,
 .home-programming-slide-next {
     font-size: 3rem;
@@ -327,7 +264,6 @@ main {
     transform: translateY(-50%);
     transition:0.3s;
 }
-
 .home-programming-slide-prev {
     left: 0.5%;
 }
@@ -338,276 +274,146 @@ main {
 .home-programming-slide-next:hover {
     color: var(--dark_yellow);
 }
-
 .home-programming-slide{
     position: relative;
 }
 
 
-/* LINE UP SECTION & TICKET */
-
-.title-bar-home {
-    height: 1.5em;
-    line-height: 1.5em;
-    color: white;
-    padding-left: 20px;
-    margin-top: 20px; 
-    margin-bottom: 10px;    
-}
+/** --------- CARD --------- **/
 
 .card {
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
 .img-zoom {
     overflow: hidden;
 }
-
 .img-zoom img {
     width: 100%;
     transition: transform .1s;
 }
-
 .img-zoom:hover img {
     transform: scale(1.1);
 }
-
 .card h3 {
     font-size: 1.4em;
 }
-
 .card p {
     font-size: 0.9em;
 }
 
-@media (max-width: 1160px) {
-    .card h3 {
-        font-size: 1em;
-    }
-    
-    .card p {
-        font-size: 0.5em;
-    }
-
-}
-
-@media (max-width: 500px) {
-    .container-video {
-        height: 30vh;
-        border: solid 3px red;
-    }
-
-    .row {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .btn-index_mobile {
-        max-width: 80%;
-        font-size: 10px;
-    }
-
-    .title-index_mobile {
-        font-size: 20px;
-    }
-    .title-bar_mobile {
-        height: 2.5em;
-        line-height: 2.5em;
-    }
-    /* Masquer la deuxième carte d'artiste */
-    .card-nodisplay_mobile {
-        display: none;
-    }
-}
-
-/** --------- END OF INDEX PAGE --------- **/
-
-/* TICKETING */
-
-/* Title bars for pages outside of the home page */
-.title-bar {
-    height: 1.5em;
-    line-height: 1.5em;
-    color: white;
-    padding-left: 20px;
-    margin-top: 20px; 
-    margin-bottom: 10px;
-    text-align: center;
-}
+/** --------- TICKETING --------- **/
 
 .container-ticketing {
     padding: 0 10% 0 10%;
 }
-
 .ticket-card-info-festival-goer,
 .ticket-card-info-price{
     font-weight: 800;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
 }
-
 .ticket-card-info-price{
     font-size: 1.5em;
     color: var(--dark_yellow);
 }
-
 .ticket-card-info h3{
     border-bottom: 2px solid var(--dark_yellow);
     width: 80%; 
     margin: auto;
 }
 
-
-/* Artist PAGE */
+/** --------- ARTIST --------- **/
 
 .container-artist {
     padding: 0 15% 0 15%;
-}
-
-    
-.artist-image img {
-    height: 100%;
+} 
+.artist-image img,
+.informations-image img {
+    width: 100%;
+    height: 100%; 
     object-fit: cover;
 }
-    
 .artist-informations{
     background-color: white;
     height: 100%;
 }  
-
 .artist-informations-name{
     font-size: 2rem;
-}
-    
+} 
 .artist-informations-show-day,
 .artist-informations-stage{
     font-size: 1.25rem;
     margin-bottom: 0;
 }
-    
-
 .artist-informations-genre {
     padding: 0.75rem 1.5rem;
-}
-    
+}  
 .artist-informations-description {
     height: 300px;
     overflow-y: auto; /* Enable the scrollbar if necessary */
-}
-    
+} 
 .artist-informations-social-networks i{
     font-size: 2.5rem;
 }
-    
 .artist-video {
     height: 75vh;
 }
-      
-@media only screen and (max-width: 767px) {
-    .artist-video {
-        width: 100vh; /* Fills the screen */
-        height: 50vh; /* Automatic height to keep the proportions */
-    }
 
-}
-
-
-/* SOCIALS */
+/** --------- SOCIAL-NETWORKS --------- **/
 
 .fa-brands {    
     font-size: 35px;
     display: flex;
     transition: all 0.2s ease-out;
 }
-
-
 .bi:hover,
 .fa-brands:hover {
     color: var(--medium_blue);
 }
-
 footer .fa-brands:hover {
     color: var(--yellow);
 }
-
 a {
     text-decoration: none;
 }
 
-/** ------------ PAGE INFOS -----------**/
+/** ------------ INFORMATIONS -----------**/
+
 .bloc-info-img {
     width: 100%;
     position: relative;
 }
-
 .info-img img {
     object-fit: cover;
     width: 100%;
     height: 100%;
 }
-
 .content-info {
     padding: 30px 50px;
 }
-
-
-.info-map, figure {
+.informations-map, figure {
     margin: 0;
     display: flex;
     justify-content: center;
 }
-
-.info-map > img {
+.informations-map > img {
     height: 240px;
 }
-
-
-@media (max-width: 500px) {
-    .info-img > img {
-        height: 300px;
-    }
-
-    .info-map > img {
-        object-fit: contain;
-        width: 80%;
-        height: 100%;
-    }
-
-    .bloc-info-img {
-        font-size: 10px;
-    }
-
-    .btn-primary {
-        width: 100%;
-    }
-
-    .content-info {
-        padding: 30px 40px;
-    }
+.informations-content{
+    height: 100%;
 }
 
-/** ------------ END PAGE INFOS -----------**/
 
-/** ------------ PAGE 404 -----------**/
+/** ------------ ERROR 404 -----------**/
 
-.main-errorPage__white {
-    background-color: white;
-}
-
-.error404-img-text {
+.error404-content{
     position: relative;
 }
-
-.image_container {
+.error404-img {
+    object-fit: contain;
     height: 300px;
 }
-
-.img-errorPage {
-    object-fit: contain;
-}
-
-
-.card-text-404 {
+.error404-text {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -615,4 +421,52 @@ a {
     height: 50px;
 }
 
-/** ------------ END PAGE 404 -----------**/
+/** ------------ RESPONSIVE -----------**/
+     
+
+@media (max-width: 750px) {
+    .info-img > img {
+        height: 300px;
+    }
+    .informations-map > img {
+        object-fit: contain;
+        width: 80%;
+        height: 100%;
+    }
+    .bloc-info-img {
+        font-size: 10px;
+    }
+    .content-info {
+        padding: 30px 40px;
+    }
+    .btn,
+    h1,
+    h2,
+    .card{
+        font-size: smaller;
+    }
+    .container-home-video {
+        height: 35vh;
+    }
+}
+@media (max-width: 970px) {
+    .artist-video {
+        width: 100vh; 
+        height: 50vh; 
+    }
+}
+@media (max-width: 1170px) {
+    .card h3 {
+        font-size: 1em;
+    }
+    .card p {
+        font-size: 0.5em;
+    }
+}
+
+
+@media(max-width: 767px){
+    .home-programming-slide-artist:nth-child(n+2) {
+        display: none;
+    }
+}

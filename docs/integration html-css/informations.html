@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="fr">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -27,101 +28,114 @@
     <title>O'Festival</title>
 </head>
 
-    <body>
-        <header class="header">
-            <nav class="navbar dark-blue-bg">
-                <a class="navbar-brand navbar-logo" href="./index.html">
-                    <img src="../images/logo.png" alt="Logo de O'Festival" class="img-fluid">
-                </a>
-                <ul class="nav-menu dark-blue-bg">
-                    <li class="nav-item">
-                        <a href="./programming.html" class="nav-link">Programmation</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="./ticketing.html" class="nav-link">Billetterie</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="./informations.html" class="nav-link">Infos pratiques</a>
-                    </li>
-                </ul>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
-            </nav>
+<body>
+    <header class="header">
+        <nav class="navbar dark-blue-bg">
+            <a class="navbar-brand navbar-logo" href="./index.html">
+                <img src="../images/logo.png" alt="Logo de O'Festival" class="img-fluid">
+            </a>
+            <ul class="nav-menu dark-blue-bg">
+                <li class="nav-item">
+                    <a href="./programming.html" class="nav-link">Programmation</a>
+                </li>
+                <li class="nav-item">
+                    <a href="./ticketing.html" class="nav-link">Billetterie</a>
+                </li>
+                <li class="nav-item">
+                    <a href="./informations.html" class="nav-link">Infos pratiques</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
     </header>
 
-        <main>
-            <!--Section des informations-->
-            <div class="d-flex flex-column medium-blue-bg">
-                <h2 class="title-bar h-25">Infos pratiques</h2>
-                <div class="medium-blue-bg">
-                    <section class="bloc-info-img d-flex flex-column flex-md-row my-3">
-                        <figure class="info-img col-12 col-md-6">
-                            <img src="../images/info-picture.jpg" alt="Photo festival">
-                        </figure>
-                        <article class="content-info bg-white col-12 col-md-6 open-font dark-blue-txt">
-                            <h2>OUVERTURE DES PORTES</h2>
-                            <p>
-                                <strong>O'Fesitval 2024 ouvrira ses portes du X au X. Il aura lieu ........ L'entrée se fera par .....(10 minutes à pied de la gare SNCF)</strong>
-                            </p>
-                            <p>
-                                <strong>Horaires d'ouvertures O'Festival</strong>
-                                <br>
-                                OUVERTURE > VENDREDI X à 18h00
-                                <br>
-                                FERMETURE > DIMANCHE X à 00h00
-                                <!--#TODO Mettre le lien vers la billetterie-->
-                            <p><strong> 👉 CONSEIL : ACHETER VOTRE PASS <a href="">ICI</a></strong></p>
-                            <p>
-                                <strong>
-                                    Situé idéalement O'Festival vous régalera de bon son tout l'été
-                                </strong>
-                            </p>
-                            <figure class="info-map">
-                                <img src="../images/info-map.png" alt="information durée transport carte">
-                            </figure>
-                        </article>
-                    </section>
+    <main>
+
+        <!--Infos Pratique-->
+        <div class="container-informations medium-blue-bg">
+            <h2 class="page-title">Infos pratiques</h2>
+            <div class="row p-5 gx-0 background-img-bg">
+
+                <!-- Image -->
+                <div class="informations-image col-lg-6">
+                    <img src="../images/info-picture.jpg" class="img-fluid" alt="Photo festival">
                 </div>
 
-                <!--Section des formulaire de contact-->
-                <section>
-                <div class="text-center mt-md-5 mt-3 contact-form light-yellow-txt">
-                    <h2>CONTACT</h2>
+                <!-- Article -->
+                <div class="col-lg-6">
+                    <article class="informations-content bg-white open-font dark-blue-txt p-5">
+                        <h2>OUVERTURE DES PORTES</h2>
+                        <p>
+                            <strong>O'Festival 2024 ouvrira ses portes du X au X. Il aura lieu ........ L'entrée se fera
+                                par
+                                .....(10 minutes à pied de la gare SNCF)</strong>
+                        </p>
+                        <p>
+                            <strong>Horaires d'ouvertures O'Festival</strong>
+                            <br>
+                            OUVERTURE > VENDREDI X à 18h00
+                            <br>
+                            FERMETURE > DIMANCHE X à 00h00
+                        </p>
+                        <p><strong> 👉 CONSEIL : ACHETER VOTRE PASS <a href="./ticketing.html">ICI</a></strong></p>
+                        <p>
+                            <strong>
+                                Situé idéalement O'Festival vous régalera de bon son tout l'été
+                            </strong>
+                        </p>
+                        <div class="informations-map">
+                            <img src="../images/info-map.png" alt="information durée transport carte">
+                        </div>
+                    </article>
                 </div>
-                <div class="container">
-                    <form>
-                        <div class="form-group mb-3">
-                            <label for="name" class="light-yellow-txt">Nom</label>
-                            <input type="text" class="form-control open-font" id="name"
-                                placeholder="Entrez votre nom">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="email" class="light-yellow-txt">Email</label>
-                            <input type="email" class="form-control open-font" id="email"
-                                placeholder="Entrez votre email">
+            </div>
 
+            <!-- Formulaire de contact -->
+            <div class="container-contact p-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="contact-title text-center mt-md-5 mt-3 contact-form light-yellow-txt">
+                            <h2>CONTACT</h2>
                         </div>
-                        <div class="form-group mb-3">
-                            <label for="message" class="light-yellow-txt">Message</label>
-                            <textarea class="form-control open-font" id="message" rows="3"></textarea>
+                        <div class="contact-content">
+                            <form>
+                                <!-- Champ Nom -->
+                                <div class="form-group mb-3">
+                                    <label for="name" class="light-yellow-txt">Nom</label>
+                                    <input type="text" class="form-control open-font" id="name" placeholder="Entrez votre nom">
+                                </div>
+            
+                                <!-- Champ Email -->
+                                <div class="form-group mb-3">
+                                    <label for="email" class="light-yellow-txt">Email</label>
+                                    <input type="email" class="form-control open-font" id="email" placeholder="Entrez votre email">
+                                </div>
+            
+                                <!-- Champ Message -->
+                                <div class="form-group mb-3">
+                                    <label for="message" class="light-yellow-txt">Message</label>
+                                    <textarea class="form-control open-font" id="message" rows="3"></textarea>
+                                </div>
+            
+                                <!-- Bouton Envoyer -->
+                                <div class="position-relative d-flex align-items-center justify-content-center p-3">
+                                    <button type="submit" class="btn btn-primary light-yellow-bg dark-blue-txt">Envoyer</button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="position-relative d-flex align-items-center justify-content-center p-3">
-                            <button type="submit" class="btn btn-primary light-yellow-bg dark-blue-txt">Envoyer</button>
-                        </div>
-
-                    </form>
+                    </div>
                 </div>
-            </section>
-
+            </div>
         </div>
     </main>
 
-<!--Footer-->
-    <footer class="light-blue-bg d-flex flex-column-reverse flex-md-row text-center">       
-        
+    <!--Footer-->
+    <footer class="light-blue-bg d-flex flex-column-reverse flex-md-row text-center">
+
         <div class="container-fluid d-flex flex-row align-items-center justify-content-center my-3">
             <a class="mx-2">
                 <i class="fa-brands fa-facebook light-yellow-txt"></i>
@@ -140,7 +154,7 @@
             </a>
         </div>
         <div class="container-fluid d-flex flex-row justify-content-around my-3">
-            <ul> 
+            <ul>
                 <li>
                     <a class="nav-link" href="#">Contact</a>
                 </li>
@@ -161,4 +175,5 @@
         crossorigin="anonymous"></script>
     <script src="./js/ofestival.js" crossorigin="anonymous"></script>
 </body>
+
 </html>

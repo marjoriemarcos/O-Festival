@@ -55,57 +55,64 @@
     </header>
 
 
-       <!-- Début page erreur -->
-        <main class="main-errorPage__white">
+    <!-- Erreur 404 -->
+    <main>
+        <div class="container-error404">
             <section class="d-flex flex-column text-center">
-                <div class="error404-img-text">
-                    <figure class="image_container">
-                        <img class="img-errorPage img-fluid" src="../images/404.png" alt="404">
-                    </figure>
-                    <p class="px-4 card-text-404 dark-blue-txt">OUPS ... le O'Festival ne se passe pas sur cette page !!!!</p>
+                <div class="error404-content">
+
+                    <!-- Image d'erreur 404 -->
+                    <img class="error404-img img-fluid" src="../images/404.png" alt="404">
+
+                    <!-- Message d'erreur 404 -->
+                    <p class="error404-text px-4 dark-blue-txt">
+                        OUPS ... le O'Festival ne se passe pas sur cette page !!!!
+                    </p>
                 </div>
 
-                <div class="mt-5">
+                <!-- Bouton de retour à la page d'accueil -->
+                <div class="error404-home-link mt-5">
                     <a href="./index.html" class="btn btn-primary light-yellow-bg dark-blue-txt">ACCUEIL</a>
                 </div>
             </section>
-        </main>
-  
-<!--Footer-->
-<footer class="light-blue-bg d-flex flex-column-reverse flex-md-row text-center">       
-        
-    <div class="container-fluid d-flex flex-row align-items-center justify-content-center my-3">
-        <a class="mx-2">
-            <i class="fa-brands fa-facebook light-yellow-txt"></i>
-        </a>
-        <a class="mx-2">
-            <i class="fa-brands fa-square-x-twitter light-yellow-txt"></i>
-        </a>
-        <a class="mx-2">
-            <i class="fa-brands fa-square-instagram light-yellow-txt"></i>
-        </a>
-        <a class="mx-2">
-            <i class="fa-brands fa-square-snapchat light-yellow-txt"></i>
-        </a>
-        <a class="mx-2">
-            <i class="fa-brands fa-youtube light-yellow-txt"></i>
-        </a>
-    </div>
-    <div class="container-fluid d-flex flex-row justify-content-around my-3">
-        <ul> 
-            <li>
-                <a class="nav-link" href="#">Contact</a>
-            </li>
-            <li>
-                <a class="nav-link" href="#">Partenaires</a>
-            </li>
-            <li>
-                <a class="nav-link" href="./legal-notice.html">Mentions légales</a>
+        </div>
+    </main>
 
-            </li>
-        </ul>
-    </div>
-</footer>
+    <!--Footer-->
+    <footer class="light-blue-bg d-flex flex-column-reverse flex-md-row text-center">
+
+        <div class="container-fluid d-flex flex-row align-items-center justify-content-center my-3">
+            <a class="mx-2">
+                <i class="fa-brands fa-facebook light-yellow-txt"></i>
+            </a>
+            <a class="mx-2">
+                <i class="fa-brands fa-square-x-twitter light-yellow-txt"></i>
+            </a>
+            <a class="mx-2">
+                <i class="fa-brands fa-square-instagram light-yellow-txt"></i>
+            </a>
+            <a class="mx-2">
+                <i class="fa-brands fa-square-snapchat light-yellow-txt"></i>
+            </a>
+            <a class="mx-2">
+                <i class="fa-brands fa-youtube light-yellow-txt"></i>
+            </a>
+        </div>
+        <div class="container-fluid d-flex flex-row justify-content-around my-3">
+            <ul>
+                <li>
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="#">Partenaires</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="./legal-notice.html">Mentions légales</a>
+
+                </li>
+            </ul>
+        </div>
+    </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
