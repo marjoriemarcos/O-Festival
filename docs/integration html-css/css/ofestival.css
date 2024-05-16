@@ -71,9 +71,20 @@
 /* GENERAL */
 
 html, body {
+    height: 100%;
     width: 100%;
-    overflow-x: hidden; /* Empêcher le débordement horizontal */
+    overflow-x: hidden;
+}    
+
+body {
+    display: flex;
+    flex-direction: column;
 }
+
+main {
+    flex: 1;
+}
+
 
 /* NAVBAR */
 
