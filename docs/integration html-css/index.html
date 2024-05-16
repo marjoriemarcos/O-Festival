@@ -4,6 +4,7 @@
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Badri CHOULAK">
         <meta name="author" content="Nicolas JOUBERT">
         <meta name="author" content="Talya LALAOUI">
@@ -28,38 +29,37 @@
     </head>
 
     <body>
-        <header>
-            <!-- Nav -->
-            <nav class="navbar navbar-expand-lg dark-blue-bg p-3">
-                <div class="container-fluid">
-                    <a class="navbar-brand navbar-logo mr-auto" href="./index.html">
-                        <img src="../images/logo.png" alt="Logo de O'Festival" class="img-fluid"></a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse d-lg-flex justify-content-lg-end" id="navbarNav">
-                    <ul class="navbar-nav">
-                      <li class="nav-item">
-                        <a class="nav-link mx-5" href="./programming.html">Programmation</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link mx-5" href="./ticketing.html">Billetterie</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link mx-5" href="./informations.html">Infos pratiques</a>
-                      </li>
+            <header class="header">
+                <nav class="navbar dark-blue-bg">
+                    <a class="navbar-brand navbar-logo" href="./index.html">
+                        <img src="../images/logo.png" alt="Logo de O'Festival" class="img-fluid">
+                    </a>
+                    <ul class="nav-menu dark-blue-bg">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Programmation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Billetterie</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Infos pratiques</a>
+                        </li>
                     </ul>
-                  </div>
-                </div>
-              </nav>
-              
+                    <div class="hamburger">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                </nav>
         </header>
+
+       <!-- </header> -->
         <main>
             <!-- Video Home -->
             <div class="container-fluid text-center position-relative d-flex align-items-center justify-content-center">
                 <video autoplay loop muted plays-inline class="home-video">
                     <!-- TODO:  src="../images/video-home.mp4"-->
-                    <source src="#" type="video/mp4">
+                    <source src="../images/video-home.mp4" type="video/mp4">
                 </video>
                 <div class="container home text-center">
                     <h1>O'Festival</h1>
@@ -68,7 +68,7 @@
 
 
             <!-- TODO Slide Programming -->   
-        <h2 class="light-blue-bg-bg title-bar">Programmation</h2>
+        <h2 class="light-blue-bg title-bar">Programmation</h2>
             <div class="d-flex flex-column dark-blue-bg">        
                 <div class="row justify-content-around mx-3 mb-4 mt-3">
                     <div class="col-md-3">
@@ -154,15 +154,14 @@
                     </div>
                 </div>
             </div>         
-
         </main>
 
 
 
-        <footer class="light-blue-bg">
-            <!-- TODO Nav Footer -->     
-
-            <div>
+        <footer class="light-blue-bg d-flex flex-column-reverse flex-md-row text-center">
+            <!-- TODO Nav Footer -->  
+            
+            <div class="container-fluid d-flex flex-row align-items-center justify-content-center my-3">
                 <a class="mx-2">
                     <i class="fa-brands fa-facebook light-yellow-txt"></i>
                 </a>
@@ -179,8 +178,8 @@
                     <i class="fa-brands fa-youtube light-yellow-txt"></i>
                 </a>
             </div>
-            <div class="menu-footer-container">
-                <ul>
+            <div class="container-fluid d-flex flex-row justify-content-around my-3">
+                <ul> 
                     <li>
                         <a class="nav-link" href="#">Contact</a>
                     </li>
@@ -193,10 +192,13 @@
                     </li>
                 </ul>
             </div>
+
+
         </footer>
 
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="./js/ofestival.js" crossorigin="anonymous"></script>
     </body>
 
 
