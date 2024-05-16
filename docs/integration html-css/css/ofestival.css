@@ -312,16 +312,28 @@ a {
 }
 
 .font-family-ss {
-    font-family: sans-serif;
+    font-family: var(--font_open);
 }
 
-figure {
+.info-map, figure {
     margin: 0;
     display: flex;
     justify-content: center;
 }
 
-figure > img {
+.info-map > img {
     height: 240px;
 }
 
+@media (max-width: 500px) {
+   .info-map > img {
+       object-fit: contain;
+       width: 80%;
+       height: 100%;
+    }
+
+   .bloc-info-img {
+       font-size: 10px;
+   }
+
+}
