@@ -67,6 +67,13 @@
     background-color: var(--light_green);
 }
 
+.background-img-bg{
+    background-image:url(../../images/back-ground.png);
+    background-size: cover;
+    background-attachment: fixed; 
+}
+
+
 /* GENERAL */
 
 html, body {
@@ -333,7 +340,7 @@ main {
 }
 
 .home-programming-slide{
-position: relative;
+    position: relative;
 }
 
 
@@ -584,8 +591,8 @@ a {
 /** ------------ PAGE 404 -----------**/
 
 .main-errorPage__white {
-     background-color: white;
- }
+    background-color: white;
+}
 
 .error404-img-text {
     position: relative;
@@ -606,6 +613,6 @@ a {
     left: 0;
     right: 0;
     height: 50px;
- }
+}
 
 /** ------------ END PAGE 404 -----------**/
