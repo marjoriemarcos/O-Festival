@@ -19,6 +19,11 @@
     font-family: var(--font_neutro);
 }
 
+.open-font {
+    font-family: var(--font_open);
+}
+
+
 
 /* COLOURS */
 
@@ -199,6 +204,7 @@
 .container-artist {
     padding: 0 15% 0 15%;
 }
+
     
 .artist-image img {
     height: 100%;
@@ -208,12 +214,8 @@
 .artist-informations{
     background-color: white;
     height: 100%;
-}
-    
-.artist-informations p{
-    font-family:var(--font_open)
-}
-    
+}  
+
 .artist-informations-name{
     font-size: 2rem;
 }
@@ -224,6 +226,7 @@
     margin-bottom: 0;
 }
     
+
 .artist-informations-genre {
     padding: 0.75rem 1.5rem;
 }
@@ -246,7 +249,7 @@
         width: 100vh; /* Prend la largeur de l'écran */
         height: 50vh; /* Hauteur automatique pour conserver les proportions */
     }
-}
+
 
 /* FOOTER */
 
