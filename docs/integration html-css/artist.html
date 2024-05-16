@@ -1,139 +1,130 @@
 <!doctype html>
 <html lang="fr">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="author" content="Badri CHOULAK">
-    <meta name="author" content="Nicolas JOUBERT">
-    <meta name="author" content="Talya LALAOUI">
-    <meta name="author" content="Marjorie MARCOS">
-    <meta name="description" content="O'Festival">
-    <!-- reset CSS -->
-    <link rel="stylesheet" href="./css/reset.css">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- Bootstrap icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- our CSS -->
-    <link rel="stylesheet" href="./css/ofestival.css">
-    <!-- Neutro font family -->
-    <link href="https://fonts.cdnfonts.com/css/neutro" rel="stylesheet">
-    <!-- favicon -->
-    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
-    <!-- font Awesome -->
-    <script src="https://kit.fontawesome.com/2789e31df4.js" crossorigin="anonymous"></script>
-    <title>O'Festival</title>
-</head>
-<body>
-    <header>
-        <!-- Nav -->
-        <nav class="navbar navbar-expand-lg dark-blue-bg p-3">
-            <div class="container-fluid">
-                <a class="navbar-brand navbar-logo mr-auto" href="./index.html">
-                    <img src="../images/logo.png" alt="Logo de O'Festival" class="img-fluid">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="author" content="Badri CHOULAK">
+        <meta name="author" content="Nicolas JOUBERT">
+        <meta name="author" content="Talya LALAOUI">
+        <meta name="author" content="Marjorie MARCOS">
+        <meta name=”description” content="O'Festival">
+        <!-- reset CSS -->
+        <link rel="stylesheet" href="./css/reset.css">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <!-- Bootstrap icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <!-- our CSS -->
+        <link rel="stylesheet" href="./css/ofestival.css">
+        <!-- Neutro font family -->
+        <link href="https://fonts.cdnfonts.com/css/neutro" rel="stylesheet">
+        <!-- favicon -->
+        <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+        <!-- font Awesome -->
+        <script src="https://kit.fontawesome.com/2789e31df4.js" crossorigin="anonymous"></script>
+
+        <title>O'Festival</title>
+    </head>
+
+    <body>
+        <header>
+            <!-- Nav -->
+            <nav class="navbar navbar-expand-lg dark-blue-bg p-3">
+                <div class="container-fluid">
+                    <a class="navbar-brand navbar-logo mr-auto" href="./index.html">
+                        <img src="../images/logo.png" alt="Logo de O'Festival" class="img-fluid"></a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse d-lg-flex justify-content-lg-end" id="navbarNav">
+                  </button>
+                  <div class="collapse navbar-collapse d-lg-flex justify-content-lg-end" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link mx-5" href="./programming.html">Programmation</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-5" href="./ticketing.html">Billetterie</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-5" href="./informations.html">Infos pratiques</a>
-                        </li>
+                      <li class="nav-item">
+                        <a class="nav-link mx-5" href="./programming.html">Programmation</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link mx-5" href="./ticketing.html">Billetterie</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link mx-5" href="./informations.html">Infos pratiques</a>
+                      </li>
                     </ul>
+                  </div>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <main>
-        <div class="container-artist medium-blue-bg">
-            <!-- Section principale pour les détails de l'artiste -->
+              </nav>
+              
+        </header>
+
+    <main class="main-artist dark-blue-bg">
+        <div class="container">
             <div class="row pt-5 gx-0">
-                <!-- Image de l'artiste à gauche -->
+                <!-- Image à gauche -->
                 <div class="artist-image col-md-6">
-                    <img src="../images/artist.jpg" alt="Photo de -nom de l'artiste-" class="img-fluid">
+                    <img src="../images/artist.jpg" alt="Photo de nom de l'artiste" class="img-fluid">
                 </div>
-                <!-- Informations sur l'artiste à droite -->
+
+                <!-- Informations à droite -->
                 <div class="col-md-6">
                     <div class="artist-informations p-4">
-                        <!-- Nom de l'artiste -->
                         <h1 class="artist-informations-name dark-blue-txt">Nom de l'artiste</h1>
-                        <!-- Jour de passage de l'artiste -->
-                        <h2 class="artist-informations-show-day dark-yellow-txt">Jour de passage</h2>
-                        <!-- Nom de la scène -->
+                        <h2 class="artist-informations-show-day light-blue-txt">Jour de passage</h2>
                         <h3 class="artist-informations-stage light-green-txt">Nom de la scène</h3>
-                        <!-- Genres de l'artiste -->
-                        <span class="artist-informations-genre btn btn-secondary btn-sm disabled light-blue-bg px-4 mt-3">Genre 1</span>
-                        <span class="artist-informations-genre btn btn-secondary btn-sm disabled light-blue-bg px-4 mt-3">Genre 2</span>
-                        <!-- Description de l'artiste -->
+                        <span class="artist-informations-genre badge bg-info mt-4">Genre 1</span>
+                        <span class="artist-informations-genre badge bg-danger">Genre 2</span>
+                        <!-- Description Artiste -->
                         <div class="artist-informations-description mt-4 mb-4">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ipsam sed exercitationem
-                                quia. Placeat, rerum vel! Labore explicabo harum dolor numquam magni consectetur
-                                deleniti vitae eligendi sit, suscipit similique totam. Corrupti voluptatum, maxime est
-                                at quasi quisquam commodi doloribus vero! Non perferendis earum pariatur, nam provident
-                                voluptates dicta sequi eligendi ex aspernatur iusto quisquam maiores unde eveniet ut id
-                                itaque sed dolorum voluptas? Hic, quos eaque iure alias ea, ducimus doloremque molestiae
-                                quisquam similique, magnam nihil qui aut natus deleniti accusamus voluptatibus.
-                                Recusandae quis consequuntur similique voluptate rerum illo repellendus nostrum suscipit
-                                id, odit officiis eligendi quo minus consectetur nobis explicabo aperiam quod laborum
-                                repudiandae illum soluta dolore. Laboriosam eius molestias quas officia maiores impedit
-                                a optio ab inventore quis odio, modi rem nisi doloribus provident, ad velit mollitia,
-                                incidunt ex doloremque laudantium et cupiditate eos unde? Officiis mollitia corrupti
-                                harum vitae nostrum accusamus a beatae adipisci esse. Quibusdam, molestias.
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, tempore a, quis,
+                                hic quo saepe quos sit natus magnam ipsum velit aliquam vitae aspernatur esse!
+                                Temporibus, sit
+                                similique.
+                                Tempora consequuntur laudantium fuga fugiat iusto deleniti nobis est minima assumenda
+                                similique
+                                natus dolore a ipsa quasi,
+                                facere cum, quam voluptatum pariatur blanditiis dignissimos? Ipsam magnam assumenda ab,
+                                dolorum
+                                at debitis,
+                                vero quidem amet fugit facere earum, ut ea veniam sint facilis eligendi expedita minima
+                                dolor
+                                deserunt suscipit maiores.
+                                Molestiae nisi suscipit veritatis eius consequatur qui, facilis dolore quas corrupti,
+                                dolorem
+                                amet nesciunt a consequuntur officiis
+                                tempora quae pariatur dicta. Distinctio, voluptatum?
+                                hic quo saepe quos sit natus magnam ipsum velit aliquam vitae aspernatur esse!
+                                Temporibus, sit
+                                similique.
+                                Tempora consequuntur laudantium fuga fugiat iusto deleniti nobis est minima assumenda
+                                similique
+                                natus dolore a ipsa quasi,
+                                facere cum, quam voluptatum pariatur blanditiis dignissimos? Ipsam magnam assumenda ab,
+                                dolorum
+                                at debitis,
+                                vero quidem amet fugit facere earum, ut ea veniam sint facilis eligendi expedita minima
+                                dolor
+                                deserunt suscipit maiores.
+                                Molestiae nisi suscipit veritatis eius consequatur qui, facilis dolore quas corrupti,
+                                dolorem
+                                amet nesciunt a consequuntur officiis
+                                tempora quae pariatur dicta. Distinctio, voluptatum?
                             </p>
                         </div>
-                        <!-- Réseaux sociaux de l'artiste -->
+                        <!-- Réseaux Artiste -->
                         <div class="artist-informations-social-networks">
                             <ul class="list-inline mb-0">
-                                <!-- Icônes pour les réseaux sociaux -->
-                                <li class="list-inline-item">
-                                    <a href="#">
-                                        <i class="bi bi-globe dark-blue-txt"></i>
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#">
-                                        <i class="fa-brands fa-spotify dark-blue-txt"></i>
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#">
-                                        <i class="fa-brands fa-facebook dark-blue-txt"></i>
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#">
-                                        <i class="fa-brands fa-instagram dark-blue-txt"></i>
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#">
-                                        <i class="fa-brands fa-youtube dark-blue-txt"></i>
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#">
-                                        <i class="fa-brands fa-snapchat dark-blue-txt"></i>
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#">
-                                        <i class="fa-brands fa-tiktok dark-blue-txt"></i>
-                                    </a>
-                                </li>
+                                <li class="list-inline-item"><i class="bi bi-globe dark-blue-txt"></i></li>
+                                <li class="list-inline-item"><i class="fa-brands fa-spotify dark-blue-txt"></i></li>
+                                <li class="list-inline-item"><i class="fa-brands fa-facebook dark-blue-txt"></i></li>
+                                <li class="list-inline-item"><i class="fa-brands fa-instagram dark-blue-txt"></i></li>
+                                <li class="list-inline-item"><i class="fa-brands fa-youtube dark-blue-txt"></i></li>
+                                <li class="list-inline-item"><i class="fa-brands fa-snapchat dark-blue-txt"></i></li>
+                                <li class="list-inline-item"><i class="fa-brands fa-tiktok dark-blue-txt"></i></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row mt-5 text-center">
-                <!-- Vidéo de l'artiste -->
+                <!-- Vidéo Artiste -->
                 <div class="artist-video embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item w-100 h-100"
                         src="https://www.youtube.com/embed/UvEwfQvVSGg?si=ZSXsQd_1zxTxu6jX" title="YouTube video player"
@@ -141,13 +132,16 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
-                <!-- Lien vers la billetterie -->
+                <!-- Lien Billetterie -->
                 <div class="mt-5 mb-5">
-                    <a href="./ticketing.html" class="btn btn-primary light-yellow-bg dark-blue-txt">Billetterie</a>
+                    <a href="#" class="btn btn-primary light-yellow-bg dark-blue-txt">Billetterie</a>
                 </div>
             </div>
         </div>
     </main>
+
+
+
     <footer class="light-blue-bg">
         <!-- TODO Nav Footer -->
         <div>
@@ -177,11 +171,18 @@
                 </li>
                 <li>
                     <a class="nav-link" href="./legal-notice.html">Mentions légales</a>
+
                 </li>
             </ul>
         </div>
     </footer>
+
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
 </body>
+
+
+
 </html>
