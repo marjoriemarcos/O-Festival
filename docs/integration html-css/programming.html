@@ -10,6 +10,7 @@
         <meta name="author" content="Talya LALAOUI">
         <meta name="author" content="Marjorie MARCOS">
         <meta name=”description” content="O'Festival">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- reset CSS -->
         <link rel="stylesheet" href="./css/reset.css">
         <!-- Bootstrap CSS -->
@@ -29,205 +30,191 @@
     </head>
 
     <body>
-        <header>
-            <!-- Nav -->
-            <nav class="navbar navbar-expand-lg dark-blue-bg p-3">
-                <div class="container-fluid">
-                    <a class="navbar-brand navbar-logo mr-auto" href="./index.html">
-                        <img src="../images/logo.png" alt="Logo de O'Festival" class="img-fluid"></a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse d-lg-flex justify-content-lg-end" id="navbarNav">
-                    <ul class="navbar-nav">
-                      <li class="nav-item">
-                        <a class="nav-link mx-5" href="./programming.html">Programmation</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link mx-5" href="./ticketing.html">Billetterie</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link mx-5" href="./informations.html">Infos pratiques</a>
-                      </li>
-                    </ul>
-                  </div>
+        <header class="header">
+            <nav class="navbar dark-blue-bg">
+                <a class="navbar-brand navbar-logo" href="./index.html">
+                    <img src="../images/logo.png" alt="Logo de O'Festival" class="img-fluid">
+                </a>
+                <ul class="nav-menu dark-blue-bg">
+                    <li class="nav-item">
+                        <a href="./programming.html" class="nav-link">Programmation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./ticketing.html" class="nav-link">Billetterie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./informations.html" class="nav-link">Infos pratiques</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
                 </div>
               </nav>
     </header>
 
     <main>
         <div class="d-flex flex-column medium-blue-bg">
-            <h2 class="title-white">Programmation</h2>
-            <div class="medium-blue-bg p-3">
-                <!--Sort by days-->
-                <div class="row gx-3">
-                    <div class="col-auto">
-                        <a href="#" class="btn btn-secondary btn-day dark-yellow-bg px-4">Tous les jours</a>
-                    </div>
-                    <div class="col-auto">
-                        <a href="#" class="btn btn-secondary btn-day dark-yellow-bg px-4">J1</a>
-                    </div>
-                    <div class="col-auto">
-                        <a href="#" class="btn btn-secondary btn-day dark-yellow-bg px-4">J2</a>
-                    </div>
-                    <div class="col-auto">
-                        <a href="#" class="btn btn-secondary btn-day dark-yellow-bg px-4">J3</a>
-                    </div>
-                </div>
-                
-                <!--Sort by stages-->
-                <div class="row gx-3">
-                    <div class="col-auto">
-                        <a href="#" class="btn btn-secondary btn-stage light-green-bg px-4">Toutes les scènes</a>
-                    </div>
-                    <div class="col-auto">
-                        <a href="#" class="btn btn-secondary btn-stage light-green-bg px-4">Scène 1</a>
-                    </div>
-                    <div class="col-auto">
-                        <a href="#" class="btn btn-secondary btn-stage light-green-bg px-4">Scène 2</a>
-                    </div>
-                    <div class="col-auto">
-                        <a href="#" class="btn btn-secondary btn-stage light-green-bg px-4">Scène 3</a>
-                    </div>
-                </div>
-                
-                <!--Sort by genres-->
-                <div class="row gx-3">
-                    <div class="col-auto">
-                        <a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4">Tous les genres</a>
-                    </div>
-                    <div class="col-auto">
-                        <a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4">Rap</a>
-                    </div>
-                    <div class="col-auto">
-                        <a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4">Rock</a>
-                    </div>
-                    <div class="col-auto">
-                        <a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4">Électro</a>
-                    </div>
-                    <div class="col-auto">
-                        <a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4">Pop</a>
-                    </div>
-                </div>
-
-         
-            <!-- Artists --> 
-            <div class="row justify-content-around mx-3 mb-4 mt-3">
-                <div class="col-md-3">
-                    <div class="card img-zoom">
-                        <a href="./artist.html">
-                            <img src="../images/picture_test.jpg" class="card-img-top" alt="Artiste 1">
-                            <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h3 class="card-title text-white mb-0">Artiste 1</h3>
-                                <p class="card-text text-white">Jour 1 - POP</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="card img-zoom">
-                        <a href="./artist.html">
-                            <img src="../images/picture_test.jpg" class="card-img-top" alt="">
-                            <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h3 class="card-title text-white mb-0">Artiste 2</h3>
-                                <p class="card-text text-white">Jour 2 - ROCK</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card img-zoom">
-                        <a href="./artist.html">
-                            <img src="../images/picture_test.jpg" class="card-img-top" alt="">
-                            <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h3 class="card-title text-white mb-0">Artiste 3</h3>
-                                <p class="card-text text-white">Jour 3 - ELECTRO</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row justify-content-around mx-3 mb-4 mt-3">
-                <div class="col-md-3">
-                    <div class="card img-zoom">
-                        <a href="./artist.html">
-                            <img src="../images/picture_test.jpg" class="card-img-top" alt="Artiste 1">
-                            <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h3 class="card-title text-white mb-0">Artiste 1</h3>
-                                <p class="card-text text-white">Jour 1 - POP</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card img-zoom">
-                        <a href="./artist.html">
-                            <img src="../images/picture_test.jpg" class="card-img-top" alt="">
-                            <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h3 class="card-title text-white mb-0">Artiste 2</h3>
-                                <p class="card-text text-white">Jour 2 - ROCK</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card img-zoom">
-                        <a href="./artist.html">
-                            <img src="../images/picture_test.jpg" class="card-img-top" alt="">
-                            <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h3 class="card-title text-white mb-0">Artiste 3</h3>
-                                <p class="card-text text-white">Jour 3 - ELECTRO</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row justify-content-around mx-3 mb-4 mt-3">
-                <div class="col-md-3">
-                    <div class="card img-zoom">
-                        <a href="./artist.html">
-                            <img src="../images/picture_test.jpg" class="card-img-top" alt="Artiste 1">
-                            <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h3 class="card-title text-white mb-0">Artiste 1</h3>
-                                <p class="card-text text-white">Jour 1 - POP</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card img-zoom">
-                        <a href="./artist.html">
-                            <img src="../images/picture_test.jpg" class="card-img-top" alt="">
-                            <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h3 class="card-title text-white mb-0">Artiste 2</h3>
-                                <p class="card-text text-white">Jour 2 - ROCK</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card img-zoom">
-                        <a href="./artist.html">
-                            <img src="../images/picture_test.jpg" class="card-img-top" alt="">
-                            <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h3 class="card-title text-white mb-0">Artiste 3</h3>
-                                <p class="card-text text-white">Jour 3 - ELECTRO</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <h2 class="title-bar">Programmation</h2>
             
-            <!-- Tickets Button-->
-            <div class="text-center position-relative d-flex align-items-center justify-content-center">
-                <a href="./ticketing.html" class="btn btn-primary light-yellow-bg dark-blue-txt">Billetterie</a>
-            </div>
-        </div>              
+                <div class="medium-blue-bg p-3">
+            
+                <div class="p-3">
+                
+                <div class="row gx-3">
+                    <!-- Sort by days -->
+                    <div class="col-md-12 mb-3">
+                        <div class="d-flex flex-wrap justify-content-start">
+                            <a href="#" class="btn btn-secondary btn-day dark-yellow-bg px-4 mr-2 mb-2">Tous les jours</a>
+                            <a href="#" class="btn btn-secondary btn-day dark-yellow-bg px-4 mr-2 mb-2">J1</a>
+                            <a href="#" class="btn btn-secondary btn-day dark-yellow-bg px-4 mr-2 mb-2">J2</a>
+                            <a href="#" class="btn btn-secondary btn-day dark-yellow-bg px-4 mb-2">J3</a>
+                        </div>
+                    </div>
+
+                    <!-- Sort by stages -->
+                    <div class="col-md-12 mb-3">
+                        <div class="d-flex flex-wrap justify-content-start">
+                            <a href="#" class="btn btn-secondary btn-stage light-green-bg px-4 mr-2 mb-2">Toutes les scènes</a>
+                            <a href="#" class="btn btn-secondary btn-stage light-green-bg px-4 mr-2 mb-2">Scène 1</a>
+                            <a href="#" class="btn btn-secondary btn-stage light-green-bg px-4 mr-2 mb-2">Scène 2</a>
+                            <a href="#" class="btn btn-secondary btn-stage light-green-bg px-4 mb-2">Scène 3</a>
+                        </div>
+                    </div>
+
+                    <!-- Sort by genres -->
+                    <div class="col-md-12 mb-3">
+                        <div class="d-flex flex-wrap justify-content-start">
+                            <a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4 mr-2 mb-2">Tous les genres</a>
+                            <a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4 mr-2 mb-2">Électro</a>
+                            <a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4 mr-2 mb-2">Pop</a>
+                            <a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4 mb-2">Rock</a>
+                            <a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4 mb-2">Rap</a>
+                        </div>
+
+                    </div>
+                </div>
+            
+                <!-- Artists --> 
+
+                <div class="row justify-content-around mx-3 mb-4 mt-3">
+                    <div class="col-md-4 col-12 mb-3">
+                        <div class="card img-zoom">
+                            <a href="./artist.html">
+                                <img src="../images/picture_test.jpg" class="card-img-top" alt="Artiste 1">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                    <h3 class="card-title text-white mb-0">Artiste 1</h3>
+                                    <p class="card-text text-white">Jour 1 - POP</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12 mb-3">
+                        <div class="card img-zoom">
+                            <a href="./artist.html">
+                                <img src="../images/picture_test.jpg" class="card-img-top" alt="">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                    <h3 class="card-title text-white mb-0">Artiste 2</h3>
+                                    <p class="card-text text-white">Jour 2 - ROCK</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12 mb-3">
+                        <div class="card img-zoom">
+                            <a href="./artist.html">
+                                <img src="../images/picture_test.jpg" class="card-img-top" alt="">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                    <h3 class="card-title text-white mb-0">Artiste 3</h3>
+                                    <p class="card-text text-white">Jour 3 - ELECTRO</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-around mx-3 mb-4 mt-3">
+                    <div class="col-md-4 col-12 mb-3">
+                        <div class="card img-zoom">
+                            <a href="./artist.html">
+                                <img src="../images/picture_test.jpg" class="card-img-top" alt="Artiste 1">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                    <h3 class="card-title text-white mb-0">Artiste 1</h3>
+                                    <p class="card-text text-white">Jour 1 - POP</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12 mb-3">
+                        <div class="card img-zoom">
+                            <a href="./artist.html">
+                                <img src="../images/picture_test.jpg" class="card-img-top" alt="">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                    <h3 class="card-title text-white mb-0">Artiste 2</h3>
+                                    <p class="card-text text-white">Jour 2 - ROCK</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12 mb-3">
+                        <div class="card img-zoom">
+                            <a href="./artist.html">
+                                <img src="../images/picture_test.jpg" class="card-img-top" alt="">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                    <h3 class="card-title text-white mb-0">Artiste 3</h3>
+                                    <p class="card-text text-white">Jour 3 - ELECTRO</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-around mx-3 mb-4 mt-3">
+                    <div class="col-md-4 col-12 mb-3">
+                        <div class="card img-zoom">
+                            <a href="./artist.html">
+                                <img src="../images/picture_test.jpg" class="card-img-top" alt="Artiste 1">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                    <h3 class="card-title text-white mb-0">Artiste 1</h3>
+                                    <p class="card-text text-white">Jour 1 - POP</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12 mb-3">
+                        <div class="card img-zoom">
+                            <a href="./artist.html">
+                                <img src="../images/picture_test.jpg" class="card-img-top" alt="">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                    <h3 class="card-title text-white mb-0">Artiste 2</h3>
+                                    <p class="card-text text-white">Jour 2 - ROCK</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12 mb-3">
+                        <div class="card img-zoom">
+                            <a href="./artist.html">
+                                <img src="../images/picture_test.jpg" class="card-img-top" alt="">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                    <h3 class="card-title text-white mb-0">Artiste 3</h3>
+                                    <p class="card-text text-white">Jour 3 - ELECTRO</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tickets Button-->
+                <div class="text-center position-relative d-flex align-items-center justify-content-center">
+                    <a href="./ticketing.html" class="btn btn-primary light-yellow-bg dark-blue-txt">Billetterie</a>
+                </div>
+                </div>              
+
     </main>
-    <!-- Footer -->
+    
+   <!-- Footer -->
     <footer class="light-blue-bg">
         <div>
             <a class="mx-2">
@@ -246,8 +233,8 @@
                 <i class="fa-brands fa-youtube light-yellow-txt"></i>
             </a>
         </div>
-        <div class="menu-footer-container">
-            <ul>
+        <div class="container-fluid d-flex flex-row justify-content-around my-3">
+            <ul> 
                 <li>
                     <a class="nav-link" href="#">Contact</a>
                 </li>
