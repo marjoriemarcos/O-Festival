@@ -117,6 +117,7 @@
     border-radius: 40px;
     margin-bottom: 20px;
     margin-right: 10px;
+    padding-left: 10px;
    
 }
 
@@ -233,7 +234,7 @@
     
 .artist-informations-description {
     height: 300px;
-    overflow-y: auto; /* Active la barre de défilement verticale si nécessaire */
+    overflow-y: auto; /* Enable the scrollbar if necessary */
 }
     
 .artist-informations-social-networks i{
@@ -246,16 +247,15 @@
       
 @media only screen and (max-width: 767px) {
     .artist-video {
-        width: 100vh; /* Prend la largeur de l'écran */
-        height: 50vh; /* Hauteur automatique pour conserver les proportions */
+        width: 100vh; /* Fills the screen */
+        height: 50vh; /* Automatic height to keep the proportions */
     }
 
-
+}
 /* FOOTER */
 
 footer {    
-    padding: 20px;
-    margin-top: 20px;
+    padding: 20px;   
     display: flex;
     justify-content: space-between;
 }
@@ -313,9 +313,6 @@ a {
     background-color: white;
 }
 
-.font-family-ss {
-    font-family: sans-serif;
-}
 
 figure {
     margin: 0;
@@ -348,22 +345,13 @@ figure > img {
 }
 
 
-.card-text {
+.card-text-404 {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     height: 50px;
-    /*TODO factoriser color*/
-    color: var(--dark_blue);
-}
-
-.footer-error404 {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-}
+ }
 
 /** ------------ END PAGE 404 -----------**/
 
