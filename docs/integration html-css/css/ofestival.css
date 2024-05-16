@@ -1,0 +1,537 @@
+/* VARIABLES */
+
+:root {
+    --dark_blue: #05608a;
+    --medium_blue: #4e7ba3;
+    --light_blue: #65C6DC;
+    --dark_yellow: #FABB25;
+    --yellow: #efdca1;
+    --light_yellow: #EECE6A;
+    --dark_green: #03a35f;
+    --light_green: #009060;    
+    --font_neutro: 'Neutro', sans-serif;
+    --font_open: "Open Sans", sans-serif;
+}
+
+/* FONT */
+
+* {
+    font-family: var(--font_neutro);
+}
+
+.open-font {
+    font-family: var(--font_open);
+
+}
+
+/* COLOURS */
+
+
+.dark-blue-txt {
+    color: var(--dark_blue)
+}
+
+.light-blue-txt {
+    color: var(--light_blue)
+}
+
+.light-green-txt {
+    color: var(--light_green)
+}
+
+.light-yellow-txt {
+    color: var(--light_yellow)
+}
+
+.light-blue-bg {
+    background-color: var(--light_blue);    
+}
+
+.medium-blue-bg {
+    background-color: var(--medium_blue);    
+}
+
+.dark-blue-bg {
+    background-color: var(--dark_blue);
+}
+
+.light-yellow-bg {
+    background-color: var(--light_yellow);
+}      
+
+.dark-yellow-bg {
+    background-color: var(--dark_yellow);
+}
+
+.light-green-bg {
+    background-color: var(--light_green);
+}
+
+/* GENERAL */
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}    
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+
+/* NAVBAR */
+
+.navbar { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    height: 10vh;    
+}
+
+.navbar-logo {
+    width: 8vh;
+    padding: 0;
+}
+
+.nav-link {
+    font-family: 'Neutro', sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+    color: var( --light_yellow);
+}
+
+
+.hamburger {
+    display: none;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: #101010;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-item {
+    margin-left: 5rem;
+}
+
+@media only screen and (max-width: 1900px) {
+    .nav-menu {
+        position: absolute;
+        z-index: 999;
+        left: -100vh;
+        top: 5rem;
+        flex-direction: column;
+        background-color: var(--light_blue);
+        width: 100%;
+        height: 50vh;
+        text-align: center;
+        transition: 0.3s;
+        background-image:url(../../images/back-ground.png);
+    }
+
+    .nav-link {
+        font-size: 25px;
+        color: white;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-item {
+        margin: 2.5rem 0;
+    }
+
+    .hamburger {
+        display: block;
+        cursor: pointer;
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+}
+
+@media only screen and (max-width: 500px) {
+    .nav-menu {
+        position: absolute;
+        z-index: 999;
+        left: -100vh;
+        top: 4rem;
+        flex-direction: column;
+        background-color: var(--light_blue);
+        width: 100%;
+        height: 50vh;
+        text-align: center;
+        transition: 0.3s;
+        background-image:url(../../images/back-ground.png);
+    }
+
+    .nav-link {
+        font-size: 15px;
+    }
+
+}
+
+/* BUTTONS */
+
+.btn-primary {
+    width: 50%; 
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    border-radius: 40px;
+    margin-bottom: 20px;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: var(--yellow);
+    color: var(--dark_blue);
+    transform: scale(1.05)
+}
+
+.btn-secondary {
+    width: auto;
+    height: auto;
+    text-align: center;
+    white-space: normal;
+    color: black;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    border-radius: 40px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    padding-left: 10px;
+   
+}
+
+.btn-day:hover,
+.btn-day:focus {
+    background-color: var(--light_yellow);
+    color: white;  
+    transform: scale(1.05)  
+}
+
+.btn-stage:hover,
+.btn-stage:focus {
+    background-color: var(--dark_green);
+    color: white;   
+    transform: scale(1.05)  
+}
+
+.btn-genre:hover,
+.btn-genre:focus {
+    background-color: var(--medium_blue);
+    color: white;  
+    transform: scale(1.05)   
+}
+
+.btn-ticket {
+    margin-top: 60px;
+    margin-bottom: 40px;
+
+}
+
+/** --------- INDEX PAGE --------- **/
+
+/* HOME VIDEO */
+.container-video {
+    height: 75vh;
+}
+
+.home-video {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+/* LINE UP SECTION & TICKET */
+
+.title-bar {
+    height: 1.5em;
+    line-height: 1.5em;
+    color: white;
+    padding-left: 20px;
+    margin-top: 20px; 
+    margin-bottom: 10px;
+    text-align: center;
+
+}
+
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.img-zoom {
+    overflow: hidden;
+}
+
+.img-zoom img {
+    width: 100%;
+    transition: transform .1s;
+}
+
+.img-zoom:hover img {
+    transform: scale(1.1);
+}
+
+.card h3 {
+    font-size: 1.4em;
+}
+
+.card p {
+    font-size: 0.9em;
+}
+
+
+
+@media (max-width: 500px) {
+    .container-video {
+        height: 30vh;
+        border: solid 3px red;
+    }
+
+    .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-index_mobile {
+        max-width: 80%;
+        font-size: 10px;
+    }
+
+    .title-index_mobile {
+        font-size: 20px;
+    }
+    .title-bar_mobile {
+        height: 2.5em;
+        line-height: 2.5em;
+    }
+    /* Masquer la deuxième carte d'artiste */
+    .card-nodisplay_mobile {
+        display: none;
+    }
+}
+
+/** --------- END OF INDEX PAGE --------- **/
+
+/* TICKETING */
+
+.container-ticketing {
+    padding: 0 10% 0 10%;
+}
+
+.ticket-card-info-festival-goer,
+.ticket-card-info-price{
+    font-weight: 800;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
+}
+
+.ticket-card-info-price{
+    font-size: 1.5em;
+    color: var(--dark_yellow);
+}
+
+.ticket-card-info h3{
+    border-bottom: 2px solid var(--dark_yellow);
+    width: 80%; 
+    margin: auto;
+}
+
+
+/* Artist PAGE */
+
+.container-artist {
+    padding: 0 15% 0 15%;
+}
+
+    
+.artist-image img {
+    height: 100%;
+    object-fit: cover;
+}
+    
+.artist-informations{
+    background-color: white;
+    height: 100%;
+}  
+
+.artist-informations-name{
+    font-size: 2rem;
+}
+    
+.artist-informations-show-day,
+.artist-informations-stage{
+    font-size: 1.25rem;
+    margin-bottom: 0;
+}
+    
+
+.artist-informations-genre {
+    padding: 0.75rem 1.5rem;
+}
+    
+.artist-informations-description {
+    height: 300px;
+    overflow-y: auto; /* Enable the scrollbar if necessary */
+}
+    
+.artist-informations-social-networks i{
+    font-size: 2.5rem;
+}
+    
+.artist-video {
+    height: 75vh;
+}
+      
+@media only screen and (max-width: 767px) {
+    .artist-video {
+        width: 100vh; /* Fills the screen */
+        height: 50vh; /* Automatic height to keep the proportions */
+    }
+
+}
+
+
+/* SOCIALS */
+
+.fa-brands {    
+    font-size: 35px;
+    display: flex;
+    transition: all 0.2s ease-out;
+}
+
+
+.bi:hover,
+.fa-brands:hover {
+    color: var(--medium_blue);
+}
+
+footer .fa-brands:hover {
+    color: var(--yellow);
+}
+
+a {
+    text-decoration: none;
+}
+
+/** ------------ PAGE INFOS -----------**/
+.bloc-info-img {
+    width: 100%;
+    position: relative;
+}
+
+.info-img img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.content-info {
+    padding: 30px 50px;
+}
+
+
+.info-map, figure {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.info-map > img {
+    height: 240px;
+}
+
+
+@media (max-width: 500px) {
+    .info-img > img {
+        height: 300px;
+    }
+
+    .info-map > img {
+        object-fit: contain;
+        width: 80%;
+        height: 100%;
+    }
+
+    .bloc-info-img {
+        font-size: 10px;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+
+    .content-info {
+        padding: 30px 40px;
+    }
+}
+
+/** ------------ END PAGE INFOS -----------**/
+
+/** ------------ PAGE 404 -----------**/
+
+.main-errorPage__white {
+     background-color: white;
+ }
+
+.error404-img-text {
+    position: relative;
+}
+
+.image_container {
+    height: 300px;
+}
+
+.img-errorPage {
+    object-fit: contain;
+}
+
+
+.card-text-404 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+ }
+
+/** ------------ END PAGE 404 -----------**/
