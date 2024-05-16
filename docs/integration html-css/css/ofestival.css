@@ -265,6 +265,7 @@ main {
 
 }
 
+
 /** --------- INDEX PAGE --------- **/
 
 /* HOME VIDEO */
@@ -283,15 +284,13 @@ main {
 }
 /* LINE UP SECTION & TICKET */
 
-.title-bar {
+.title-bar-home {
     height: 1.5em;
     line-height: 1.5em;
     color: white;
     padding-left: 20px;
     margin-top: 20px; 
-    margin-bottom: 10px;
-    text-align: center;
-
+    margin-bottom: 10px;    
 }
 
 .card {
@@ -354,6 +353,17 @@ main {
 /** --------- END OF INDEX PAGE --------- **/
 
 /* TICKETING */
+
+/* Title bars for pages outside of the home page */
+.title-bar {
+    height: 1.5em;
+    line-height: 1.5em;
+    color: white;
+    padding-left: 20px;
+    margin-top: 20px; 
+    margin-bottom: 10px;
+    text-align: center;
+}
 
 .container-ticketing {
     padding: 0 10% 0 10%;
