@@ -19,6 +19,11 @@
     font-family: var(--font_neutro);
 }
 
+.open-font {
+    font-family: var(--font_open);
+}
+
+
 
 /* COLOURS */
 
@@ -61,6 +66,13 @@
 
 .light-green-bg {
     background-color: var(--light_green);
+}
+
+/* GENERAL */
+
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* Empêcher le débordement horizontal */
 }
 
 /* NAVBAR */
@@ -192,6 +204,7 @@
     border-radius: 40px;
     margin-bottom: 20px;
     margin-right: 10px;
+    padding-left: 10px;
    
 }
 
@@ -277,59 +290,56 @@
 
 /* Artist PAGE */
 
-.main-artist {
-    margin: 25px 0 25px 0;
+.container-artist {
+    padding: 0 15% 0 15%;
 }
 
+    
 .artist-image img {
     height: 100%;
     object-fit: cover;
 }
-
+    
 .artist-informations{
     background-color: white;
-}
-.artist-informations p{
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
+    height: 100%;
+}  
 
-.artist-informations-name{    
+.artist-informations-name{
     font-size: 2rem;
 }
-
+    
 .artist-informations-show-day,
-.artist-informations-stage{  
+.artist-informations-stage{
     font-size: 1.25rem;
-}    
+    margin-bottom: 0;
+}
+    
 
 .artist-informations-genre {
     padding: 0.75rem 1.5rem;
 }
-
-.artist-informations-name,
-.artist-informations-show-day,
-.artist-informations-stage{
-    margin-bottom: 0;
-}
-
+    
 .artist-informations-description {
-    max-height: 300px; /* Limite la hauteur à 300 pixels */
-    overflow-y: auto; /* Active la barre de défilement verticale si nécessaire */
+    height: 300px;
+    overflow-y: auto; /* Enable the scrollbar if necessary */
 }
-
+    
 .artist-informations-social-networks i{
-font-size: 35px;
+    font-size: 2.5rem;
 }
-
+    
 .artist-video {
     height: 75vh;
 }
+      
+@media only screen and (max-width: 767px) {
+    .artist-video {
+        width: 100vh; /* Fills the screen */
+        height: 50vh; /* Automatic height to keep the proportions */
+    }
 
-.medium-text {
-    font-family: var(--font_open);
-    font-size: 18px;
 }
-
 
 
 /* SOCIALS */
@@ -354,11 +364,9 @@ a {
     text-decoration: none;
 }
 
-/* PAGE INFOS */
+/** ------------ PAGE INFOS -----------**/
 .bloc-info-img {
     width: 100%;
-    padding-left: 50px;
-    padding-right: 50px;
     position: relative;
 }
 
@@ -368,29 +376,73 @@ a {
     height: 100%;
 }
 
-.title-white {
-    color: white;
-    text-align: center;
-    padding-top: 30px;
-    padding-bottom: 30px; 
-}
-
 .content-info {
-    padding: 30px 50px;    
-    background-color: white;
+    padding: 30px 50px;
 }
 
-.font-family-ss {
-    font-family: sans-serif;
-}
 
-figure {
+.info-map, figure {
     margin: 0;
     display: flex;
     justify-content: center;
 }
 
-figure > img {
+.info-map > img {
     height: 240px;
 }
 
+
+@media (max-width: 500px) {
+    .info-img > img {
+        height: 300px;
+    }
+
+    .info-map > img {
+        object-fit: contain;
+        width: 80%;
+        height: 100%;
+    }
+
+    .bloc-info-img {
+        font-size: 10px;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+
+    .content-info {
+        padding: 30px 40px;
+    }
+}
+
+/** ------------ END PAGE INFOS -----------**/
+
+/** ------------ PAGE 404 -----------**/
+
+.main-errorPage__white {
+     background-color: white;
+ }
+
+.error404-img-text {
+    position: relative;
+}
+
+.image_container {
+    height: 300px;
+}
+
+.img-errorPage {
+    object-fit: contain;
+}
+
+
+.card-text-404 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+ }
+
+/** ------------ END PAGE 404 -----------**/
