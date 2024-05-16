@@ -21,9 +21,8 @@
 
 .open-font {
     font-family: var(--font_open);
+
 }
-
-
 
 /* COLOURS */
 
@@ -246,12 +245,13 @@ main {
 
 }
 
-
+/** --------- INDEX PAGE --------- **/
 
 /* HOME VIDEO */
-.container-fluid.text-center.position-relative {
+.container-video {
     height: 75vh;
 }
+
 .home-video {
     position: absolute;
     right: 0;
@@ -263,7 +263,6 @@ main {
 }
 /* LINE UP SECTION & TICKET */
 
-
 .title-bar {
     height: 1.5em;
     line-height: 1.5em;
@@ -272,8 +271,8 @@ main {
     margin-top: 20px; 
     margin-bottom: 10px;
     text-align: center;
-}
 
+}
 
 .card {
     border: none;
@@ -301,6 +300,39 @@ main {
     font-size: 0.9em;
 }
 
+
+
+@media (max-width: 500px) {
+    .container-video {
+        height: 30vh;
+        border: solid 3px red;
+    }
+
+    .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-index_mobile {
+        max-width: 80%;
+        font-size: 10px;
+    }
+
+    .title-index_mobile {
+        font-size: 20px;
+    }
+    .title-bar_mobile {
+        height: 2.5em;
+        line-height: 2.5em;
+    }
+    /* Masquer la deuxième carte d'artiste */
+    .card-nodisplay_mobile {
+        display: none;
+    }
+}
+
+/** --------- END OF INDEX PAGE --------- **/
+
 /* TICKETING */
 
 .container-ticketing {
@@ -323,6 +355,7 @@ main {
     width: 80%; 
     margin: auto;
 }
+
 
 /* Artist PAGE */
 
