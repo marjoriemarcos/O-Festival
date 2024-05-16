@@ -32,10 +32,6 @@
     color: var(--dark_blue)
 }
 
-.dark-yellow-txt {
-    color: var(--dark_yellow)
-}
-
 .light-blue-txt {
     color: var(--light_blue)
 }
@@ -72,13 +68,26 @@
     background-color: var(--light_green);
 }
 
+/* GENERAL */
+
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* Empêcher le débordement horizontal */
+}
+
 /* NAVBAR */
 
 .navbar { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
     height: 10vh;    
 }
+
 .navbar-logo {
-    width: 10vh;
+    width: 8vh;
+    padding: 0;
 }
 
 .nav-link {
@@ -92,13 +101,86 @@
     color: var( --light_yellow);
 }
 
+
+.hamburger {
+    display: none;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: #101010;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-item {
+    margin-left: 5rem;
+}
+
+@media only screen and (max-width: 1900px) {
+    .nav-menu {
+        position: absolute;
+        z-index: 999;
+        left: -100%;
+        top: 7rem;
+        flex-direction: column;
+        background-color: var(--light_blue);
+        width: 100%;
+        height: 50vh;
+        text-align: center;
+        transition: 0.3s;
+        background-image:url(../../images/back-ground.png);
+    }
+
+    .nav-link {
+        font-size: 25px;
+        color: white;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-item {
+        margin: 2.5rem 0;
+    }
+
+    .hamburger {
+        display: block;
+        cursor: pointer;
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+}
+
+
 /* BUTTONS */
 
 .btn-primary {
     width: 50%; 
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: all 0.3s ease-in-out;
     border-radius: 40px;
     margin-bottom: 20px;
 }
@@ -107,6 +189,7 @@
 .btn-primary:focus {
     background-color: var(--yellow);
     color: var(--dark_blue);
+    transform: scale(1.05)
 }
 
 .btn-secondary {
@@ -117,33 +200,36 @@
     color: black;
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: all 0.3s ease-in-out;
     border-radius: 40px;
     margin-bottom: 20px;
     margin-right: 10px;
+    padding-left: 10px;
    
 }
 
 .btn-day:hover,
 .btn-day:focus {
     background-color: var(--light_yellow);
-    color: white;    
+    color: white;  
+    transform: scale(1.05)  
 }
 
 .btn-stage:hover,
 .btn-stage:focus {
     background-color: var(--dark_green);
-    color: white;    
+    color: white;   
+    transform: scale(1.05)  
 }
 
 .btn-genre:hover,
 .btn-genre:focus {
     background-color: var(--medium_blue);
-    color: white;    
+    color: white;  
+    transform: scale(1.05)   
 }
 
 .btn-ticket {
-
     margin-top: 60px;
     margin-bottom: 40px;
 
@@ -154,7 +240,6 @@
 /* HOME VIDEO */
 .container-fluid.text-center.position-relative {
     height: 75vh;
-    border: solid 3px red;
 }
 .home-video {
     position: absolute;
@@ -173,7 +258,9 @@
     line-height: 1.5em;
     color: white;
     padding-left: 20px;
-    margin: 15px 0 7.5px 0;
+    margin-top: 20px; 
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 
@@ -201,6 +288,29 @@
 
 .card p {
     font-size: 0.9em;
+}
+
+/* TICKETING */
+
+.container-ticketing {
+    padding: 0 10% 0 10%;
+}
+
+.ticket-card-info-festival-goer,
+.ticket-card-info-price{
+    font-weight: 800;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
+}
+
+.ticket-card-info-price{
+    font-size: 1.5em;
+    color: var(--dark_yellow);
+}
+
+.ticket-card-info h3{
+    border-bottom: 2px solid var(--dark_yellow);
+    width: 80%; 
+    margin: auto;
 }
 
 /* Artist PAGE */
@@ -237,7 +347,7 @@
     
 .artist-informations-description {
     height: 300px;
-    overflow-y: auto; /* Active la barre de défilement verticale si nécessaire */
+    overflow-y: auto; /* Enable the scrollbar if necessary */
 }
     
 .artist-informations-social-networks i{
@@ -250,48 +360,12 @@
       
 @media only screen and (max-width: 767px) {
     .artist-video {
-        width: 100vh; /* Prend la largeur de l'écran */
-        height: 50vh; /* Hauteur automatique pour conserver les proportions */
+        width: 100vh; /* Fills the screen */
+        height: 50vh; /* Automatic height to keep the proportions */
     }
+
 }
 
-
-/* TICKETING */
-
-.container-ticketing {
-    padding: 0 10% 0 10%;
-}
-
-.ticket-card-info-festival-goer,
-.ticket-card-info-price{
-    font-weight: 800;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
-}
-
-.ticket-card-info-price{
-    font-size: 1.5em;
-    color: var(--dark_yellow);
-}
-
-.ticket-card-info h3{
-    border-bottom: 2px solid var(--dark_yellow);
-    width: 80%; 
-    margin: auto;
-}
-
-/* FOOTER */
-
-footer {    
-    padding: 20px;
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.menu-footer-container ul li {
-    list-style-type: none;
-    display: inline-block;
-}
 
 /* SOCIALS */
 
@@ -318,8 +392,6 @@ a {
 /** ------------ PAGE INFOS -----------**/
 .bloc-info-img {
     width: 100%;
-    padding-left: 50px;
-    padding-right: 50px;
     position: relative;
 }
 
@@ -329,30 +401,44 @@ a {
     height: 100%;
 }
 
-.title-white {
-    color: white;
-    text-align: center;
-    padding-top: 30px;
-    padding-bottom: 30px; 
-}
-
 .content-info {
-    padding: 30px 50px;    
-    background-color: white;
+    padding: 30px 50px;
 }
 
-.font-family-ss {
-    font-family: sans-serif;
-}
 
-figure {
+.info-map, figure {
     margin: 0;
     display: flex;
     justify-content: center;
 }
 
-figure > img {
+.info-map > img {
     height: 240px;
+}
+
+
+@media (max-width: 500px) {
+    .info-img > img {
+        height: 300px;
+    }
+
+    .info-map > img {
+        object-fit: contain;
+        width: 80%;
+        height: 100%;
+    }
+
+    .bloc-info-img {
+        font-size: 10px;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+
+    .content-info {
+        padding: 30px 40px;
+    }
 }
 
 /** ------------ END PAGE INFOS -----------**/
@@ -376,22 +462,12 @@ figure > img {
 }
 
 
-.card-text {
+.card-text-404 {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     height: 50px;
-    /*TODO factoriser color*/
-    color: var(--dark_blue);
-}
-
-.footer-error404 {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-}
+ }
 
 /** ------------ END PAGE 404 -----------**/
-
