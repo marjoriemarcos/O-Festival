@@ -107,118 +107,77 @@
                    <button class="btn btn-lg btn-success fw-bold" type="button">Ajouter un artiste</button>
                </div>
                
-               <div class="container-fluid mt-5 open-front">
-                   <!-- Artiste 1-->
-                   <div class="container-fluid d-flex flex-column align-items-center text-center w-75">
-                       <h2 class="fs-2 fw-bold open-front">Artiste 1</h2>
-                       <table class="table table-hover">
+               <main>
+                <div class="container-fluid mt-5 open-front">
+                    <!-- Table structure for artists -->
+                    <table class="table table-hover">
+                        <!-- Table header -->
                         <thead>
                             <tr class="table-info">
-                                <th scope="col" class="fs-4 fw-bold">Name</th>                                               
-                                <th scope="col"><i class="bi bi-globe fs-4"></i></th>                                
-                                <th scope="col"><i class="fab fa-instagram fs-4"></i></th>
-                                <th scope="col"><i class="fab fa-spotify fs-4"></i></th>                                
+                                <th scope="col" class="fs-4 fw-bold">Name</th>
+                                <th scope="col"><i class="bi bi-globe fs-4 fw-bold me-1"></i><span class="fs-4">Website</span></th>
+                                <th scope="col"><i class="fab fa-instagram fs-4 fw-bold me-1"></i><span class="fs-4">Instagram</span></th>
+                                <th scope="col"><i class="fab fa-spotify fs-4 fw-bold me-1"></i><span class="fs-4">Spotify</span></th>
                                 <th scope="col" class="fs-4 fw-bold">Actions</th>
                             </tr>
                         </thead>
-                           <tbody>
-                               <th scope="row" class="fw-normal">XYZ</th>                         
-                               <td>Column content</td>
-                               <td>Column content</td>
-                               <td>Column content</td>                                                       
-                               <td>                               
-                                   <div class=" d-flex justify-content-center">
-                                       <form action="#" method="post" class="px-2">
-                                           <button onclick=" return confirm('Souhaitez-vous supprimer cet artiste?');" type=" submit" class=" bi bi-trash btn btn-outline-danger rounded-2"></button>
-                                       </form>
-                                       <a class="rounded-2  btn btn-outline-warning bi bi-pencil" href="#"></a>
-                                </td>
-                           </tr>
-                           </tbody>
-                       </table>
-       
-                       <div class="d-flex justify-content-center p-3">
-                           <form action="#" method="post" class="px-2">
-                           <button onclick=" return confirm('Souhaitez-vous supprimer cet artiste ?');" type=" submit" class="btn btn-md btn-danger fw-bold" type="button">
-                            Supprimer cet artiste</button>
-                       </form>
-                       </div>
-                   </div>
-
-                   <!-- Artiste 2-->
-                   <div class="container-fluid d-flex flex-column align-items-center text-center w-75">
-                    <h2 class="fs-2 fw-bold open-front">Artiste 2</h2>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr class="table-info">
-                                <th scope="col" class="fs-4 fw-bold">Name</th>                                               
-                                <th scope="col"><i class="bi bi-globe fs-4"></i></th>                                
-                                <th scope="col"><i class="fab fa-instagram fs-4"></i></th>
-                                <th scope="col"><i class="fab fa-spotify fs-4"></i></th>                                
-                                <th scope="col" class="fs-4 fw-bold">Actions</th>
-                            </tr>
-                        </thead>
-                           <tbody>
-                               <th scope="row" class="fw-normal">XYZ</th>                         
-                               <td>Column content</td>
-                               <td>Column content</td>
-                               <td>Column content</td>                                                       
-                               <td>                               
-                                   <div class=" d-flex justify-content-center">
-                                       <form action="#" method="post" class="px-2">
-                                           <button onclick=" return confirm('Souhaitez-vous supprimer cet artiste?');" type=" submit" class=" bi bi-trash btn btn-outline-danger rounded-2"></button>
-                                       </form>
-                                       <a class="rounded-2  btn btn-outline-warning bi bi-pencil" href="#"></a>
-                                </td>
-                           </tr>
-                           </tbody>
-                    </table>
-    
-                    <div class="d-flex justify-content-center p-3">
-                        <form action="#" method="post" class="px-2">
-                        <button onclick=" return confirm('Souhaitez-vous supprimer cet artiste ?');" type=" submit" class="btn btn-md btn-danger fw-bold" type="button">
-                         Supprimer cet artiste</button>
-                    </form>
-                    </div>
-                </div>        
-                                
-                <!-- Artiste 3-->
-                   <div class="container-fluid d-flex flex-column align-items-center text-center w-75">
-                    <h2 class="fs-2 fw-bold open-front">Artiste 3</h2>
-                    <table class="table table-hover">
-                     <thead>
-                         <tr class="table-info">
-                             <th scope="col" class="fs-4 fw-bold">Name</th>                                               
-                             <th scope="col"><i class="bi bi-globe fs-4"></i></th>                                
-                             <th scope="col"><i class="fab fa-instagram fs-4"></i></th>
-                             <th scope="col"><i class="fab fa-spotify fs-4"></i></th>                                
-                             <th scope="col" class="fs-4 fw-bold">Actions</th>
-                         </tr>
-                     </thead>
                         <tbody>
-                            <th scope="row" class="fw-normal">XYZ</th>                         
-                            <td>Column content</td>
-                            <td>Column content</td>
-                            <td>Column content</td>                                                       
-                            <td>                               
-                                <div class=" d-flex justify-content-center">
-                                    <form action="#" method="post" class="px-2">
-                                        <button onclick=" return confirm('Souhaitez-vous supprimer cet artiste?');" type=" submit" class=" bi bi-trash btn btn-outline-danger rounded-2"></button>
-                                    </form>
-                                    <a class="rounded-2  btn btn-outline-warning bi bi-pencil" href="#"></a>
-                             </td>
-                        </tr>
+                            <!-- Artist 1 -->
+                            <tr>
+                                <!-- Artist name -->
+                                <td class="fs-2 fw-bold open-front">Artist 1</td>
+                                <!-- Social media links -->
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <!-- Action buttons -->
+                                <td>
+                                    <!-- Centered buttons -->
+                                    <div class="d-flex justify-content-center">
+                                        <!-- Delete button -->
+                                        <form action="#" method="post" class="px-2">
+                                            <button onclick=" return confirm('Do you want to delete this artist?');" type="submit" class="bi bi-trash btn btn-outline-danger rounded-2"></button>
+                                        </form>
+                                        <!-- Edit button -->
+                                        <a class="rounded-2 btn btn-outline-warning bi bi-pencil" href="#"></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Artist 2 -->
+                            <tr>
+                                <td class="fs-2 fw-bold open-front">Artist 2</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        <form action="#" method="post" class="px-2">
+                                            <button onclick=" return confirm('Do you want to delete this artist?');" type="submit" class="bi bi-trash btn btn-outline-danger rounded-2"></button>
+                                        </form>
+                                        <a class="rounded-2 btn btn-outline-warning bi bi-pencil" href="#"></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Artist 3 -->
+                            <tr>
+                                <td class="fs-2 fw-bold open-front">Artist 3</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        <form action="#" method="post" class="px-2">
+                                            <button onclick=" return confirm('Do you want to delete this artist?');" type="submit" class="bi bi-trash btn btn-outline-danger rounded-2"></button>
+                                        </form>
+                                        <a class="rounded-2 btn btn-outline-warning bi bi-pencil" href="#"></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Add more rows for additional artists -->
                         </tbody>
                     </table>
-
-                    <div class="d-flex justify-content-center p-3">
-                        <form action="#" method="post" class="px-2">
-                        <button onclick=" return confirm('Souhaitez-vous supprimer cet artiste ?');" type=" submit" class="btn btn-md btn-danger fw-bold" type="button">
-                         Supprimer cet artiste</button>
-                    </form>
-                    </div>
-
-                </div>        
+                </div>
+            </main>      
 
 
            </main>
