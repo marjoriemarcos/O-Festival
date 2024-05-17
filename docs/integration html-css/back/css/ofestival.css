@@ -1,0 +1,96 @@
+/** --------- VARIABLES --------- **/
+
+:root {
+    --dark_blue: #05608a;
+    --medium_blue: #4e7ba3;
+    --light_blue: #65C6DC;
+    --dark_yellow: #FABB25;
+    --yellow: #efdca1;
+    --light_yellow: #EECE6A;
+    --dark_green: #03a35f;
+    --light_green: #009060;    
+    --font_neutro: 'Neutro', sans-serif;
+    --font_open: "Open Sans", sans-serif;
+}
+
+/** --------- FONT --------- **/
+
+* {
+    font-family: var(--font_open);
+}
+.open-font {
+    font-family: var(--font_open);
+}
+
+/** --------- COLORS --------- **/
+
+.dark-blue-txt {
+    color: var(--dark_blue)
+}
+.light-blue-txt {
+    color: var(--light_blue)
+}
+.light-green-txt {
+    color: var(--light_green)
+}
+.light-yellow-txt {
+    color: var(--light_yellow)
+}
+.light-blue-bg {
+    background-color: var(--light_blue);    
+}
+.light-green-bg {
+    background-color: var(--light_green);
+}
+.light-yellow-bg {
+    background-color: var(--light_yellow);
+}  
+.medium-blue-bg {
+    background-color: var(--medium_blue);    
+}
+.dark-blue-bg {
+    background-color: var(--dark_blue);
+}  
+.dark-yellow-bg {
+    background-color: var(--dark_yellow);
+}
+
+.background-img-bg{
+    background-image:url(../../images/back-ground.png);
+    background-size: cover;
+}
+.background-img-fixed-bg{
+    background-image:url(../../images/back-ground.png);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/** --------- GENERAL --------- **/
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}    
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-title {
+    line-height: 1.5em;
+    color: white;
+    padding: 2.5% 0 2.5% 0;
+    text-align: center;
+}
+
+/** --------- GENERAL --------- **/
+
+.navbar-brand > .img-fluid {
+    width: 15%;
+}
+
+/* .navbar {
+    height: ;
+
+} */
