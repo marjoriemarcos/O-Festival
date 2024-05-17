@@ -34,7 +34,7 @@
     <div class="d-flex justify-content-end bg-secondary p-1">
         <button class="btn btn-lg btn-primary" type="button">Accéder au site</button>
       </div>
-    <nav class="navbar navbar-expand-sm bg-primary" data-bs-theme="dark">
+      <nav class="navbar navbar-expand-sm bg-primary" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="./index.html">
                 <img src="../images/logo.png" alt="Logo de O'Festival" class="img-fluid">
@@ -94,14 +94,110 @@
                     </div>
                 </li>
             </ul>
+
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                  <span> Marie BROCHAND</span>
+                  <i class="bi bi-person-square"></i>
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="#">Profil</a>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Déconnexion</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <a href="#" class="btn btn-danger me-2">Connexion</a>
           </div>
         </div>
       </nav>
 
         <main>
-       
+          <!-- Bouton ajouter-->
+          <div class="d-fex justify-content-end p-4">
+              <button class="btn btn-lg btn-success fw-bold" type="button">Ajouter une programmation</button>
+          </div>
+          <!--Titre de la page-->
+          <h1 class="fs-1 fw-bold open-front py-3 text-center"> Liste de la programmation</h1>
+          <div class="container-fluid d-flex flex-column align-items-center w-75 p-3">
+            <!-- Bouton tri par jour de programmation-->
+            <div class="container-fluid d-fex justify-content-start p-4">
+              <button class="btn btn-lg btn-primary fw-bold mx-2" type="button">Jour 1</button>
+              <button class="btn btn-lg btn-primary fw-bold mx-2" type="button">Jour 2</button>
+              <button class="btn btn-lg btn-primary fw-bold mx-2" type="button">Jour 3</button>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                <tr class="table-info">
+                    <th scope="col" class="fs-4 fw-bold">Artiste</th>
+                    <th scope="col" class="fs-4 fw-bold">Photo</th>
+                    <th scope="col" class="fs-4 fw-bold">Scène</th>
+                    <th scope="col" class="fs-4 fw-bold">Jour</th>
+                    <th scope="col" class="fs-4 fw-bold">Heure</th>
+                    <th scope="col" class="fs-4 fw-bold">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row" class="fw-normal">Arthur</th>
+                    <th class="w-25"><img src="../images/chanteur.jpg" alt="" class="w-25"></th>
+                    <td>Scène 3</td>
+                    <td>24/08/2024</td>
+                    <td>19:00</td>
+                    <td>
+                      <div class=" d-flex justify-content-start">
+                          <a class="rounded-2  btn btn-outline-success bi bi-arrow-up-right-square" href="#"></a>
+                          <form action="#" method="post" class="px-2">
+                              <button onclick=" return confirm('Souhaitez-vous supprimer cette programmation ?');" type=" submit" class=" bi bi-trash btn btn-outline-danger rounded-2"></button>
+                          </form>
+                          <a class="rounded-2  btn btn-outline-warning bi bi-pencil" href="#"></a>
+                      </div>
+                    </td> 
+                  </tr> 
 
-        
+                  <tr>
+                    <th scope="row" class="fw-normal">Léonard</th>
+                    <th class="w-25"><img src="../images/chanteur2.jpg" alt="" class="w-25"></th>
+                    <td>Scène 1</td>
+                    <td>23/08/2024</td>
+                    <td>18:00</td>
+                    <td>
+                      <div class=" d-flex justify-content-start">
+                          <a class="rounded-2  btn btn-outline-success bi bi-arrow-up-right-square" href="#"></a>
+                          <form action="#" method="post" class="px-2">
+                              <button onclick=" return confirm('Souhaitez-vous supprimer cette programmation ?');" type=" submit" class=" bi bi-trash btn btn-outline-danger rounded-2"></button>
+                          </form>
+                          <a class="rounded-2  btn btn-outline-warning bi bi-pencil" href="#"></a>
+                      </div>
+                    </td> 
+                  </tr> 
+
+                  <tr>
+                    <th scope="row" class="fw-normal">Thomas</th>
+                    <th class="w-25"><img src="../images/chanteur3.jpg" alt="" class="w-25"></th>
+                    <td>Scène 3</td>
+                    <td>25/08/2024</td>
+                    <td>16:00</td>
+                    <td>
+                      <div class=" d-flex justify-content-start">
+                          <a class="rounded-2  btn btn-outline-success bi bi-arrow-up-right-square" href="#"></a>
+                          <form action="#" method="post" class="px-2">
+                              <button onclick=" return confirm('Souhaitez-vous supprimer cette programmation ?');" type=" submit" class=" bi bi-trash btn btn-outline-danger rounded-2"></button>
+                          </form>
+                          <a class="rounded-2  btn btn-outline-warning bi bi-pencil" href="#"></a>
+                      </div>
+                    </td> 
+                  </tr> 
+                </tbody>
+            </table>
+        </div>
         </main>
         
 
@@ -114,6 +210,4 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     </body>
-
-
 </html>
