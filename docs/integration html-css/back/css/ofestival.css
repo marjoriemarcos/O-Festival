@@ -18,8 +18,8 @@
 * {
     font-family: var(--font_open);
 }
-.open-font {
-    font-family: var(--font_open);
+.neutro-font {
+    font-family: var(--font_neutro);
 }
 
 /** --------- COLORS --------- **/
@@ -88,6 +88,12 @@ body {
 
 .navbar-brand > .img-fluid {
     width: 15%;
+}
+
+/** ARTIST **/
+
+.img-artist {
+   max-width: 300px;
 }
 
 /* .navbar {
