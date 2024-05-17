@@ -406,6 +406,10 @@ a {
 
 /** ------------ ERROR 404 -----------**/
 
+.container-error404{
+    height: 100vh;
+}
+
 .error404-content{
     position: relative;
 }
