@@ -127,8 +127,8 @@
                 <a href="#" class="btn btn-lg btn-success fw-bold" type="button">Ajouter</a>
             </div>
             <div class="container-fluid open-front">
-                <div class="container-fluid d-flex flex-column align-items-center text-center w-75">
-                    <h1 class="fs-2 fw-bold neutro-font mb-4">Liste des genres</h1>
+                <div class="container-fluid d-flex flex-column align-items-center text-center w-50">
+                    <h2 class="text-center mb-4 my-3 fw-bold display-5 neutro-font">Liste des genres</h2>
                     <table class="table table-hover">
                         <thead>
                             <tr class="table-info">
@@ -140,13 +140,13 @@
                             <tr>
                                 <td class="fs-5">Rock</td>
                                 <td class="d-flex align-items-center justify-content-center">
-                                    <a class="rounded-2 btn btn-outline-success bi bi-arrow-up-right-square me-2"
-                                       href="genre_detail.html"></a>
-                                    <button onclick=" return confirm('Souhaitez-vous supprimer cette programmation ?');"
-                                            type="submit"
-                                            class=" bi bi-trash btn btn-outline-danger rounded-2 me-2"></button>
+                                  <div class=" d-flex justify-content-start">
+                                    <a class="rounded-2  btn btn-outline-success bi bi-arrow-up-right-square" href="./slot_read.html"></a>
+                                    <form action="#" method="post" class="px-2">
+                                        <button onclick=" return confirm('Souhaitez-vous supprimer ce genre ?');" type=" submit" class=" bi bi-trash btn btn-outline-danger rounded-2"></button>
                                     </form>
-                                    <a class="rounded-2 btn btn-outline-warning bi bi-pencil me-2" href="#"></a>
+                                    <a class="rounded-2  btn btn-outline-warning bi bi-pencil" href="#"></a>
+                                </div>
                                 </td>
                             </tr>
                         </tbody>
