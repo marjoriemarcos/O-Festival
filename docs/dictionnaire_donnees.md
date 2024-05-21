@@ -7,7 +7,7 @@
 | id         | INT         | PRIMARY KEY, NOT NULL, AUTO_INCREMENT, UNSIGNED | L'identifiant de notre artiste  |
 | name       | VARCHAR(64) | NOT NULL                                        | Le nom du genre musical         |
 | created_at | TIMESTAMP   | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de création de la table    |
-| updated_at | TIMESTAMP   | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table |
+| updated_at | TIMESTAMP   | NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table |
 
 ## Table d'association entre genre et artist (`artist_genre`)
 
@@ -32,7 +32,8 @@
 | spotify     | VARCHAR(255) | NULL                                            | Lien de la page Spotify de l'artiste  |
 | snapchat    | VARCHAR(255) | NULL                                            | Lien du profil Snapchat de l'artiste  |
 | tiktok      | VARCHAR(255) | NULL                                            | Lien du profil TikTok de l'artiste    |
-
+| created_at | TIMESTAMP   | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de création de la table    |
+| updated_at | TIMESTAMP   | NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table |
 
 ## Créneau (`slot`)
 
@@ -44,7 +45,7 @@
 | artist_id  | ENTITY    | FOREIGN KEY (artist.id)                         | Identifiant de l'artiste associé |
 | stage_id   | ENTITY    | FOREIGN KEY (stage.id)                          | Identifiant de la scène associée |
 | created_at | TIMESTAMP | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de création de la table     |
-| updated_at | TIMESTAMP | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table  |
+| updated_at | TIMESTAMP | NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table  |
 
 ## Scène (`stage`)
 
@@ -53,7 +54,7 @@
 | id         | INT         | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | L'identifiant de la scène       |
 | name       | VARCHAR(64) | NOT NULL                                        | Le nom de la scène              |
 | created_at | TIMESTAMP   | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de création de la table    |
-| updated_at | TIMESTAMP   | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table |
+| updated_at | TIMESTAMP   | NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table |
 
 
 ## Utilisateur (`user`)
@@ -67,7 +68,7 @@
 | password   | VARCHAR(255) | NOT NULL                                        | Le mot de passe de l'utilisateur   |
 | role       | VARCHAR(255) | NOT NULL                                        | Le rôle de l'utilisateur           |
 | created_at | TIMESTAMP    | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de création de la table       |
-| updated_at | TIMESTAMP    | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table    |
+| updated_at | TIMESTAMP    | NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table    |
 
 
 ## Client (`customer`)
@@ -83,7 +84,7 @@
 | postcode     | INT          | LENGTH (10) NOT NULL                            | Le code postal du client         |
 | town         | VARCHAR(64)  | NOT NULL                                        | La ville du client               |
 | created_at   | TIMESTAMP    | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de création de la table     |
-| updated_at   | TIMESTAMP    | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table  |
+| updated_at   | TIMESTAMP    | NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table  |
 
 ## Billet (`ticket`)
 
@@ -96,7 +97,7 @@
 | duration_id               | ENTITY      | FOREIGN KEY                                     | Identifiant de la durée               |
 | festival_goer_category_id | ENTITY      | FOREIGN_KEY                                     | Identifiant de la catégorie du client |
 | created_at                | TIMESTAMP   | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de création de la table          |
-| updated_at                | TIMESTAMP   | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table       |
+| updated_at                | TIMESTAMP   | NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table       |
 
 ## Table d'association entre ticket et customer (`ticket_buy`)
 
@@ -113,7 +114,7 @@
 | day_quantity | INT         | NOT NULL                                        | Le nombre de jours                  |
 | day_name     | VARCHAR(64) | NOT NULL                                        | Le nom des jours                    |
 | created_at   | TIMESTAMP   | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de création de la table        |
-| updated_at   | TIMESTAMP   | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table     |
+| updated_at   | TIMESTAMP   | NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table     |
 
 ## Catégorie de festivalier (`festival_goer_category`)
 
@@ -122,4 +123,4 @@
 | id         | INT         | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | L'identifiant de la catégorie   |
 | title      | VARCHAR(64) | NOT NULL                                        | Le nom de la catégorie          |
 | created_at | TIMESTAMP   | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de création de la table    |
-| updated_at | TIMESTAMP   | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table |
+| updated_at | TIMESTAMP   | NULL, DEFAULT CURRENT_TIMESTAMP             | Date de mise à jour de la table |
