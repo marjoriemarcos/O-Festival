@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Artiste{% endblock %}
+
+{% block body %}
+
+    <main>
+        <div class="container-artist background-img-fixed-bg">
+
+            
+            <div class="row pt-5 gx-0 ">
+
+                <!-- Picture of the artist -->
+                <div class="artist-image col-lg-6">
+                    <img src="{{ asset('images/artist.jpg') }}" alt="Photo de -nom de l'artiste-" class="img-fluid">
+                </div>
+
+                <!-- Information on the artist -->
+                <div class="col-lg-6">
+                    <div class="artist-informations open-font p-4">
+
+                        <!-- Artist's name -->
+                        <h1 class="artist-informations-name dark-blue-txt">Nom de l'artiste</h1>
+
+                        <!-- Day of the artist's performance -->
+                        <h2 class="artist-informations-show-day dark-yellow-txt">Jour de passage</h2>
+
+                        <!-- Stage' name -->
+                        <h3 class="artist-informations-stage light-green-txt">Nom de la scène</h3>
+
+                        <!-- Musical genres -->
+                        <span
+                            class="artist-informations-genre btn btn-secondary btn-sm disabled light-blue-bg px-4 mt-3">Genre
+                            1</span>
+                        <span
+                            class="artist-informations-genre btn btn-secondary btn-sm disabled light-blue-bg px-4 mt-3">Genre
+                            2</span>
+
+                        <!-- Artist's description -->
+                        <div class="artist-informations-description open-font mt-4 mb-4">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ipsam sed exercitationem
+                                quia. Placeat, rerum vel! Labore explicabo harum dolor numquam magni consectetur
+                                deleniti vitae eligendi sit, suscipit similique totam. Corrupti voluptatum, maxime est
+                                at quasi quisquam commodi doloribus vero! Non perferendis earum pariatur, nam provident
+                                voluptates dicta sequi eligendi ex aspernatur iusto quisquam maiores unde eveniet ut id
+                                itaque sed dolorum voluptas? Hic, quos eaque iure alias ea, ducimus doloremque molestiae
+                                quisquam similique, magnam nihil qui aut natus deleniti accusamus voluptatibus.
+                                Recusandae quis consequuntur similique voluptate rerum illo repellendus nostrum suscipit
+                                id, odit officiis eligendi quo minus consectetur nobis explicabo aperiam quod laborum
+                                repudiandae illum soluta dolore. Laboriosam eius molestias quas officia maiores impedit
+                                a optio ab inventore quis odio, modi rem nisi doloribus provident, ad velit mollitia,
+                                incidunt ex doloremque laudantium et cupiditate eos unde? Officiis mollitia corrupti
+                                harum vitae nostrum accusamus a beatae adipisci esse. Quibusdam, molestias.
+                            </p>
+                        </div>
+
+                        <!-- Artist's socials -->
+                        <div class="artist-informations-social-networks">
+                            <ul class="list-inline mb-0">
+
+                                <!-- Socials icons -->
+                                <li class="list-inline-item">
+                                    <a href="#">
+                                        <i class="bi bi-globe dark-blue-txt"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#">
+                                        <i class="fa-brands fa-spotify dark-blue-txt"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#">
+                                        <i class="fa-brands fa-facebook dark-blue-txt"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#">
+                                        <i class="fa-brands fa-instagram dark-blue-txt"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#">
+                                        <i class="fa-brands fa-youtube dark-blue-txt"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#">
+                                        <i class="fa-brands fa-snapchat dark-blue-txt"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#">
+                                        <i class="fa-brands fa-tiktok dark-blue-txt"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5 text-center">
+
+                <!-- Video -->
+                <div class="artist-video embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item w-100 h-100"
+                        src="https://www.youtube.com/embed/UvEwfQvVSGg?si=ZSXsQd_1zxTxu6jX" title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+
+                <!--  Link to the ticket shop -->
+                <div class="mt-5 mb-5">
+                    <a href="{{path('ticketBrowse')}}" class="btn btn-primary light-yellow-bg dark-blue-txt">Billetterie</a>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

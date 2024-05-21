@@ -70,17 +70,41 @@
 html, body {
     height: 100%;
     width: 100%;
-    overflow-x: hidden;
+    overflow-x: hidden;    
 }    
 body {
     display: flex;
     flex-direction: column;
 }
+
+/* TITLES */
+
+.home-title{
+    z-index: 2;
+    font-size: 8vw;
+}
+
+.home-bar-title {    
+    font-size: 2.5vw;
+    padding-left: 1rem;       
+}
+
+
 .page-title {
-    line-height: 1.5em;
+    font-size: 3vw;
     color: white;
     padding: 2.5% 0 2.5% 0;
     text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+    .home-bar-title {
+        font-size: 6vw; 
+    }
+
+    .page-title {
+        font-size: 8vw;    
+    }
 }
 
 /** --------- NAV BAR --------- **/
@@ -106,7 +130,7 @@ body {
     color: var( --light_yellow);
 }
 .hamburger {
-    display: none;
+    display: none;    
 }
 .bar {
     display: block;
@@ -115,7 +139,7 @@ body {
     margin: 5px auto;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
-    background-color: #101010;
+    background-color: var(--light_yellow);
 }
 .nav-menu {
     display: flex;
@@ -187,14 +211,19 @@ body {
 /** --------- BUTTONS --------- **/
 
 .btn-primary {
-    padding: 1%;
-    width: 50%; 
+    padding: 10px 20px; 
+    min-width: 150px; 
+    max-width: 100%; 
     border: none;
+    display: inline-block;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease-in-out;
     border-radius: 40px;
     margin-bottom: 20px;
+    text-align: center; 
+    white-space: nowrap;      
 }
+
 .btn-primary:hover,
 .btn-primary:focus {
     background-color: var(--yellow);
@@ -202,8 +231,9 @@ body {
     transform: scale(1.05)
 }
 .btn-secondary {
-    width: auto;
+    min-width: auto;
     height: auto;
+    display: inline-block;
     text-align: center;
     white-space: normal;
     color: black;
@@ -235,7 +265,9 @@ body {
     transform: scale(1.05)   
 }
 
+
 /** --------- INDEX PAGE --------- **/
+
 
 /* HOME VIDEO */
 .container-home-video {
@@ -250,11 +282,10 @@ body {
     object-fit: cover;
     z-index: 1;
 }
-.home-title{
-    z-index: 2;
-}
+
 
 /* SLIDE LINE-UP */
+
 .home-programming-slide-prev,
 .home-programming-slide-next {
     font-size: 3rem;
@@ -307,6 +338,7 @@ body {
 .container-ticketing {
     padding: 0 10% 0 10%;
 }
+
 .ticket-card-info-festival-goer,
 .ticket-card-info-price{
     font-weight: 800;

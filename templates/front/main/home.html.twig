@@ -1,0 +1,159 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}O'Festival{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container-home dark-blue-bg">
+            <img src="{{asset('images/frise-1.png')}}" class="card-img-top">
+
+            <!-- Video Home -->
+            <div
+                class="container-home-video container-fluid text-center position-relative d-flex align-items-center justify-content-center ">
+                <video autoplay loop muted plays-inline class="home-video">
+                    <!-- TODO:  src="../images/video-home.mp4"-->
+                    <source src="{{asset('images/video-home.mp4')}}" type="video/mp4">
+                </video>
+                <h1 class="home-title text-white">O'Festival</h1>
+            </div>
+            <img src="{{asset('images/frise-2.png')}}" class="card-img-top">
+
+            <!-- Line-up -->
+            <div class="container-home-programming d-flex flex-column">
+
+                <h2 class="home-bar-title light-blue-bg text-white ">
+                    Programmation
+                </h2>
+
+                <div class="home-programming-slide row gx-1 px-5">
+
+                    <!-- Artist Card -->
+                    <div class="home-programming-slide-artist col-md-3">
+                        <div class="card img-zoom">
+                            <a href="{{path('artistRead')}}">
+                                <img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="Artiste 1">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                    <h3 class="card-title text-white mb-0">Artiste 1</h3>
+                                    <p class="card-text text-white">Jour 1 - POP</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Artist Card -->
+                    <div class="home-programming-slide-artist col-md-3">
+                        <div class="card img-zoom">
+                            <a href="{{path('artistRead')}}">
+                                <img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="Artiste 2">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                    <h3 class="card-title text-white mb-0">Artiste 2</h3>
+                                    <p class="card-text text-white">Jour 2 - ROCK</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Artist Card -->
+                    <div class="home-programming-slide-artist col-md-3">
+                        <div class="card img-zoom">
+                            <a href="{{path('artistRead')}}">
+                                <img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="Artiste 3">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                    <h3 class="card-title text-white mb-0">Artiste 3</h3>
+                                    <p class="card-text text-white">Jour 3 - ELECTRO</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Artist Card -->
+                    <div class="home-programming-slide-artist col-md-3">
+                        <div class="card img-zoom">
+                            <a href="{{path('artistRead')}}">
+                                <img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="Artiste 4">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                    <h3 class="card-title text-white mb-0">Artiste 4</h3>
+                                    <p class="card-text text-white">Jour 3 - ELECTRO</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Back button for browsing through artists -->
+                    <ul class="home-programming-slide-direction">
+                        <li>
+                            <a class="home-programming-slide-prev" href="#">❮</a>
+                        </li>
+                    </ul>
+
+                    <!-- Next button for browsing through artists -->
+                    <ul class="home-programming-slide-direction">
+                        <li>
+                            <a class="home-programming-slide-next" href="#">❯</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Link to the Line-Up page -->
+                <div class="home-programming-slide-link text-center">
+                    <a href="{{path('lineupBrowse')}}"
+                        class="btn btn-primary light-yellow-bg dark-blue-txt">Toute la
+                        programmation</a>
+                </div>
+            </div>
+
+
+            <!-- Ticket Shop -->
+            <div class="container-home-ticketing d-flex flex-column">
+
+                <h2 class="home-bar-title light-blue-bg text-white">
+                    Billetterie
+                </h2>
+
+                <div class="home-ticket-list row justify-content-around mx-3 mb-4 mt-3">
+                    <!-- Ticket 1 -->
+                    <div class="home-ticket col-md-3 mb-4">
+                        <div class="card img-zoom">
+                            <a href="{{path('ticketBrowse')}}">
+                                <img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                    <h3 class="card-title text-white mb-0">PASS 3 JOURS</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Ticket 2 -->
+                    <div class="home-ticket col-md-3 mb-4">
+                        <div class="card img-zoom">
+                            <a href="{{path('ticketBrowse')}}">
+                                <img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                    <h3 class="card-title text-white mb-0">PASS 2 JOURS</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Ticket 3 -->
+                    <div class="home-ticket col-md-3">
+                        <div class="card img-zoom">
+                            <a href="{{path('ticketBrowse')}}">
+                                <img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                    <h3 class="card-title text-white mb-0">PASS 1 JOURS</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Link to the ticket shop -->
+                <div class="text-center position-relative d-flex align-items-center justify-content-center">
+                    <a href="{{path('ticketBrowse')}}"
+                        class="btn btn-primary light-yellow-bg dark-blue-txt">Billetterie</a>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
