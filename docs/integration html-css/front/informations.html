@@ -4,12 +4,12 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Badri CHOULAK">
     <meta name="author" content="Nicolas JOUBERT">
     <meta name="author" content="Talya LALAOUI">
     <meta name="author" content="Marjorie MARCOS">
     <meta name=”description” content="O'Festival">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- reset CSS -->
     <link rel="stylesheet" href="./css/reset.css">
     <!-- Bootstrap CSS -->
@@ -19,45 +19,51 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- our CSS -->
     <link rel="stylesheet" href="./css/ofestival.css">
-    <!-- Neutro font family -->
-    <link href="https://fonts.cdnfonts.com/css/neutro" rel="stylesheet">
+    <!-- Adumu font family -->
+    <link href="https://fonts.cdnfonts.com/css/adumu-inline" rel="stylesheet">
+    <!-- Roboto font family -->
+    <link href="https://fonts.cdnfonts.com/css/roboto-condensed-3" rel="stylesheet">
     <!-- favicon -->
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
     <!-- font Awesome -->
     <script src="https://kit.fontawesome.com/2789e31df4.js" crossorigin="anonymous"></script>
+
     <title>O'Festival</title>
 </head>
 
 <body>
-    <header class="header">
-        <nav class="navbar dark-blue-bg">
-            <a class="navbar-brand navbar-logo" href="./index.html">
-                <img src="../images/logo.png" alt="Logo de O'Festival" class="img-fluid">
-            </a>
-            <ul class="nav-menu dark-blue-bg">
-                <li class="nav-item">
-                    <a href="./programming.html" class="nav-link">Programmation</a>
-                </li>
-                <li class="nav-item">
-                    <a href="./ticketing.html" class="nav-link">Billetterie</a>
-                </li>
-                <li class="nav-item">
-                    <a href="./informations.html" class="nav-link">Infos pratiques</a>
-                </li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </nav>
+    <header>
+        <div class="header roboto-font  text-white">
+            <!--Navbar-->
+            <nav class="navbar dark-blue-bg px-5">
+                <a class="navbar-brand navbar-logo" href="./index.html">
+                    <img src="../images/logoNav.png" alt="Logo de O'Festival" class="img-fluid">
+                </a>
+                <ul class="nav-menu dark-blue-bg">
+                    <li class="nav-item me-5">
+                        <a href="./programming.html" class="nav-link">Programmation</a>
+                    </li>
+                    <li class="nav-item me-5">
+                        <a href="./ticketing.html" class="nav-link">Billetterie</a>
+                    </li>
+                    <li class="nav-item me-5">
+                        <a href="./informations.html" class="nav-link">Infos pratiques</a>
+                    </li>
+                </ul>
+                <div class="hamburger me-5">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
     </header>
 
     <main>
 
         <!--Infos Pratique-->
         <div class="container-informations medium-blue-bg">
-            <h2 class="page-title">Infos pratiques</h2>
+            <h2 class="page-title adumu-font">Infos pratiques</h2>
             <div class="row p-5 gx-0 background-img-bg">
 
                 <!-- Image -->
@@ -136,40 +142,39 @@
         </div>
     </main>
 
+
     <!--Footer-->
-    <footer class="light-blue-bg d-flex flex-column-reverse flex-md-row text-center justify-content-around p-3">
-
-        <!-- Réseaux sociaux -->
-        <div class="d-flex flex-row align-items-center justify-content-center my-3">
-            <a class="mx-2">
-                <i class="fa-brands fa-facebook light-yellow-txt"></i>
-            </a>
-            <a class="mx-2">
-                <i class="fa-brands fa-square-x-twitter light-yellow-txt"></i>
-            </a>
-            <a class="mx-2">
-                <i class="fa-brands fa-square-instagram light-yellow-txt"></i>
-            </a>
-            <a class="mx-2">
-                <i class="fa-brands fa-square-snapchat light-yellow-txt"></i>
-            </a>
-            <a class="mx-2">
-                <i class="fa-brands fa-youtube light-yellow-txt"></i>
-            </a>
+    <footer>
+        <div class="footer light-blue-bg roboto-font text-white p-2">
+            <div class="social-icons">
+                <a class="mx-2" href="#">
+                    <i class="fa-brands fa-facebook light-yellow-txt"></i>
+                </a>
+                <a class="mx-2" href="#">
+                    <i class="fa-brands fa-twitter light-yellow-txt"></i>
+                </a>
+                <a class="mx-2" href="#">
+                    <i class="fa-brands fa-instagram light-yellow-txt"></i>
+                </a>
+                <a class="mx-2" href="#">
+                    <i class="fa-brands fa-snapchat light-yellow-txt"></i>
+                </a>
+                <a class="mx-2" href="#">
+                    <i class="fa-brands fa-youtube light-yellow-txt"></i>
+                </a>
+            </div>
+            <ul class="nav-links list-inline">
+                <li class="list-inline-item">
+                    <a class="nav-link mx-2" href="#">Contact</a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="nav-link mx-2" href="#">Partenaires</a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="nav-link mx-2" href="./legal-notice.html">Mentions légales</a>
+                </li>
+            </ul>
         </div>
-
-        <!-- Liens de navigation -->
-        <ul class="list-inline mt-4">
-            <li class="list-inline-item">
-                <a class="nav-link mx-2" href="#">Contact</a>
-            </li>
-            <li class="list-inline-item">
-                <a class="nav-link mx-2" href="#">Partenaires</a>
-            </li>
-            <li class="list-inline-item">
-                <a class="nav-link mx-2" href="./legal-notice.html">Mentions légales</a>
-            </li>
-        </ul>
     </footer>
 
     <!-- Bootstrap JS -->
