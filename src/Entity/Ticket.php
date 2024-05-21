@@ -36,6 +36,10 @@ class Ticket
     #[ORM\JoinColumn(nullable: false)]
     private ?FestivalGoerCategory $festivalGoerCategory = null;
 
+    #[ORM\ManyToOne(inversedBy: 'tickets')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Customer $customer = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +125,18 @@ class Ticket
     public function setFestivalGoerCategory(?FestivalGoerCategory $festivalGoerCategory): static
     {
         $this->festivalGoerCategory = $festivalGoerCategory;
+
+        return $this;
+    }
+
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?Customer $customer): static
+    {
+        $this->customer = $customer;
 
         return $this;
     }
