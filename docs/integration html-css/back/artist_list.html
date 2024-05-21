@@ -44,8 +44,7 @@
       <div class="container-fluid">
         <!-- Logo de la marque avec lien vers la page d'accueil -->
         <a class="navbar-brand" href="./index.html">
-          <img src="../images/logo.png" alt="Logo de O'Festival" class="img-fluid w-50">
-
+          <img src="../images/logoNav.png" alt="Logo de O'Festival" class="img-fluid w-100">
         </a>
         <!-- Bouton de bascule pour la navigation mobile -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
@@ -162,82 +161,87 @@
       <!-- Titre principal -->
       <h2 class="text-center my-5 fw-bold display-5">Liste des Artistes</h2>
 
-      <div class="container mt-5">
-        <div class="row justify-content-center">
-          <!-- Carte unique pour la liste des artistes -->
-          <div class="col-md-8">
-            <div class="card">
-              <!-- En-tête de la carte -->
-              <div class="card-header d-flex justify-content-between align-items-center">
-                <span class="fs-2 fw-bold">Artistes</span>
-                <button class="btn btn-success fw-bold" type="button">Ajouter un Artiste</button>
-              </div>
-              <div class="card-body">
-                <ul class="list-group list-group-flush">
-                  <!-- Artiste 1 -->
-                  <li class="list-group-item">
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="d-flex align-items-center">
-                        <img src="../images/chanteur.jpg" alt="Image de l'artiste Arthur" class="img-thumbnail me-4"
-                          style="max-width: 100px;">
-                        <h6 class="fw-bold mb-0">Arthur</h6>
-                        <!-- Tags de genre musical -->
-                        <span class="badge bg-primary ms-2 me-1">Pop</span>
-                        <span class="badge bg-secondary me-1">Rock</span>
-                      </div>
-                      <div class="d-flex">
-                        <!-- Boutons pour les actions -->
-                        <a href="./artist_read.html" class="btn btn-primary bi bi-search me-2"></a>
-                        <form action="#" method="post">
-                          <button onclick="return confirm('Souhaitez-vous supprimer cet artiste ?');" type="submit"
-                            class="btn btn-danger bi bi-trash"></button>
-                        </form>
-                      </div>
-                    </div>
-                  </li>
-                  <!-- Artiste 2 -->
-                  <li class="list-group-item">
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="d-flex align-items-center">
-                        <img src="../images/chanteur2.jpg" alt="Image de l'artiste Léonard" class="img-thumbnail me-4"
-                          style="max-width: 100px;">
-                        <h6 class="fw-bold mb-0">Léonard</h6>
-                        <!-- Tags de genre musical -->
-                        <span class="badge bg-primary ms-2 me-1">Rock</span>
-                      </div>
-                      <div class="d-flex">
-                        <!-- Boutons pour les actions -->
-                        <a href="./artist_read.html" class="btn btn-primary bi bi-search me-2"></a>
-                        <form action="#" method="post">
-                          <button onclick="return confirm('Souhaitez-vous supprimer cet artiste ?');" type="submit"
-                            class="btn btn-danger bi bi-trash"></button>
-                        </form>
-                      </div>
-                    </div>
-                  </li>
-                  <!-- Artiste 3 -->
-                  <li class="list-group-item">
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="d-flex align-items-center">
-                        <img src="../images/chanteur3.jpg" alt="Image de l'artiste Thomas" class="img-thumbnail me-4"
-                          style="max-width: 100px;">
-                        <h6 class="fw-bold mb-0">Thomas</h6>
-                        <!-- Tags de genre musical -->
-                        <span class="badge bg-primary ms-2 me-1">Pop</span>
-                        <span class="badge bg-secondary me-1">Jazz</span>
-                      </div>
-                      <div class="d-flex">
-                        <!-- Boutons pour les actions -->
-                        <a href="./artist_read.html" class="btn btn-primary bi bi-search me-2"></a>
-                        <form action="#" method="post">
-                          <button onclick="return confirm('Souhaitez-vous supprimer cet artiste ?');" type="submit"
-                            class="btn btn-danger bi bi-trash"></button>
-                        </form>
-                      </div>
-                    </div>
-                  </li>
-                  <!-- Ajoutez d'autres artistes si nécessaire -->
-                </ul>
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <div class="card">
+            <!-- En-tête de la carte -->
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span class="fs-2 fw-bold">Artistes</span>
+              <button class="btn btn-success fw-bold" type="button">Ajouter un Artiste</button>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col"><i class="bi bi-person me-2"></i> Photo</th>
+                      <th scope="col"><i class="bi bi-person me-2"></i> Nom</th>
+                      <th scope="col"><i class="bi bi-music-note-list me-2"></i> Genres musicaux</th>
+                      <th class="col-1"><i class="bi bi-gear me-2"></i> Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Artiste 1 -->
+                    <tr>
+                      <td><img src="../images/chanteur.jpg" alt="Image de l'artiste Arthur" class="img-thumbnail"
+                          style="max-width: 100px;"></td>
+                      <td>Arthur</td>
+                      <td>
+                        <span class="badge bg-primary">Pop</span>
+                        <span class="badge bg-secondary">Rock</span>
+                      </td>
+                      <td>
+                        <div class="d-flex">
+                          <!-- Boutons pour les actions -->
+                          <a href="./artist_read.html" class="btn btn-primary bi bi-search me-2"></a>
+                          <form action="#" method="post">
+                            <button onclick="return confirm('Souhaitez-vous supprimer cet artiste ?');" type="submit"
+                              class="btn btn-danger bi bi-trash"></button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                    <!-- Artiste 2 -->
+                    <tr>
+                      <td><img src="../images/chanteur2.jpg" alt="Image de l'artiste Léonard" class="img-thumbnail"
+                          style="max-width: 100px;"></td>
+                      <td>Léonard</td>
+                      <td>
+                        <span class="badge bg-primary">Rock</span>
+                      </td>
+                      <td>
+                        <div class="d-flex">
+                          <!-- Boutons pour les actions -->
+                          <a href="./artist_read.html" class="btn btn-primary bi bi-search me-2"></a>
+                          <form action="#" method="post">
+                            <button onclick="return confirm('Souhaitez-vous supprimer cet artiste ?');" type="submit"
+                              class="btn btn-danger bi bi-trash"></button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                    <!-- Artiste 3 -->
+                    <tr>
+                      <td><img src="../images/chanteur3.jpg" alt="Image de l'artiste Thomas" class="img-thumbnail"
+                          style="max-width: 100px;"></td>
+                      <td>Thomas</td>
+                      <td>
+                        <span class="badge bg-primary">Pop</span>
+                        <span class="badge bg-secondary">Jazz</span>
+                      </td>
+                      <td>
+                        <div class="d-flex">
+                          <!-- Boutons pour les actions -->
+                          <a href="./artist_read.html" class="btn btn-primary bi bi-search me-2"></a>
+                          <form action="#" method="post">
+                            <button onclick="return confirm('Souhaitez-vous supprimer cet artiste ?');" type="submit"
+                              class="btn btn-danger bi bi-trash"></button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -245,6 +249,8 @@
       </div>
     </div>
   </main>
+
+
 
 
   <!--Footer-->
