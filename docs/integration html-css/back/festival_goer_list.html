@@ -161,100 +161,64 @@
   <main>
     <div class="container">
       <!-- Titre principal -->
-      <h2 class="text-center my-5 fw-bold display-5">Détails de l'Artiste</h2>
+      <h2 class="text-center my-5 fw-bold display-5">Liste Festivaliers</h2>
+  
       <div class="container mt-5">
         <div class="row justify-content-center">
-          <!-- Carte unique pour les détails de l'artiste -->
+          <!-- Carte unique pour la liste des festivaliers -->
           <div class="col-md-8">
-            <a href="./artist_list.html" class="btn btn-primary fw-bold mb-4">
-              <i class="bi bi-arrow-left"></i> Retour à la liste des artistes
-            </a>
             <div class="card">
               <!-- En-tête de la carte -->
               <div class="card-header d-flex justify-content-between align-items-center">
-                <span class="fs-2 fw-bold">Arthur</span>
-                <div class="d-flex">
-                  <a href="#" class="btn btn-warning me-2 bi bi-pencil"></a>
-                  <form action="#" method="post">
-                    <button onclick="return confirm('Souhaitez-vous supprimer cet artiste ?');" type="submit"
-                      class="btn btn-danger bi bi-trash"></button>
-                  </form>
-                </div>
+                <span class="fs-2 fw-bold">Festivaliers</span>
+                <button class="btn btn-success fw-bold" type="button">Ajouter un Festivalier</button>
               </div>
               <div class="card-body">
-                <!-- Image de l'artiste -->
-                <img src="../images/chanteur.jpg" alt="Image de l'artiste Arthur" class="card-img-top"
-                  style="width: 100%;">
-                <!-- Titre des tags de genre musical -->
-                <h6 class="fw-bold mt-4">Genres Musicaux</h6>
-                <!-- Tags de genre musical -->
-                <div class="my-2">
-                  <span class="badge bg-primary me-2">Pop</span>
-                  <span class="badge bg-secondary">Rock</span>
-                </div>
-                <!-- Description de l'artiste -->
-                <div class="mb-4">
-                  <h6 class="fw-bold">Description</h6>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ipsam sed exercitationem quia.
-                    Placeat, rerum vel! Labore explicabo harum dolor numquam magni consectetur deleniti vitae eligendi
-                    sit, suscipit similique totam. Corrupti voluptatum, maxime est at quasi quisquam commodi doloribus
-                    vero! Non perferendis earum pariatur, nam provident voluptates dicta sequi eligendi ex aspernatur
-                    iusto quisquam maiores unde eveniet ut id itaque sed dolorum voluptas? Hic, quos eaque iure alias
-                    ea, ducimus doloremque molestiae quisquam similique, magnam nihil qui aut natus deleniti accusamus
-                    voluptatibus. Recusandae quis consequuntur similique voluptate rerum illo repellendus nostrum
-                    suscipit id, odit officiis eligendi quo minus consectetur nobis explicabo aperiam quod laborum
-                    repudiandae illum soluta dolore. Laboriosam eius molestias quas officia maiores impedit a optio ab
-                    inventore quis odio, modi rem nisi doloribus provident, ad velit mollitia, incidunt ex doloremque
-                    laudantium et cupiditate eos unde? Officiis mollitia corrupti harum vitae nostrum accusamus a beatae
-                    adipisci esse. Quibusdam, molestias.</p>
-                </div>
-                <!-- Lien de la vidéo YouTube -->
-                <h6 class="fw-bold">Vidéo YouTube</h6>
-                <div class="my-2">
-                  <a href="https://youtu.be/UvEwfQvVSGg" target="_blank" class="badge bg-danger me-0">Vidéo</a>
-                </div>
-                <!-- Réseaux Sociaux -->
-                <h6 class="fw-bold">Réseaux Sociaux</h6>
-                <div class="d-flex">
-                  <ul class="list-inline mb-0">
-                    <!-- Icônes pour les réseaux sociaux -->
-                    <li class="list-inline-item">
-                      <a href="#">
-                        <i class="bi bi-globe fs-3 dark-blue-txt"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#">
-                        <i class="fa-brands fa-spotify fs-3 dark-blue-txt"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#">
-                        <i class="fa-brands fa-facebook fs-3 dark-blue-txt"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#">
-                        <i class="fa-brands fa-instagram fs-3 dark-blue-txt"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#">
-                        <i class="fa-brands fa-youtube fs-3 dark-blue-txt"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#">
-                        <i class="fa-brands fa-snapchat fs-3 dark-blue-txt"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#">
-                        <i class="fa-brands fa-tiktok fs-3 dark-blue-txt"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+                <ul class="list-group list-group-flush">
+                  <!-- Genre musical 1 -->
+                  <li class="list-group-item">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="d-flex align-items-center">
+                        <h6 class="fw-bold mb-0">Adulte + de 18 ans</h6>
+                      </div>
+                      <div class="d-flex">
+                        <a href="#" class="btn btn-warning bi bi-pencil me-2"></a>
+                        <form action="#" method="post">
+                          <button onclick="return confirm('Souhaitez-vous supprimer ce genre musical ?');" type="submit" class="btn btn-danger bi bi-trash"></button>
+                        </form>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- Genre musical 2 -->
+                  <li class="list-group-item">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="d-flex align-items-center">
+                        <h6 class="fw-bold mb-0">Etudiant</h6>
+                      </div>
+                      <div class="d-flex">
+                        <a href="#" class="btn btn-warning bi bi-pencil me-2"></a>
+                        <form action="#" method="post">
+                          <button onclick="return confirm('Souhaitez-vous supprimer ce genre musical ?');" type="submit" class="btn btn-danger bi bi-trash"></button>
+                        </form>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- Genre musical 3 -->
+                  <li class="list-group-item">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="d-flex align-items-center">
+                        <h6 class="fw-bold mb-0">Enfant - de 12 ans</h6>
+                      </div>
+                      <div class="d-flex">
+                        <a href="#" class="btn btn-warning bi bi-pencil me-2"></a>
+                        <form action="#" method="post">
+                          <button onclick="return confirm('Souhaitez-vous supprimer ce genre musical ?');" type="submit" class="btn btn-danger bi bi-trash"></button>
+                        </form>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- Ajoutez d'autres festivaliers si nécessaire -->
+                </ul>
               </div>
             </div>
           </div>
@@ -262,9 +226,11 @@
       </div>
     </div>
   </main>
+  
+  
+  <!--Footer-->
+  <footer class="bg-primary mt-5"></footer>
 
-    <!--Footer-->
-    <footer class="bg-primary mt-5"></footer>
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
