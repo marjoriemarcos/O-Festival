@@ -1,162 +1,215 @@
+<title>O'Festival BackOffice</title>
+</head>
 <!doctype html>
 <html lang="fr">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Badri CHOULAK">
-    <meta name="author" content="Nicolas JOUBERT">
-    <meta name="author" content="Talya LALAOUI">
-    <meta name="author" content="Marjorie MARCOS">
-    <meta name=”description” content="BackOffice de O'Festival">
-    <!-- reset CSS -->
-    <link rel="stylesheet" href="./css/reset.css">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- Bootstrap icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!--Bootswatch Yeti-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.3/yeti/bootstrap.min.css">
-    <!-- our CSS -->
-    <link rel="stylesheet" href="./css/ofestival.css">
-    <!-- Neutro font family -->
-    <link href="https://fonts.cdnfonts.com/css/neutro" rel="stylesheet">
-    <!-- favicon -->
-    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
-    <!-- font Awesome -->
-    <script src="https://kit.fontawesome.com/2789e31df4.js" crossorigin="anonymous"></script>
-
-    <title>Détail du créneau X</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Badri CHOULAK">
+  <meta name="author" content="Nicolas JOUBERT">
+  <meta name="author" content="Talya LALAOUI">
+  <meta name="author" content="Marjorie MARCOS">
+  <meta name=”description” content="BackOffice de O'Festival">
+  <!-- reset CSS -->
+  <link rel="stylesheet" href="./css/reset.css">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <!-- Bootstrap icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!--Bootswatch Yeti-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.3/yeti/bootstrap.min.css">
+  <!-- our CSS -->
+  <link rel="stylesheet" href="./css/ofestival.css">
+  <!-- Neutro font family -->
+  <link href="https://fonts.cdnfonts.com/css/neutro" rel="stylesheet">
+  <!-- favicon -->
+  <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+  <!-- font Awesome -->
+  <script src="https://kit.fontawesome.com/2789e31df4.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
+
+  <header>
+    <!-- Bouton pour accéder au site principal -->
     <div class="d-flex justify-content-end bg-secondary p-1">
-        <button class="btn btn-lg btn-primary" type="button">Accéder au site</button>
-      </div>
-      <nav class="navbar navbar-expand-sm bg-primary" data-bs-theme="dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="./index.html">
-                <img src="../images/logo.png" alt="Logo de O'Festival" class="img-fluid">
-            </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse space-between " id="navbarColor01">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item dropdown mx-4">
-                    <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Artiste</a>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item fs-4" href="artist_list.html">Liste</a>
-                      <a class="dropdown-item fs-4" href="artist_add.html">Ajouter</a>                      
-                    </div>
-                </li>
-                <li class="nav-item dropdown mx-4">
-                    <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Genre</a>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item fs-4" href="genre_list.html">Liste</a>
-                      <a class="dropdown-item fs-4" href="genre_add.html">Ajouter</a>                      
-                    </div>
-                </li>
-                <li class="nav-item dropdown mx-4">
-                    <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Programmation</a>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item fs-4" href="slot_list.html">Liste</a>
-                      <a class="dropdown-item fs-4" href="slot_add.html">Ajouter</a>                      
-                    </div>
-                </li>
-                <li class="nav-item dropdown mx-4">
-                    <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Scène</a>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item fs-4" href="stage_list.html">Liste</a>
-                      <a class="dropdown-item fs-4" href="stage_add.html">Ajouter</a>                      
-                    </div>
-                </li>
-                <li class="nav-item dropdown mx-4">
-                    <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Billet</a>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item fs-4" href="ticket_list.html">Liste</a>
-                      <a class="dropdown-item fs-4" href="ticket_add.html">Ajouter</a>
-                      <!--TODO Ne pas oublier de mettre les durées et catégories-->                    
-                    </div>
-                </li>
+      <a class="btn btn-lg btn-primary" href="../front/index.html" role="button">Accéder au site</a>
+    </div>
 
-                <li class="nav-item dropdown mx-4">
-                    <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Client</a>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item fs-4" href="./customer_list.html">Liste</a>                 
-                    </div>
-                </li>
-                <li class="nav-item dropdown mx-4">
-                    <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Autres</a>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item fs-4" href="./admin_list.html">Admin</a>                      
-                    </div>
-                </li>
-            </ul>
+    <!-- Barre de navigation avec Bootstrap -->
+    <nav class="navbar navbar-expand-sm bg-primary" data-bs-theme="dark">
+      <div class="container-fluid">
+        <!-- Logo de la marque avec lien vers la page d'accueil -->
+        <a class="navbar-brand" href="./index.html">
+          <img src="../images/logo.png" alt="Logo de O'Festival" class="img-fluid">
+        </a>
+        <!-- Bouton de bascule pour la navigation mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+          aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                  <span> Marie BROCHAND</span>
-                  <i class="bi bi-person-square"></i>
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="dropdown-item" href="#">Profil</a>
-                  </li>
-                  <li>
-                    <hr class="dropdown-divider">
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">Déconnexion</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <a href="#" class="btn btn-danger me-2">Connexion</a>
-          </div>
-        </div>
-      </nav>
-        <main>
-          <!--Bouton ajouter et supprimer-->
-          <div class="d-fex justify-content-end p-4">
-            <button class="btn btn-lg btn-success fw-bold" type="button">Ajouter une programmation</button>
-            <button class="btn btn-lg btn-danger fw-bold" type="button">Supprimer cette programmation</button>
-            <button class="btn btn-lg btn-warning fw-bold" type="button">Modifier cette programmation</button>
-          </div>
-          <!--Titre de la page-->
-          <h2 class="text-center mb-4 my-3 fw-bold display-5 neutro-font"> Détail de la programmation : </h2>
-          <div class="container-fluid d-flex flex-column align-items-center w-75 p-3">
-            <div class="card mb-3 w-75">
-              <h3 class="card-header text-center">Programmation du 23/08/2024 à 18h00</h3>
-              <div class="card-body">
-                <h5 class="card-title fs-2 text-center fw-bold text-decoration-underline ">Arthur</h5>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item fs-4 fw-bold text-center">Date</li>
-                  <li class="list-group-item fs-4 fw-bold text-center">Heure</li>
-                  <li class="list-group-item fs-4 fw-bold text-center">Scène</li>
-                </ul>
+        <!-- Contenu de la barre de navigation -->
+        <div class="collapse navbar-collapse space-between" id="navbarColor01">
+          <!-- Menu de navigation principal -->
+          <ul class="navbar-nav ms-auto">
+            <!-- Menu déroulant pour les artistes -->
+            <li class="nav-item dropdown mx-4">
+              <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button"
+                aria-haspopup="true" aria-expanded="false">Artiste</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item fs-4" href="artist_list.html">Liste</a>
+                <a class="dropdown-item fs-4" href="artist_add.html">Ajouter</a>
               </div>
-              <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="50vh" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <image href="https://images.pexels.com/photos/6270136/pexels-photo-6270136.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"/>
-              </svg>
+            </li>
+            <!-- Menu déroulant pour les genres -->
+            <li class="nav-item dropdown mx-4">
+              <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button"
+                aria-haspopup="true" aria-expanded="false">Genre</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item fs-4" href="genre_list.html">Liste</a>
+                <a class="dropdown-item fs-4" href="genre_add.html">Ajouter</a>
+              </div>
+            </li>
+            <!-- Menu déroulant pour la programmation -->
+            <li class="nav-item dropdown mx-4">
+              <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button"
+                aria-haspopup="true" aria-expanded="false">Programmation</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item fs-4" href="slot_list.html">Liste</a>
+                <a class="dropdown-item fs-4" href="slot_add.html">Ajouter</a>
+              </div>
+            </li>
+            <!-- Menu déroulant pour les scènes -->
+            <li class="nav-item dropdown mx-4">
+              <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button"
+                aria-haspopup="true" aria-expanded="false">Scène</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item fs-4" href="stage_list.html">Liste</a>
+                <a class="dropdown-item fs-4" href="stage_add.html">Ajouter</a>
+              </div>
+            </li>
+            <!-- Menu déroulant pour les billets -->
+            <li class="nav-item dropdown mx-4">
+              <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button"
+                aria-haspopup="true" aria-expanded="false">Billet</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item fs-4" href="ticket_list.html">Liste</a>
+                <a class="dropdown-item fs-4" href="ticket_add.html">Ajouter</a>
+              </div>
+            </li>
+            <!-- Menu déroulant pour les clients -->
+            <li class="nav-item dropdown mx-4">
+              <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button"
+                aria-haspopup="true" aria-expanded="false">Client</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item fs-4" href="./customer_list.html">Liste</a>
+              </div>
+            </li>
+            <!-- Menu déroulant pour les admins -->
+            <li class="nav-item dropdown mx-4">
+              <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button"
+                aria-haspopup="true" aria-expanded="false">Admin</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item fs-4" href="./admin_list.html">Liste</a>
+              </div>
+            </li>
+          </ul>
 
+          <!-- Menu utilisateur avec options de profil et déconnexion -->
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                <span> Marie BROCHAND</span>
+                <i class="bi bi-person-square"></i>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="#">Profil</a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">Déconnexion</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <!-- Bouton de connexion -->
+          <a href="#" class="btn btn-danger me-2">Connexion</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <!-- Titre principal -->
+      <h2 class="text-center my-5 fw-bold display-5">Détails du Créneau</h2>
+      <div class="container mt-5">
+        <div class="row justify-content-center">
+          <!-- Carte unique pour les détails du créneau -->
+          <div class="col-md-8">
+            <a href="./slot_list.html" class="btn btn-primary fw-bold mb-4">
+              <i class="bi bi-arrow-left"></i> Retour à la programmation
+            </a>
+            <div class="card">
+              <!-- En-tête de la carte -->
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <span class="fs-2 fw-bold">
+                  <i class="bi bi-calendar3 me-2"></i>Vendredi 21 Mai à 18:00
+                </span>
+                <div class="d-flex">
+                  <a href="#" class="btn btn-warning me-2 bi bi-pencil"></a>
+                  <form action="#" method="post">
+                    <button onclick="return confirm('Souhaitez-vous supprimer ce crénaux ?');" type="submit"
+                      class="btn btn-danger bi bi-trash"></button>
+                  </form>
+                </div>
+              </div>
+              <div class="card-body">
+                <!-- Artiste -->
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-person me-2" style="font-size: 1.5rem;"></i>
+                  <h6 class="fw-bold mb-0">Artiste :</h6>
+                  <p class="mb-0 ms-2">Arthur</p>
+                </div>
+                <!-- Jour de passage -->
+                <div class="d-flex align-items-center mt-3">
+                  <i class="bi bi-calendar-date me-2" style="font-size: 1.5rem;"></i>
+                  <h6 class="fw-bold mb-0">Jour de Passage :</h6>
+                  <p class="mb-0 ms-2">Vendredi 21 Mai</p>
+                </div>
+                <!-- Heure de passage -->
+                <div class="d-flex align-items-center mt-3">
+                  <i class="bi bi-clock me-2" style="font-size: 1.5rem;"></i>
+                  <h6 class="fw-bold mb-0">Heure de Passage :</h6>
+                  <p class="mb-0 ms-2">18:00</p>
+                </div>
+                <!-- Nom de la scène -->
+                <div class="d-flex align-items-center mt-3">
+                  <i class="bi bi-music-note me-2" style="font-size: 1.5rem;"></i>
+                  <h6 class="fw-bold mb-0">Nom de la Scène :</h6>
+                  <p class="mb-0 ms-2">Scène 1</p>
+                </div>
+              </div>
             </div>
           </div>
-        </main>
-        
-
-
-
-
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    </body>
-
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
 
 </html>
