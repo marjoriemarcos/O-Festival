@@ -20,9 +20,6 @@ class Ticket
     private ?float $price = null;
 
     #[ORM\Column]
-    private ?int $quantity = null;
-
-    #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
@@ -30,15 +27,19 @@ class Ticket
 
     #[ORM\ManyToOne(inversedBy: 'tickets')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Duration $durations = null;
-
-    #[ORM\ManyToOne(inversedBy: 'tickets')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?FestivalGoerCategory $festivalGoerCategory = null;
-
-    #[ORM\ManyToOne(inversedBy: 'tickets')]
-    #[ORM\JoinColumn(nullable: false)]
     private ?Customer $customer = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $startAt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $endAt = null;
+
+    #[ORM\OneToOne(mappedBy: 'tickets', cascade: ['persist', 'remove'])]
+    private ?FeeTicket $feeTicket = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $quantity = null;
 
     public function getId(): ?int
     {
@@ -69,18 +70,6 @@ class Ticket
         return $this;
     }
 
-    public function getQuantity(): ?int
-    {
-        return $this->quantity;
-    }
-
-    public function setQuantity(int $quantity): static
-    {
-        $this->quantity = $quantity;
-
-        return $this;
-    }
-
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
@@ -105,29 +94,6 @@ class Ticket
         return $this;
     }
 
-    public function getDurations(): ?Duration
-    {
-        return $this->durations;
-    }
-
-    public function setDurations(?Duration $durations): static
-    {
-        $this->durations = $durations;
-
-        return $this;
-    }
-
-    public function getFestivalGoerCategory(): ?FestivalGoerCategory
-    {
-        return $this->festivalGoerCategory;
-    }
-
-    public function setFestivalGoerCategory(?FestivalGoerCategory $festivalGoerCategory): static
-    {
-        $this->festivalGoerCategory = $festivalGoerCategory;
-
-        return $this;
-    }
 
     public function getCustomer(): ?Customer
     {
@@ -137,6 +103,64 @@ class Ticket
     public function setCustomer(?Customer $customer): static
     {
         $this->customer = $customer;
+
+        return $this;
+    }
+
+    public function getStartAt(): ?\DateTimeImmutable
+    {
+        return $this->startAt;
+    }
+
+    public function setStartAt(?\DateTimeImmutable $startAt): static
+    {
+        $this->startAt = $startAt;
+
+        return $this;
+    }
+
+    public function getEndAt(): ?\DateTimeImmutable
+    {
+        return $this->endAt;
+    }
+
+    public function setEndAt(?\DateTimeImmutable $endAt): static
+    {
+        $this->endAt = $endAt;
+
+        return $this;
+    }
+
+    public function getFeeTicket(): ?FeeTicket
+    {
+        return $this->feeTicket;
+    }
+
+    public function setFeeTicket(?FeeTicket $feeTicket): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($feeTicket === null && $this->feeTicket !== null) {
+            $this->feeTicket->setTickets(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($feeTicket !== null && $feeTicket->getTickets() !== $this) {
+            $feeTicket->setTickets($this);
+        }
+
+        $this->feeTicket = $feeTicket;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(?int $quantity): static
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }

@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\FestivalGoerCategory;
+use App\Entity\FeeTicket;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<FestivalGoerCategory>
+ * @extends ServiceEntityRepository<FeeTicket>
  */
-class FestivalGoerCategoryRepository extends ServiceEntityRepository
+class FeeTicketRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, FestivalGoerCategory::class);
+        parent::__construct($registry, FeeTicket::class);
     }
 
 //    /**
-//     * @return FestivalGoerCategory[] Returns an array of FestivalGoerCategory objects
+//     * @return FeeTicket[] Returns an array of FeeTicket objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -31,7 +31,7 @@ class FestivalGoerCategoryRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?FestivalGoerCategory
+//    public function findOneBySomeField($value): ?FeeTicket
 //    {
 //        return $this->createQueryBuilder('f')
 //            ->andWhere('f.exampleField = :val')
