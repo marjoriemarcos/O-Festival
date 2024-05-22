@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures\Providers;
 
-class AppProvider
+class AppProvider extends \Faker\Provider\Base
 
 {
     // singers
@@ -27,7 +27,41 @@ class AppProvider
         'David Bowie',
         'Paul McCartney',
         'Celine Dion',
-
+        'Lompale',
+        'The Blaze',
+        'Korn',
+        'Angèle',
+        'Aya Nakamura',
+        'Vianney',
+        'Clara Luciani',
+        'Sliman',
+        'Juliette Armanet',
+        'Benjamin Biolay',
+        'Billie Eilish',
+        'Taylor Swift',
+        'The Weeknd',
+        'Ariana Grande',
+        'Post Malone',
+        'Drake',
+        'Kayne West',
+        'Adele',
+        'Sabrina Carpenter',
+        'Dua Lipa',
+        'Harry Style',
+        'Megan Thee Stallion',
+        'Lady Gaga',
+        'Justin Bieber',
+        'Kendrick Lamar',
+        'Lizzo',
+        'Travis Scott',
+        'Doja Cat',
+        'The kid Larol',
+        'Olivia Rodrigo',
+        'Machine Gun Kelly',
+        'Halsey',
+        'Miley Cyrus',
+        'Lil Nas X',
+        'BTS',
     ];
 
     // singers
@@ -51,8 +85,19 @@ class AppProvider
         "House",
         "Techno",
         "RnB (Rhythm and Blues)",
-        "Salsa"
+        "Salsa",
+        'India Rock',
+        'Grunge',
+        'Dream Pop',
+        'Shoegaze',
+        'Post-Punk',
+        'Electroclash',
+        'Folktronica',
+        'Experimental Rock',
+        'Noise Rock',
+        'Lo-fi Indie',
     ];
+
 
     public function singers(): array
     {

@@ -17,8 +17,8 @@ class Slot
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $hour = null;
+    #[ORM\Column(length: 64)]
+    private ?string $hour = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
@@ -50,12 +50,12 @@ class Slot
         return $this;
     }
 
-    public function getHour(): ?\DateTimeInterface
+    public function getHour(): string
     {
         return $this->hour;
     }
 
-    public function setHour(?\DateTimeInterface $hour): static
+    public function setHour(string $hour): static
     {
         $this->hour = $hour;
 
