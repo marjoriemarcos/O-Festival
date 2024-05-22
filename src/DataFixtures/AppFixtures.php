@@ -2,6 +2,9 @@
 
 namespace App\DataFixtures;
 
+use App\DataFixtures\Providers\AppProvider;
+use App\Entity\Artist;
+use App\Entity\Genre;
 use App\Entity\User;
 use DateTimeImmutable;
 use DateTimeZone;
@@ -14,9 +17,38 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $timezone = new DateTimeZone('Europe/Paris');
         $faker = Factory::create('fr_FR');
-        
+        $faker->addProvider(new AppProvider($faker));
+        $faker = Factory::create();
+        $faker->addProvider(new \Faker\Provider\Youtube($faker));
+        $faker->addProvider(new \Smknstd\FakerPicsumImages\FakerPicsumImagesProvider($faker));
+        $timezone = new DateTimeZone('Europe/Paris');
+
+        // Genre
+        $genreList = [];
+        for ($i = 0; $i < 20; $i++) {
+            $genre = (new Genre())
+                ->setName($faker->unique()->genreName());
+            $manager->persist($genre);
+            $genreList[] = $genre;
+        };
+
+        // Artiste
+        $artistList = [];
+        for ($i = 0; $i < 50; $i++) {
+            $artist = (new Artist())
+                ->setName($faker->unique()->singerName())
+                ->setDescription($faker->paragraphs())
+                ->setPicture($faker->imageUrl())
+                ->setVideo($faker->youtubeUri())
+                ->setPicture($faker->imageUrl());
+            for ($j = 1; $j <= mt_rand(1, 2); $j++) {
+                $artist->addGenre($genreList[array_rand($genreList)]);
+            }
+            $manager->persist($artist);
+            $artistList[] = $artist;
+        };
+
         // user
         $userList = [
             [
@@ -43,9 +75,9 @@ class AppFixtures extends Fixture
                 'lastname'  => 'MARCOS',
                 'email' => 'marjorie@ofestival.fr'
             ],
-            
+
         ];
- 
+
         for ($i = 0; $i <= 3; $i++) {
             $user = new User();
             $user->setEmail($userList[$i]['email']);

@@ -80,7 +80,9 @@
         }
     },
     "require-dev": {
+        "aalaap/faker-youtube": "^2.0",
         "doctrine/doctrine-fixtures-bundle": "^3.6",
+        "smknstd/fakerphp-picsum-images": "^1.0",
         "symfony/debug-bundle": "7.0.*",
         "symfony/maker-bundle": "^1.59",
         "symfony/stopwatch": "7.0.*",
