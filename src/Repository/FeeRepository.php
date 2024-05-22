@@ -2,39 +2,39 @@
 
 namespace App\Repository;
 
-use App\Entity\Duration;
+use App\Entity\Fee;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Duration>
+ * @extends ServiceEntityRepository<Fee>
  */
-class DurationRepository extends ServiceEntityRepository
+class FeeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Duration::class);
+        parent::__construct($registry, Fee::class);
     }
 
 //    /**
-//     * @return Duration[] Returns an array of Duration objects
+//     * @return Fee[] Returns an array of Fee objects
 //     */
 //    public function findByExampleField($value): array
 //    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
+//        return $this->createQueryBuilder('f')
+//            ->andWhere('f.exampleField = :val')
 //            ->setParameter('val', $value)
-//            ->orderBy('d.id', 'ASC')
+//            ->orderBy('f.id', 'ASC')
 //            ->setMaxResults(10)
 //            ->getQuery()
 //            ->getResult()
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Duration
+//    public function findOneBySomeField($value): ?Fee
 //    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
+//        return $this->createQueryBuilder('f')
+//            ->andWhere('f.exampleField = :val')
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()
