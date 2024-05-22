@@ -1,0 +1,87 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}Liste des clients{% endblock %}
+
+{% block main %}
+
+<main>
+    <div class="container">
+      <!-- Titre principal -->
+      <h2 class="text-center my-5 fw-bold display-5">Liste des clients</h2>
+
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card">
+            <!-- Card Title -->
+            <div class="card-header">
+              <h3 class="fs-2 fw-bold mb-0">Clients</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col"><i class="bi bi-person me-2"></i> Nom</th>
+                      <th scope="col"><i class="bi bi-person me-2"></i> Prénom</th>
+                      <th scope="col"><i class="bi bi-ticket me-2"></i> Tickets achetés</th>
+                      <th class="col-1"><i class="bi bi-gear me-2"></i> Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Customers -->
+                    <tr>
+                      <td>Dupont</td>
+                      <td>Jean</td>
+                      <td>Pass 1 Jour, Pass 2 Jours</td>
+                      <td>
+                        <div class="d-flex">
+                          <!-- Action buttons -->
+                          <a href="{{path('customerRead')}}" class="btn btn-primary bi bi-search me-2"></a>
+                          <form action="#" method="post">
+                            <button onclick="return confirm('Souhaitez-vous supprimer ce client ?');" type="submit"
+                              class="btn btn-danger bi bi-trash"></button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Martin</td>
+                      <td>Sophie</td>
+                      <td>Pass 3 Jours</td>
+                      <td>
+                        <div class="d-flex">
+                          <!-- Action buttons -->
+                          <a href="{{path('customerRead')}}" class="btn btn-primary bi bi-search me-2"></a>
+                          <form action="#" method="post">
+                            <button onclick="return confirm('Souhaitez-vous supprimer ce client ?');" type="submit"
+                              class="btn btn-danger bi bi-trash"></button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Lefèvre</td>
+                      <td>Marie</td>
+                      <td>Pass 1 Jour</td>
+                      <td>
+                        <div class="d-flex">
+                          <!-- Action buttons -->
+                          <a href="{{path('customerRead')}}" class="btn btn-primary bi bi-search me-2"></a>
+                          <form action="#" method="post">
+                            <button onclick="return confirm('Souhaitez-vous supprimer ce client ?');" type="submit"
+                              class="btn btn-danger bi bi-trash"></button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+{% endblock %}
