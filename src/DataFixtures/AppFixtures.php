@@ -20,25 +20,25 @@ class AppFixtures extends Fixture
         // user
         $userList = [
             [
-                'role' => 'ROLE_ADMIN',
+                'role' => ['ROLE_ADMIN'],
                 'firstname' => 'Talya',
                 'lastname'  => 'LALAOUI',
                 'email' => 'talya@ofestival.fr'
             ],
             [
-                'role' => 'ROLE_ADMIN',
+                'role' => ['ROLE_ADMIN'],
                 'firstname' => 'Badri',
                 'lastname'  => 'CHOULAK',
                 'email' => 'badri@ofestival.fr'
             ],
             [
-                'role' => 'ROLE_ADMIN',
+                'role' => ['ROLE_ADMIN'],
                 'firstname' => 'Nicolas',
                 'lastname'  => 'JOUBERT',
                 'email' => 'nicolas@ofestival.fr'
             ],
             [
-                'role' => 'ROLE_ADMIN',
+                'role' => ['ROLE_ADMIN'],
                 'firstname' => 'Marjorie',
                 'lastname'  => 'MARCOS',
                 'email' => 'marjorie@ofestival.fr'
@@ -49,7 +49,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i <= 3; $i++) {
             $user = new User();
             $user->setEmail($userList[$i]['email']);
-            $user->setRole($userList[$i]['role']);
+            $user->setRoles($userList[$i]['role']);
             $user->setFirstname($userList[$i]['firstname']);
             $user->setLastname($userList[$i]['lastname']);
             $user->setPassword('$2y$13$dtEoqptHglRxkDAhwPSvi.RXyEI5Y0xhRA569ujGRJln4A7xi/DxO');
