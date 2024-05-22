@@ -105,20 +105,133 @@ class AppFixtures extends Fixture
    
       
         // Ticket 
-        $dateStart = new DateTimeImmutable('2024-08-23');
-        //$dateTwo = new DateTimeImmutable('2024-08-24');
-        $dateEnd = new DateTimeImmutable('2024-08-25');
+        $feeList = [
+            'Normal' => [
+                [
+                    'title' => 'Pass 1J',
+                    'start' => new DateTimeImmutable('2024-08-23'),
+                    'end' => new DateTimeImmutable('2024-08-23'),
+                    'price' => 100
+                ],
+                [
+                    'title' => 'Pass 1J',
+                    'start' => new DateTimeImmutable('2024-08-24'),
+                    'end' => new DateTimeImmutable('2024-08-24'),
+                    'price' => 100
+                ],
+                [
+                    'title' => 'Pass 1J',
+                    'start' => new DateTimeImmutable('2024-08-25'),
+                    'end' => new DateTimeImmutable('2024-08-25'),
+                    'price' => 100
+                ],
+                [
+                    'title' => 'Pass 2J',
+                    'start' => new DateTimeImmutable('2024-08-23'),
+                    'end' => new DateTimeImmutable('2024-08-24'),
+                    'price' => 180
+                ],
+                [
+                    'title' => 'Pass 3J',
+                    'start' => new DateTimeImmutable('2024-08-23'),
+                    'end' => new DateTimeImmutable('2024-08-25'),
+                    'price' => 250
+                ]
+            ],
+            'Etudiant' => [
+                [
+                    'title' => 'Pass 1J',
+                    'start' => new DateTimeImmutable('2024-08-23'),
+                    'end' => new DateTimeImmutable('2024-08-23'),
+                    'price' => 80
+                ],
+                [
+                    'title' => 'Pass 1J',
+                    'start' => new DateTimeImmutable('2024-08-24'),
+                    'end' => new DateTimeImmutable('2024-08-24'),
+                    'price' => 80
+                ],
+                [
+                    'title' => 'Pass 1J',
+                    'start' => new DateTimeImmutable('2024-08-25'),
+                    'end' => new DateTimeImmutable('2024-08-25'),
+                    'price' => 80
+                ],
+                [
+                    'title' => 'Pass 2J',
+                    'start' => new DateTimeImmutable('2024-08-23'),
+                    'end' => new DateTimeImmutable('2024-08-24'),
+                    'price' => 150
+                ],
+                [
+                    'title' => 'Pass 3J',
+                    'start' => new DateTimeImmutable('2024-08-23'),
+                    'end' => new DateTimeImmutable('2024-08-25'),
+                    'price' => 220
+                ]
+            ],
+            'Enfant (-12 ans)' => [
+                [
+                    'title' => 'Pass 1J',
+                    'start' => new DateTimeImmutable('2024-08-23'),
+                    'end' => new DateTimeImmutable('2024-08-23'),
+                    'price' => 0
+                ],
+                [
+                    'title' => 'Pass 1J',
+                    'start' => new DateTimeImmutable('2024-08-24'),
+                    'end' => new DateTimeImmutable('2024-08-24'),
+                    'price' => 0
+                ],
+                [
+                    'title' => 'Pass 1J',
+                    'start' => new DateTimeImmutable('2024-08-25'),
+                    'end' => new DateTimeImmutable('2024-08-25'),
+                    'price' => 0
+                ],
+                [
+                    'title' => 'Pass 2J',
+                    'start' => new DateTimeImmutable('2024-08-23'),
+                    'end' => new DateTimeImmutable('2024-08-24'),
+                    'price' => 0
+                ],
+                [
+                    'title' => 'Pass 3J',
+                    'start' => new DateTimeImmutable('2024-08-23'),
+                    'end' => new DateTimeImmutable('2024-08-25'),
+                    'price' => 0
+                ]
+            ]
+        ];
+
+
         $ticketList = [];
         for ($i = 0; $i < 50; $i++) {
             $ticket = new Ticket();
 
-            $ticket->setTitle($faker->randomElement(['Pass 1 jour', 'Pass 2 jours', 'Pass 3 jours']));
-            $ticket->setPrice($faker->numberBetween(0, 500));
+            // Sélectionne un type de billet aléatoire (Normal, Etudiant, Enfant)
+            $type = array_rand($feeList);
+            // Sélectionne un billet spécifique de ce type J1, J2 ...
+            $fee = $feeList[$type][array_rand($feeList[$type])];
+            // Mettre le titre dans $title
+            $title = $fee['title'];
+            // Mettre la date de départ dans $startDate
+            $startDate = $fee['start'];
+            // Mettre la date de fin dans $endDate
+            $endDate = $fee['end'];
+            // Mettre le prix dans $price
+            $price = $fee['price'];
+
+            $ticket->setTitle($type . ' ' . $title . ' ' . $startDate->format('d-m-Y') . ' ' . $endDate->format('d-m-Y'));
+            $ticket->setFee($type . ' ' . $title . ' ' . $price);
             $ticket->setCreatedAt(new DateTimeImmutable('now', $timezone));
             $ticket->setCustomer($customerList[array_rand($customerList)]);
-            $ticket->setStartAt($dateStart);
-            $ticket->setQuantity($faker->numberBetween(0, 10));
-            $ticket->setEndAt($dateEnd);
+            $ticket->setStartAt($startDate);
+            $quantity = mt_rand(0, 10);
+            $ticket->setQuantity($quantity);
+            $price = ($price * $quantity);
+            $ticket->setPrice($price);
+            $ticket->setEndAt( $endDate);
             $manager->persist($ticket);
             $ticketList[] = $ticket;
         }        
