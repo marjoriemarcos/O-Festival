@@ -28,8 +28,8 @@ class Customer
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
-    #[ORM\Column]
-    private ?int $phone_number = null;
+    #[ORM\Column(length: 20)]
+    private ?string $phone_number = null;
 
     #[ORM\Column]
     private ?int $postcode = null;
@@ -107,12 +107,12 @@ class Customer
         return $this;
     }
 
-    public function getPhoneNumber(): ?int
+    public function getPhoneNumber(): ?string
     {
         return $this->phone_number;
     }
 
-    public function setPhoneNumber(int $phone_number): static
+    public function setPhoneNumber(string $phone_number): static
     {
         $this->phone_number = $phone_number;
 
