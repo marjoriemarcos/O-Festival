@@ -2,26 +2,25 @@
 
 {% block title %}O'Festival{% endblock %}
 
-{% block body %}
+{% block main %}
     <main>
-        <div class="container-home dark-blue-bg">
+        <div class="container-home dark-blue-bg roboto-font">
             <img src="{{asset('images/frise-1.png')}}" class="card-img-top">
 
             <!-- Video Home -->
             <div
-                class="container-home-video container-fluid text-center position-relative d-flex align-items-center justify-content-center ">
-                <video autoplay loop muted plays-inline class="home-video">
-                    <!-- TODO:  src="../images/video-home.mp4"-->
+                class="container-home-video container-fluid text-center position-relative d-flex align-items-center justify-content-center">
+                <video autoplay loop muted plays-inline class="home-video">                   
                     <source src="{{asset('images/video-home.mp4')}}" type="video/mp4">
                 </video>
-                <h1 class="home-title text-white">O'Festival</h1>
+                <h1 class="home-title text-white adumu-font">O'FESTIVAL</h1>
             </div>
             <img src="{{asset('images/frise-2.png')}}" class="card-img-top">
 
             <!-- Line-up -->
             <div class="container-home-programming d-flex flex-column">
 
-                <h2 class="home-bar-title light-blue-bg text-white ">
+                <h2 class="home-programming-title py-5 px-5 medium-blue-bg text-white ">
                     Programmation
                 </h2>
 
@@ -106,7 +105,7 @@
             <!-- Ticket Shop -->
             <div class="container-home-ticketing d-flex flex-column">
 
-                <h2 class="home-bar-title light-blue-bg text-white">
+                <h2 class="home-ticket-title py-5 px-5 medium-blue-bg text-white">
                     Billetterie
                 </h2>
 

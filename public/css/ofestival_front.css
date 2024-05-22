@@ -9,8 +9,8 @@
     --light_yellow: #EECE6A;
     --dark_green: #03a35f;
     --light_green: #009060;    
-    --font_neutro: 'Neutro', sans-serif;
-    --font_open: "Open Sans", sans-serif;
+    --font_adumu: 'Adumu', sans-serif;
+    --font_roboto: 'Roboto Condensed', sans-serif;
 }
 
 ::placeholder {
@@ -21,11 +21,26 @@
 
 /** --------- FONT --------- **/
 
-* {
-    font-family: var(--font_neutro);
+.adumu-font {
+    font-family: var(--font_adumu);
+}
+.roboto-font,
+.btn {
+    font-family: var(--font_roboto);
+    text-transform: uppercase;
+    font-weight: 800;
+
 }
 .open-font {
-    font-family: var(--font_open);
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1{
+    font-size: 5rem;
+}
+h2{
+    font-size: 3.5rem; 
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 1);
 }
 
 /** --------- COLORS --------- **/
@@ -76,41 +91,17 @@
 html, body {
     height: 100%;
     width: 100%;
-    overflow-x: hidden;    
+    overflow-x: hidden;
 }    
 body {
     display: flex;
     flex-direction: column;
 }
-
-/* TITLES */
-
-.home-title{
-    z-index: 2;
-    font-size: 8vw;
-}
-
-.home-bar-title {    
-    font-size: 2.5vw;
-    padding-left: 1rem;       
-}
-
-
 .page-title {
-    font-size: 3vw;
+    line-height: 1.5em;
     color: white;
     padding: 2.5% 0 2.5% 0;
     text-align: center;
-}
-
-@media only screen and (max-width: 768px) {
-    .home-bar-title {
-        font-size: 6vw; 
-    }
-
-    .page-title {
-        font-size: 8vw;    
-    }
 }
 
 /** --------- NAV BAR --------- **/
@@ -119,24 +110,22 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 1.5rem;
-    height: 10vh;    
+    height: 15vh; 
+    font-size: 2rem;  
+    position: relative;
 }
-.navbar-logo {
-    width: 8vh;
-    padding: 0;
+
+.nav-menu{
+    display: flex;
+    margin: 0;
 }
-.nav-link {
-    font-family: 'Neutro', sans-serif;
-    font-size: 20px;
-    color: white;
-}
+
 .nav-link:hover,
 .nav-link:focus {
     color: var( --light_yellow);
 }
 .hamburger {
-    display: none;    
+    display: none;
 }
 .bar {
     display: block;
@@ -145,91 +134,25 @@ body {
     margin: 5px auto;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
-    background-color: var(--light_yellow);
+    background-color: #101010;
 }
-.nav-menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.nav-item {
-    margin-left: 5rem;
+.navbar-logo img {
+    height: 10vh;
 }
 
-@media only screen and (max-width: 1300px) {
-    .nav-menu {
-        position: absolute;
-        z-index: 999;
-        left: -100vh;
-        top: 5rem;
-        flex-direction: column;
-        background-color: var(--light_blue);
-        width: 100%;
-        height: 50vh;
-        text-align: center;
-        transition: 0.3s;
-        background-image:url(../../images/back-ground.png);
-    }
-    .nav-link {
-        font-size: 25px;
-        color: white;
-    }
-    .nav-menu.active {
-        left: 0;
-    }
-    .nav-item {
-        margin: 2.5rem 0;
-    }
-    .hamburger {
-        display: block;
-        cursor: pointer;
-    }
-    .hamburger.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-    .hamburger.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-    .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    .nav-menu {
-        position: absolute;
-        z-index: 999;
-        left: -100vh;
-        top: 4rem;
-        flex-direction: column;
-        background-color: var(--light_blue);
-        width: 100%;
-        height: 50vh;
-        text-align: center;
-        transition: 0.3s;
-        background-image:url(../../images/back-ground.png);
-    }
-    .nav-link {
-        font-size: 15px;
-    }
-}
 
 /** --------- BUTTONS --------- **/
 
 .btn-primary {
-    padding: 10px 20px; 
-    min-width: 150px; 
-    max-width: 100%; 
+    padding: 1%;
+    font-size: 1.75em;
+    width: 30%;
     border: none;
-    display: inline-block;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 8px 8px rgba(0, 0, 0, 0.8);
     transition: all 0.3s ease-in-out;
     border-radius: 40px;
-    margin-bottom: 20px;
-    text-align: center; 
-    white-space: nowrap;      
+    margin-bottom: 4%;
 }
-
 .btn-primary:hover,
 .btn-primary:focus {
     background-color: var(--yellow);
@@ -237,9 +160,8 @@ body {
     transform: scale(1.05)
 }
 .btn-secondary {
-    min-width: auto;
+    width: auto;
     height: auto;
-    display: inline-block;
     text-align: center;
     white-space: normal;
     color: black;
@@ -271,9 +193,7 @@ body {
     transform: scale(1.05)   
 }
 
-
 /** --------- INDEX PAGE --------- **/
-
 
 /* HOME VIDEO */
 .container-home-video {
@@ -288,10 +208,11 @@ body {
     object-fit: cover;
     z-index: 1;
 }
-
+.home-title{
+    z-index: 2;
+}
 
 /* SLIDE LINE-UP */
-
 .home-programming-slide-prev,
 .home-programming-slide-next {
     font-size: 3rem;
@@ -300,6 +221,7 @@ body {
     top: 50%;
     transform: translateY(-50%);
     transition:0.3s;
+    text-decoration: none;
 }
 .home-programming-slide-prev {
     left: 0.5%;
@@ -333,7 +255,7 @@ body {
     transform: scale(1.1);
 }
 .card h3 {
-    font-size: 1.4em;
+    font-size: 3rem;
 }
 .card p {
     font-size: 0.9em;
@@ -344,20 +266,27 @@ body {
 .container-ticketing {
     padding: 0 10% 0 10%;
 }
-
 .ticket-card-info-festival-goer,
 .ticket-card-info-price{
     font-weight: 800;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
 }
 .ticket-card-info-price{
-    font-size: 1.5em;
+    font-size: 2.5rem;
     color: var(--dark_yellow);
 }
-.ticket-card-info h3{
+.ticket-card-content h3{
     border-bottom: 2px solid var(--dark_yellow);
     width: 80%; 
     margin: auto;
+    font-size: 2.5rem;
+}
+.ticket-card-content{
+ font-size: 1.5rem;
+}
+.ticket-card-content .btn{
+    width: 75%;
+    font-size: 1rem;
 }
 
 /** --------- ARTIST --------- **/
@@ -382,13 +311,14 @@ body {
 .artist-informations-stage{
     font-size: 1.25rem;
     margin-bottom: 0;
+    text-shadow: none;
 }
 .artist-informations-genre {
     padding: 0.75rem 1.5rem;
 }  
 .artist-informations-description {
     height: 300px;
-    overflow-y: auto; /* Enable the scrollbar if necessary */
+    overflow-y: auto;
 } 
 .artist-informations-social-networks i{
     font-size: 2.5rem;
@@ -399,20 +329,25 @@ body {
 
 /** --------- SOCIAL-NETWORKS --------- **/
 
-.fa-brands {    
-    font-size: 35px;
+
+.footer {
     display: flex;
-    transition: all 0.2s ease-out;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    text-align: center;
+    font-size: 2rem;
 }
-.bi:hover,
-.fa-brands:hover {
-    color: var(--medium_blue);
+
+.social-icons,
+.nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
 }
-footer .fa-brands:hover {
-    color: var(--yellow);
-}
-a {
-    text-decoration: none;
+
+.nav-link:hover {
+    color: var(--light_yellow);
 }
 
 /** ------------ INFORMATIONS -----------**/
@@ -465,8 +400,68 @@ a {
 
 /** ------------ RESPONSIVE -----------**/
      
+@media(max-width: 1375px){
+    .nav-menu,
+    .btn{
+        font-size: 1.2rem;
+    }
+    .ticket-card-content{
+        font-size: 1rem;
+    }
+    .ticket-card-info-price{
+        font-size: 1.5rem;
+    }
+}
 
-@media (max-width: 750px) {
+@media only screen and (max-width: 1010px) {
+    .nav-menu {
+        position: absolute;
+        z-index: 999;
+        left: -300vh;
+        top: 100%;
+        background-color: var(--light_blue);
+        width: 100%;
+        height: 50vh;
+        text-align: center;
+        transition: 0.3s;
+        background-image:url(../../images/back-ground.png);
+        flex-direction: column
+    }
+    .nav-menu.active {
+        left: 0;
+    }
+    .nav-item {
+        margin-top: 2.5rem;
+    }
+    .hamburger {
+        display: block;
+        cursor: pointer;
+    }
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+    .artist-video {
+        width: 100vh; 
+        height: 50vh; 
+    }
+    .h2{
+        font-size: 2rem;
+    }
+    .card h3 {
+        font-size: 1.5rem;
+    }
+    .card p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 765px) {
     .info-img > img {
         height: 300px;
     }
@@ -481,34 +476,48 @@ a {
     .content-info {
         padding: 30px 40px;
     }
-    .btn,
-    h1,
-    h2,
-    .card{
-        font-size: smaller;
+
+    h1 {
+        font-size: 4.5rem; 
+    }
+    h2 {
+        font-size: 2.5rem; 
+        text-align: center;
     }
     .container-home-video {
         height: 35vh;
     }
-}
-@media (max-width: 970px) {
-    .artist-video {
-        width: 100vh; 
-        height: 50vh; 
-    }
-}
-@media (max-width: 1170px) {
-    .card h3 {
-        font-size: 1em;
-    }
-    .card p {
-        font-size: 0.5em;
-    }
-}
-
-
-@media(max-width: 767px){
     .home-programming-slide-artist:nth-child(n+2) {
         display: none;
     }
+    .card h3 {
+        font-size: 3rem;
+    }
+    .card p {
+        font-size: 2rem;
+    }
+    .navbar-logo img{
+        height: 6vh;
+    }
+    .btn{
+        width: 80%;
+    }
+    .line-up-sorting .btn{
+        width: auto;
+    }
+    .artist-informations-show-day,
+    .artist-informations-stage{
+        text-align: left;
+    }
 }
+
+@media (max-width: 710px) {
+    .footer {
+        flex-direction: column;
+    }
+    .nav-links{
+        display: flex;
+        flex-direction: column
+    }
+}
+
