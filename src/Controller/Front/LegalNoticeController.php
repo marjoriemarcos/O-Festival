@@ -9,9 +9,9 @@ use Symfony\Component\Routing\Attribute\Route;
 class LegalNoticeController extends AbstractController
 {
     #[Route('/cgv', name: 'legalNoticeBrowse')]
-    public function browse(): Response
+    public function legalNoticeBrowse(): Response
     {
-        return $this->render('front/legalnotice/browse.html.twig', [
+        return $this->render('front/legal_notice/index.html.twig', [
             'controller_name' => 'LegalNoticeController',
         ]);
     }
