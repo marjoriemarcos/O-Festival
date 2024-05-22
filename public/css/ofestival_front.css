@@ -25,6 +25,9 @@
     font-weight: 800;
 
 }
+.open-font {
+    font-family: 'Open Sans', sans-serif;
+}
 
 h1{
     font-size: 5rem;
