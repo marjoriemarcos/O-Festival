@@ -35,9 +35,6 @@ class Ticket
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $endAt = null;
 
-    #[ORM\OneToOne(mappedBy: 'tickets', cascade: ['persist', 'remove'])]
-    private ?FeeTicket $feeTicket = null;
-
     #[ORM\Column(nullable: true)]
     private ?int $quantity = null;
 
@@ -129,29 +126,7 @@ class Ticket
         $this->endAt = $endAt;
 
         return $this;
-    }
-
-    public function getFeeTicket(): ?FeeTicket
-    {
-        return $this->feeTicket;
-    }
-
-    public function setFeeTicket(?FeeTicket $feeTicket): static
-    {
-        // unset the owning side of the relation if necessary
-        if ($feeTicket === null && $this->feeTicket !== null) {
-            $this->feeTicket->setTickets(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($feeTicket !== null && $feeTicket->getTickets() !== $this) {
-            $feeTicket->setTickets($this);
-        }
-
-        $this->feeTicket = $feeTicket;
-
-        return $this;
-    }
+    }   
 
     public function getQuantity(): ?int
     {

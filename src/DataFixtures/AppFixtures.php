@@ -10,7 +10,6 @@ use App\Entity\Ticket;
 use App\Entity\User;
 use App\Entity\Slot;
 use App\Entity\Stage;
-use App\Entity\Fee;
 use DateTimeImmutable;
 use DateTimeZone;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -103,29 +102,8 @@ class AppFixtures extends Fixture
             $manager->persist($customer);
             $customerList[] = $customer;
         }
-
-        // Fee
-        $feeName = [
-            "Pass J1" => 100,
-            "Pass J2" => 180,
-            "Pass J3" => 250,
-            "Tarif étudiant J1" => 80,
-            "Tarif étudiant J2" => 150,
-            "Tarif étudiant J3" => 200,
-            "Tarif enfant (-12 ans)" => 0,
-        ];
-
-        $feeList = [];
-        for ($i = 0; $i < count($feeName); $i++) {
-            $fee = new Fee();
-            $title = $faker->unique()->randomElement(array_keys($feeName));
-            $fee->setTitle($title);
-            $fee->setPrice($feeName[$title]);;
-            $fee->setCreatedAt(new DateTimeImmutable('now', $timezone));
-            $manager->persist($fee);
-            $feeList[] = $fee;
-        }
-
+   
+      
         // Ticket 
         $dateStart = new DateTimeImmutable('2024-08-23');
         //$dateTwo = new DateTimeImmutable('2024-08-24');
@@ -134,7 +112,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 50; $i++) {
             $ticket = new Ticket();
 
-            $ticket->setTitle($faker->randomElement(array_keys($feeName)));
+            $ticket->setTitle($faker->randomElement(['Pass 1 jour', 'Pass 2 jours', 'Pass 3 jours']));
             $ticket->setPrice($faker->numberBetween(0, 500));
             $ticket->setCreatedAt(new DateTimeImmutable('now', $timezone));
             $ticket->setCustomer($customerList[array_rand($customerList)]);
@@ -143,10 +121,7 @@ class AppFixtures extends Fixture
             $ticket->setEndAt($dateEnd);
             $manager->persist($ticket);
             $ticketList[] = $ticket;
-        }
-
-        // FeeTicket
-
+        }        
 
         // user
         $userList = [
