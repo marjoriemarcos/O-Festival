@@ -38,6 +38,9 @@ class Ticket
     #[ORM\Column(nullable: true)]
     private ?int $quantity = null;
 
+    #[ORM\Column(length: 64)]
+    private ?string $fee = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -136,6 +139,18 @@ class Ticket
     public function setQuantity(?int $quantity): static
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function getFee(): ?string
+    {
+        return $this->fee;
+    }
+
+    public function setFee(string $fee): static
+    {
+        $this->fee = $fee;
 
         return $this;
     }
