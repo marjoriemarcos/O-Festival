@@ -16,16 +16,18 @@ class ArtistRepository extends ServiceEntityRepository
         parent::__construct($registry, Artist::class);
     }
 
-    /**
-     * Récupère tous les artistes de la base de données.
-     *
-     * @return Artist[]
-     */
-    public function findAllArtists(): array
+/**
+ * Récupère tous les artistes ayant des slots associés dans la base de données.
+ *
+ * @return Artist[]
+ */
+    public function findArtistsWithSlots(): array
     {
-        return $this->createQueryBuilder('a')
-            ->orderBy('a.name', 'ASC')
-            ->getQuery()
-            ->getResult();
-    }
+        return $this->createQueryBuilder('artist')
+        ->leftJoin('App\Entity\Slot', 'slot', 'WITH', 'slot.artist = artist.id')
+        ->where('slot.id IS NOT NULL')
+        ->orderBy('artist.name', 'ASC')
+        ->getQuery()
+        ->getResult();
+}
 }

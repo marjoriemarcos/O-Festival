@@ -13,7 +13,7 @@ class MainController extends AbstractController
     public function home_front(ArtistRepository $artistRepository): Response
     {
         // Récupérer tous les artistes à partir du référentiel
-        $artistList = $artistRepository->findAllArtists();
+        $artistList = $artistRepository->findArtistsWithSlots();
 
         return $this->render('front/main/home.html.twig', [
             'controller_name' => 'MainController',
