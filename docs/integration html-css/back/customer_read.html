@@ -1,0 +1,243 @@
+<title>O'Festival BackOffice</title>
+</head>
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Badri CHOULAK">
+  <meta name="author" content="Nicolas JOUBERT">
+  <meta name="author" content="Talya LALAOUI">
+  <meta name="author" content="Marjorie MARCOS">
+  <meta name=”description” content="BackOffice de O'Festival">
+  <!-- reset CSS -->
+  <link rel="stylesheet" href="./css/reset.css">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <!-- Bootstrap icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!--Bootswatch Yeti-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.3/yeti/bootstrap.min.css">
+  <!-- our CSS -->
+  <link rel="stylesheet" href="./css/ofestival.css">
+  <!-- Neutro font family -->
+  <link href="https://fonts.cdnfonts.com/css/neutro" rel="stylesheet">
+  <!-- favicon -->
+  <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+  <!-- font Awesome -->
+  <script src="https://kit.fontawesome.com/2789e31df4.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <header>
+    <!-- Bouton pour accéder au site principal -->
+    <div class="d-flex justify-content-end bg-secondary p-1">
+      <a class="btn btn-lg btn-primary" href="../front/index.html" role="button">Accéder au site</a>
+    </div>
+
+    <!-- Barre de navigation avec Bootstrap -->
+    <nav class="navbar navbar-expand-sm bg-primary" data-bs-theme="dark">
+      <div class="container-fluid">
+        <!-- Logo de la marque avec lien vers la page d'accueil -->
+        <a class="navbar-brand" href="./index.html">
+          <img src="../images/logoNav.png" alt="Logo de O'Festival" class="img-fluid w-100">
+        </a>
+        <!-- Bouton de bascule pour la navigation mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+          aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Contenu de la barre de navigation -->
+        <div class="collapse navbar-collapse space-between" id="navbarColor01">
+          <!-- Menu de navigation principal -->
+          <ul class="navbar-nav ms-auto">
+
+            <!-- Menu déroulant pour la programmation -->
+            <li class="nav-item dropdown mx-4">
+              <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button"
+                aria-haspopup="true" aria-expanded="false">Programmation</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item fs-4" href="slot_list.html">Liste</a>
+                <a class="dropdown-item fs-4" href="#">Ajouter</a>
+              </div>
+            </li>
+            <!-- Menu déroulant pour les artistes -->
+            <li class="nav-item dropdown mx-4">
+              <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button"
+                aria-haspopup="true" aria-expanded="false">Artiste</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item fs-4" href="artist_list.html">Liste</a>
+                <a class="dropdown-item fs-4" href="#">Ajouter</a>
+              </div>
+            </li>
+            <!-- Menu déroulant pour les genres -->
+            <li class="nav-item dropdown mx-4">
+              <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button"
+                aria-haspopup="true" aria-expanded="false">Genre</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item fs-4" href="genre_list.html">Liste</a>
+                <a class="dropdown-item fs-4" href="#">Ajouter</a>
+              </div>
+            </li>
+            <!-- Menu déroulant pour les scènes -->
+            <li class="nav-item dropdown mx-4">
+              <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button"
+                aria-haspopup="true" aria-expanded="false">Scène</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item fs-4" href="stage_list.html">Liste</a>
+                <a class="dropdown-item fs-4" href="#">Ajouter</a>
+              </div>
+            </li>
+            <!-- Menu déroulant pour les billets -->
+            <li class="nav-item dropdown mx-4">
+              <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button"
+                aria-haspopup="true" aria-expanded="false">Billet</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item fs-4" href="ticket_list.html">Liste</a>
+                <a class="dropdown-item fs-4" href="#">Ajouter</a>
+              </div>
+            </li>
+            <!-- Menu déroulant pour les festivaliers -->
+            <li class="nav-item dropdown mx-4">
+              <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button"
+                aria-haspopup="true" aria-expanded="false">Festivalier</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item fs-4" href="./festival_goer_list.html">Liste</a>
+                <a class="dropdown-item fs-4" href="#">Ajouter</a>
+              </div>
+            </li>
+            <!-- Menu déroulant pour les clients -->
+            <li class="nav-item dropdown mx-4">
+              <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button"
+                aria-haspopup="true" aria-expanded="false">Client</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item fs-4" href="./customer_list.html">Liste</a>
+              </div>
+            </li>
+            <!-- Menu déroulant pour les admins -->
+            <li class="nav-item dropdown mx-4">
+              <a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button"
+                aria-haspopup="true" aria-expanded="false">Admin</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item fs-4" href="./admin_list.html">Liste</a>
+              </div>
+            </li>
+          </ul>
+
+          <!-- Menu utilisateur avec options de profil et déconnexion -->
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                <span> Marie BROCHAND</span>
+                <i class="bi bi-person-square"></i>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="#">Profil</a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">Déconnexion</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <!-- Bouton de connexion -->
+          <a href="#" class="btn btn-danger me-2">Connexion</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="container">
+      <!-- Titre principal -->
+      <h2 class="text-center my-5 fw-bold display-5">Détails du Client</h2>
+      <div class="container mt-5">
+        <div class="row justify-content-center">
+          <!-- Carte unique pour les détails du client -->
+          <div class="col-md-8">
+            <a href="./customer_list.html" class="btn btn-primary fw-bold mb-4">
+              <i class="bi bi-arrow-left"></i> Retour à la liste des clients
+            </a>
+            <div class="card">
+              <!-- En-tête de la carte -->
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <span class="fs-2 fw-bold">
+                  <i class="bi bi-person me-2"></i> Jean Dupont
+                </span>
+                <div class="d-flex">
+                  <form action="#" method="post">
+                    <button onclick="return confirm('Souhaitez-vous supprimer ce client ?');" type="submit"
+                      class="btn btn-danger bi bi-trash"></button>
+                  </form>
+                </div>
+              </div>
+              <div class="card-body">
+                <!-- Date de naissance -->
+                <div class="d-flex align-items-center mt-3">
+                  <i class="bi bi-calendar3 me-2"></i>
+                  <h6 class="fw-bold mb-0">Date de naissance :</h6>
+                  <p class="mb-0 ms-2">01/01/1990</p>
+                </div>
+                <!-- Email -->
+                <div class="d-flex align-items-center mt-3">
+                  <i class="bi bi-envelope me-2"></i>
+                  <h6 class="fw-bold mb-0">Email :</h6>
+                  <p class="mb-0 ms-2">jean.dupont@example.com</p>
+                </div>
+                <!-- Numéro de téléphone -->
+                <div class="d-flex align-items-center mt-3">
+                  <i class="bi bi-phone me-2"></i>
+                  <h6 class="fw-bold mb-0">Numéro de téléphone :</h6>
+                  <p class="mb-0 ms-2">0123456789</p>
+                </div>
+                <!-- Adresse -->
+                <div class="d-flex align-items-center mt-3">
+                  <i class="bi bi-geo-alt me-2"></i>
+                  <h6 class="fw-bold mb-0">Adresse :</h6>
+                  <p class="mb-0 ms-2">123 Rue de la Liberté</p>
+                </div>
+                <!-- Code postal -->
+                <div class="d-flex align-items-center mt-3">
+                  <i class="bi bi-geo-alt me-2"></i>
+                  <h6 class="fw-bold mb-0">Code postal :</h6>
+                  <p class="mb-0 ms-2">75001</p>
+                </div>
+                <!-- Ville -->
+                <div class="d-flex align-items-center mt-3">
+                  <i class="bi bi-geo-alt me-2"></i>
+                  <h6 class="fw-bold mb-0">Ville :</h6>
+                  <p class="mb-0 ms-2">Paris</p>
+                </div>
+                <!-- Tickets achetés -->
+                <div class="d-flex align-items-center mt-3">
+                  <i class="bi bi-ticket me-2"></i>
+                  <h6 class="fw-bold mb-0">Tickets achetés :</h6>
+                  <p class="mb-0 ms-2">Pass 1 Jour, Pass 2 Jours</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+    <!--Footer-->
+    <footer class="bg-primary mt-5"></footer>
+  
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

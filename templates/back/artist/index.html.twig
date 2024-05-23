@@ -1,0 +1,98 @@
+{% extends 'back/base.html.twig' %}
+
+{%block title%}Liste des artistes{%endblock%}
+
+{% block main %}
+ <main>
+    <div class="container">      
+      <h2 class="text-center my-5 fw-bold display-5">Liste des Artistes</h2>
+
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <div class="card">
+            <!-- Card title -->
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span class="fs-2 fw-bold">Artistes</span>
+              <button class="btn btn-success fw-bold" type="button">Ajouter un Artiste</button>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col"><i class="bi bi-person me-2"></i> Photo</th>
+                      <th scope="col"><i class="bi bi-person me-2"></i> Nom</th>
+                      <th scope="col"><i class="bi bi-music-note-list me-2"></i> Genres musicaux</th>
+                      <th class="col-1"><i class="bi bi-gear me-2"></i> Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Artist -->
+                    <tr>
+                      <td><img src="{{asset('images/chanteur.jpg')}}" alt="Image de l'artiste Arthur" class="img-thumbnail"
+                          style="max-width: 100px;"></td>
+                      <td>Arthur</td>
+                      <td>
+                        <span class="badge bg-primary">Pop</span>
+                        <span class="badge bg-secondary">Rock</span>
+                      </td>
+                      <td>
+                        <div class="d-flex">
+                          <!-- Action buttons -->
+                          <a href="{{path('artistBackRead')}}" class="btn btn-primary bi bi-search me-2"></a>
+                          <form action="#" method="post">
+                            <button onclick="return confirm('Souhaitez-vous supprimer cet artiste ?');" type="submit"
+                              class="btn btn-danger bi bi-trash"></button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                    <!-- Artist -->
+                    <tr>
+                      <td><img src="{{asset('images/chanteur2.jpg')}}" alt="Image de l'artiste Léonard" class="img-thumbnail"
+                          style="max-width: 100px;"></td>
+                      <td>Léonard</td>
+                      <td>
+                        <span class="badge bg-primary">Rock</span>
+                      </td>
+                      <td>
+                        <div class="d-flex">
+                          <!-- Action buttons -->
+                          <a href="{{path('artistBackRead')}}" class="btn btn-primary bi bi-search me-2"></a>
+                          <form action="#" method="post">
+                            <button onclick="return confirm('Souhaitez-vous supprimer cet artiste ?');" type="submit"
+                              class="btn btn-danger bi bi-trash"></button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                    <!-- Artist -->
+                    <tr>
+                      <td><img src="{{asset('images/chanteur3.jpg')}}" alt="Image de l'artiste Thomas" class="img-thumbnail"
+                          style="max-width: 100px;"></td>
+                      <td>Thomas</td>
+                      <td>
+                        <span class="badge bg-primary">Pop</span>
+                        <span class="badge bg-secondary">Jazz</span>
+                      </td>
+                      <td>
+                        <div class="d-flex">
+                          <!-- Action buttons -->
+                          <a href="{{path('artistBackRead')}}" class="btn btn-primary bi bi-search me-2"></a>
+                          <form action="#" method="post">
+                            <button onclick="return confirm('Souhaitez-vous supprimer cet artiste ?');" type="submit"
+                              class="btn btn-danger bi bi-trash"></button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

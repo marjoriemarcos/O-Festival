@@ -1,0 +1,213 @@
+{% extends 'back/base.html.twig' %}
+
+{% block main %}
+	<main>
+		<div class="container">
+
+			<h2 class="text-center my-5 fw-bold display-5">Accueil Back Office O'festival</h2>
+			<div class="container mt-5">
+				<a href="{{path('slotBrowse')}}" class="btn btn-primary fw-bold mb-4">
+					Programmation
+					<i class="bi bi-arrow-right"></i>
+				</a>
+				<div
+					class="row">
+					<!-- Day -->
+					<div class="col-md-4">
+						<div
+							class="card">
+							<!-- Program of the day -->
+							<div class="card-header fs-2 fw-bold">JOUR 1</div>
+							<div class="card-body">
+								<ul
+									class="list-group list-group-flush">
+									<!-- Artist -->
+									<li class="list-group-item">
+										<div class="d-flex justify-content-between align-items-center">
+											<img src="{{asset('images/chanteur.jpg')}}" alt="Image de l'artiste Arthur" class="img-thumbnail me-4" style="max-width: 100px;">
+											<div>
+												<h6 class="fw-bold mb-0">Arthur</h6>
+												<p class="mb-0">Scène 3</p>
+												<p class="mb-0">24/08/2024 - 19:00</p>
+											</div>
+											<div class="d-flex">
+												<a href="{{path('slotRead')}}" class="btn btn-primary bi bi-search me-2"></a>
+												<form action="#" method="post">
+													<button onclick="return confirm('Souhaitez-vous supprimer ce créneau ?');" type="submit" class="btn btn-danger bi bi-trash"></button>
+												</form>
+											</div>
+										</div>
+									</li>
+									<!-- Artist -->
+									<li class="list-group-item">
+										<div class="d-flex justify-content-between align-items-center">
+											<img src="{{asset('images/chanteur2.jpg')}}" alt="Image de l'artiste Léonard" class="img-thumbnail me-4" style="max-width: 100px;">
+											<div>
+												<h6 class="fw-bold mb-0">Léonard</h6>
+												<p class="mb-0">Scène 1</p>
+												<p class="mb-0">23/08/2024 - 18:00</p>
+											</div>
+											<div class="d-flex mt-2">
+												<a href="{{path('slotRead')}}" class="btn btn-primary bi bi-search me-2"></a>
+												<form action="#" method="post">
+													<button onclick="return confirm('Souhaitez-vous supprimer ce créneau ?');" type="submit" class="btn btn-danger bi bi-trash"></button>
+												</form>
+											</div>
+										</div>
+									</li>
+									<!-- Artist -->
+									<li class="list-group-item">
+										<div class="d-flex justify-content-between align-items-center">
+											<img src="{{asset('images/chanteur3.jpg')}}" alt="Image de l'artiste Thomas" class="img-thumbnail me-4" style="max-width: 100px;">
+											<div>
+												<h6 class="fw-bold mb-0">Thomas</h6>
+												<p class="mb-0">Scène 3</p>
+												<p class="mb-0">25/08/2024 - 16:00</p>
+											</div>
+											<div class="d-flex">
+												<a href="{{path('slotRead')}}" class="btn btn-primary bi bi-search me-2"></a>
+												<form action="#" method="post">
+													<button onclick="return confirm('Souhaitez-vous supprimer ce créneau ?');" type="submit" class="btn btn-danger bi bi-trash"></button>
+												</form>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<!-- Day -->
+					<div class="col-md-4">
+						<div
+							class="card">
+							<!-- Program of the day -->
+							<div class="card-header fs-2 fw-bold">JOUR 2</div>
+							<div class="card-body">
+								<ul
+									class="list-group list-group-flush">
+									<!-- Artist -->
+									<li class="list-group-item">
+										<div class="d-flex justify-content-between align-items-center">
+											<img src="{{asset('images/chanteur.jpg')}}" alt="Image de l'artiste Arthur" class="img-thumbnail me-4" style="max-width: 100px;">
+											<div>
+												<h6 class="fw-bold mb-0">Arthur</h6>
+												<p class="mb-0">Scène 3</p>
+												<p class="mb-0">24/08/2024 - 19:00</p>
+											</div>
+											<div class="d-flex">
+												<a href="{{path('slotRead')}}" class="btn btn-primary bi bi-search me-2"></a>
+												<form action="#" method="post">
+													<button onclick="return confirm('Souhaitez-vous supprimer ce créneau ?');" type="submit" class="btn btn-danger bi bi-trash"></button>
+												</form>
+											</div>
+										</div>
+									</li>
+									<!-- Artist -->
+									<li class="list-group-item">
+										<div class="d-flex justify-content-between align-items-center">
+											<img src="{{asset('images/chanteur2.jpg')}}" alt="Image de l'artiste Léonard" class="img-thumbnail me-4" style="max-width: 100px;">
+											<div>
+												<h6 class="fw-bold mb-0">Léonard</h6>
+												<p class="mb-0">Scène 1</p>
+												<p class="mb-0">23/08/2024 - 18:00</p>
+											</div>
+											<div class="d-flex mt-2">
+												<a href="{{path('slotRead')}}" class="btn btn-primary bi bi-search me-2"></a>
+												<form action="#" method="post">
+													<button onclick="return confirm('Souhaitez-vous supprimer ce créneau ?');" type="submit" class="btn btn-danger bi bi-trash"></button>
+												</form>
+											</div>
+										</div>
+									</li>
+									<!-- Artist -->
+									<li class="list-group-item">
+										<div class="d-flex justify-content-between align-items-center">
+											<img src="{{asset('images/chanteur3.jpg')}}" alt="Image de l'artiste Thomas" class="img-thumbnail me-4" style="max-width: 100px;">
+											<div>
+												<h6 class="fw-bold mb-0">Thomas</h6>
+												<p class="mb-0">Scène 3</p>
+												<p class="mb-0">25/08/2024 - 16:00</p>
+											</div>
+											<div class="d-flex">
+												<a href="{{path('slotRead')}}" class="btn btn-primary bi bi-search me-2"></a>
+												<form action="#" method="post">
+													<button onclick="return confirm('Souhaitez-vous supprimer ce créneau ?');" type="submit" class="btn btn-danger bi bi-trash"></button>
+												</form>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<!-- Day -->
+					<div class="col-md-4">
+						<div
+							class="card">
+							<!-- Program of the day -->
+							<div class="card-header fs-2 fw-bold">JOUR 3</div>
+							<div class="card-body">
+								<ul
+									class="list-group list-group-flush">
+									<!-- Artist -->
+									<li class="list-group-item">
+										<div class="d-flex justify-content-between align-items-center">
+											<img src="{{asset('images/chanteur.jpg')}}" alt="Image de l'artiste Arthur" class="img-thumbnail me-4" style="max-width: 100px;">
+											<div>
+												<h6 class="fw-bold mb-0">Arthur</h6>
+												<p class="mb-0">Scène 3</p>
+												<p class="mb-0">24/08/2024 - 19:00</p>
+											</div>
+											<div class="d-flex">
+												<a href="{{path('slotRead')}}" class="btn btn-primary bi bi-search me-2"></a>
+												<form action="#" method="post">
+													<button onclick="return confirm('Souhaitez-vous supprimer ce créneau ?');" type="submit" class="btn btn-danger bi bi-trash"></button>
+												</form>
+											</div>
+										</div>
+									</li>
+									<!-- Artist -->
+									<li class="list-group-item">
+										<div class="d-flex justify-content-between align-items-center">
+											<img src="{{asset('images/chanteur2.jpg')}}" alt="Image de l'artiste Léonard" class="img-thumbnail me-4" style="max-width: 100px;">
+											<div>
+												<h6 class="fw-bold mb-0">Léonard</h6>
+												<p class="mb-0">Scène 1</p>
+												<p class="mb-0">23/08/2024 - 18:00</p>
+											</div>
+											<div class="d-flex mt-2">
+												<a href="{{path('slotRead')}}" class="btn btn-primary bi bi-search me-2"></a>
+												<form action="#" method="post">
+													<button onclick="return confirm('Souhaitez-vous supprimer ce créneau ?');" type="submit" class="btn btn-danger bi bi-trash"></button>
+												</form>
+											</div>
+										</div>
+									</li>
+									<!-- Artist -->
+									<li class="list-group-item">
+										<div class="d-flex justify-content-between align-items-center">
+											<img src="{{asset('images/chanteur3.jpg')}}" alt="Image de l'artiste Thomas" class="img-thumbnail me-4" style="max-width: 100px;">
+											<div>
+												<h6 class="fw-bold mb-0">Thomas</h6>
+												<p class="mb-0">Scène 3</p>
+												<p class="mb-0">25/08/2024 - 16:00</p>
+											</div>
+											<div class="d-flex">
+												<a href="{{path('slotRead')}}" class="btn btn-primary bi bi-search me-2"></a>
+												<form action="#" method="post">
+													<button onclick="return confirm('Souhaitez-vous supprimer ce créneau ?');" type="submit" class="btn btn-danger bi bi-trash"></button>
+												</form>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+{% endblock %}
