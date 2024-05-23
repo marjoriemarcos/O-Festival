@@ -30,76 +30,36 @@
 					class="home-programming-slide row gx-1 px-5">
 
 					<!-- Artist Card -->
-					<div class="home-programming-slide-artist col-md-3">
-						<div class="card img-zoom">
-							<a href="{{path('artistRead')}}">
-								<img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="Artiste 1">
-								<div class="card-img-overlay d-flex flex-column justify-content-end">
-									<h3 class="card-title text-white mb-0">Artiste 1</h3>
-									<p class="card-text text-white">Jour 1 - POP</p>
-								</div>
-							</a>
+					{% for artist in artistList %}
+						<div class="home-programming-slide-artist current-card col-md-3">
+							<div class="card img-zoom">
+								<a href="{{ path('artistRead', {'id': artist.id}) }}">
+									<img src="{{ artist.picture }}" class="card-img-top" alt="{{ artist.name }}">
+									<div class="card-img-overlay d-flex flex-column justify-content-end">
+										<h3 class="card-title text-white mb-0">{{ artist.name }}</h3>
+										<p class="card-text text-white">
+											{{ artist.slot ? artist.slot.getFormattedDate() : 'Date non disponible' }}
+											{% if artist.genres is not empty %}
+												-
+												{{ artist.genres|map(genre => genre.name)|join(' - ') }}
+											{% endif %}
+										</p>
+									</div>
+								</a>
+							</div>
 						</div>
-					</div>
-
-					<!-- Artist Card -->
-					<div class="home-programming-slide-artist col-md-3">
-						<div class="card img-zoom">
-							<a href="{{path('artistRead')}}">
-								<img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="Artiste 2">
-								<div class="card-img-overlay d-flex flex-column justify-content-end">
-									<h3 class="card-title text-white mb-0">Artiste 2</h3>
-									<p class="card-text text-white">Jour 2 - ROCK</p>
-								</div>
-							</a>
-						</div>
-					</div>
-
-					<!-- Artist Card -->
-					<div class="home-programming-slide-artist col-md-3">
-						<div class="card img-zoom">
-							<a href="{{path('artistRead')}}">
-								<img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="Artiste 3">
-								<div class="card-img-overlay d-flex flex-column justify-content-end">
-									<h3 class="card-title text-white mb-0">Artiste 3</h3>
-									<p class="card-text text-white">Jour 3 - ELECTRO</p>
-								</div>
-							</a>
-						</div>
-					</div>
-
-					<!-- Artist Card -->
-					<div class="home-programming-slide-artist col-md-3">
-						<div class="card img-zoom">
-							<a href="{{path('artistRead')}}">
-								<img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="Artiste 4">
-								<div class="card-img-overlay d-flex flex-column justify-content-end">
-									<h3 class="card-title text-white mb-0">Artiste 4</h3>
-									<p class="card-text text-white">Jour 3 - ELECTRO</p>
-								</div>
-							</a>
-						</div>
-					</div>
+					{% endfor %}
 
 					<!-- Back button for browsing through artists -->
-					<ul class="home-programming-slide-direction">
-						<li>
-							<a class="home-programming-slide-prev" href="#">❮</a>
-						</li>
-					</ul>
-
-					<!-- Next button for browsing through artists -->
-					<ul class="home-programming-slide-direction">
-						<li>
-							<a class="home-programming-slide-next" href="#">❯</a>
-						</li>
-					</ul>
+					<section class="home-programming-slide-direction mb-5">
+						<span class="home-programming-slide-prev" type="button" aria-label="Précédent">❮</span>
+						<span class="home-programming-slide-next" type="button" aria-label="Précédent">❯</span>
+					</section>
 				</div>
 
 				<!-- Link to the Line-Up page -->
-				<div class="home-programming-slide-link text-center">
-					<a href="{{path('lineupBrowse')}}" class="btn btn-primary light-yellow-bg dark-blue-txt">Toute la
-						                        programmation</a>
+				<div class="home-programming-slide-link text-center mt-3">
+					<a href="{{path('lineupBrowse')}}" class="btn btn-primary light-yellow-bg dark-blue-txt">Toute la programmation</a>
 				</div>
 			</div>
 
