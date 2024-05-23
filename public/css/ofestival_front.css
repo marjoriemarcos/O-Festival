@@ -243,6 +243,7 @@ body {
 .card {
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    height: 85%;
 }
 .img-zoom {
     overflow: hidden;
@@ -271,6 +272,11 @@ body {
     font-weight: 800;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
 }
+
+.ticket-card-image{
+    height: 40%;
+}
+
 .ticket-card-info-price{
     font-size: 2.5rem;
     color: var(--dark_yellow);

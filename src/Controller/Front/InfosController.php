@@ -8,18 +8,18 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class InfosController extends AbstractController
 {
-    #[Route('/infos-pratiques', name: 'infoBrowse')]
-    public function infoBrowse(): Response
+    #[Route('/infos-pratiques', name: 'app_infos_browse')]
+    public function browse(): Response
     {
-        return $this->render('front/infos/index.html.twig', [
+        return $this->render('front/infos/browse.html.twig', [
             'controller_name' => 'InfosController',
         ]);
     }
 
-    #[Route('/infos-pratiques', name: 'sendRequest', methods: 'POST')]
+    #[Route('/infos-pratiques', name: 'app_infos_send_request', methods: 'POST')]
     public function sendRequest(): Response
     {
-        return $this->render('front/infos/index.html.twig', [
+        return $this->render('front/infos/browse.html.twig', [
             'controller_name' => 'InfosController',
         ]);
     }

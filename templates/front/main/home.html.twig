@@ -38,8 +38,9 @@
 									<h3 class="card-title text-white mb-0">{{ artist.name }}</h3>
 									<p class="card-text text-white">
 										{{artist.slot.getFormattedDate() }}
-											-
-											{{ artist.genres|map(genre => genre.name)|join(' - ') }}
+										-
+										{{ artist.genres|map(genre => genre.name)|join(' - ') }}
+
 									</p>
 								</div>
 							</a>
@@ -48,14 +49,14 @@
 				{% endfor %}
 
 				<!-- Back button for browsing through artists -->
-				<section class="home-programming-slide-direction mb-5">
+				<section class="home-programming-slide-direction">
 					<span class="home-programming-slide-prev" type="button" aria-label="Précédent">❮</span>
 					<span class="home-programming-slide-next" type="button" aria-label="Précédent">❯</span>
 				</section>
 			</div>
 
 			<!-- Link to the Line-Up page -->
-			<div class="home-programming-slide-link text-center mt-3">
+			<div class="home-programming-slide-link text-center">
 				<a href="{{path('app_artist_browse')}}" class="btn btn-primary light-yellow-bg dark-blue-txt">Toute la programmation</a>
 			</div>
 		</div>
@@ -69,47 +70,30 @@
 			</h2>
 
 			<div
-				class="home-ticket-list row justify-content-around mx-3 mb-4 mt-3">
-				<!-- Ticket 1 -->
-				<div class="home-ticket col-md-3 mb-4">
-					<div class="card img-zoom">
-						<a href="{{path('ticketBrowse')}}">
-							<img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="">
-							<div class="card-img-overlay d-flex flex-column justify-content-end">
-								<h3 class="card-title text-white mb-0">PASS 3 JOURS</h3>
-							</div>
-						</a>
-					</div>
-				</div>
+				class="home-ticket-list row justify-content-around mx-3 mb-2 mt-3">
+				<!-- Ticket -->
+				{% set passTypes = [
+    { 'type': '1 jour', 'image': 'pass-1-jour.jpg', 'label': 'PASS 1 JOUR' },
+    { 'type': '2 jours', 'image': 'pass-2-jours.jpg', 'label': 'PASS 2 JOURS' },
+    { 'type': '3 jours', 'image': 'pass-3-jours.jpg', 'label': 'PASS 3 JOURS' }] %}
 
-				<!-- Ticket 2 -->
-				<div class="home-ticket col-md-3 mb-4">
-					<div class="card img-zoom">
-						<a href="{{path('ticketBrowse')}}">
-							<img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="">
-							<div class="card-img-overlay d-flex flex-column justify-content-end">
-								<h3 class="card-title text-white mb-0">PASS 2 JOURS</h3>
-							</div>
-						</a>
+				{% for pass in passTypes %}
+					<div class="home-ticket col-md-3 mb-2">
+						<div class="card img-zoom">
+							<a href="{{ path('app_ticket_browse') }}">
+								<img src="{{ asset('images/' ~ pass.image) }}" class="card-img-top" alt="">
+								<div class="card-img-overlay d-flex flex-column justify-content-end">
+									<h3 class="card-title text-white mb-0">{{ pass.label }}</h3>
+								</div>
+							</a>
+						</div>
 					</div>
-				</div>
-
-				<!-- Ticket 3 -->
-				<div class="home-ticket col-md-3">
-					<div class="card img-zoom">
-						<a href="{{path('ticketBrowse')}}">
-							<img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="">
-							<div class="card-img-overlay d-flex flex-column justify-content-end">
-								<h3 class="card-title text-white mb-0">PASS 1 JOURS</h3>
-							</div>
-						</a>
-					</div>
-				</div>
+				{% endfor %}
 			</div>
 
 			<!-- Link to the ticket shop -->
 			<div class="text-center position-relative d-flex align-items-center justify-content-center">
-				<a href="{{path('ticketBrowse')}}" class="btn btn-primary light-yellow-bg dark-blue-txt">Billetterie</a>
+				<a href="{{path('app_ticket_browse')}}" class="btn btn-primary light-yellow-bg dark-blue-txt">Billetterie</a>
 			</div>
 		</div>
 	</div>

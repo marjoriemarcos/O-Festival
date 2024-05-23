@@ -1,6 +1,6 @@
 {% extends 'front/base.html.twig' %}
 
-{% block title %}Artiste
+{% block artistActive %}active
 {% endblock %}
 
 {% block main %}
@@ -110,7 +110,7 @@
 
 			<!--  Link to the ticket shop -->
 			<div class="mt-5 mb-5">
-				<a href="{{path('ticketBrowse')}}" class="btn btn-primary light-yellow-bg dark-blue-txt">Billetterie</a>
+				<a href="{{path('app_ticket_browse')}}" class="btn btn-primary light-yellow-bg dark-blue-txt">Billetterie</a>
 			</div>
 		</div>
 	</div>
