@@ -37,87 +37,17 @@
                     </tr>
                   </thead>
                   <tbody>
+                    {% for ticket in ticketList %}
                     <tr>
-                      <td>Pass 1 Jour | Vendredi | Plein Tarif</td>
-                      <td>80 €</td>
-                      <td>100</td>
+                      <td>{{ticket.title}}</td>
+                      <td>{{ticket.price}}</td>
+                      <td>{{ticket.quantity}}</td>
                       <td>
-                        <a href="{{path('ticketBackRead')}}" class="btn btn-primary btn-sm bi bi-search"></a>
+                        <a href="{{path('ticketBackRead', {id: ticket.id})}}" class="btn btn-primary btn-sm bi bi-search"></a>
                         <button class="btn btn-danger btn-sm bi bi-trash"></button>
                       </td>
-                    </tr>
-                    <tr>
-                      <td>Pass 1 Jour | Samedi | Plein Tarif</td>
-                      <td>80 €</td>
-                      <td>100</td>
-                      <td>
-                        <a href="{{path('ticketBackRead')}}" class="btn btn-primary btn-sm bi bi-search"></a>
-                        <button class="btn btn-danger btn-sm bi bi-trash"></button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Pass 1 Jour | Dimanche | Plein Tarif</td>
-                      <td>80 €</td>
-                      <td>100</td>
-                      <td>
-                        <a href="{{path('ticketBackRead')}}" class="btn btn-primary btn-sm bi bi-search"></a>
-                        <button class="btn btn-danger btn-sm bi bi-trash"></button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Pass 1 Jour | Vendredi | Tarif Etudiant</td>
-                      <td>50 €</td>
-                      <td>80</td>
-                      <td>
-                        <a href="{{path('ticketBackRead')}}" class="btn btn-primary btn-sm bi bi-search"></a>
-                        <button class="btn btn-danger btn-sm bi bi-trash"></button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Pass 1 Jour | Samedi | Tarif Etudiant</td>
-                      <td>50 €</td>
-                      <td>80</td>
-                      <td>
-                        <a href="{{path('ticketBackRead')}}" class="btn btn-primary btn-sm bi bi-search"></a>
-                        <button class="btn btn-danger btn-sm bi bi-trash"></button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Pass 1 Jour | Dimanche | Tarif Etudiant</td>
-                      <td>50 €</td>
-                      <td>80</td>
-                      <td>
-                        <a href="{{path('ticketBackRead')}}" class="btn btn-primary btn-sm bi bi-search"></a>
-                        <button class="btn btn-danger btn-sm bi bi-trash"></button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Pass 1 Jour | Vendredi | Tarif Enfant</td>
-                      <td>0 €</td>
-                      <td>30</td>
-                      <td>
-                        <a href="{{path('ticketBackRead')}}" class="btn btn-primary btn-sm bi bi-search"></a>
-                        <button class="btn btn-danger btn-sm bi bi-trash"></button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Pass 1 Jour | Samedi | Tarif Enfant</td>
-                      <td>0 €</td>
-                      <td>30</td>
-                      <td>
-                        <a href="{{path('ticketBackRead')}}" class="btn btn-primary btn-sm bi bi-search"></a>
-                        <button class="btn btn-danger btn-sm bi bi-trash"></button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Pass 1 Jour | Dimanche | Tarif Enfant</td>
-                      <td>0 €</td>
-                      <td>30</td>
-                      <td>
-                        <a href="{{path('ticketBackRead')}}" class="btn btn-primary btn-sm bi bi-search"></a>
-                        <button class="btn btn-danger btn-sm bi bi-trash"></button>
-                      </td>
-                    </tr>
+                    </tr>                    
+                    {% endfor %}                    
                   </tbody>
                 </table>
               </div>

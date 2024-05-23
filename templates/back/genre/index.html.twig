@@ -21,10 +21,11 @@
               <div class="card-body">
                 <ul class="list-group list-group-flush">
                   <!-- Genre -->
+                  {% for genre in genreList %}
                   <li class="list-group-item">
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="d-flex align-items-center">
-                        <h6 class="fw-bold mb-0">Pop</h6>
+                        <h6 class="fw-bold mb-0">{{genre.name}}</h6>
                       </div>
                       <div class="d-flex">
                         <a href="#" class="btn btn-warning bi bi-pencil me-2"></a>
@@ -33,36 +34,8 @@
                         </form>
                       </div>
                     </div>
-                  </li>
-                  <!-- Genre -->
-                  <li class="list-group-item">
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="d-flex align-items-center">
-                        <h6 class="fw-bold mb-0">Rock</h6>
-                      </div>
-                      <div class="d-flex">
-                        <a href="#" class="btn btn-warning bi bi-pencil me-2"></a>
-                        <form action="#" method="post">
-                          <button onclick="return confirm('Souhaitez-vous supprimer ce genre musical ?');" type="submit" class="btn btn-danger bi bi-trash"></button>
-                        </form>
-                      </div>
-                    </div>
-                  </li>
-                  <!-- Genre -->
-                  <li class="list-group-item">
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="d-flex align-items-center">
-                        <h6 class="fw-bold mb-0">Jazz</h6>
-                      </div>
-                      <div class="d-flex">
-                        <a href="#" class="btn btn-warning bi bi-pencil me-2"></a>
-                        <form action="#" method="post">
-                          <button onclick="return confirm('Souhaitez-vous supprimer ce genre musical ?');" type="submit" class="btn btn-danger bi bi-trash"></button>
-                        </form>
-                      </div>
-                    </div>
-                  </li>
-
+                  </li> 
+                  {% endfor %}             
                 </ul>
               </div>
             </div>
