@@ -16,6 +16,29 @@ class SlotRepository extends ServiceEntityRepository
         parent::__construct($registry, Slot::class);
     }
 
+    public function findAllSlotWithArtistAndGenre(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT artist.*, genre.name AS genreName, stage.name AS stageName, slot.*
+            FROM artist
+            INNER JOIN genre_artist
+            ON artist.id = genre_artist.artist_id
+            INNER JOIN genre
+            ON genre.id = genre_artist.genre_id
+            INNER JOIN slot
+            ON artist.id = slot.artist_id
+            INNER JOIN stage
+            ON stage.id = slot.stage_id
+            ';
+
+        $resultSet = $conn->executeQuery($sql);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return Slot[] Returns an array of Slot objects
 //     */
