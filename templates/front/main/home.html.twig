@@ -1,120 +1,116 @@
 {% extends 'front/base.html.twig' %}
 
-{% block title %}O'Festival
+{% block homeActive %}active
 {% endblock %}
 
 {% block main %}
-	<main>
-		<div class="container-home dark-blue-bg roboto-font">
-			<img
-			src="{{asset('images/frise-1.png')}}" class="card-img-top">
+	<div class="container-home dark-blue-bg roboto-font">
+		<img
+		src="{{asset('images/frise-1.png')}}" class="card-img-top">
 
-			<!-- Video Home -->
-			<div class="container-home-video container-fluid text-center position-relative d-flex align-items-center justify-content-center">
-				<video autoplay loop muted plays-inline class="home-video">
-					<source src="{{asset('images/video-home.mp4')}}" type="video/mp4">
-				</video>
-				<h1 class="home-title text-white adumu-font">O'FESTIVAL</h1>
-			</div>
-			<img
-			src="{{asset('images/frise-2.png')}}" class="card-img-top">
+		<!-- Video Home -->
+		<div class="container-home-video container-fluid text-center position-relative d-flex align-items-center justify-content-center">
+			<video autoplay loop muted plays-inline class="home-video">
+				<source src="{{asset('images/video-home.mp4')}}" type="video/mp4">
+			</video>
+			<h1 class="home-title text-white adumu-font">O'FESTIVAL</h1>
+		</div>
+		<img
+		src="{{asset('images/frise-2.png')}}" class="card-img-top">
 
-			<!-- Line-up -->
-			<div class="container-home-programming d-flex flex-column">
+		<!-- Line-up -->
+		<div class="container-home-programming d-flex flex-column">
 
-				<h2 class="home-programming-title py-5 px-5 medium-blue-bg text-white ">
-					Programmation
-				</h2>
+			<h2 class="home-programming-title py-5 px-5 medium-blue-bg text-white ">
+				Programmation
+			</h2>
 
-				<div
-					class="home-programming-slide row gx-1 px-5">
+			<div
+				class="home-programming-slide row gx-1 px-5">
 
-					<!-- Artist Card -->
-					{% for artist in artistList %}
-						<div class="home-programming-slide-artist current-card col-md-3">
-							<div class="card img-zoom">
-								<a href="{{ path('artistRead', {'id': artist.id}) }}">
-									<img src="{{ artist.picture }}" class="card-img-top" alt="{{ artist.name }}">
-									<div class="card-img-overlay d-flex flex-column justify-content-end">
-										<h3 class="card-title text-white mb-0">{{ artist.name }}</h3>
-										<p class="card-text text-white">
-											{{ artist.slot ? artist.slot.getFormattedDate() : 'Date non disponible' }}
-											{% if artist.genres is not empty %}
-												-
-												{{ artist.genres|map(genre => genre.name)|join(' - ') }}
-											{% endif %}
-										</p>
-									</div>
-								</a>
-							</div>
+				<!-- Artist Card -->
+				{% for artist in artistBrowse %}
+					<div class="home-programming-slide-artist current-card col-md-3">
+						<div class="card img-zoom">
+							<a href="{{ path('app_artist_read', {'id': artist.id}) }}">
+								<img src="{{ artist.picture }}" class="card-img-top" alt="{{ artist.name }}">
+								<div class="card-img-overlay d-flex flex-column justify-content-end">
+									<h3 class="card-title text-white mb-0">{{ artist.name }}</h3>
+									<p class="card-text text-white">
+										{{artist.slot.getFormattedDate() }}
+											-
+											{{ artist.genres|map(genre => genre.name)|join(' - ') }}
+									</p>
+								</div>
+							</a>
 						</div>
-					{% endfor %}
+					</div>
+				{% endfor %}
 
-					<!-- Back button for browsing through artists -->
-					<section class="home-programming-slide-direction mb-5">
-						<span class="home-programming-slide-prev" type="button" aria-label="Précédent">❮</span>
-						<span class="home-programming-slide-next" type="button" aria-label="Précédent">❯</span>
-					</section>
-				</div>
-
-				<!-- Link to the Line-Up page -->
-				<div class="home-programming-slide-link text-center mt-3">
-					<a href="{{path('lineupBrowse')}}" class="btn btn-primary light-yellow-bg dark-blue-txt">Toute la programmation</a>
-				</div>
+				<!-- Back button for browsing through artists -->
+				<section class="home-programming-slide-direction mb-5">
+					<span class="home-programming-slide-prev" type="button" aria-label="Précédent">❮</span>
+					<span class="home-programming-slide-next" type="button" aria-label="Précédent">❯</span>
+				</section>
 			</div>
 
-
-			<!-- Ticket Shop -->
-			<div class="container-home-ticketing d-flex flex-column">
-
-				<h2 class="home-ticket-title py-5 px-5 medium-blue-bg text-white">
-					Billetterie
-				</h2>
-
-				<div
-					class="home-ticket-list row justify-content-around mx-3 mb-4 mt-3">
-					<!-- Ticket 1 -->
-					<div class="home-ticket col-md-3 mb-4">
-						<div class="card img-zoom">
-							<a href="{{path('ticketBrowse')}}">
-								<img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="">
-								<div class="card-img-overlay d-flex flex-column justify-content-end">
-									<h3 class="card-title text-white mb-0">PASS 3 JOURS</h3>
-								</div>
-							</a>
-						</div>
-					</div>
-
-					<!-- Ticket 2 -->
-					<div class="home-ticket col-md-3 mb-4">
-						<div class="card img-zoom">
-							<a href="{{path('ticketBrowse')}}">
-								<img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="">
-								<div class="card-img-overlay d-flex flex-column justify-content-end">
-									<h3 class="card-title text-white mb-0">PASS 2 JOURS</h3>
-								</div>
-							</a>
-						</div>
-					</div>
-
-					<!-- Ticket 3 -->
-					<div class="home-ticket col-md-3">
-						<div class="card img-zoom">
-							<a href="{{path('ticketBrowse')}}">
-								<img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="">
-								<div class="card-img-overlay d-flex flex-column justify-content-end">
-									<h3 class="card-title text-white mb-0">PASS 1 JOURS</h3>
-								</div>
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<!-- Link to the ticket shop -->
-				<div class="text-center position-relative d-flex align-items-center justify-content-center">
-					<a href="{{path('ticketBrowse')}}" class="btn btn-primary light-yellow-bg dark-blue-txt">Billetterie</a>
-				</div>
+			<!-- Link to the Line-Up page -->
+			<div class="home-programming-slide-link text-center mt-3">
+				<a href="{{path('app_artist_browse')}}" class="btn btn-primary light-yellow-bg dark-blue-txt">Toute la programmation</a>
 			</div>
 		</div>
-	</main>
+
+
+		<!-- Ticket Shop -->
+		<div class="container-home-ticketing d-flex flex-column">
+
+			<h2 class="home-ticket-title py-5 px-5 medium-blue-bg text-white">
+				Billetterie
+			</h2>
+
+			<div
+				class="home-ticket-list row justify-content-around mx-3 mb-4 mt-3">
+				<!-- Ticket 1 -->
+				<div class="home-ticket col-md-3 mb-4">
+					<div class="card img-zoom">
+						<a href="{{path('ticketBrowse')}}">
+							<img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="">
+							<div class="card-img-overlay d-flex flex-column justify-content-end">
+								<h3 class="card-title text-white mb-0">PASS 3 JOURS</h3>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<!-- Ticket 2 -->
+				<div class="home-ticket col-md-3 mb-4">
+					<div class="card img-zoom">
+						<a href="{{path('ticketBrowse')}}">
+							<img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="">
+							<div class="card-img-overlay d-flex flex-column justify-content-end">
+								<h3 class="card-title text-white mb-0">PASS 2 JOURS</h3>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<!-- Ticket 3 -->
+				<div class="home-ticket col-md-3">
+					<div class="card img-zoom">
+						<a href="{{path('ticketBrowse')}}">
+							<img src="{{asset('images/picture_test.jpg')}}" class="card-img-top" alt="">
+							<div class="card-img-overlay d-flex flex-column justify-content-end">
+								<h3 class="card-title text-white mb-0">PASS 1 JOURS</h3>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Link to the ticket shop -->
+			<div class="text-center position-relative d-flex align-items-center justify-content-center">
+				<a href="{{path('ticketBrowse')}}" class="btn btn-primary light-yellow-bg dark-blue-txt">Billetterie</a>
+			</div>
+		</div>
+	</div>
 {% endblock %}

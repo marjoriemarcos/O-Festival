@@ -9,15 +9,14 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class MainController extends AbstractController
 {
-    #[Route('/', name: 'home_front')]
-    public function home_front(ArtistRepository $artistRepository): Response
+    #[Route('/', name: 'app_main_home')]
+    public function home(ArtistRepository $artistRepository): Response
     {
         // Récupérer tous les artistes à partir du référentiel
-        $artistList = $artistRepository->findArtistsWithSlots();
+        $artistBrowse = $artistRepository->findAllArtistsWithSlot();
 
         return $this->render('front/main/home.html.twig', [
-            'controller_name' => 'MainController',
-            'artistList' => $artistList
+            'artistBrowse' => $artistBrowse
         ]);
     }
 }

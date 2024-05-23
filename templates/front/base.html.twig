@@ -46,12 +46,12 @@
 				class="header roboto-font  text-white">
 				<!--Navbar-->
 				<nav class="navbar dark-blue-bg px-5">
-					<a class="navbar-brand navbar-logo" href="{{path('home_front')}}">
+					<a class="navbar-brand navbar-logo" href="{{path('app_main_home')}}">
 						<img src="{{ asset('images/logoNav.png') }}" alt="Logo de O'Festival" class="img-fluid">
 					</a>
 					<ul class="nav-menu dark-blue-bg">
 						<li class="nav-item me-5">
-							<a href="{{path('lineupBrowse')}}" class="nav-link">Programmation</a>
+							<a href="{{path('app_artist_browse')}}" class="nav-link">Programmation</a>
 						</li>
 						<li class="nav-item me-5">
 							<a href="{{path('ticketBrowse')}}" class="nav-link">Billetterie</a>
@@ -67,9 +67,9 @@
 					</div>
 				</nav>
 			</header>
-
-			{% block main %}{% endblock %}
-
+			<main>
+				{% block main %}{% endblock %}
+			</main>
 
 			<!--Footer-->
 			<footer>
