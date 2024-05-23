@@ -36,6 +36,7 @@ class LineupController extends AbstractController
                         throw $this->createNotFoundException('Le jour spécifié est invalide.');
             }
         }
+
         $date = $days[$id];
         $lineUpListList = $slotRepository->findAllSlotWithArtistAndGenreAndStageByDay($date);
 
@@ -54,11 +55,13 @@ class LineupController extends AbstractController
         ]);
     }
 
-    // #[Route('/programmation/artiste/{id<\d+>}', name: 'artistRead', methods: ['GET'])]
-    // public function artistRead(Artist $article): Response
-    // {
-    //     return $this->render('front/lineup/artist.html.twig', [
-    //         'controller_name' => 'LineupController',
-    //     ]);
-    // }
+    #[Route('/programmation/artiste/{id<\d+>}', name: 'artistRead', methods: ['GET'])]
+    public function artistRead(SlotRepository $slotRepository, $id): Response
+    {
+        $artist = $slotRepository->findArtistWithSlotAndGenreAndStage($id);
+        dump($artist);
+        return $this->render('front/lineup/artist.html.twig', [
+            'artist' => $artist,
+        ]);
+    }
 }

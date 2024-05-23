@@ -54,7 +54,7 @@ class AppFixtures extends Fixture
                 ->setName($faker->unique()->singerName())
                 ->setDescription($faker->text())
                 ->setPicture($faker->imageUrl())
-                ->setVideo($faker->youtubeUri())
+                ->setVideo('https://www.youtube.com/embed/UvEwfQvVSGg?si=ZSXsQd_1zxTxu6jX')
                 ->setPicture($faker->imageUrl())
                 ->setCreatedAt(new DateTimeImmutable('now', $timezone));
             for ($j = 1; $j <= mt_rand(1, 2); $j++) {

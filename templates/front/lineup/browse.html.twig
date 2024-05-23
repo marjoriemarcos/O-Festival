@@ -85,7 +85,7 @@
                         
                     <div class="line-up-artist col-md-4 col-12 mb-3">
                         <div class="card img-zoom">
-                            <a href="#">
+                            <a href="{{ path('artistRead', {id: lineUp.id}) }}">
                                 <img src="{{lineUp.picture}}" class="card-img-top" alt="Artist 1">
                                 <div class="card-img-overlay d-flex flex-column justify-content-end">
                                     <h3 class="card-title text-white mb-0">{{lineUp.name}}</h3>

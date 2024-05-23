@@ -76,25 +76,30 @@ class SlotRepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();
     }
 
-    public function findAllSlotWithArtistAndGenreAndStageByStage($stage): array
+    public function findArtistWithSlotAndGenreAndStage($artist): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-            SELECT artist.*, genre.name AS genreName, stage.name AS stageName, slot.*
+            SELECT artist.*,
+            GROUP_CONCAT(genre.name SEPARATOR ", ") AS genres,
+            slot.id AS slot_id,
+            slot.date,
+            stage.name AS stage_name
             FROM artist
-            INNER JOIN genre_artist
+            INNER JOIN genre_artist 
             ON artist.id = genre_artist.artist_id
-            INNER JOIN genre
+            INNER JOIN genre 
             ON genre.id = genre_artist.genre_id
-            INNER JOIN slot
+            INNER JOIN slot 
             ON artist.id = slot.artist_id
-            INNER JOIN stage
+            INNER JOIN stage 
             ON stage.id = slot.stage_id
-            WHERE stage.id :stage
+            WHERE artist.id = :artist
+            GROUP BY artist.id, slot.id
             ';
 
-        $resultSet = $conn->executeQuery($sql, ['stage' => $stage]);
+        $resultSet = $conn->executeQuery($sql, ['artist' => $artist]);
 
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();
