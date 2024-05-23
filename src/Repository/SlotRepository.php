@@ -46,16 +46,16 @@ class SlotRepository extends ServiceEntityRepository
     }
 
 
-    public function findAllSlotWithArtistAndGenreAndStageByDay($date): array
+    public function findAllSlotWithArtistAndGenreAndStageByParams($date = null, $genre = null, $stage = null): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
             SELECT artist.*,
-            GROUP_CONCAT(genre.name SEPARATOR ", ") AS genres,
-            slot.id AS slot_id,
-            slot.date,
-            stage.name AS stage_name
+                   GROUP_CONCAT(genre.name SEPARATOR ", ") AS genres,
+                   slot.id AS slot_id,
+                   slot.date,
+                   stage.name AS stage_name
             FROM artist
             INNER JOIN genre_artist 
             ON artist.id = genre_artist.artist_id
@@ -65,13 +65,37 @@ class SlotRepository extends ServiceEntityRepository
             ON artist.id = slot.artist_id
             INNER JOIN stage 
             ON stage.id = slot.stage_id
-            WHERE slot.date = :date
-            GROUP BY artist.id, slot.id
+        ';
+    
+        $conditions = [];
+        $params = [];
+    
+        if ($date !== null) {
+            $conditions[] = 'slot.date = :date';
+            $params['date'] = $date;
+        }
+    
+        if ($genre !== null) {
+            $conditions[] = 'genre.name = :genre';
+            $params['genre'] = $genre;
+        }
+    
+        if ($stage !== null) {
+            $conditions[] = 'stage.name = :stage';
+            $params['stage'] = $stage;
+        }
+    
+        if (count($conditions) > 0) {
+            $sql .= ' WHERE ' . implode(' AND ', $conditions);
+        }
+    
+        $sql .= '
+            GROUP BY artist.id, slot.id, slot.date, stage.name
             ORDER BY artist.name ASC
-            ';
-
-        $resultSet = $conn->executeQuery($sql, ['date' => $date]);
-
+        ';
+    
+        $resultSet = $conn->executeQuery($sql, $params);
+    
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();
     }
