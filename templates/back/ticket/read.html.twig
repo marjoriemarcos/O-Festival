@@ -1,12 +1,12 @@
 {% extends "back/base.html.twig" %}
 
-{% block title%}Billet X{% endblock %}
+{% block title%}Ticket {{ticket.title}}{% endblock %}
 
 {% block main%}
 
 <main>
     <div class="container">
-      <h2 class="text-center my-5 fw-bold display-5">Détails du Ticket</h2>
+      <h2 class="text-center my-5 fw-bold display-5">Détails du Ticket {{ticket.title}}</h2>
       <div class="container mt-5">
         <div class="row justify-content-center">
           <!-- Ticket Card -->
@@ -18,7 +18,7 @@
               <!-- Title Card -->
               <div class="card-header d-flex justify-content-between align-items-center">
                 <span class="fs-2 fw-bold">
-                  <i class="bi bi-ticket me-2"></i>Pass 1 Jour | Vendredi | Plein Tarif
+                  <i class="bi bi-ticket me-2"></i>{{ticket.title}}
                 </span>
                 <div class="d-flex">
                   <a href="#" class="btn btn-warning me-2 bi bi-pencil"></a>
@@ -33,31 +33,25 @@
                 <div class="d-flex align-items-center mt-3">
                   <i class="bi bi-clock me-2" style="font-size: 1.5rem;"></i>
                   <h6 class="fw-bold mb-0">Durée :</h6>
-                  <p class="mb-0 ms-2">1 Jour</p>
-                </div>
-                <!-- Days -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-calendar-date me-2" style="font-size: 1.5rem;"></i>
-                  <h6 class="fw-bold mb-0">Jours :</h6>
-                  <p class="mb-0 ms-2">Vendredi</p>
-                </div>
+                  <p class="mb-0 ms-2">{{ticket.startAt | date('d/m/Y')}} au {{ticket.endAt | date('d/m/Y')}}</p>
+                </div>               
                 <!-- Fee -->
                 <div class="d-flex align-items-center mt-3">
                   <i class="bi bi-person-badge me-2" style="font-size: 1.5rem;"></i>
                   <h6 class="fw-bold mb-0">Type de Forfait :</h6>
-                  <p class="mb-0 ms-2">Plein Tarif</p>
+                  <p class="mb-0 ms-2">{{ticket.fee}}</p>
                 </div>
                 <!-- Price -->
                 <div class="d-flex align-items-center mt-3">
                   <i class="bi bi-currency-euro me-2" style="font-size: 1.5rem;"></i>
                   <h6 class="fw-bold mb-0">Prix :</h6>
-                  <p class="mb-0 ms-2">80 €</p>
+                  <p class="mb-0 ms-2">{{ticket.price}}</p>
                 </div>
                 <!-- Quantity -->
                 <div class="d-flex align-items-center mt-3">
                   <i class="bi bi-box-seam me-2" style="font-size: 1.5rem;"></i>
                   <h6 class="fw-bold mb-0">Quantité :</h6>
-                  <p class="mb-0 ms-2">100</p>
+                  <p class="mb-0 ms-2">{{ticket.quantity}}</p>
                 </div>
               </div>
             </div>
