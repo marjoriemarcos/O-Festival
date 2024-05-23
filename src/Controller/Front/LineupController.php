@@ -15,7 +15,7 @@ class LineupController extends AbstractController
     {
 
         // Récupérer tous les artistes à partir du référentiel
-        $artistList = $artistRepository->findAllArtists();
+        $artistList = $artistRepository->findArtistsWithSlots();
 
         return $this->render('front/lineup/index.html.twig', [
             'controller_name' => 'LineupController',
@@ -26,7 +26,6 @@ class LineupController extends AbstractController
     #[Route('/programmation/artiste/{id}', name: 'artistRead', requirements: ['id' => '\d+'])]
     public function artistRead(Artist $artist): Response
     {
-
         return $this->render('front/lineup/artist.html.twig', [
             "artist" => $artist
         ]);
