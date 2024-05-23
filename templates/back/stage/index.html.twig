@@ -21,10 +21,11 @@
               <div class="card-body">
                 <ul class="list-group list-group-flush">
                   <!-- Stage -->
+                  {% for stage in stageList %}
                   <li class="list-group-item">
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="d-flex align-items-center">
-                        <h6 class="fw-bold mb-0">Scène 1</h6>
+                        <h6 class="fw-bold mb-0">{{stage.name}}</h6>
                       </div>
                       <div class="d-flex">
                         <a href="#" class="btn btn-warning bi bi-pencil me-2"></a>
@@ -34,34 +35,7 @@
                       </div>
                     </div>
                   </li>
-                  <!-- Stage -->
-                  <li class="list-group-item">
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="d-flex align-items-center">
-                        <h6 class="fw-bold mb-0">Scène 2</h6>
-                      </div>
-                      <div class="d-flex">
-                        <a href="#" class="btn btn-warning bi bi-pencil me-2"></a>
-                        <form action="#" method="post">
-                          <button onclick="return confirm('Souhaitez-vous supprimer cette scène?');" type="submit" class="btn btn-danger bi bi-trash"></button>
-                        </form>
-                      </div>
-                    </div>
-                  </li>
-                  <!-- Stage -->
-                  <li class="list-group-item">
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="d-flex align-items-center">
-                        <h6 class="fw-bold mb-0">Scène 3</h6>
-                      </div>
-                      <div class="d-flex">
-                        <a href="#" class="btn btn-warning bi bi-pencil me-2"></a>
-                        <form action="#" method="post">
-                          <button onclick="return confirm('Souhaitez-vous supprimer cette scène ?');" type="submit" class="btn btn-danger bi bi-trash"></button>
-                        </form>
-                      </div>
-                    </div>
-                  </li>                  
+                  {% endfor %}
                 </ul>
               </div>
             </div>
