@@ -1,208 +1,110 @@
 {% extends 'front/base.html.twig' %}
 
-{% block title %}Programmation{% endblock %}
+{% block title %}Programmation
+{% endblock %}
 
 {% block main %}
-    <main>
-        <div class="container-line-up medium-blue-bg">
-            <h2 class="page-title adumu-font">Programmation</h2>
+	<main>
+		<div class="container-line-up medium-blue-bg">
+			<h2 class="page-title adumu-font">Programmation</h2>
 
 
-            <div class="line-up-sorting px-5">
-                <div class="row gx-3">
+			<div class="line-up-sorting px-5">
+				<div
+					class="row gx-3">
 
-                    <!-- Sort per day -->
-                    <div class="line-up-sorting col-md-12">
-                        <ul class="list-inline">
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-secondary btn-day dark-yellow-bg px-4 mr-2 mb-2">Tous les
-                                    jours</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-secondary btn-day dark-yellow-bg px-4 mr-2 mb-2">J1</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-secondary btn-day dark-yellow-bg px-4 mr-2 mb-2">J2</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-secondary btn-day dark-yellow-bg px-4 mb-2">J3</a>
-                            </li>
-                        </ul>
-                    </div>
+					<!-- Sort per day -->
+					<div class="line-up-sorting col-md-12">
+						<ul class="list-inline">
+							<li class="list-inline-item">
+								<a href="#" class="btn btn-secondary btn-day dark-yellow-bg px-4 mr-2 mb-2">Tous les
+																		                                    jours</a>
+							</li>
+							<li class="list-inline-item">
+								<a href="#" class="btn btn-secondary btn-day dark-yellow-bg px-4 mr-2 mb-2">J1</a>
+							</li>
+							<li class="list-inline-item">
+								<a href="#" class="btn btn-secondary btn-day dark-yellow-bg px-4 mr-2 mb-2">J2</a>
+							</li>
+							<li class="list-inline-item">
+								<a href="#" class="btn btn-secondary btn-day dark-yellow-bg px-4 mb-2">J3</a>
+							</li>
+						</ul>
+					</div>
 
-                    <!-- Sort per stage -->
-                    <div class="line-up-sorting col-md-12">
-                        <ul class="list-inline">
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-secondary btn-stage light-green-bg px-4 mr-2 mb-2">Toutes les
-                                    scènes</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-secondary btn-stage light-green-bg px-4 mr-2 mb-2">Scène
-                                    1</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-secondary btn-stage light-green-bg px-4 mr-2 mb-2">Scène
-                                    2</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-secondary btn-stage light-green-bg px-4 mb-2">Scène 3</a>
-                            </li>
-                        </ul>
-                    </div>
+					<!-- Sort per stage -->
+					<div class="line-up-sorting col-md-12">
+						<ul class="list-inline">
+							<li class="list-inline-item">
+								<a href="#" class="btn btn-secondary btn-stage light-green-bg px-4 mr-2 mb-2">Toutes les
+																		                                    scènes</a>
+							</li>
+							<li class="list-inline-item">
+								<a href="#" class="btn btn-secondary btn-stage light-green-bg px-4 mr-2 mb-2">Scène
+																		                                    1</a>
+							</li>
+							<li class="list-inline-item">
+								<a href="#" class="btn btn-secondary btn-stage light-green-bg px-4 mr-2 mb-2">Scène
+																		                                    2</a>
+							</li>
+							<li class="list-inline-item">
+								<a href="#" class="btn btn-secondary btn-stage light-green-bg px-4 mb-2">Scène 3</a>
+							</li>
+						</ul>
+					</div>
 
-                    <!-- Sort per genre -->
-                    <div class="line-up-sorting col-md-12">
-                        <ul class="list-inline">
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4 mr-2 mb-2">Touts les
-                                    genres</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4 mr-2 mb-2">Électro</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4 mr-2 mb-2">Pop</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4 mb-2">Rock</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4 mb-2">Rap</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+					<!-- Sort per genre -->
+					<div class="line-up-sorting col-md-12">
+						<ul class="list-inline">
+							<li class="list-inline-item">
+								<a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4 mr-2 mb-2">Touts les
+																		                                    genres</a>
+							</li>
+							<li class="list-inline-item">
+								<a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4 mr-2 mb-2">Électro</a>
+							</li>
+							<li class="list-inline-item">
+								<a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4 mr-2 mb-2">Pop</a>
+							</li>
+							<li class="list-inline-item">
+								<a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4 mb-2">Rock</a>
+							</li>
+							<li class="list-inline-item">
+								<a href="#" class="btn btn-secondary btn-genre light-blue-bg px-4 mb-2">Rap</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- Artist List-->
+			<div class="line-up-artists-list px-5">
+				<div class="row gx-3">
+					{% for artist in artistList %}
+						<div class="line-up-artist col-md-4 col-12 mb-3">
+							<div class="card img-zoom">
+								<a href="{{ path('artistRead', {'id': artist.id}) }}">
+									<img src="{{ artist.picture }}" class="card-img-top" alt="{{ artist.name }}">
+									<div class="card-img-overlay d-flex flex-column justify-content-end">
+										<h3 class="card-title text-white mb-0">{{ artist.name }}</h3>
+										<p class="card-text text-white">
+											{{ artist.slot ? artist.slot.getFormattedDate() : 'Date non disponible' }}
+											{% if artist.genres is not empty %}
+												-
+												{{ artist.genres|map(genre => genre.name)|join(' - ') }}
+											{% endif %}
+										</p>
+									</div>
+								</a>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
 
-
-            <!-- Artist List-->
-            <div class="line-up-artists-list px-5">
-                <div class="row gx-3">
-
-                    <!-- Artist 1 -->
-                    <div class="line-up-artist col-md-4 col-12 mb-3">
-                        <div class="card img-zoom">
-                            <a href="{{path('artistRead')}}">
-                                <img src="../images/picture_test.jpg" class="card-img-top" alt="Artist 1">
-                                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                    <h3 class="card-title text-white mb-0">Artiste 1</h3>
-                                    <p class="card-text text-white">Jour 1 - POP</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Artist 2 -->
-                    <div class="line-up-artist col-md-4 col-12 mb-3">
-                        <div class="card img-zoom">
-                            <a href="{{path('artistRead')}}">
-                                <img src="../images/picture_test.jpg" class="card-img-top" alt="">
-                                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                    <h3 class="card-title text-white mb-0">Artiste 2</h3>
-                                    <p class="card-text text-white">Jour 2 - ROCK</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Artist 3 -->
-                    <div class="line-up-artist col-md-4 col-12 mb-3">
-                        <div class="card img-zoom">
-                            <a href="{{path('artistRead')}}">
-                                <img src="../images/picture_test.jpg" class="card-img-top" alt="">
-                                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                    <h3 class="card-title text-white mb-0">Artiste 3</h3>
-                                    <p class="card-text text-white">Jour 3 - ELECTRO</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Artist 4 -->
-                    <div class="line-up-artist col-md-4 col-12 mb-3">
-                        <div class="card img-zoom">
-                            <a href="{{path('artistRead')}}">
-                                <img src="../images/picture_test.jpg" class="card-img-top" alt="Artist 1">
-                                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                    <h3 class="card-title text-white mb-0">Artiste 1</h3>
-                                    <p class="card-text text-white">Jour 1 - POP</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Artist 5 -->
-                    <div class="line-up-artist col-md-4 col-12 mb-3">
-                        <div class="card img-zoom">
-                            <a href="{{path('artistRead')}}">
-                                <img src="../images/picture_test.jpg" class="card-img-top" alt="">
-                                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                    <h3 class="card-title text-white mb-0">Artiste 2</h3>
-                                    <p class="card-text text-white">Jour 2 - ROCK</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Artist 6 -->
-                    <div class="line-up-artist col-md-4 col-12 mb-3">
-                        <div class="card img-zoom">
-                            <a href="{{path('artistRead')}}">
-                                <img src="../images/picture_test.jpg" class="card-img-top" alt="">
-                                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                    <h3 class="card-title text-white mb-0">Artiste 3</h3>
-                                    <p class="card-text text-white">Jour 3 - ELECTRO</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Artist 7 -->
-                    <div class="line-up-artist col-md-4 col-12 mb-3">
-                        <div class="card img-zoom">
-                            <a href="{{path('artistRead')}}">
-                                <img src="../images/picture_test.jpg" class="card-img-top" alt="Artist 1">
-                                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                    <h3 class="card-title text-white mb-0">Artiste 1</h3>
-                                    <p class="card-text text-white">Jour 1 - POP</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Artist 8 -->
-                    <div class="line-up-artist col-md-4 col-12 mb-3">
-                        <div class="card img-zoom">
-                            <a href="{{path('artistRead')}}">
-                                <img src="../images/picture_test.jpg" class="card-img-top" alt="">
-                                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                    <h3 class="card-title text-white mb-0">Artiste 2</h3>
-                                    <p class="card-text text-white">Jour 2 - ROCK</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Artist 9 -->
-                    <div class="line-up-artist col-md-4 col-12 mb-3">
-                        <div class="card img-zoom">
-                            <a href="{{path('artistRead')}}">
-                                <img src="../images/picture_test.jpg" class="card-img-top" alt="">
-                                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                    <h3 class="card-title text-white mb-0">Artiste 3</h3>
-                                    <p class="card-text text-white">Jour 3 - ELECTRO</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Link to the Ticketing Page -->
-            <div class="text-center position-relative d-flex align-items-center justify-content-center">
-                <a href="{{path('ticketBrowse')}}" class="btn btn-primary light-yellow-bg dark-blue-txt">Billetterie</a>
-            </div>
-        </div>
-    </main>
+			<!-- Link to the Ticketing Page -->
+			<div class="text-center position-relative d-flex align-items-center justify-content-center">
+				<a href="{{path('ticketBrowse')}}" class="btn btn-primary light-yellow-bg dark-blue-txt">Billetterie</a>
+			</div>
+		</div>
+	</main>
 {% endblock %}
