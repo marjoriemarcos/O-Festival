@@ -132,6 +132,12 @@ class AppFixtures extends Fixture
                     'price' => 180
                 ],
                 [
+                    'title' => 'Pass 2J',
+                    'start' => new DateTimeImmutable('2024-08-24'),
+                    'end' => new DateTimeImmutable('2024-08-25'),
+                    'price' => 180
+                ],
+                [
                     'title' => 'Pass 3J',
                     'start' => new DateTimeImmutable('2024-08-23'),
                     'end' => new DateTimeImmutable('2024-08-25'),
@@ -161,6 +167,12 @@ class AppFixtures extends Fixture
                     'title' => 'Pass 2J',
                     'start' => new DateTimeImmutable('2024-08-23'),
                     'end' => new DateTimeImmutable('2024-08-24'),
+                    'price' => 150
+                ],
+                [
+                    'title' => 'Pass 2J',
+                    'start' => new DateTimeImmutable('2024-08-24'),
+                    'end' => new DateTimeImmutable('2024-08-25'),
                     'price' => 150
                 ],
                 [
@@ -196,6 +208,12 @@ class AppFixtures extends Fixture
                     'price' => 0
                 ],
                 [
+                    'title' => 'Pass 2J',
+                    'start' => new DateTimeImmutable('2024-08-24'),
+                    'end' => new DateTimeImmutable('2024-08-25'),
+                    'price' => 0
+                ],
+                [
                     'title' => 'Pass 3J',
                     'start' => new DateTimeImmutable('2024-08-23'),
                     'end' => new DateTimeImmutable('2024-08-25'),
@@ -225,7 +243,7 @@ class AppFixtures extends Fixture
             $ticket->setTitle($type . ' ' . $title . ' ' . $startDate->format('d-m-Y') . ' ' . $endDate->format('d-m-Y'));
             $ticket->setFee($type . ' ' . $title . ' ' . $price);
             $ticket->setCreatedAt(new DateTimeImmutable('now', $timezone));
-            $ticket->setCustomer($customerList[array_rand($customerList)]);
+            $ticket->addCustomer($customerList[array_rand($customerList)]);
             $ticket->setStartAt($startDate);
             $quantity = mt_rand(0, 10);
             $ticket->setQuantity($quantity);

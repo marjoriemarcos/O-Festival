@@ -46,7 +46,7 @@ class Customer
     /**
      * @var Collection<int, Ticket>
      */
-    #[ORM\OneToMany(targetEntity: Ticket::class, mappedBy: 'customer')]
+    #[ORM\ManyToMany(targetEntity: Ticket::class, inversedBy: 'customers')]
     private Collection $tickets;
 
     public function __construct()
@@ -179,7 +179,6 @@ class Customer
     {
         if (!$this->tickets->contains($ticket)) {
             $this->tickets->add($ticket);
-            $ticket->setCustomer($this);
         }
 
         return $this;
@@ -187,13 +186,9 @@ class Customer
 
     public function removeTicket(Ticket $ticket): static
     {
-        if ($this->tickets->removeElement($ticket)) {
-            // set the owning side to null (unless already changed)
-            if ($ticket->getCustomer() === $this) {
-                $ticket->setCustomer(null);
-            }
-        }
+        $this->tickets->removeElement($ticket);
 
         return $this;
     }
+
 }
