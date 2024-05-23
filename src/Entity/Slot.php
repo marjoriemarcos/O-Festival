@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\SlotRepository;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use IntlDateFormatter;
 
 #[ORM\Entity(repositoryClass: SlotRepository::class)]
 class Slot
@@ -33,6 +35,30 @@ class Slot
     #[ORM\ManyToOne(inversedBy: 'slots')]
     private ?Stage $stage = null;
 
+    /**
+     * Formate la date au format "Jeudi 23 Mai 2024"
+     *
+     * @return string|null
+     */
+    public function getFormattedDate(): ?string
+    {
+        // Vérifier si la date est définie
+        if ($this->date !== null) {
+            // Créer un objet DateTime à partir du timestamp de la date
+            $dateTime = new DateTime('@' . $this->date->getTimestamp());
+            
+            // Créer un formateur de date avec la locale française
+            $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
+            
+            // Formater la date selon le format souhaité
+            $formattedDate = $formatter->format($dateTime);
+            
+            return $formattedDate;
+        } else {
+            return null;
+        }
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
