@@ -282,7 +282,7 @@ body {
     font-size: 2.5rem;
 }
 .ticket-card-content{
- font-size: 1.5rem;
+    font-size: 1.5rem;
 }
 .ticket-card-content .btn{
     width: 75%;
@@ -502,6 +502,10 @@ body {
     .btn{
         width: 80%;
     }
+    .artist-informations-genre{
+        width: auto;
+    }
+
     .line-up-sorting .btn{
         width: auto;
     }
@@ -518,6 +522,9 @@ body {
     .nav-links{
         display: flex;
         flex-direction: column
+    }
+    .container-artist{
+        padding: 0;
     }
 }
 
