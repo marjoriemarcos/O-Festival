@@ -29,14 +29,22 @@
                   </thead>
                   <tbody>
                     <!-- Customers -->
+                    <!-- Loop through customerList and display them -->
+                    {% for customer in customerList %}
                     <tr>
-                      <td>Dupont</td>
-                      <td>Jean</td>
-                      <td>Pass 1 Jour, Pass 2 Jours</td>
+                      <td>{{customer.lastname}}</td>
+                      <td>{{customer.firstname}}</td> 
+                      <td>                     
+                      {% for ticket in customer.getTickets %}
+                      <li>{{ ticket.Title }}</li>
+                            {% else %}
+                       <li>Ce client n'a pas acheté de tickets</li>
+                      {% endfor %} 
+                        </td>                 
                       <td>
                         <div class="d-flex">
                           <!-- Action buttons -->
-                          <a href="{{path('customerRead')}}" class="btn btn-primary bi bi-search me-2"></a>
+                          <a href="{{path('customerRead', {id: customer.id})}}" class="btn btn-primary bi bi-search me-2"></a>
                           <form action="#" method="post">
                             <button onclick="return confirm('Souhaitez-vous supprimer ce client ?');" type="submit"
                               class="btn btn-danger bi bi-trash"></button>
@@ -44,36 +52,7 @@
                         </div>
                       </td>
                     </tr>
-                    <tr>
-                      <td>Martin</td>
-                      <td>Sophie</td>
-                      <td>Pass 3 Jours</td>
-                      <td>
-                        <div class="d-flex">
-                          <!-- Action buttons -->
-                          <a href="{{path('customerRead')}}" class="btn btn-primary bi bi-search me-2"></a>
-                          <form action="#" method="post">
-                            <button onclick="return confirm('Souhaitez-vous supprimer ce client ?');" type="submit"
-                              class="btn btn-danger bi bi-trash"></button>
-                          </form>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Lefèvre</td>
-                      <td>Marie</td>
-                      <td>Pass 1 Jour</td>
-                      <td>
-                        <div class="d-flex">
-                          <!-- Action buttons -->
-                          <a href="{{path('customerRead')}}" class="btn btn-primary bi bi-search me-2"></a>
-                          <form action="#" method="post">
-                            <button onclick="return confirm('Souhaitez-vous supprimer ce client ?');" type="submit"
-                              class="btn btn-danger bi bi-trash"></button>
-                          </form>
-                        </div>
-                      </td>
-                    </tr>
+                    {% endfor %}                    
                   </tbody>
                 </table>
               </div>
