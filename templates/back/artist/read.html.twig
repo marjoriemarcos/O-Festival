@@ -1,6 +1,6 @@
 {% extends 'back/base.html.twig' %}
 
-{%block title%}Artiste X{%endblock%}
+{%block title%}{{artist.name}}{%endblock%}
 
 {% block main %}
   <main>
@@ -16,7 +16,7 @@
             <div class="card">
               <!-- Card title -->
               <div class="card-header d-flex justify-content-between align-items-center">
-                <span class="fs-2 fw-bold">Arthur</span>
+                <span class="fs-2 fw-bold">{{artist.name}}</span>
                 <div class="d-flex">
                   <a href="#" class="btn btn-warning me-2 bi bi-pencil"></a>
                   <form action="#" method="post">
@@ -27,72 +27,54 @@
               </div>
               <div class="card-body">
                 <!-- Artist picture -->
-                <img src="{{asset('images/chanteur.jpg')}}" alt="Image de l'artiste Arthur" class="card-img-top"
+                <img src="{{artist.picture}}" alt="Image de l'artiste {{artist.name}}" class="card-img-top"
                   style="width: 100%;">
                 <!-- Musical genres -->
-                <h6 class="fw-bold mt-4">Genres Musicaux</h6>
-                
-                <div class="my-2">
-                  <span class="badge bg-primary me-2">Pop</span>
-                  <span class="badge bg-secondary">Rock</span>
-                </div>
+                <h6 class="fw-bold mt-4">Genres Musicaux</h6>                
+                {% for genre in artist.genres %}
+                  <span class="badge bg-primary">{{ genre.name }}</span>
+                {% endfor %}
                 <!-- Description -->
                 <div class="mb-4">
                   <h6 class="fw-bold">Description</h6>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ipsam sed exercitationem quia.
-                    Placeat, rerum vel! Labore explicabo harum dolor numquam magni consectetur deleniti vitae eligendi
-                    sit, suscipit similique totam. Corrupti voluptatum, maxime est at quasi quisquam commodi doloribus
-                    vero! Non perferendis earum pariatur, nam provident voluptates dicta sequi eligendi ex aspernatur
-                    iusto quisquam maiores unde eveniet ut id itaque sed dolorum voluptas? Hic, quos eaque iure alias
-                    ea, ducimus doloremque molestiae quisquam similique, magnam nihil qui aut natus deleniti accusamus
-                    voluptatibus. Recusandae quis consequuntur similique voluptate rerum illo repellendus nostrum
-                    suscipit id, odit officiis eligendi quo minus consectetur nobis explicabo aperiam quod laborum
-                    repudiandae illum soluta dolore. Laboriosam eius molestias quas officia maiores impedit a optio ab
-                    inventore quis odio, modi rem nisi doloribus provident, ad velit mollitia, incidunt ex doloremque
-                    laudantium et cupiditate eos unde? Officiis mollitia corrupti harum vitae nostrum accusamus a beatae
-                    adipisci esse. Quibusdam, molestias.</p>
+                  <p>{{artist.description}}</p>
                 </div>
                 <!-- YouTube Video Link -->
                 <h6 class="fw-bold">Vidéo YouTube</h6>
                 <div class="my-2">
-                  <a href="https://youtu.be/UvEwfQvVSGg" target="_blank" class="badge bg-danger me-0">Vidéo</a>
+                  <a href="{{artist.video}}" target="_blank" class="badge bg-danger me-0">Vidéo</a>
                 </div>
                 <!-- Socials -->
                 <h6 class="fw-bold">Réseaux Sociaux</h6>
                 <div class="d-flex">
                   <ul class="list-inline mb-0">                    
                     <li class="list-inline-item">
-                      <a href="#">
+                      <a href="{{artist.website}}">
                         <i class="bi bi-globe fs-3 dark-blue-txt"></i>
                       </a>
                     </li>
                     <li class="list-inline-item">
-                      <a href="#">
+                      <a href="{{artist.spotify}}">
                         <i class="fa-brands fa-spotify fs-3 dark-blue-txt"></i>
                       </a>
                     </li>
                     <li class="list-inline-item">
-                      <a href="#">
+                      <a href="{{artist.facebook}}">
                         <i class="fa-brands fa-facebook fs-3 dark-blue-txt"></i>
                       </a>
                     </li>
                     <li class="list-inline-item">
-                      <a href="#">
+                      <a href="{{artist.instagram}}">
                         <i class="fa-brands fa-instagram fs-3 dark-blue-txt"></i>
                       </a>
                     </li>
                     <li class="list-inline-item">
-                      <a href="#">
-                        <i class="fa-brands fa-youtube fs-3 dark-blue-txt"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#">
+                      <a href="{{artist.snapchat}}">
                         <i class="fa-brands fa-snapchat fs-3 dark-blue-txt"></i>
                       </a>
                     </li>
                     <li class="list-inline-item">
-                      <a href="#">
+                      <a href="{{artist.tiktok}}">
                         <i class="fa-brands fa-tiktok fs-3 dark-blue-txt"></i>
                       </a>
                     </li>
