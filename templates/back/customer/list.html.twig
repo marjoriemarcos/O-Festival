@@ -30,7 +30,7 @@
                   <tbody>
                     <!-- Customers -->
                     <!-- Loop through customerList and display them -->
-                    {% for customer in customerList %}
+                    {# {% for customer in customerList %} 
                     <tr>
                       <td>{{customer.lastname}}</td>
                       <td>{{customer.firstname}}</td> 
@@ -44,7 +44,7 @@
                       <td>
                         <div class="d-flex">
                           <!-- Action buttons -->
-                          <a href="{{path('customerRead', {id: customer.id})}}" class="btn btn-primary bi bi-search me-2"></a>
+                          <a href="{{path('app_customer_read_admin', {id: customer.id})}}" class="btn btn-primary bi bi-search me-2"></a>
                           <form action="#" method="post">
                             <button onclick="return confirm('Souhaitez-vous supprimer ce client ?');" type="submit"
                               class="btn btn-danger bi bi-trash"></button>
@@ -52,7 +52,7 @@
                         </div>
                       </td>
                     </tr>
-                    {% endfor %}                    
+                    {% endfor %} #}               
                   </tbody>
                 </table>
               </div>

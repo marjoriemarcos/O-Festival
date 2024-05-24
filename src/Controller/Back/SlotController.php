@@ -9,19 +9,19 @@ use App\Repository\SlotRepository;
 
 class SlotController extends AbstractController
 {
-    #[Route('/back/slot_list', name: 'slotBrowse')]
-    public function slotBrowse(SlotRepository $slotRepository): Response
+    #[Route('/back/slot_list', name: 'app_slot_list_admin')]
+    public function list(SlotRepository $slotRepository): Response
     {
         // Fetch slots
         $slotList = $slotRepository->findAll();
 
-        return $this->render('back/slot/index.html.twig', [
+        return $this->render('back/slot/list.html.twig', [
             'slotList' => $slotList,
         ]);
     }
 
-    #[Route('/back/slot_list/{id}', name: 'slotRead')]
-    public function slotRead(int $id, SlotRepository $slotRepository): Response
+    #[Route('/back/slot_list/{id}', name:'app_slot_read_admin')]
+    public function read(int $id, SlotRepository $slotRepository): Response
     {
         // Fetch the slot by its ID
         $slot = $slotRepository->find($id);

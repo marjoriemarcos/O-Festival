@@ -47,7 +47,7 @@
 		<header>
 			<!-- Access to the front office -->
 			<div class="d-flex justify-content-end bg-secondary p-1">
-				<a class="btn btn-lg btn-primary" href="{{path('home_front')}}" role="button">Accéder au site</a>
+				<a class="btn btn-lg btn-primary" href="{{path('app_main_home')}}" role="button">Accéder au site</a>
 			</div>
 
 			<!-- Nav Bar -->
@@ -55,7 +55,7 @@
 				<div
 					class="container-fluid">
 					<!-- Website Logo -->
-					<a class="navbar-brand" href="{{path('home_back')}}">
+					<a class="navbar-brand" href="{{path('app_main_home_admin')}}">
 						<img src="{{asset('images/logoNav.png')}}" alt="O'Festival Logo" class="img-fluid w-25">
 					</a>
 					<!-- Collapse -->
@@ -74,7 +74,7 @@
 							<li class="nav-item dropdown mx-4">
 								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Créneaux</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item fs-4" href="{{path('slotBrowse')}}">Liste</a>
+									<a class="dropdown-item fs-4" href="{{path('app_slot_list_admin')}}">Liste</a>
 									<a class="dropdown-item fs-4" href="#">Ajouter</a>
 								</div>
 							</li>
@@ -82,7 +82,7 @@
 							<li class="nav-item dropdown mx-4">
 								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Artiste</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item fs-4" href="{{path('artistBackBrowse')}}">Liste</a>
+									<a class="dropdown-item fs-4" href="{{path('app_artist_list_admin')}}">Liste</a>
 									<a class="dropdown-item fs-4" href="#">Ajouter</a>
 								</div>
 							</li>
@@ -90,7 +90,7 @@
 							<li class="nav-item dropdown mx-4">
 								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Genre</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item fs-4" href="{{path('genreBrowse')}}">Liste</a>
+									<a class="dropdown-item fs-4" href="{{path('app_genre_list_admin')}}">Liste</a>
 									<a class="dropdown-item fs-4" href="#">Ajouter</a>
 								</div>
 							</li>
@@ -98,7 +98,7 @@
 							<li class="nav-item dropdown mx-4">
 								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Scène</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item fs-4" href="{{path('stageBrowse')}}">Liste</a>
+									<a class="dropdown-item fs-4" href="{{path('app_stage_list_admin')}}">Liste</a>
 									<a class="dropdown-item fs-4" href="#">Ajouter</a>
 								</div>
 							</li>
@@ -106,7 +106,7 @@
 							<li class="nav-item dropdown mx-4">
 								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Billet</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item fs-4" href="{{path('ticketBackBrowse')}}">Liste</a>
+									<a class="dropdown-item fs-4" href="{{path('app_ticket_list_admin')}}">Liste</a>
 									<a class="dropdown-item fs-4" href="#">Ajouter</a>
 								</div>
 							</li>
@@ -114,14 +114,14 @@
 							<li class="nav-item dropdown mx-4">
 								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Clients</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item fs-4" href="{{path('customerBrowse')}}">Liste</a>
+									<a class="dropdown-item fs-4" href="{{path('app_customer_list_admin')}}">Liste</a>
 								</div>
 							</li>
 							<!-- Dropdown Menu for Admins -->
 							<li class="nav-item dropdown mx-4">
 								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrateurs</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item fs-4" href="{{path('userBrowse')}}">Liste</a>
+									<a class="dropdown-item fs-4" href="{{path('app_user_list_admin')}}">Liste</a>
 								</div>
 							</li>
 						</ul>

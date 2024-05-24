@@ -9,19 +9,19 @@ use App\Repository\ArtistRepository;
 
 class ArtistController extends AbstractController
 {
-    #[Route('/back/artist_list', name: 'artistBackBrowse')]
-    public function artistBrowse(ArtistRepository $artistRepository): Response
+    #[Route('/back/artist_list', name: 'app_artist_list_admin')]
+    public function list(ArtistRepository $artistRepository): Response
     {
         // Fetch artists
         $artistList = $artistRepository->findAll();
 
-        return $this->render('back/artist/index.html.twig', [
+        return $this->render('back/artist/list.html.twig', [
             'artistList' => $artistList,
         ]);
     }
 
-    #[Route('/back/artist_list/{id}', name: 'artistBackRead')]
-    public function artistRead(int $id, ArtistRepository $artistRepository): Response
+    #[Route('/back/artist_list/{id}', name: 'app_artist_read_admin')]
+    public function read(int $id, ArtistRepository $artistRepository): Response
     {
         // Fetch the artist by its ID
         $artist = $artistRepository->find($id);

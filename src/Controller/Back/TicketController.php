@@ -9,18 +9,18 @@ use App\Repository\TicketRepository;
 
 class TicketController extends AbstractController
 {
-    #[Route('/back/ticket_list', name: 'ticketBackBrowse')]
-    public function ticketBrowse(TicketRepository $ticketRepository): Response
+    #[Route('/back/ticket_list', name: 'app_ticket_list_admin')]
+    public function list(TicketRepository $ticketRepository): Response
     {
         // Fetch tickets
         $ticketList = $ticketRepository->findAll();
-        return $this->render('back/ticket/index.html.twig', [
+        return $this->render('back/ticket/list.html.twig', [
             'ticketList' => $ticketList,
         ]);
     }
 
-    #[Route('/back/ticket_list/{id}', name: 'ticketBackRead')]
-    public function ticketRead(int $id, TicketRepository $ticketRepository): Response
+    #[Route('/back/ticket_list/{id}', name: 'app_ticket_read_admin')]
+    public function read(int $id, TicketRepository $ticketRepository): Response
     {
         // Fetch the ticket by its ID
         $ticket = $ticketRepository->find($id);

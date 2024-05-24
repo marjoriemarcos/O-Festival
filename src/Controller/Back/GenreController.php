@@ -9,12 +9,12 @@ use App\Repository\GenreRepository;
 
 class GenreController extends AbstractController
 {
-    #[Route('/back/genre_list', name: 'genreBrowse')]
-    public function genreBrowse(GenreRepository $genreRepository): Response
+    #[Route('/back/genre_list', name: 'app_genre_list_admin')]
+    public function list(GenreRepository $genreRepository): Response
     {
         // Fetch genres
         $genreList = $genreRepository->findAll();
-        return $this->render('back/genre/index.html.twig', [
+        return $this->render('back/genre/list.html.twig', [
             'genreList' => $genreList,
         ]);
     }
