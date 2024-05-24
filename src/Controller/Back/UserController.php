@@ -9,13 +9,13 @@ use App\Repository\UserRepository;
 
 class UserController extends AbstractController
 {
-    #[Route('/back/user_list', name: 'userBrowse')]
-    public function userBrowse(UserRepository $userRepository): Response
+    #[Route('/back/user_list', name: 'app_user_list_admin')]
+    public function list(UserRepository $userRepository): Response
     {
         // Fetch users with ROLE_ADMIN
         $adminList = $userRepository->findByRole('ROLE_ADMIN');
 
-        return $this->render('back/user/index.html.twig', [
+        return $this->render('back/user/list.html.twig', [
             'adminList' => $adminList,
         ]);}
 }

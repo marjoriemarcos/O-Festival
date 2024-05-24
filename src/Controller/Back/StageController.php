@@ -9,12 +9,12 @@ use App\Repository\StageRepository;
 
 class StageController extends AbstractController
 {
-    #[Route('/back/stage_list', name: 'stageBrowse')]
-    public function stageBrowse(StageRepository $stageRepository): Response
+    #[Route('/back/stage_list', name: 'app_stage_list_admin')]
+    public function list(StageRepository $stageRepository): Response
     {
         // Fetch stages
         $stageList = $stageRepository->findAll();
-        return $this->render('back/stage/index.html.twig', [
+        return $this->render('back/stage/list.html.twig', [
             'stageList' => $stageList,
         ]);
     }

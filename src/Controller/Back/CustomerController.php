@@ -9,19 +9,19 @@ use App\Repository\CustomerRepository;
 
 class CustomerController extends AbstractController
 {
-    #[Route('/back/customer_list', name: 'customerBrowse')]
-    public function customerBrowse(CustomerRepository $customerRepository): Response
+    #[Route('/back/customer_list', name: 'app_customer_list_admin')]
+    public function list(CustomerRepository $customerRepository): Response
     {
         // Fetch customers
-        $customerList = $customerRepository->findAll();
+        // $customerList = $customerRepository->findAll();
         
-        return $this->render('back/customer/index.html.twig', [
-            'customerList' => $customerList,
+        return $this->render('back/customer/list.html.twig', [
+            // 'customerList' => $customerList,
         ]);
     }
 
-    #[Route('/back/customer_list/{id}', name: 'customerRead')]
-    public function customerRead(int $id, CustomerRepository $customerRepository): Response
+    #[Route('/back/customer_list/{id}', name: 'app_customer_read_admin')]
+    public function read(int $id, CustomerRepository $customerRepository): Response
     {
         // Fetch the customer by its ID
         $customer = $customerRepository->find($id);
