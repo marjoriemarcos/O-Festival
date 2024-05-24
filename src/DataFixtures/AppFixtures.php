@@ -270,7 +270,7 @@ class AppFixtures extends Fixture
             $duration = $fee['duration'];
 
             $ticket->setTitle($type . ' ' . $title . ' ' . $startDate->format('d-m-Y') . ' ' . $endDate->format('d-m-Y'));
-            $ticket->setFee($type . ' ' . $title . ' ' . $price);
+            $ticket->setFee($type);
             $ticket->setCreatedAt(new DateTimeImmutable('now', $timezone));
             $ticket->addCustomer($customerList[array_rand($customerList)]);
             $ticket->setStartAt($startDate);
