@@ -54,14 +54,14 @@ class Ticket
     }
 
     /**
-     * Calculate the duration of the ticket in hours
+     * Calculate the duration of the ticket in day
      *
      * @return void
      */
-    public function calculateDuration() : void
+    public function calculateDuration() : int
     {
         $interval = $this->startAt->diff($this->endAt);
-        $this->setDuration($interval->h);
+        return $interval->h / 24;
     }
 
     public function getId(): ?int
