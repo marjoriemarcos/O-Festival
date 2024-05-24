@@ -39,9 +39,9 @@ class AppFixtures extends Fixture
 
         // Stage
         $stageList = [];
-        for ($i = 0; $i < 4; $i++) {
+        for ($i = 1; $i < 5; $i++) {
             $stage = (new Stage())
-                ->setName($faker->unique()->genreName())
+                ->setName('scene' . $i )
                 ->setCreatedAt(new DateTimeImmutable('now', $timezone));
             $manager->persist($stage);
             $stageList[] = $stage;
@@ -54,7 +54,7 @@ class AppFixtures extends Fixture
                 ->setName($faker->unique()->singerName())
                 ->setDescription($faker->text())
                 ->setPicture($faker->imageUrl())
-                ->setVideo($faker->youtubeUri())
+                ->setVideo('https://www.youtube.com/embed/UvEwfQvVSGg?si=ZSXsQd_1zxTxu6jX')
                 ->setPicture($faker->imageUrl())
                 ->setCreatedAt(new DateTimeImmutable('now', $timezone));
             for ($j = 1; $j <= mt_rand(1, 2); $j++) {
@@ -95,8 +95,9 @@ class AppFixtures extends Fixture
                 ->setLastname($faker->lastname())
                 ->setBirthdate($faker->dateTime())
                 ->setEmail($faker->email())
-                ->setPhoneNumber($faker->phoneNumber())
+                ->setPhoneNumber($faker->mobileNumber())
                 ->setPostcode($faker->postcode())
+                ->setAdress($faker->address())
                 ->setTown($faker->city())
                 ->setCreatedAt(new DateTimeImmutable('now', $timezone));
             $manager->persist($customer);
