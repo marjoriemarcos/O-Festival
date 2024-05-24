@@ -41,7 +41,7 @@ class AppFixtures extends Fixture
         $stageList = [];
         for ($i = 1; $i < 5; $i++) {
             $stage = (new Stage())
-                ->setName('scene' . $i )
+                ->setName('Scène' . " " . $i )
                 ->setCreatedAt(new DateTimeImmutable('now', $timezone));
             $manager->persist($stage);
             $stageList[] = $stage;
