@@ -126,6 +126,7 @@ body {
 }
 .hamburger {
     display: none;
+    
 }
 .bar {
     display: block;
@@ -425,7 +426,7 @@ body {
     }
 }
 
-@media only screen and (max-width: 1010px) {
+@media only screen and (max-width: 1040px) {
     .nav-menu {
         position: absolute;
         z-index: 999;
@@ -537,5 +538,14 @@ body {
     }
     .container-artist{
         padding: 0;
+    }
+}
+
+@media (max-width: 400px) {
+    .informations-content > h2 {
+        font-size: 30px;
+    }
+    .informations-content > p {
+        font-size: 13px;
     }
 }
