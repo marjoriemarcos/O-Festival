@@ -35,6 +35,9 @@ class Slot
     #[ORM\ManyToOne(inversedBy: 'slots')]
     private ?Stage $stage = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?string $day = null;
+
     /**
      * Formate la date au format "Jeudi 23 Mai 2024"
      *
@@ -132,6 +135,18 @@ class Slot
     public function setStage(?Stage $stage): static
     {
         $this->stage = $stage;
+
+        return $this;
+    }
+
+    public function getDay(): ?string
+    {
+        return $this->day;
+    }
+
+    public function setDay(?string $day): static
+    {
+        $this->day = $day;
 
         return $this;
     }
