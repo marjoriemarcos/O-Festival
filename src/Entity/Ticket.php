@@ -45,9 +45,23 @@ class Ticket
     #[ORM\ManyToMany(targetEntity: Customer::class, mappedBy: 'tickets')]
     private Collection $customers;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $duration = null;
+
     public function __construct()
     {
         $this->customers = new ArrayCollection();
+    }
+
+    /**
+     * Calculate the duration of the ticket in hours
+     *
+     * @return void
+     */
+    public function calculateDuration() : void
+    {
+        $interval = $this->startAt->diff($this->endAt);
+        $this->setDuration($interval->h);
     }
 
     public function getId(): ?int
@@ -174,6 +188,18 @@ class Ticket
         if ($this->customers->removeElement($customer)) {
             $customer->removeTicket($this);
         }
+
+        return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(?int $duration): static
+    {
+        $this->duration = $duration;
 
         return $this;
     }
