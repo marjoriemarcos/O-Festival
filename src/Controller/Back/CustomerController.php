@@ -12,11 +12,11 @@ class CustomerController extends AbstractController
     #[Route('/back/customer_list', name: 'app_customer_list_admin')]
     public function list(CustomerRepository $customerRepository): Response
     {
-        // Fetch customers
-        // $customerList = $customerRepository->findAll();
+        $customerList = $customerRepository->findAll();
         
         return $this->render('back/customer/list.html.twig', [
-            // 'customerList' => $customerList,
+        'customerList' => $customerList,
+
         ]);
     }
 

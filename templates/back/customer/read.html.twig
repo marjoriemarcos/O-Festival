@@ -50,7 +50,7 @@
                 <div class="d-flex align-items-center mt-3">
                   <i class="bi bi-geo-alt me-2"></i>
                   <h6 class="fw-bold mb-0">Adresse :</h6>
-                  <p class="mb-0 ms-2"></p>
+                  <p class="mb-0 ms-2">{{customer.adress}}</p>
                 </div>
                 <!-- Postcode -->
                 <div class="d-flex align-items-center mt-3">
@@ -68,13 +68,14 @@
                 <div class="d-flex align-items-center mt-3">
                   <i class="bi bi-ticket me-2"></i>
                   <h6 class="fw-bold mb-0">Tickets achetés :</h6>
-                  <p class="mb-0 ms-2">
+                  <p class="mb-0 ms-2"><ul>
                   {% for ticket in customer.getTickets %}
+
                       <li>{{ ticket.Title }}</li>
                   {% else %}
                   <li>Ce client n'a pas acheté de tickets</li>
                   {% endfor %}
-                  </p>
+                  </ul></p>
                 </div>
               </div>
             </div>
