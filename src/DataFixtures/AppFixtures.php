@@ -71,13 +71,22 @@ class AppFixtures extends Fixture
             '22 heures à minuit',
         ];
 
+        $dateDay = [
+            '2024-08-23' => 'J1',
+            '2024-08-24' => 'J2',
+            '2024-08-25' => 'J3',
+        ];
+
         $date = new DateTimeImmutable('2024-08-23');
+
         for ($l = 0; $l < 3; $l++) {
+            $day = $dateDay[$date->format('Y-m-d')];
             foreach ($hour as $hourValue) {
                 $slot = new Slot();
                 $slot->setDate($date);
                 $slot->setHour($hourValue);
-                //array_shift nous permet de prendre le premier element du tableau et de le supprimer une fois utilisée 
+                $slot->setDay($day);
+                //array_shift nous permet de prendre le premier element du tableau et de le supprimer une fois utilisée
                 $slot->setArtist(array_shift($artistList));
                 $slot->setStage($stageList[array_rand($stageList)]);
                 $slot->setCreatedAt(new DateTimeImmutable('now', $timezone));
