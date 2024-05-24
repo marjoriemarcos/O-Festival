@@ -15,8 +15,8 @@ class CustomerController extends AbstractController
         // Fetch customers
         $customerList = $customerRepository->findAll();
         
-        return $this->render('back/customer/index.html.twig', [
-            'customerList' => $customerList,
+        return $this->render('back/customer/list.html.twig', [
+             'customerList' => $customerList,
         ]);
     }
 
