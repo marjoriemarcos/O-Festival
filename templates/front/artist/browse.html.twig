@@ -103,8 +103,6 @@
 		</div>
 
 		<!-- Link to the Ticketing Page -->
-		<div class="text-center position-relative d-flex align-items-center justify-content-center">
-			<a href="{{path('app_ticket_browse')}}" class="btn btn-primary light-yellow-bg dark-blue-txt">Billetterie</a>
-		</div>
+		{{ include('front/fragments/_ticket_button.html.twig') }}
 	</div>
 {% endblock %}
