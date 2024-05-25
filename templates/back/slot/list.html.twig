@@ -1,6 +1,11 @@
 {% extends 'back/base.html.twig' %}
 
-{%block title%}Liste des créneaux{%endblock%}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/slotSort.js') }}"></script>
+{% endblock %}
+
+{% block title %}Liste des créneaux{% endblock %}
 
 {% block main %}
 <main>
@@ -11,20 +16,21 @@
         <div class="row justify-content-center">
           <!-- Sort per day -->
           <div class="col-md-8 mb-3">
-            <button class="btn btn btn-success fw-bold mb-2" type="button">Ajouter un créneau</button>
+            <a class="btn btn btn-success fw-bold mb-2" type="button" href="{{path('app_slot_new_admin')}}">Ajouter un créneau</a>
             <div class="d-flex">
-              <button class="btn btn-primary fw-bold me-2" type="button">Jour 1</button>
-              <button class="btn btn-primary fw-bold me-2" type="button">Jour 2</button>
-              <button class="btn btn-primary fw-bold" type="button">Jour 3</button>
+              <button class="btn btn-primary fw-bold me-2 filter-button selected" data-day="all" type="button">Tous les jours</button>
+              <button class="btn btn-primary fw-bold me-2 filter-button" data-day="J1" type="button">Jour 1</button>
+              <button class="btn btn-primary fw-bold me-2 filter-button" data-day="J2" type="button">Jour 2</button>
+              <button class="btn btn-primary fw-bold filter-button" data-day="J3" type="button">Jour 3</button>
             </div>
           </div>
           <!-- Slot card -->
           <div class="col-md-8">
             <div class="card">
               <!-- Card title -->        
-          <div class="card-header d-flex justify-content-between align-items-center">
-            <span class="fs-2 fw-bold">Jour 1</span>
-            </div>
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <span class="fs-2 fw-bold" id="table-title">Liste des créneaux</span>
+              </div>
               <div class="card-body">
                 <div class="table-responsive">
                   <table class="table table-bordered">
@@ -36,21 +42,18 @@
                         <th class="col-1"><i class="bi bi-gear me-2"></i> Actions</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="slots-table-body">
                       <!-- Slot -->
                       {% for slot in slotList %}
-                      <tr>
-                        <td>{{slot.hour}}</td>
-                        <td>{{slot.artist.name}}</td>
-                        <td>{{slot.stage.name}}</td>
+                      <tr data-day="{{ slot.day }}">
+                        <td>{{ slot.hour }}</td>
+                        <td>{{ slot.artist.name }}</td>
+                        <td>{{ slot.stage.name }}</td>
                         <td>
                           <div class="d-flex">
                             <!-- Action buttons -->
-                            <a href="{{path('app_slot_read_admin', {id: slot.id})}}" class="btn btn-primary bi bi-search me-2"></a>
-                            <form action="#" method="post">
-                              <button onclick="return confirm('Souhaitez-vous supprimer cette entrée ?');" type="submit"
-                                class="btn btn-danger bi bi-trash"></button>
-                            </form>
+                            <a href="{{ path('app_slot_read_admin', {id: slot.id}) }}" class="btn btn-primary bi bi-search me-2"></a>
+                            {{ include('back/slot/_delete_form.html.twig', {'slot': slot}) }}
                           </div>
                         </td>
                       </tr> 

@@ -1,0 +1,33 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}Éditer le billet {{ ticket.title }}{% endblock %}
+
+{% block main %}
+    <main>
+        <div class="container">
+            <h2 class="text-center my-5 fw-bold display-5">Éditer le billet</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <a href="{{ path('app_ticket_list_admin') }}" class="btn btn-primary fw-bold mb-4">
+                        <i class="bi bi-arrow-left"></i> Retour à la liste des billets
+                    </a>
+                    <div class="card">
+                        <!-- Card title -->
+                        <div class="card-header fs-2 fw-bold">
+                            <i class="bi bi-calendar3 me-2"></i>Éditer le billet
+                        </div>
+                        <div class="card-body">
+                            <!-- Include the form for editing a ticket -->
+                            {{ include('back/ticket/_form.html.twig', {'ticket': ticket, 'button_label': 'Mettre à jour'}) }}
+                        </div>
+                        <!-- Card footer (containing buttons) -->
+                        <div class="card-footer">
+                            <!-- Include the form for deleting a ticket -->
+                            {{ include('back/ticket/_delete_form.html.twig', {'ticket': ticket, 'button_label': 'Supprimer'}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

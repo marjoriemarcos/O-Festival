@@ -96,6 +96,11 @@ body {
    max-width: 300px;
 }
 
+.selected {
+    background-color: #007bff; 
+    color: white;
+  }
+
 /* .navbar {
     height: ;
 

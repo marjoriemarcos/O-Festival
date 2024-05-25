@@ -128,4 +128,19 @@ class SlotRepository extends ServiceEntityRepository
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();
     }
+
+        /**
+     * Retrieves slots for a specific day.
+     *
+     * @param string $day The day for which to retrieve the slots (e.g., 'DAY 1').
+     * @return Slot[] The slots for the specified day.
+     */
+    public function findByDay(string $day): array
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.day = :day')
+            ->setParameter('day', $day)
+            ->getQuery()
+            ->getResult();
+    }
 }
