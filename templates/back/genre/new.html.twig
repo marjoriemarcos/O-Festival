@@ -1,0 +1,26 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}Nouveau genre{% endblock %}
+
+{% block main %}
+    <main>
+        <div class="container">
+            <h2 class="text-center my-5 fw-bold display-5">Créer un nouveau genre musical</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <a href="{{ path('app_genre_list_admin') }}" class="btn btn-primary fw-bold mb-4">
+                        <i class="bi bi-arrow-left"></i> Retour à la liste des genres
+                    </a>
+                    <div class="card">
+                        <div class="card-header fs-2 fw-bold">
+                            <i class="bi bi-music-note-list me-2"></i>Nouveau genre
+                        </div>
+                        <div class="card-body">
+                            {{ include('back/genre/_form.html.twig', {'button_label': 'Créer le genre'}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

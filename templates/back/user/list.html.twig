@@ -54,9 +54,7 @@
 													<div
 														class="d-flex me-2">
 														<!-- Action buttons -->
-														<form action="#" method="post">
-															<button onclick="return confirm('Souhaitez-vous supprimer cet administrateur ?');" type="submit" class="btn btn-danger bi bi-trash mx-3"></button>
-														</form>
+														{{ include('back/ticket/_delete_form.html.twig', {'ticket': ticket}) }}
 													</div>
 												</td>
 											</tr>

@@ -21,10 +21,7 @@
                   <i class="bi bi-person me-2"></i> {{customer.firstname}} {{customer.lastname}}
                 </span>
                 <div class="d-flex">
-                  <form action="#" method="post">
-                    <button onclick="return confirm('Souhaitez-vous supprimer ce client ?');" type="submit"
-                      class="btn btn-danger bi bi-trash"></button>
-                  </form>
+                  {{ include('back/customer/_delete_form.html.twig', {'customer': customer}) }}
                 </div>
               </div>
               <div class="card-body">
@@ -68,15 +65,18 @@
                 <div class="d-flex align-items-center mt-3">
                   <i class="bi bi-ticket me-2"></i>
                   <h6 class="fw-bold mb-0">Tickets achetés :</h6>
-                  <p class="mb-0 ms-2"><ul>
-                  {% for ticket in customer.getTickets %}
-
-                      <li>{{ ticket.Title }}</li>
-                  {% else %}
-                  <li>Ce client n'a pas acheté de tickets</li>
-                  {% endfor %}
-                  </ul></p>
                 </div>
+                  <ul class="list-group mt-3">
+                    {% for ticket in customer.getTickets %}
+                      <li class="list-group-item">
+                       <a href="{{ path('app_ticket_read_admin', {id: ticket.id}) }}">
+                        <i class="bi bi-ticket me-2"></i>{{ ticket.title }}
+                       </a>
+                      </li>
+                    {% else %}
+                      <li class="list-group-item">Ce client n'a pas acheté de tickets</li>
+                    {% endfor %}
+                  </ul>
               </div>
             </div>
           </div>
