@@ -1,21 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
     const filterButtons = document.querySelectorAll('.filter-button');
     const tableRows = document.querySelectorAll('#slots-table-body tr');
-    const tableTitle = document.getElementById('table-title');
+    const dayTitle = document.getElementById('day-title');
     
-    const updateTableTitle = (day) => {
+    const updateDayTitle = (day) => {
         switch(day) {
             case 'J1':
-                tableTitle.textContent = 'Jour 1';
+                dayTitle.textContent = ' - Jour 1';
                 break;
             case 'J2':
-                tableTitle.textContent = 'Jour 2';
+                dayTitle.textContent = ' - Jour 2';
                 break;
             case 'J3':
-                tableTitle.textContent = 'Jour 3';
+                dayTitle.textContent = ' - Jour 3';
                 break;
             default:
-                tableTitle.textContent = 'Liste des créneaux';
+                dayTitle.textContent = ' - Tous les jours';
         }
     };
 
@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
             filterButtons.forEach(btn => btn.classList.remove('selected'));
             button.classList.add('selected');
 
-            // Update table title
-            updateTableTitle(day);
+            // Update day title
+            updateDayTitle(day);
             
             // Filter table rows
             tableRows.forEach(row => {
