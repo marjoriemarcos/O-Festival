@@ -12,11 +12,14 @@ class TicketController extends AbstractController
     #[Route('/billetterie', name: 'app_ticket_browse')]
     public function browse(TicketRepository $ticketRepository): Response
     {
-
-        $tickets= $ticketRepository->findAll();
+        $pass1 = $ticketRepository->findDistinctFeesByDuration(0);
+        $pass2 = $ticketRepository->findDistinctFeesByDuration(1);
+        $pass3 = $ticketRepository->findDistinctFeesByDuration(2);
 
         return $this->render('front/ticket/browse.html.twig', [
-            'tickets' => $tickets,
+            'pass1' => $pass1,
+            'pass2' => $pass2,
+            'pass3' => $pass3,
         ]);
     }
 
@@ -27,5 +30,4 @@ class TicketController extends AbstractController
             'controller_name' => 'TicketController',
         ]);
     }
-
 }

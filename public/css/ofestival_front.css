@@ -285,7 +285,7 @@ body {
     border-bottom: 2px solid var(--dark_yellow);
     width: 80%; 
     margin: auto;
-    font-size: 2.5rem;
+    font-size: 1.75rem;
 }
 .ticket-card-content{
     font-size: 1.5rem;

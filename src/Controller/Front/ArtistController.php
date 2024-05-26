@@ -40,11 +40,7 @@ class ArtistController extends AbstractController
      * @return Response La réponse HTTP contenant les artistes associés à la date.
      */
     #[Route('/programmation/{date}', name: 'app_artist_browse_by_date', methods: ['GET'])]
-    public function browseByDate(
-        $date,
-        ArtistRepository $artistRepository,
-        SlotRepository $slotRepository
-    ): Response {
+    public function browseByDate( $date, ArtistRepository $artistRepository,SlotRepository $slotRepository): Response {
         $slots = $slotRepository->findAll();
         $artistBrowse = $artistRepository->findBySlotDate($date);
         return $this->render('front/artist/browse.html.twig', [
