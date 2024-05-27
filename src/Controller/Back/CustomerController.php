@@ -9,13 +9,22 @@ use App\Repository\CustomerRepository;
 use App\Entity\Customer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
 
 class CustomerController extends AbstractController
 {
-    #[Route('/back/customer_list', name: 'app_customer_list_admin')]
-    public function list(CustomerRepository $customerRepository): Response
+    #[Route('/back/customer_list', name: 'app_customer_list_admin', methods: ['GET'])]
+    public function list(CustomerRepository $customerRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $customerList = $customerRepository->findAll();
+        // Fetch customers with pagination
+        $query = $customerRepository->createQueryBuilder('c')
+            ->getQuery();
+        
+        $customerList = $paginator->paginate(
+            $query, 
+            $request->query->getInt('page', 1),
+            5 // limit per page
+        );
         
         return $this->render('back/customer/list.html.twig', [
         'customerList' => $customerList,
@@ -23,7 +32,7 @@ class CustomerController extends AbstractController
         ]);
     }
 
-    #[Route('/back/customer_list/{id}', name: 'app_customer_read_admin')]
+    #[Route('/back/customer_list/{id}', name: 'app_customer_read_admin', methods: ['GET'])]
     public function read(int $id, CustomerRepository $customerRepository): Response
     {
         // Fetch the customer by its ID

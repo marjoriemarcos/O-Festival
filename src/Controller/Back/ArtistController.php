@@ -10,15 +10,23 @@ use App\Entity\Artist;
 use App\Form\ArtistType;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\ArtistRepository;
+use Knp\Component\Pager\PaginatorInterface;
 
 class ArtistController extends AbstractController
 {
     #[Route('/back/artist_list', name: 'app_artist_list_admin', methods: ['GET'])]
-    public function list(ArtistRepository $artistRepository): Response
+    public function list(ArtistRepository $artistRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // Fetch artists
-        $artistList = $artistRepository->findAll();
-
+        // Fetch artists with pagination
+        $query = $artistRepository->createQueryBuilder('a')
+            ->getQuery();
+    
+        $artistList = $paginator->paginate(
+            $query, 
+            $request->query->getInt('page', 1),
+            5 // limit per page
+        );     
+    
         return $this->render('back/artist/list.html.twig', [
             'artistList' => $artistList,
         ]);

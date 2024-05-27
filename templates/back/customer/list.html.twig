@@ -57,6 +57,11 @@
                     {% endfor %}            
                   </tbody>
                 </table>
+
+                <!-- Pagination -->
+                <div id="pagination-container" class="pagination justify-content-center">
+                  {{ knp_pagination_render(customerList) }}
+                </div>
               </div>
             </div>
           </div>
