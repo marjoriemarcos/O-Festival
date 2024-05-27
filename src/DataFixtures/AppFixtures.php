@@ -52,9 +52,8 @@ class AppFixtures extends Fixture
             $artist = (new Artist())
                 ->setName($faker->unique()->singerName())
                 ->setDescription($faker->text())
-                ->setPicture($faker->imageUrl())
+                ->setPicture($faker->unique()->singerPicture())
                 ->setVideo('https://www.youtube.com/embed/UvEwfQvVSGg?si=ZSXsQd_1zxTxu6jX')
-                ->setPicture($faker->imageUrl())
                 ->setCreatedAt(new DateTimeImmutable('now', $timezone));
             for ($j = 1; $j <= mt_rand(1, 2); $j++) {
                 $artist->addGenre($genreList[array_rand($genreList)]);
