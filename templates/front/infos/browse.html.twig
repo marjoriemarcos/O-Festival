@@ -6,6 +6,12 @@
 {% block main %}
 
 	<div class="container-informations medium-blue-bg">
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success alert-dismissible fade show" role="alert">
+				{{ message }}
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		{% endfor %}
 		<h2 class="page-title adumu-font">Infos pratiques</h2>
 		<div
 			class="row p-5 gx-0 background-img-bg">
@@ -56,30 +62,28 @@
 						<h2>CONTACT</h2>
 					</div>
 					<div class="contact-content">
-						<form>
-							<!-- Name field -->
-							<div class="form-group mb-3">
-								<label for="name" class="light-yellow-txt">Nom</label>
-								<input type="text" class="form-control open-font" id="name" placeholder="Entrez votre nom">
-							</div>
+						{{ form_start(form) }}
 
-							<!-- Emai field -->
-							<div class="form-group mb-3">
-								<label for="email" class="light-yellow-txt">Email</label>
-								<input type="email" class="form-control open-font" id="email" placeholder="Entrez votre email">
-							</div>
+						<div class="form-group mb-3">
+							{{ form_label(form.name, 'Nom', {'label_attr': {'class': 'light-yellow-txt'}}) }}
+							{{ form_widget(form.name, {'attr': {'class': 'form-control open-font', 'placeholder': 'Entrez votre nom'}}) }}
+						</div>
 
-							<!-- Message field -->
-							<div class="form-group mb-3">
-								<label for="message" class="light-yellow-txt">Message</label>
-								<textarea class="form-control open-font" id="message" rows="3"></textarea>
-							</div>
+						<div class="form-group mb-3">
+							{{ form_label(form.email, 'Email', {'label_attr': {'class': 'light-yellow-txt'}}) }}
+							{{ form_widget(form.email, {'attr': {'class': 'form-control open-font', 'placeholder': 'Entrez votre email'}}) }}
+						</div>
 
-							<!-- Send Button -->
-							<div class="position-relative d-flex align-items-center justify-content-center p-3">
-								<button type="submit" class="btn btn-primary light-yellow-bg dark-blue-txt">Envoyer</button>
-							</div>
-						</form>
+						<div class="form-group mb-3">
+							{{ form_label(form.message, 'Message', {'label_attr': {'class': 'light-yellow-txt'}}) }}
+							{{ form_widget(form.message, {'attr': {'class': 'form-control open-font', 'rows': 3, 'placeholder': 'Entrez votre message'}}) }}
+						</div>
+
+						<div class="position-relative d-flex align-items-center justify-content-center p-3">
+							{{ form_widget(form.save, {'attr': {'class': 'btn btn-primary light-yellow-bg dark-blue-txt'}}) }}
+						</div>
+
+						{{ form_end(form) }}
 					</div>
 				</div>
 			</div>
