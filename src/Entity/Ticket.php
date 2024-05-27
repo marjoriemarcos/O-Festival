@@ -58,7 +58,7 @@ class Ticket
      *
      * @return void
      */
-    public function calculateDuration() : int
+    public function calculateDuration(): int
     {
         $interval = $this->startAt->diff($this->endAt);
         return $interval->h / 24;
@@ -139,7 +139,7 @@ class Ticket
         $this->endAt = $endAt;
 
         return $this;
-    }   
+    }
 
     public function getQuantity(): ?int
     {

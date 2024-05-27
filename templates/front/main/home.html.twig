@@ -68,26 +68,23 @@
 			<h2 class="home-ticket-title py-5 px-5 medium-blue-bg text-white">
 				Billetterie
 			</h2>
-
+			
 			<div
 				class="home-ticket-list row justify-content-around mx-3 mb-2 mt-3">
 				<!-- Ticket -->
-				{% set passTypes = [
-    { 'type': '1 jour', 'image': 'pass-1-jour.jpg', 'label': 'PASS 1 JOUR' },
-    { 'type': '2 jours', 'image': 'pass-2-jours.jpg', 'label': 'PASS 2 JOURS' },
-    { 'type': '3 jours', 'image': 'pass-3-jours.jpg', 'label': 'PASS 3 JOURS' }] %}
-
-				{% for pass in passTypes %}
-					<div class="home-ticket col-md-3 mb-2">
-						<div class="card img-zoom">
-							<a href="{{ path('app_ticket_browse') }}">
-								<img src="{{ asset('images/' ~ pass.image) }}" class="card-img-top" alt="">
-								<div class="card-img-overlay d-flex flex-column justify-content-end">
-									<h3 class="card-title text-white mb-0">{{ pass.label }}</h3>
-								</div>
-							</a>
+				{% for pass in passes %}
+					{% if pass.data is not empty %}
+						<div class="home-ticket col-md-3 mb-2">
+							<div class="card img-zoom">
+								<a href="{{ path('app_ticket_browse') }}">
+									<img src="{{ asset('images/' ~ pass.image) }}" class="card-img-top" alt="">
+									<div class="card-img-overlay d-flex flex-column justify-content-end">
+										<h3 class="card-title text-white mb-0">{{ pass.title }}</h3>
+									</div>
+								</a>
+							</div>
 						</div>
-					</div>
+					{% endif %}
 				{% endfor %}
 			</div>
 

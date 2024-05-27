@@ -114,175 +114,68 @@ class AppFixtures extends Fixture
 
 
         // Ticket 
+
+        // Liste des fees et leurs prix
         $feeList = [
-            'Normal'           => [
-                [
-                    'title'    => 'Pass 1J',
-                    'start'    => new DateTimeImmutable('2024-08-23'),
-                    'end'      => new DateTimeImmutable('2024-08-23'),
-                    'price'    => 100,
-                    'duration' => 24
-                ],
-                [
-                    'title'    => 'Pass 1J',
-                    'start'    => new DateTimeImmutable('2024-08-24'),
-                    'end'      => new DateTimeImmutable('2024-08-24'),
-                    'price'    => 100,
-                    'duration' => 24
-                ],
-                [
-                    'title'    => 'Pass 1J',
-                    'start'    => new DateTimeImmutable('2024-08-25'),
-                    'end'      => new DateTimeImmutable('2024-08-25'),
-                    'price'    => 100,
-                    'duration' => 24
-                ],
-                [
-                    'title'    => 'Pass 2J',
-                    'start'    => new DateTimeImmutable('2024-08-23'),
-                    'end'      => new DateTimeImmutable('2024-08-24'),
-                    'price'    => 180,
-                    'duration' => 48
-                ],
-                [
-                    'title'    => 'Pass 2J',
-                    'start'    => new DateTimeImmutable('2024-08-24'),
-                    'end'      => new DateTimeImmutable('2024-08-25'),
-                    'price'    => 180,
-                    'duration' => 48
-                ],
-                [
-                    'title'    => 'Pass 3J',
-                    'start'    => new DateTimeImmutable('2024-08-23'),
-                    'end'      => new DateTimeImmutable('2024-08-25'),
-                    'price'    => 250,
-                    'duration' => 72
-                ]
-            ],
-            'Etudiant'         => [
-                [
-                    'title'    => 'Pass 1J',
-                    'start'    => new DateTimeImmutable('2024-08-23'),
-                    'end'      => new DateTimeImmutable('2024-08-23'),
-                    'price'    => 80,
-                    'duration' => 24
-                ],
-                [
-                    'title'    => 'Pass 1J',
-                    'start'    => new DateTimeImmutable('2024-08-24'),
-                    'end'      => new DateTimeImmutable('2024-08-24'),
-                    'price'    => 80,
-                    'duration' => 24
-                ],
-                [
-                    'title'    => 'Pass 1J',
-                    'start'    => new DateTimeImmutable('2024-08-25'),
-                    'end'      => new DateTimeImmutable('2024-08-25'),
-                    'price'    => 80,
-                    'duration' => 24
-                ],
-                [
-                    'title'    => 'Pass 2J',
-                    'start'    => new DateTimeImmutable('2024-08-23'),
-                    'end'      => new DateTimeImmutable('2024-08-24'),
-                    'price'    => 150,
-                    'duration' => 48
-                ],
-                [
-                    'title'    => 'Pass 2J',
-                    'start'    => new DateTimeImmutable('2024-08-24'),
-                    'end'      => new DateTimeImmutable('2024-08-25'),
-                    'price'    => 150,
-                    'duration' => 48
-                ],
-                [
-                    'title'    => 'Pass 3J',
-                    'start'    => new DateTimeImmutable('2024-08-23'),
-                    'end'      => new DateTimeImmutable('2024-08-25'),
-                    'price'    => 220,
-                    'duration' => 72
-                ]
-            ],
-            'Enfant (-12 ans)' => [
-                [
-                    'title'    => 'Pass 1J',
-                    'start'    => new DateTimeImmutable('2024-08-23'),
-                    'end'      => new DateTimeImmutable('2024-08-23'),
-                    'price'    => 0,
-                    'duration' => 24
-                ],
-                [
-                    'title'    => 'Pass 1J',
-                    'start'    => new DateTimeImmutable('2024-08-24'),
-                    'end'      => new DateTimeImmutable('2024-08-24'),
-                    'price'    => 0,
-                    'duration' => 24
-                ],
-                [
-                    'title'    => 'Pass 1J',
-                    'start'    => new DateTimeImmutable('2024-08-25'),
-                    'end'      => new DateTimeImmutable('2024-08-25'),
-                    'price'    => 0,
-                    'duration' => 24
-                ],
-                [
-                    'title'    => 'Pass 2J',
-                    'start'    => new DateTimeImmutable('2024-08-23'),
-                    'end'      => new DateTimeImmutable('2024-08-24'),
-                    'price'    => 0,
-                    'duration' => 48
-                ],
-                [
-                    'title'    => 'Pass 2J',
-                    'start'    => new DateTimeImmutable('2024-08-24'),
-                    'end'      => new DateTimeImmutable('2024-08-25'),
-                    'price'    => 0,
-                    'duration' => 48
-                ],
-                [
-                    'title'    => 'Pass 3J',
-                    'start'    => new DateTimeImmutable('2024-08-23'),
-                    'end'      => new DateTimeImmutable('2024-08-25'),
-                    'price'    => 0,
-                    'duration' => 72
-                ]
-            ]
+            'Plein Tarif' => 200,
+            'Tarif Etudiant' => 100,
+            'Tarif Enfant (-12 ans)' => 0,
         ];
 
+        // Dates du festival
+        $festivalStartDate = new DateTimeImmutable('2024-05-23');
+        $festivalEndDate = new DateTimeImmutable('2024-05-25');
 
-        $ticketList = [];
-        for ($i = 0; $i < 50; $i++) {
-            $ticket = new Ticket();
-
-            // Sélectionne un type de billet aléatoire (Normal, Etudiant, Enfant)
-            $type = array_rand($feeList);
-            // Sélectionne un billet spécifique de ce type J1, J2 ...
-            $fee = $feeList[$type][array_rand($feeList[$type])];
-            // Mettre le titre dans $title
-            $title = $fee['title'];
-            // Mettre la date de départ dans $startDate
-            $startDate = $fee['start'];
-            // Mettre la date de fin dans $endDate
-            $endDate = $fee['end'];
-            // Mettre le prix dans $price
-            $price = $fee['price'];
-            // Mettre la durée dans $duration
-            $duration = $fee['duration'];
-
-            $ticket->setTitle($type . ' ' . $title . ' ' . $startDate->format('d-m-Y') . ' ' . $endDate->format('d-m-Y'));
-            $ticket->setFee($type);
-            $ticket->setCreatedAt(new DateTimeImmutable('now', $timezone));
-            $ticket->addCustomer($customerList[array_rand($customerList)]);
-            $ticket->setStartAt($startDate);
-            $quantity = mt_rand(0, 10);
-            $ticket->setQuantity($quantity);
-            $price = ($price * $quantity);
-            $ticket->setPrice($price);
-            $ticket->setEndAt($endDate);
-            $ticket->setDuration($duration);
-            $manager->persist($ticket);
-            $ticketList[] = $ticket;
+        // Génération des tickets pour chaque jour (vendredi, samedi, dimanche)
+        for ($i = 0; $i < 3; $i++) {
+            foreach ($feeList as $fee => $price) {
+                $ticket = new Ticket();
+                $ticket->setTitle("Pass 1 JOUR $fee - " . $festivalStartDate->format('d/m/Y'));
+                $ticket->setStartAt($festivalStartDate);
+                $ticket->setEndAt($festivalStartDate);
+                $ticket->setDuration(24);
+                $ticket->setFee($fee);
+                $ticket->setPrice($price);
+                $ticket->setQuantity(mt_rand(0, 30)); // Quantité aléatoire entre 0 et 30
+                $ticket->setCreatedAt(new DateTimeImmutable('now', $timezone));
+                // Persister le ticket
+                $manager->persist($ticket);
+            }
+            $festivalStartDate = $festivalStartDate->modify('+1 day');
         }
+
+        // Génération des tickets pour les 2 derniers jours (samedi et dimanche)
+        foreach ($feeList as $fee => $price) {
+            $ticket = new Ticket();
+            $ticket->setTitle("Pass 2 JOURS $fee du " . $festivalStartDate->format('d/m/Y') . ' au ' . $festivalEndDate->format('d/m/Y'));
+            $ticket->setStartAt($festivalEndDate->modify('-1 day'));
+            $ticket->setEndAt($festivalEndDate);
+            $ticket->setDuration(48);
+            $ticket->setFee($fee);
+            $ticket->setPrice($price * 1.75); // Prix plus cher pour 2 jours
+            $ticket->setQuantity(mt_rand(0, 30)); // Quantité aléatoire entre 0 et 30
+            $ticket->setCreatedAt(new DateTimeImmutable('now', $timezone));
+            // Persister le ticket
+            $manager->persist($ticket);
+        }
+
+        // Génération des tickets pour le premier et le dernier jour (vendredi et dimanche)
+        foreach ($feeList as $fee => $price) {
+            $ticket = new Ticket();
+            $ticket->setTitle("Pass 3 JOURS $fee du " . $festivalStartDate->format('d/m/Y') . ' au ' . $festivalEndDate->format('d/m/Y'));
+            $ticket->setStartAt($festivalEndDate->modify('-2 day'));
+            $ticket->setEndAt($festivalEndDate);
+            $ticket->setDuration(72);
+            $ticket->setFee($fee);
+            $ticket->setPrice($price * 2.5); // Prix le plus cher pour 3 jours
+            $ticket->setQuantity(mt_rand(0, 30)); // Quantité aléatoire entre 0 et 30
+            $ticket->setCreatedAt(new DateTimeImmutable('now', $timezone));
+            // Persister le ticket
+            $manager->persist($ticket);
+        }
+
+        // Flush tous les tickets persistés pour les sauvegarder dans la base de données
+        $manager->flush();
 
         // user
         $userList = [
