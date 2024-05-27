@@ -16,7 +16,9 @@ class ArtistController extends AbstractController
      * Affiche la liste des artistes avec des slots associés.
      *
      * @param ArtistRepository $artistRepository Le repository des artistes.
-     * @param SlotRepository $slotRepository Le repository des slots.
+     * @param StageRepository $stageRepository Le repository des stage.
+     * @param SlotRepository $slotRepository Le repository des dates.
+     * @param GenreRepository $genreRepository Le repository des genres. 
      * @return Response La réponse HTTP contenant la liste des artistes.
      */
     #[Route('/programmation', name: 'app_artist_browse')]
@@ -53,14 +55,13 @@ class ArtistController extends AbstractController
      * @param GenreRepository $genreRepository Le repository des genres. 
      * @return Response La réponse HTTP contenant les artistes associés à la date.
      */
-    #[Route('/programmation/date/{date}', name: 'app_artist_browse_by_date', methods: ['GET'])]
-    public function browseByDate(
-        string $date, 
-        ArtistRepository $artistRepository, 
+    #[Route('/programmation/{date}', name: 'app_artist_browse_by_date', methods: ['GET'])]
+    public function browseByDate( 
+        $date, 
+        ArtistRepository $artistRepository,
         SlotRepository $slotRepository,
         StageRepository $stageRepository,
-        GenreRepository $genreRepository): Response 
-        {
+        GenreRepository $genreRepository): Response {
         $slots = $slotRepository->findAll();
         $stageList = $stageRepository->findAll();
         $genreList = $genreRepository->limitedGenre();

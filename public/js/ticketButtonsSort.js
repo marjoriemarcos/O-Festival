@@ -1,23 +1,25 @@
 document.addEventListener('DOMContentLoaded', function() {
     const filterButtons = document.querySelectorAll('.filter-button');
     const tableRows = document.querySelectorAll('#tickets-table-body tr');
-    const tableTitle = document.getElementById('table-title');
-    
-    const updateTableTitle = (duration) => {
+    const durationTitle = document.getElementById('duration-title');
+
+    const updateDurationTitle = (duration) => {
         switch(duration) {
             case '24':
-                tableTitle.textContent = 'Pass 1 Jour';
+                durationTitle.textContent = ' - Pass 1 Jour';
                 break;
             case '48':
-                tableTitle.textContent = 'Pass 2 Jours';
+                durationTitle.textContent = ' - Pass 2 Jours';
                 break;
             case '72':
-                tableTitle.textContent = 'Pass 3 Jours';
+                durationTitle.textContent = ' - Pass 3 Jours';
                 break;
             default:
-                tableTitle.textContent = 'Liste des tickets';
+                durationTitle.textContent = ' - Tous les pass';
         }
     };
+
+    
 
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -27,8 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
             filterButtons.forEach(btn => btn.classList.remove('selected'));
             button.classList.add('selected');
 
-            // Update table title
-            updateTableTitle(duration);
+            // Update duration title
+            updateDurationTitle(duration);
             
             // Filter table rows
             tableRows.forEach(row => {

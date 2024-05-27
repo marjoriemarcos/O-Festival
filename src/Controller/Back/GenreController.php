@@ -11,14 +11,23 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 Use App\Entity\Genre;
 use App\Form\GenreType;
+use Knp\Component\Pager\PaginatorInterface;
 
 class GenreController extends AbstractController
 {
     #[Route('/back/genre_list', name: 'app_genre_list_admin', methods: ['GET'])]
-    public function list(GenreRepository $genreRepository): Response
+    public function list(GenreRepository $genreRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // Fetch genres
-        $genreList = $genreRepository->findAll();
+        //fetch genres with pagination
+        $query = $genreRepository->createQueryBuilder('g')
+            ->getQuery();
+        
+        $genreList = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            5 // limit per page
+        );
+
         return $this->render('back/genre/list.html.twig', [
             'genreList' => $genreList,
         ]);

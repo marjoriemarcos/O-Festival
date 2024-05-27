@@ -32,15 +32,23 @@
 				<article class="informations-content bg-white open-font dark-blue-txt p-5">
 					<h2>OUVERTURE DES PORTES</h2>
 					<p>
-						<strong>O'Festival 2024 ouvrira ses portes du X au X. 
-                        Il aura lieu ........ L'entrée se fera par.....(10 minutes à pied de la gare SNCF)</strong>
+						<strong>O'Festival 2024 ouvrira ses portes du
+							{{ openingDate }}
+							au
+							{{ closingDate }}
+							Il aura lieu au: 10 rue de Penthièvre à Paris (75008), 
+							l'entrée se fera par la rue de Pentihèvre (10 minutes à pied de la gare SNCF)</strong>
 					</p>
 					<p>
 						<strong>Horaires d'ouvertures O'Festival</strong>
 						<br>
-						OUVERTURE > VENDREDI X à 18h00
+						OUVERTURE >
+						{{ openingDate }}
+						à 15h00
 						<br>
-						FERMETURE > DIMANCHE X à 00h00
+						FERMETURE >
+						{{ closingDate }}
+						à 23h59
 					</p>
 					<p>
 						<strong>
@@ -105,5 +113,4 @@
 			</div>
 		</div>
 	</div>
-
 {% endblock %}

@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class TicketType extends AbstractType
 {
@@ -15,13 +17,18 @@ class TicketType extends AbstractType
         $builder
             ->add('title')
             ->add('price')
-            ->add('startAt', null, [
-                'widget' => 'single_text',
+            ->add('startAt', DateTimeType::class, [
+                'input' => 'datetime_immutable',                
             ])
-            ->add('endAt', null, [
-                'widget' => 'single_text',
+            ->add('endAt', DateTimeType::class, [
+                'input' => 'datetime_immutable',
             ])
-            ->add('quantity')
+            ->add('quantity', IntegerType::class, [
+                'attr' => [
+                    'min' => 0,
+                    'step' => 1,
+                ],
+            ])
             ->add('fee', ChoiceType::class, [
                 'choices' => [
                     'Normal' => 'Normal',

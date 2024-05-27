@@ -2,12 +2,20 @@
 
 {% block title %}Liste des clients{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/backTablesSort.js') }}"></script>
+    <script src="{{ asset('js/search.js') }}"></script>
+{% endblock %}
+
 {% block main %}
 
 <main>
     <div class="container">
       <!-- Titre principal -->
       <h2 class="text-center my-5 fw-bold display-5">Liste des clients</h2>
+      <!-- Search Bar -->
+      {{ include('back/fragments/_search_bar.html.twig')}}
 
       <div class="row justify-content-center">
         <div class="col-md-8">
@@ -17,12 +25,14 @@
               <h3 class="fs-2 fw-bold mb-0">Clients</h3>
             </div>
             <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered">
+              <!-- No results message -->
+              {{ include('back/fragments/_noResult_message.html.twig') }}
+              <div class="table-responsive" id="tableWrapper">
+                <table class="table table-bordered searchable-table">
                   <thead class="thead-dark">
                     <tr>
-                      <th scope="col"><i class="bi bi-person me-2"></i> Nom</th>
-                      <th scope="col"><i class="bi bi-person me-2"></i> Prénom</th>
+                      <th scope="col" data-sortable><i class="bi bi-person me-2"></i> Nom</th>
+                      <th scope="col" data-sortable><i class="bi bi-person me-2"></i> Prénom</th>
                       <th scope="col"><i class="bi bi-ticket me-2"></i> Tickets achetés</th>
                       <th class="col-1"><i class="bi bi-gear me-2"></i> Actions</th>
                     </tr>
@@ -52,6 +62,11 @@
                     {% endfor %}            
                   </tbody>
                 </table>
+
+                <!-- Pagination -->
+                <div id="pagination-container" class="pagination justify-content-center">
+                  {{ knp_pagination_render(customerList) }}
+                </div>
               </div>
             </div>
           </div>

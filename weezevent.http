@@ -3,4 +3,12 @@ content-type:application/x-www-form-urlencoded;charset=utf-8
 
 &username=marjorie.marcos@oclock.school
 &password=.ybqeN3VAL2bd!H
-&api_key=O502448
+&api_key=4af7c955bdb1fb64c42597994b0a8cf5
+
+###
+
+GET https://api.weezevent.com/events?api_key=4af7c955bdb1fb64c42597994b0a8cf5&access_token=3599d9e13fd11d884b8a1af159b61567 HTTP/1.0
+
+###
+
+GET https://api.weezevent.com/participant/list?api_key=4af7c955bdb1fb64c42597994b0a8cf5&access_token=3599d9e13fd11d884b8a1af159b61567&id_event[]=1146829&full=1 HTTP/1.0

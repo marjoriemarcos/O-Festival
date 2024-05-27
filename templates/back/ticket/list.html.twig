@@ -2,7 +2,9 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/ticketSort.js') }}"></script>
+    <script src="{{ asset('js/ticketButtonsSort.js') }}"></script>
+    <script src="{{ asset('js/backTablesSort.js') }}"></script>
+    <script src="{{ asset('js/search.js') }}"></script>
 {% endblock %}
 
 {% block title %}Liste des billets{% endblock %}
@@ -10,14 +12,17 @@
 {% block main %}
 <main>
     <div class="container">      
-        <h2 class="text-center my-5 fw-bold display-5">Liste des billets</h2>
+        <h2 class="text-center my-5 fw-bold display-5">Liste des billets</h2>        
+
+        <!-- Search bar -->
+        {{ include('back/fragments/_search_bar.html.twig')}}
 
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <!-- Sort per day -->
                 <div class="col-md-8 mb-3">
                     <div class="d-flex">
-                        <button class="btn btn-primary fw-bold me-2 filter-button selected" data-duration="all" type="button">Tous les pass</button>
+                        <button class="btn btn-primary fw-bold me-2 filter-button selected" data-duration="all" type="button">Tous les billets</button>
                         <button class="btn btn-primary fw-bold me-2 filter-button" data-duration="24" type="button">Pass 1 Jour</button>
                         <button class="btn btn-primary fw-bold me-2 filter-button" data-duration="48" type="button">Pass 2 Jours</button>
                         <button class="btn btn-primary fw-bold filter-button" data-duration="72" type="button">Pass 3 Jours</button>
@@ -28,16 +33,21 @@
                     <div class="card">
                         <!-- Ticket Title -->
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <span class="fs-2 fw-bold" id="table-title">Tous les pass</span>
+                            <div>
+                                <span class="fs-2 fw-bold">Liste des billets</span>
+                                <span class="fs-5" id="duration-title"> - Tous les pass</span>
+                            </div>
                             <a class="btn btn-success fw-bold" type="button" href="{{path('app_ticket_new_admin')}}">Ajouter un ticket</a>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered table-hover">
+                            <!-- No results message -->
+                            {{ include('back/fragments/_noResult_message.html.twig') }}
+                            <table class="table table-bordered table-hover searchable-table"  id="tableWrapper">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th class="col-5"><i class="bi bi-file-earmark-text me-2"></i> Titre</th>
-                                        <th class="col-1"><i class="bi bi-currency-euro me-2"></i> Prix</th>
-                                        <th class="col-1"><i class="bi bi-box-seam me-2"></i> Quantité</th>
+                                        <th class="col-5" data-sortable><i class="bi bi-file-earmark-text me-2"></i> Titre</th>
+                                        <th class="col-1" data-sortable><i class="bi bi-currency-euro me-2"></i> Prix</th>
+                                        <th class="col-1" data-sortable><i class="bi bi-box-seam me-2"></i> Quantité</th>
                                         <th class="col-1"><i class="bi bi-gear me-2"></i> Actions</th>
                                     </tr>
                                 </thead>
@@ -57,7 +67,7 @@
                                     </tr>                    
                                     {% endfor %}                    
                                 </tbody>
-                            </table>
+                            </table>                            
                         </div>
                     </div>
                 </div>
