@@ -4,6 +4,7 @@
     {{ parent() }}
     <script src="{{ asset('js/slotButtonsSort.js') }}"></script>
     <script src="{{ asset('js/backTablesSort.js') }}"></script>
+    <script src="{{ asset('js/search.js') }}"></script>
 {% endblock %}
 
 {% block title %}Liste des créneaux{% endblock %}
@@ -12,6 +13,9 @@
 <main>
     <div class="container">      
       <h2 class="text-center my-5 fw-bold display-5">Liste des créneaux</h2>
+        
+        <!-- Search bar -->
+      {{ include('back/fragments/_search_bar.html.twig')}}
 
       <div class="container mt-5">
         <div class="row justify-content-center">
@@ -36,8 +40,10 @@
                 </div>
               </div>
               <div class="card-body">
+                <!-- No results message -->
+                {{ include('back/fragments/_noResult_message.html.twig') }}
                 <div class="table-responsive">
-                  <table class="table table-bordered">
+                  <table class="table table-bordered searchable-table"  id="tableWrapper">
                     <thead class="thead-dark">
                       <tr>
                         <th scope="col" data-sortable><i class="bi bi-calendar me-2"></i>Jour</th> 

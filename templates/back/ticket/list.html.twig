@@ -4,6 +4,7 @@
     {{ parent() }}
     <script src="{{ asset('js/ticketButtonsSort.js') }}"></script>
     <script src="{{ asset('js/backTablesSort.js') }}"></script>
+    <script src="{{ asset('js/search.js') }}"></script>
 {% endblock %}
 
 {% block title %}Liste des billets{% endblock %}
@@ -12,6 +13,9 @@
 <main>
     <div class="container">      
         <h2 class="text-center my-5 fw-bold display-5">Liste des billets</h2>
+
+        <!-- Search bar -->
+        {{ include('back/fragments/_search_bar.html.twig')}}
 
         <div class="container mt-5">
             <div class="row justify-content-center">
@@ -36,7 +40,9 @@
                             <a class="btn btn-success fw-bold" type="button" href="{{path('app_ticket_new_admin')}}">Ajouter un ticket</a>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered table-hover">
+                            <!-- No results message -->
+                            {{ include('back/fragments/_noResult_message.html.twig') }}
+                            <table class="table table-bordered table-hover searchable-table"  id="tableWrapper">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th class="col-5" data-sortable><i class="bi bi-file-earmark-text me-2"></i> Titre</th>

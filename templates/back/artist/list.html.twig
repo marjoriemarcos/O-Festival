@@ -5,12 +5,16 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/backTablesSort.js') }}"></script>
+    <script src="{{ asset('js/search.js') }}"></script>
 {% endblock %}
 
 {% block main %}
 <main>
     <div class="container">      
         <h2 class="text-center my-5 fw-bold display-5">Liste des Artistes</h2>
+
+        <!-- Search bar -->
+        {{ include('back/fragments/_search_bar.html.twig')}}
 
         <div class="row justify-content-center">
             <div class="col-md-10">
@@ -21,8 +25,10 @@
                         <a class="btn btn-success fw-bold" type="button" href="{{path('app_artist_new_admin')}}">Ajouter un Artiste</a>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
+                        <!-- No results message -->
+                        {{ include('back/fragments/_noResult_message.html.twig') }}
+                        <div class="table-responsive" id="tableWrapper">
+                            <table class="table table-bordered searchable-table">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th scope="col"><i class="bi bi-person me-2"></i> Photo </th>
