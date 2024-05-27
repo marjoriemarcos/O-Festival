@@ -15,19 +15,39 @@ class TicketRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Ticket::class);
     }
-    
-    /**
-     * @return array Returns an array of distinct fees with associated prices for a given duration
-     */
-    public function findDistinctFeesByDuration($days)
+
+    public function findTicketsByDuration($duration)
     {
         return $this->createQueryBuilder('ticket')
-            ->select('ticket.fee, MAX(ticket.price) as price, ticket.startAt, ticket.endAt')
+        ->andWhere('ticket.duration = :duration')
+        ->setParameter('duration', $duration)
+        ->orderBy('ticket.price', 'DESC')
+        ->getQuery()
+        ->getResult();
+}
+
+    /**
+     * @return array Returns an array of distinct startAt and endAt with associated fees and prices for a given duration
+     */
+    public function findDistinctDatesByDuration($days)
+    {
+        return $this->createQueryBuilder('ticket')
+            ->select('MIN(ticket.startAt) as startAt, MAX(ticket.endAt) as endAt, ticket.fee, MAX(ticket.price) as price')
             ->andWhere('DATE_DIFF(ticket.endAt, ticket.startAt) = :days')
             ->setParameter('days', $days)
-            ->groupBy('ticket.fee, ticket.startAt, ticket.endAt')
+            ->groupBy('ticket.fee')
             ->orderBy('price', 'DESC')
             ->getQuery()
             ->getResult();
+    }
+
+
+
+    public function findOpeningAndClosingDates()
+    {
+        return $this->createQueryBuilder('ticket')
+            ->select('MIN(ticket.startAt) as openingDate, MAX(ticket.endAt) as closingDate')
+            ->getQuery()
+            ->getSingleResult();
     }
 }
