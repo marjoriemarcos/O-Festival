@@ -283,17 +283,22 @@ body {
     height: 40%;
 }
 
+
 .ticket-card-info-price{
     font-size: 2.25rem;
     color: var(--dark_yellow);
 }
+
 .ticket-card-content h3{
-    border-bottom: 2px solid var(--dark_yellow);
     width: 80%; 
     margin: auto;
     font-size: 1.5rem;
     text-transform: none;
 }
+.ticket-card-content h3:last-child {
+    border-bottom: 2px solid var(--dark_yellow);
+}
+
 .ticket-card-content{
     font-size: 1.6rem;
 }
