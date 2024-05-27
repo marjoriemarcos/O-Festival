@@ -243,6 +243,7 @@ body {
 .card {
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    height: 85%;
 }
 .img-zoom {
     overflow: hidden;
@@ -250,6 +251,11 @@ body {
 .img-zoom img {
     width: 100%;
     transition: transform .1s;
+}
+.ticket-card-image img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 .img-zoom:hover img {
     transform: scale(1.1);
@@ -271,18 +277,24 @@ body {
     font-weight: 800;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
 }
+
+.ticket-card-image{
+    height: 40%;
+}
+
 .ticket-card-info-price{
-    font-size: 2.5rem;
+    font-size: 2.25rem;
     color: var(--dark_yellow);
 }
 .ticket-card-content h3{
     border-bottom: 2px solid var(--dark_yellow);
     width: 80%; 
     margin: auto;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
+    text-transform: none;
 }
 .ticket-card-content{
-    font-size: 1.5rem;
+    font-size: 1.6rem;
 }
 .ticket-card-content .btn{
     width: 75%;
@@ -414,6 +426,9 @@ body {
     .ticket-card-content{
         font-size: 1rem;
     }
+    .ticket-card-content h3{
+        font-size: 1rem;
+    }
     .ticket-card-info-price{
         font-size: 1.5rem;
     }
@@ -533,4 +548,3 @@ body {
         padding: 0;
     }
 }
-

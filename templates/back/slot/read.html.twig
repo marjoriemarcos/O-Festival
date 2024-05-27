@@ -1,6 +1,6 @@
 {% extends 'back/base.html.twig' %}
 
-{%block title%}Créneau X{%endblock%}
+{%block title%}Créneau {{slot.date| date('d/m/Y')}} {{slot.hour}}{%endblock%}
 
 {% block main %}
 <main>
@@ -10,14 +10,14 @@
         <div class="row justify-content-center">
           <!-- Card -->
           <div class="col-md-8">
-            <a href="{{path('slotBrowse')}}" class="btn btn-primary fw-bold mb-4">
+            <a href="{{path('app_slot_list_admin')}}" class="btn btn-primary fw-bold mb-4">
               <i class="bi bi-arrow-left"></i> Retour à la programmation
             </a>
             <div class="card">
               <!-- Card title -->
               <div class="card-header d-flex justify-content-between align-items-center">
                 <span class="fs-2 fw-bold">
-                  <i class="bi bi-calendar3 me-2"></i>Vendredi 21 Mai à 18:00
+                  <i class="bi bi-calendar3 me-2"></i>{{slot.date| date('d/m/Y')}}, de {{slot.hour}}
                 </span>
                 <div class="d-flex">
                   <a href="#" class="btn btn-warning me-2 bi bi-pencil"></a>
@@ -32,25 +32,25 @@
                 <div class="d-flex align-items-center">
                   <i class="bi bi-person me-2" style="font-size: 1.5rem;"></i>
                   <h6 class="fw-bold mb-0">Artiste :</h6>
-                  <p class="mb-0 ms-2">Arthur</p>
+                  <p class="mb-0 ms-2">{{slot.artist.name}}</p>
                 </div>
                 <!-- Day -->
                 <div class="d-flex align-items-center mt-3">
                   <i class="bi bi-calendar-date me-2" style="font-size: 1.5rem;"></i>
                   <h6 class="fw-bold mb-0">Jour de Passage :</h6>
-                  <p class="mb-0 ms-2">Vendredi 21 Mai</p>
+                  <p class="mb-0 ms-2">{{slot.date| date('d/m/Y')}}</p>
                 </div>
                 <!-- Hour -->
                 <div class="d-flex align-items-center mt-3">
                   <i class="bi bi-clock me-2" style="font-size: 1.5rem;"></i>
                   <h6 class="fw-bold mb-0">Heure de Passage :</h6>
-                  <p class="mb-0 ms-2">18:00</p>
+                  <p class="mb-0 ms-2">{{slot.hour}}</p>
                 </div>
                 <!-- Stage name -->
                 <div class="d-flex align-items-center mt-3">
                   <i class="bi bi-music-note me-2" style="font-size: 1.5rem;"></i>
                   <h6 class="fw-bold mb-0">Nom de la Scène :</h6>
-                  <p class="mb-0 ms-2">Scène 1</p>
+                  <p class="mb-0 ms-2">{{slot.stage.name}}</p>
                 </div>
               </div>
             </div>

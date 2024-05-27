@@ -49,6 +49,9 @@ class Customer
     #[ORM\ManyToMany(targetEntity: Ticket::class, inversedBy: 'customers')]
     private Collection $tickets;
 
+    #[ORM\Column(length: 255)]
+    private ?string $adress = null;
+
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
@@ -187,6 +190,18 @@ class Customer
     public function removeTicket(Ticket $ticket): static
     {
         $this->tickets->removeElement($ticket);
+
+        return $this;
+    }
+
+    public function getAdress(): ?string
+    {
+        return $this->adress;
+    }
+
+    public function setAdress(string $adress): static
+    {
+        $this->adress = $adress;
 
         return $this;
     }

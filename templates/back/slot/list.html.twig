@@ -5,7 +5,7 @@
 {% block main %}
 <main>
     <div class="container">      
-      <h2 class="text-center my-5 fw-bold display-5">Programmation</h2>
+      <h2 class="text-center my-5 fw-bold display-5">Liste des créneaux</h2>
 
       <div class="container mt-5">
         <div class="row justify-content-center">
@@ -21,10 +21,10 @@
           <!-- Slot card -->
           <div class="col-md-8">
             <div class="card">
-              <!-- Card title -->
-              <div class="card-header d-flex justify-content-between align-items-center">
-                <span class="fs-2 fw-bold">Jour 1 - Vendredi 21 Mai</span>
-              </div>
+              <!-- Card title -->        
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <span class="fs-2 fw-bold">Jour 1</span>
+            </div>
               <div class="card-body">
                 <div class="table-responsive">
                   <table class="table table-bordered">
@@ -38,59 +38,30 @@
                     </thead>
                     <tbody>
                       <!-- Slot -->
+                      {% for slot in slotList %}
                       <tr>
-                        <td>14:00</td>
-                        <td>Arthur</td>
-                        <td>Scène 1</td>
+                        <td>{{slot.hour}}</td>
+                        <td>{{slot.artist.name}}</td>
+                        <td>{{slot.stage.name}}</td>
                         <td>
                           <div class="d-flex">
                             <!-- Action buttons -->
-                            <a href="{{path('slotRead')}}" class="btn btn-primary bi bi-search me-2"></a>
+                            <a href="{{path('app_slot_read_admin', {id: slot.id})}}" class="btn btn-primary bi bi-search me-2"></a>
                             <form action="#" method="post">
                               <button onclick="return confirm('Souhaitez-vous supprimer cette entrée ?');" type="submit"
                                 class="btn btn-danger bi bi-trash"></button>
                             </form>
                           </div>
                         </td>
-                      </tr>
-                      <!-- Slot -->
-                      <tr>
-                        <td>15:30</td>
-                        <td>Léonard</td>
-                        <td>Scène 2</td>
-                        <td>
-                          <div class="d-flex">
-                            <!-- Action buttons -->
-                            <a href="{{path('slotRead')}}" class="btn btn-primary bi bi-search me-2"></a>
-                            <form action="#" method="post">
-                              <button onclick="return confirm('Souhaitez-vous supprimer cette entrée ?');" type="submit"
-                                class="btn btn-danger bi bi-trash"></button>
-                            </form>
-                          </div>
-                        </td>
-                      </tr>
-                      <!-- Slot -->
-                      <tr>
-                        <td>17:00</td>
-                        <td>Thomas</td>
-                        <td>Scène 3</td>
-                        <td>
-                          <div class="d-flex">
-                            <!-- Action buttons -->
-                            <a href="{{path('slotRead')}}" class="btn btn-primary bi bi-search me-2"></a>
-                            <form action="#" method="post">
-                              <button onclick="return confirm('Souhaitez-vous supprimer cette entrée ?');" type="submit"
-                                class="btn btn-danger bi bi-trash"></button>
-                            </form>
-                          </div>
-                        </td>
-                      </tr>
+                      </tr> 
+                      {% endfor %}                                           
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
           </div>
+        
         </div>
       </div>
     </div>

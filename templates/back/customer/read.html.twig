@@ -1,24 +1,24 @@
 {% extends 'back/base.html.twig' %}
 
-{% block title %}Client X{% endblock %}
+{% block title %}{{customer.firstname}} {{customer.lastname}}{% endblock %}
 
 {% block main %}
 
 <main>
     <div class="container">     
-      <h2 class="text-center my-5 fw-bold display-5">Détails du Client</h2>
+      <h2 class="text-center my-5 fw-bold display-5">Détails du Client {{customer.firstname}} {{customer.lastname}}</h2>
       <div class="container mt-5">
         <div class="row justify-content-center">
           <!-- Customer Card -->
           <div class="col-md-8">
-            <a href="{{path('customerBrowse')}}" class="btn btn-primary fw-bold mb-4">
+            <a href="{{path('app_customer_list_admin')}}" class="btn btn-primary fw-bold mb-4">
               <i class="bi bi-arrow-left"></i> Retour à la liste des clients
             </a>
             <div class="card">
               <!--Card Title -->
               <div class="card-header d-flex justify-content-between align-items-center">
                 <span class="fs-2 fw-bold">
-                  <i class="bi bi-person me-2"></i> Jean Dupont
+                  <i class="bi bi-person me-2"></i> {{customer.firstname}} {{customer.lastname}}
                 </span>
                 <div class="d-flex">
                   <form action="#" method="post">
@@ -32,43 +32,50 @@
                 <div class="d-flex align-items-center mt-3">
                   <i class="bi bi-calendar3 me-2"></i>
                   <h6 class="fw-bold mb-0">Date de naissance :</h6>
-                  <p class="mb-0 ms-2">01/01/1990</p>
+                  <p class="mb-0 ms-2">{{customer.birthdate |date('d/m/Y')}}</p>
                 </div>
                 <!-- Email -->
                 <div class="d-flex align-items-center mt-3">
                   <i class="bi bi-envelope me-2"></i>
                   <h6 class="fw-bold mb-0">Email :</h6>
-                  <p class="mb-0 ms-2">jean.dupont@example.com</p>
+                  <p class="mb-0 ms-2">{{customer.email}}</p>
                 </div>
                 <!-- Phone number -->
                 <div class="d-flex align-items-center mt-3">
                   <i class="bi bi-phone me-2"></i>
                   <h6 class="fw-bold mb-0">Numéro de téléphone :</h6>
-                  <p class="mb-0 ms-2">0123456789</p>
+                  <p class="mb-0 ms-2">{{customer.phoneNumber}}</p>
                 </div>
                 <!-- Address -->
                 <div class="d-flex align-items-center mt-3">
                   <i class="bi bi-geo-alt me-2"></i>
                   <h6 class="fw-bold mb-0">Adresse :</h6>
-                  <p class="mb-0 ms-2">123 Rue de la Liberté</p>
+                  <p class="mb-0 ms-2">{{customer.adress}}</p>
                 </div>
                 <!-- Postcode -->
                 <div class="d-flex align-items-center mt-3">
                   <i class="bi bi-geo-alt me-2"></i>
                   <h6 class="fw-bold mb-0">Code postal :</h6>
-                  <p class="mb-0 ms-2">75001</p>
+                  <p class="mb-0 ms-2">{{customer.postcode}}</p>
                 </div>
                 <!-- City -->
                 <div class="d-flex align-items-center mt-3">
                   <i class="bi bi-geo-alt me-2"></i>
                   <h6 class="fw-bold mb-0">Ville :</h6>
-                  <p class="mb-0 ms-2">Paris</p>
+                  <p class="mb-0 ms-2">{{customer.town}}</p>
                 </div>
                 <!-- Bought tickets -->
                 <div class="d-flex align-items-center mt-3">
                   <i class="bi bi-ticket me-2"></i>
                   <h6 class="fw-bold mb-0">Tickets achetés :</h6>
-                  <p class="mb-0 ms-2">Pass 1 Jour, Pass 2 Jours</p>
+                  <p class="mb-0 ms-2"><ul>
+                  {% for ticket in customer.getTickets %}
+
+                      <li>{{ ticket.Title }}</li>
+                  {% else %}
+                  <li>Ce client n'a pas acheté de tickets</li>
+                  {% endfor %}
+                  </ul></p>
                 </div>
               </div>
             </div>
