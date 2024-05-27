@@ -9,6 +9,7 @@ use App\Repository\CustomerRepository;
 use App\Entity\Customer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use App\Services\weezevent;
 
 class CustomerController extends AbstractController
 {
@@ -53,5 +54,22 @@ class CustomerController extends AbstractController
         }        
     
         return $this->redirectToRoute('app_customer_list_admin');
+    }
+
+
+    #[Route('/back/ticket_list/api', name: 'app_ticket_api', methods: ['GET'])]
+    public function ticketApiList(weezevent $weezevent)
+    {   // Va chercher la liste des commandes des client
+        $content = $weezevent->fetchCustomerList();
+        $customerList = $content['participants'];
+
+        // Va chercher la liste de type de billets
+        $ticketList = $weezevent->fetchTicketList();
+
+        return $this->render('back/customer/listApi.html.twig', [
+        'customerList' => $customerList,
+        'ticketList' => $ticketList,
+        ]);
+    
     }
 }
