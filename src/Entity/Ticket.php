@@ -6,6 +6,7 @@ use App\Repository\TicketRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TicketRepository::class)]
 class Ticket
@@ -16,27 +17,38 @@ class Ticket
     private ?int $id = null;
 
     #[ORM\Column(length: 64)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 64)]
     private ?string $title = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Assert\Type(type: 'float')]
+    #[Assert\GreaterThanOrEqual(0)]
     private ?float $price = null;
 
-    #[ORM\Column]
+    #[ORM\Column] 
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true)]   
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Type(type: 'datetimeinterface')]
     private ?\DateTimeImmutable $startAt = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Type(type: 'datetimeinterface')]
     private ?\DateTimeImmutable $endAt = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\NotNull]
+    #[Assert\Type(type: 'integer')]
+    #[Assert\GreaterThanOrEqual(0)]
     private ?int $quantity = null;
 
-    #[ORM\Column(length: 64)]
+    #[ORM\Column(length: 64, nullable: true)]
+    #[Assert\Length(max: 64)]
     private ?string $fee = null;
 
     /**
@@ -51,6 +63,7 @@ class Ticket
     public function __construct()
     {
         $this->customers = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     /**

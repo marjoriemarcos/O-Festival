@@ -12,7 +12,7 @@
 {% block main %}
 <main>
     <div class="container">      
-        <h2 class="text-center my-5 fw-bold display-5">Liste des billets</h2>
+        <h2 class="text-center my-5 fw-bold display-5">Liste des billets</h2>        
 
         <!-- Search bar -->
         {{ include('back/fragments/_search_bar.html.twig')}}
@@ -22,7 +22,7 @@
                 <!-- Sort per day -->
                 <div class="col-md-8 mb-3">
                     <div class="d-flex">
-                        <button class="btn btn-primary fw-bold me-2 filter-button selected" data-duration="all" type="button">Tous les pass</button>
+                        <button class="btn btn-primary fw-bold me-2 filter-button selected" data-duration="all" type="button">Tous les billets</button>
                         <button class="btn btn-primary fw-bold me-2 filter-button" data-duration="24" type="button">Pass 1 Jour</button>
                         <button class="btn btn-primary fw-bold me-2 filter-button" data-duration="48" type="button">Pass 2 Jours</button>
                         <button class="btn btn-primary fw-bold filter-button" data-duration="72" type="button">Pass 3 Jours</button>

@@ -4,7 +4,6 @@ namespace App\Controller\Back;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
@@ -40,24 +39,24 @@ class TicketController extends AbstractController
             'ticket' => $ticket,
         ]);
     }
-
     #[Route('/back/ticket_list/new', name: 'app_ticket_new_admin', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $ticket = new Ticket();
         $form = $this->createForm(TicketType::class, $ticket);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($ticket);
             $entityManager->flush();
-
+    
+            $this->addFlash('success', 'The ticket has been created successfully.');
             return $this->redirectToRoute('app_ticket_list_admin', [], Response::HTTP_SEE_OTHER);
         }
-
+    
         return $this->render('back/ticket/new.html.twig', [
             'ticket' => $ticket,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -66,18 +65,20 @@ class TicketController extends AbstractController
     {
         $form = $this->createForm(TicketType::class, $ticket);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-
+    
+            $this->addFlash('success', 'The ticket has been updated successfully.');
             return $this->redirectToRoute('app_ticket_list_admin', [], Response::HTTP_SEE_OTHER);
         }
-
+    
         return $this->render('back/ticket/edit.html.twig', [
             'ticket' => $ticket,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
+    
 
     #[Route('/back/ticket_list/{id<\d+>}/delete', name: 'app_ticket_delete_admin', methods: ['POST'])]
     public function delete(Request $request, Ticket $ticket, EntityManagerInterface $entityManager): Response

@@ -21,7 +21,7 @@
         <div class="row justify-content-center">
           <!-- Sort per day -->
           <div class="col-md-8 mb-3">
-            <a class="btn btn btn-success fw-bold mb-2" type="button" href="{{path('app_slot_new_admin')}}">Ajouter un créneau</a>
+            
             <div class="d-flex">
               <button class="btn btn-primary fw-bold me-2 filter-button selected" data-day="all" type="button">Tous les jours</button>
               <button class="btn btn-primary fw-bold me-2 filter-button" data-day="J1" type="button">Jour 1</button>
@@ -33,11 +33,14 @@
           <div class="col-md-8">
             <div class="card">
               <!-- Card title -->        
-              <div class="card-header d-flex justify-content-between align-items-center">
+              <div class="card-header d-flex justify-content-between align-items-center">              
                 <div>
-                    <span class="fs-2 fw-bold">Liste des créneaux</span>
-                    <span class="fs-5" id="day-title"> - Tous les jours</span>
+                  <span class="fs-2 fw-bold">Liste des créneaux</span>
+                  <span class="fs-5" id="day-title"> - Tous les jours</span>
                 </div>
+                  <a class="btn btn-success fw-bold" type="button" href="{{ path('app_slot_new_admin') }}">Ajouter un créneau</a>               
+                </div>
+
               </div>
               <div class="card-body">
                 <!-- No results message -->

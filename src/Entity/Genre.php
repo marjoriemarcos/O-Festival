@@ -6,6 +6,7 @@ use App\Repository\GenreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: GenreRepository::class)]
 class Genre
@@ -16,6 +17,7 @@ class Genre
     private ?int $id = null;
 
     #[ORM\Column(length: 64)]
+    #[Assert\Length(max: 64)]    
     private ?string $name = null;
 
     #[ORM\Column]
@@ -33,6 +35,7 @@ class Genre
     public function __construct()
     {
         $this->artists = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
