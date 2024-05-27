@@ -15,7 +15,6 @@ use IntlDateFormatter;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use App\Repository\TicketRepository;
 
 
 class InfosController extends AbstractController
