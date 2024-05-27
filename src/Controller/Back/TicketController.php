@@ -11,6 +11,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\TicketRepository;
 use App\Form\TicketType;
 use App\Entity\Ticket;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use App\Services\weezevent;
 
 class TicketController extends AbstractController
 {
@@ -94,5 +96,14 @@ class TicketController extends AbstractController
     
         return $this->redirectToRoute('app_ticket_list_admin');
     }
+
+    #[Route('/back/ticket_list/api', name: 'app_ticket_api', methods: ['GET'])]
+    public function ticketApiList(weezevent $weezevent)
+    {
+        $content = $weezevent->fetchTicketList();
+        return $this->json($content, Response::HTTP_FOUND);   
+        
+    }
+
     
 }
