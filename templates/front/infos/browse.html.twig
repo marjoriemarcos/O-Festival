@@ -85,8 +85,9 @@
 						</div>
 
 						<div class="form-group mb-3">
-							{{ form_label(form.message, 'Message', {'label_attr': {'class': 'light-yellow-txt'}}) }}
-							{{ form_widget(form.message, {'attr': {'class': 'form-control open-font', 'rows': 3, 'placeholder': 'Entrez votre message'}}) }}
+							{{ form_label(form.content, 'Content', {'label_attr': {'class': 'light-yellow-txt'}}) }}
+							{{ form_widget(form.content, {'attr': {'class': 'form-control open-font', 'rows': 3,
+								'placeholder': 'Entrez votre message'}}) }}
 							{% for error in form.name.vars.errors %}
 								<div class="alert alert-danger" role="alert">
 									{{ error.message }}

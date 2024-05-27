@@ -2,6 +2,8 @@
 
 namespace App\Controller\Front;
 
+use App\Entity\Contact;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -16,7 +18,7 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 class InfosController extends AbstractController
 {
     #[Route('/infos-pratiques', name: 'app_infos_browse')]
-    public function browse(Request $request, MailerInterface $mailer): Response
+    public function browse(Request $request, MailerInterface $mailer, EntityManagerInterface $entityManager): Response
     {
         $data = new ContactDTO();
         // crée un formulaire à partir de ContactType et lie les données, traite la requete HTTP
@@ -24,8 +26,18 @@ class InfosController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $contact = new Contact();
+            $contact->setName($data->name);
+            $contact->setEmail($data->email);
+            $contact->setContent($data->content);
+            $contact->setTreatment('A traiter');
+
+            $entityManager->persist($contact);
+            $entityManager->flush();
+
             $mail = (new TemplatedEmail())
-                ->to('nicolas.joubert@oclock.school')
+                ->to('ofestival@yahoo.com')
                 ->from($data->email)
                 ->subject('Information')
                 // définit le modèle de vue pour le corps du message
@@ -47,7 +59,7 @@ class InfosController extends AbstractController
         ]);
     }
 
-    #[Route('/infos-pratiques', name: 'app_infos_send_request', methods: 'POST')]
+    #[Route('/infos-pratiques/send', name: 'app_infos_send_request', methods: 'POST')]
     public function sendRequest(): Response
     {
         return $this->render('front/infos/browse.html.twig', [
