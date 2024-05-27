@@ -14,27 +14,28 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ContactType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
-        $builder
-            ->add('name', TextType::class, [
-                'empty_data' => '',
-            ])
-            ->add('email', EmailType::class, [
-                'empty_data' => '',
-            ])
-            ->add('message', TextareaType::class, [
-                'empty_data' => '',
-            ])
-            ->add('save', SubmitType::class, [
-                'label' => 'Envoyer'
-            ])
-        ;
-    }
+{
+    $builder
+        ->add('name', TextType::class, [
+            'empty_data' => '',
+        ])
+        ->add('email', EmailType::class, [
+            'empty_data' => '',
+        ])
+        ->add('content', TextareaType::class, [
+            'empty_data' => '',
+        ])
+
+        ->add('save', SubmitType::class, [
+            'label' => 'Envoyer'
+        ])
+    ;
+}
 
     public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => ContactDTO::class,
-        ]);
-    }
+{
+    $resolver->setDefaults([
+        'data_class' => ContactDTO::class,
+    ]);
+}
 }

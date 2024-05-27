@@ -2,6 +2,8 @@
 
 namespace App\Controller\Front;
 
+use App\Entity\Contact;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -13,12 +15,14 @@ use IntlDateFormatter;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use App\Repository\TicketRepository;
 
 
 class InfosController extends AbstractController
 {
     #[Route('/infos-pratiques', name: 'app_infos_browse')]
-    public function browse(Request $request, MailerInterface $mailer, TicketRepository $ticketRepository): Response
+    public function browse(Request $request, MailerInterface $mailer,TicketRepository $ticketRepository,
+                           EntityManagerInterface $entityManager): Response
     {
         // Récupérer les dates d'ouverture et de fermeture depuis la base de données
         $openingClosingDates = $ticketRepository->findOpeningAndClosingDates();
@@ -36,7 +40,16 @@ class InfosController extends AbstractController
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
-            // Envoyer l'email
+
+            $contact = new Contact();
+            $contact->setName($data->name);
+            $contact->setEmail($data->email);
+            $contact->setContent($data->content);
+            $contact->setTreatment('A traiter');
+
+            $entityManager->persist($contact);
+            $entityManager->flush();
+
             $mail = (new TemplatedEmail())
                 ->to('ofestival@gmail.com')
                 ->from($data->email)
@@ -58,7 +71,7 @@ class InfosController extends AbstractController
         ]);
     }
 
-    #[Route('/infos-pratiques', name: 'app_infos_send_request', methods: 'POST')]
+    #[Route('/infos-pratiques/send', name: 'app_infos_send_request', methods: 'POST')]
     public function sendRequest(): Response
     {
         return $this->render('front/infos/browse.html.twig', [
