@@ -7,6 +7,7 @@ use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use IntlDateFormatter;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SlotRepository::class)]
 class Slot
@@ -20,23 +21,33 @@ class Slot
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 64)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 64)]
     private ?string $hour = null;
 
-    #[ORM\Column]
+    #[ORM\Column]    
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true)]    
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\OneToOne(inversedBy: 'slot', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull]
     private ?Artist $artist = null;
 
     #[ORM\ManyToOne(inversedBy: 'slots')]
+    #[Assert\NotNull]
     private ?Stage $stage = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Length(max: 255)]
     private ?string $day = null;
+
+    public function __construct()
+    {        
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     /**
      * Formate la date au format "Jeudi 23 Mai 2024"

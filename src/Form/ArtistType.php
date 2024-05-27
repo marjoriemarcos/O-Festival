@@ -9,6 +9,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ArtistType extends AbstractType
 {
@@ -17,19 +19,21 @@ class ArtistType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('picture')
-            ->add('video')
-            ->add('website')
-            ->add('facebook')
-            ->add('twitter')
-            ->add('instagram')
-            ->add('spotify')
-            ->add('snapchat')
-            ->add('tiktok')
-            ->add('genres', EntityType::class, [
+            ->add('picture', UrlType::class, [])
+            ->add('video', UrlType::class, [ 'required' => false ])
+            ->add('website', UrlType::class, [ 'required' => false ])
+            ->add('facebook', UrlType::class, [ 'required' => false ])
+            ->add('twitter', UrlType::class, [ 'required' => false ])
+            ->add('instagram', UrlType::class, [ 'required' => false ])
+            ->add('spotify', UrlType::class, [ 'required' => false ])
+            ->add('snapchat', UrlType::class, [ 'required' => false ])
+            ->add('tiktok', UrlType::class, [ 'required' => false ])
+            ->add('genres', EntityType::class, [                
                 'class' => Genre::class,
-                'choice_label' => 'name', // Use 'title' for genre display
+                'choice_label' => 'name',
                 'multiple' => true,
+                'expanded' => true,
+                'by_reference' => false,                    
             ])
             ->add('slot', EntityType::class, [
                 'class' => Slot::class,

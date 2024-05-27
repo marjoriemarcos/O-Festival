@@ -10,14 +10,23 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Stage;
 use App\Form\StageType;
+use Knp\Component\Pager\PaginatorInterface;
 
 class StageController extends AbstractController
 {
     #[Route('/back/stage_list', name: 'app_stage_list_admin', methods: ['GET'])]
-    public function list(StageRepository $stageRepository): Response
+    public function list(StageRepository $stageRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // Fetch stages
-        $stageList = $stageRepository->findAll();
+        // Fetch stages with pagination
+        $query = $stageRepository->createQueryBuilder('s')
+            ->getQuery();
+
+        $stageList = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            5 // limit per page
+        );
+        
         return $this->render('back/stage/list.html.twig', [
             'stageList' => $stageList,
         ]);
