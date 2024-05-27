@@ -15,30 +15,26 @@ class MainController extends AbstractController
     {
         // Récupérer tous les artistes à partir du référentiel
         $artistBrowse = $artistRepository->findAllArtistsWithSlot();
-        // Préparer les passes avec leurs données associées
-        $passes = [
-            [
-                'data' => $ticketRepository->findDistinctFeesByDuration(0),
-                'title' => 'PASS 1 JOUR',
-                'image' => '../images/pass-1-jour.jpg',
-                'duration' => ' Vendredi 23 août - Samedi 24 août - Dimanche 25 août -'
-            ],
-            [
-                'data' => $ticketRepository->findDistinctFeesByDuration(1),
-                'title' => 'PASS 2 JOURS',
-                'image' => '../images/pass-2-jours.jpg',
-                'duration' => 'du Samedi 24 août au Dimanche 25 août'
-            ],
-            [
-                'data' => $ticketRepository->findDistinctFeesByDuration(2),
-                'title' => 'PASS 3 JOURS',
-                'image' => '../images/pass-3-jours.jpg',
-                'duration' => 'du Vendredi 23 août au Dimanche 25 août'
-            ]
-        ];
+        // Initialiser un tableau pour stocker les durées des billets
+        $durations = [24, 48, 72];
+        // Initialiser un tableau pour stocker les passes
+        $passes = [];
+
+        // Boucler sur chaque durée pour récupérer les billets correspondants
+        foreach ($durations as $duration) {
+            // Récupérer les billets pour la durée spécifiée
+            $tickets = $ticketRepository->findTicketsByDuration($duration);
+
+            // Ajouter les billets à la liste des passes
+            $passes[] = [
+                'data' => $tickets,
+                'title' => 'PASS ' . ($duration / 24) . ' JOUR(S)',
+                'image' => '../images/pass-' . ($duration / 24) . '-jours.jpg',
+            ];
+        }
         return $this->render('front/main/home.html.twig', [
             'artistBrowse' => $artistBrowse,
-            'passes'=> $passes
+            'passes' => $passes
         ]);
     }
 }

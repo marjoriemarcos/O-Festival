@@ -4,31 +4,33 @@
 {% endblock %}
 
 {% block main %}
+	<!-- Conteneur principal de la page d'accueil -->
 	<div class="container-home dark-blue-bg roboto-font">
-		<img
-		src="{{asset('images/frise-1.png')}}" class="card-img-top">
+		<!-- Frise supérieure -->
+		<img src="{{asset('images/frise-1.png')}}" class="card-img-top">
 
-		<!-- Video Home -->
+		<!-- Vidéo d'accueil -->
 		<div class="container-home-video container-fluid text-center position-relative d-flex align-items-center justify-content-center">
 			<video autoplay loop muted plays-inline class="home-video">
 				<source src="{{asset('images/video-home.mp4')}}" type="video/mp4">
 			</video>
 			<h1 class="home-title text-white adumu-font">O'FESTIVAL</h1>
 		</div>
-		<img
-		src="{{asset('images/frise-2.png')}}" class="card-img-top">
 
-		<!-- Line-up -->
+		<!-- Frise intermédiaire -->
+		<img src="{{asset('images/frise-2.png')}}" class="card-img-top">
+
+		<!-- Programmation -->
 		<div class="container-home-programming d-flex flex-column">
 
-			<h2 class="home-programming-title py-5 px-5 medium-blue-bg text-white ">
+			<!-- Titre de la section Programmation -->
+			<h2 class="home-programming-title py-5 px-5 medium-blue-bg text-white">
 				Programmation
 			</h2>
 
-			<div
-				class="home-programming-slide row gx-1 px-5">
-
-				<!-- Artist Card -->
+			<!-- Liste déroulante des artistes -->
+			<div class="home-programming-slide row gx-1 px-5">
+				<!-- Carte de l'artiste -->
 				{% for artist in artistBrowse %}
 					<div class="home-programming-slide-artist current-card col-md-3">
 						<div class="card img-zoom">
@@ -37,41 +39,43 @@
 								<div class="card-img-overlay d-flex flex-column justify-content-end">
 									<h3 class="card-title text-white mb-0">{{ artist.name }}</h3>
 									<p class="card-text text-white">
-										{{artist.slot.getFormattedDate() }}
+										{{ artist.slot.getFormattedDate() }}
 										-
 										{{ artist.genres|map(genre => genre.name)|join(' - ') }}
-
 									</p>
 								</div>
 							</a>
 						</div>
 					</div>
+					<!-- Fin de la carte de l'artiste -->
 				{% endfor %}
 
-				<!-- Back button for browsing through artists -->
+				<!-- Boutons de navigation pour parcourir les artistes -->
 				<section class="home-programming-slide-direction">
 					<span class="home-programming-slide-prev" type="button" aria-label="Précédent">❮</span>
 					<span class="home-programming-slide-next" type="button" aria-label="Précédent">❯</span>
 				</section>
 			</div>
 
-			<!-- Link to the Line-Up page -->
+			<!-- Lien vers la page Line-Up -->
 			<div class="home-programming-slide-link text-center">
 				<a href="{{path('app_artist_browse')}}" class="btn btn-primary light-yellow-bg dark-blue-txt">Toute la programmation</a>
 			</div>
 		</div>
 
+		<!-- Billetterie -->
+		<div
+			class="container-home-ticketing d-flex flex-column">
 
-		<!-- Ticket Shop -->
-		<div class="container-home-ticketing d-flex flex-column">
-
+			<!-- Titre de la section Billetterie -->
 			<h2 class="home-ticket-title py-5 px-5 medium-blue-bg text-white">
 				Billetterie
 			</h2>
-			
+
+			<!-- Liste des billets -->
 			<div
 				class="home-ticket-list row justify-content-around mx-3 mb-2 mt-3">
-				<!-- Ticket -->
+				<!-- Billet -->
 				{% for pass in passes %}
 					{% if pass.data is not empty %}
 						<div class="home-ticket col-md-3 mb-2">
@@ -88,7 +92,7 @@
 				{% endfor %}
 			</div>
 
-			<!-- Link to the ticket shop -->
+			<!-- Lien vers la billetterie -->
 			{{ include('front/fragments/_ticket_button.html.twig', {'button_label': 'Acheter maintenant'}) }}
 		</div>
 	</div>
