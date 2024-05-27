@@ -36,6 +36,7 @@ class Stage
     public function __construct()
     {
         $this->slots = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
