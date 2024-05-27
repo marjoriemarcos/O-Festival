@@ -13,12 +13,14 @@ use Mailgun\Mailgun;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use App\Repository\TicketRepository;
 
 
 class InfosController extends AbstractController
 {
     #[Route('/infos-pratiques', name: 'app_infos_browse')]
-    public function browse(Request $request, MailerInterface $mailer, EntityManagerInterface $entityManager): Response
+    public function browse(Request $request, MailerInterface $mailer,TicketRepository $ticketRepository,
+                           EntityManagerInterface $entityManager): Response
     {
         $data = new ContactDTO();
         // crée un formulaire à partir de ContactType et lie les données, traite la requete HTTP
@@ -37,7 +39,7 @@ class InfosController extends AbstractController
             $entityManager->flush();
 
             $mail = (new TemplatedEmail())
-                ->to('ofestival@yahoo.com')
+                ->to('ofestival@gmail.com')
                 ->from($data->email)
                 ->subject('Information')
                 // définit le modèle de vue pour le corps du message

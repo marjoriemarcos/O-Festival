@@ -9,7 +9,6 @@ use App\Repository\CustomerRepository;
 use App\Entity\Customer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use App\Repository\ContactRepository;
 
 class CustomerController extends AbstractController
 {
