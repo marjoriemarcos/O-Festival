@@ -59,7 +59,7 @@ class InfosController extends AbstractController
             $this->addFlash('success_contact', 'Votre message a bien été envoyé');
 
             return $this->redirectToRoute('app_infos_browse');
-        } else {
+        } elseif  ($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash('error_contact', 'Merci de vérifier le formulaire de contact');
         }
 
