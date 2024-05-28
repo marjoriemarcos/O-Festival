@@ -15,7 +15,6 @@ use IntlDateFormatter;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use App\Repository\TicketRepository;
 
 
 class InfosController extends AbstractController
@@ -33,12 +32,12 @@ class InfosController extends AbstractController
         $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
         $openingFormatted = $formatter->format($openingDate);
         $closingFormatted = $formatter->format($closingDate);
-    
+
         // Créer le formulaire de contact
         $data = new ContactDTO();
         $form = $this->createForm(ContactType::class, $data);
         $form->handleRequest($request);
-    
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             $contact = new Contact();
@@ -51,23 +50,26 @@ class InfosController extends AbstractController
             $entityManager->flush();
 
             $mail = (new TemplatedEmail())
-                ->to('ofestival@gmail.com')
+                ->to('ofestival2024@gmail.com')
                 ->from($data->email)
                 ->subject('Information')
                 ->htmlTemplate('emails/contact.html.twig')
                 ->context(['data' => $data]);
             $mailer->send($mail);
-            $this->addFlash('success', 'Votre message a bien été envoyé');
-    
+            $this->addFlash('success_contact', 'Votre message a bien été envoyé');
+
             return $this->redirectToRoute('app_infos_browse');
+        } else {
+            $this->addFlash('error_contact', 'Merci de vérifier le formulaire de contact');
         }
-    
+
+
         // Rendre la vue avec les données
         return $this->render('front/infos/browse.html.twig', [
             'controller_name' => 'InfosController',
-            'form' => $form->createView(),
-            'openingDate' => $openingFormatted,
-            'closingDate' => $closingFormatted,
+            'form'            => $form->createView(),
+            'openingDate'     => $openingFormatted,
+            'closingDate'     => $closingFormatted,
         ]);
     }
 
@@ -79,3 +81,4 @@ class InfosController extends AbstractController
         ]);
     }
 }
+
