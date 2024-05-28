@@ -214,28 +214,60 @@ body {
 }
 
 /* SLIDE LINE-UP */
+.home-programming-slide {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.home-programming-slide-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%; 
+}
+
+.home-programming-slide-artist {
+    flex: 0 0 25%; 
+    box-sizing: border-box;
+    padding: 0 0.25rem; 
+}
+.home-programming-slide {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: transform 0.3s ease;
+}
+
+.home-programming-slide-artist {
+    flex: 0 0 auto;
+    width: 25%; /* Ajustez cette valeur selon le nombre d'éléments par page */
+    box-sizing: border-box;
+}
+
 .home-programming-slide-prev,
 .home-programming-slide-next {
-    font-size: 3rem;
-    color: var(--yellow);
+    cursor: pointer;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    transition:0.3s;
+    z-index: 1;
+    font-size: 3rem;
+    color: var(--yellow);
+    transition: 0.3s;
     text-decoration: none;
 }
-.home-programming-slide-prev {
-    left: 0.5%;
-}
-.home-programming-slide-next {
-    right: 0.5%;
-}
+
 .home-programming-slide-prev:hover,
 .home-programming-slide-next:hover {
     color: var(--dark_yellow);
 }
-.home-programming-slide{
-    position: relative;
+
+.home-programming-slide-prev {
+    left: 0.5%;
+}
+
+.home-programming-slide-next {
+    right: 0.5%;
 }
 
 
@@ -541,6 +573,19 @@ body {
     .artist-informations-stage{
         text-align: left;
     }
+
+    .home-programming-slide-artist {
+        flex: 0 0 100%; /* Une seule carte par ligne en dessous de 767px */
+        box-sizing: border-box;
+        padding: 0 0.25rem; /* Espacement horizontal entre les cartes */
+    }
+    
+    .home-programming-slide-inner {
+        display: flex;
+        transition: transform 0.5s ease;
+        width: 100%; /* S'assure que les éléments ne débordent pas */
+    }
+
 }
 
 @media (max-width: 710px) {
