@@ -34,8 +34,8 @@ class ArtistController extends AbstractController
         $slots = $slotRepository->findAll();
         // Récupération de tous les stages
         $stageList = $stageRepository->findAll();
-        // Récupération de 4 les genre
-        $genreList = $genreRepository->limitedGenre();
+        // Récupération des genres
+        $genreList = $genreRepository->findGenresOfArtistsWithSlot();
 
         return $this->render('front/artist/browse.html.twig', [
             "artistBrowse" => $artistBrowse,
@@ -64,7 +64,7 @@ class ArtistController extends AbstractController
         GenreRepository $genreRepository): Response {
         $slots = $slotRepository->findAll();
         $stageList = $stageRepository->findAll();
-        $genreList = $genreRepository->limitedGenre();
+        $genreList = $genreRepository->findGenresOfArtistsWithSlot();
         $artistBrowse = $artistRepository->findAllArtistByParams($date, null, null);
         return $this->render('front/artist/browse.html.twig', [
             'artistBrowse' => $artistBrowse,
@@ -95,7 +95,7 @@ class ArtistController extends AbstractController
         {
         $slots = $slotRepository->findAll();
         $stageList = $stageRepository->findAll();
-        $genreList = $genreRepository->limitedGenre();
+        $genreList = $genreRepository->findGenresOfArtistsWithSlot();
         $artistBrowse = $artistRepository->findAllArtistByParams(null, null, $stage);
         return $this->render('front/artist/browse.html.twig', [
             'artistBrowse' => $artistBrowse,
@@ -126,7 +126,7 @@ class ArtistController extends AbstractController
         {
         $slots = $slotRepository->findAll();
         $stageList = $stageRepository->findAll();
-        $genreList = $genreRepository->limitedGenre();
+        $genreList = $genreRepository->findGenresOfArtistsWithSlot();
         $artistBrowse = $artistRepository->findAllArtistByParams(null, $genre, null);
 
         return $this->render('front/artist/browse.html.twig', [

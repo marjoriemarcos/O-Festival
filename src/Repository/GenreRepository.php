@@ -29,6 +29,20 @@ class GenreRepository extends ServiceEntityRepository
        ;
    }
 
+    /**
+     * Récupère les genres des artistes présents dans les slots.
+     *
+     * @return Genre[] Returns an array of Genre objects
+     */
+    public function findGenresOfArtistsWithSlot(): array
+    {
+        return $this->createQueryBuilder('g')
+            ->innerJoin('g.artists', 'a') // Joindre la table pivot via l'entité Artist
+            ->innerJoin('App\Entity\Slot', 's', 'WITH', 's.artist = a.id') // Joindre les slots
+            ->groupBy('g.id') // Regrouper par genre pour éviter les doublons
+            ->getQuery()
+            ->getResult();
+    }
 //    public function findOneBySomeField($value): ?Genre
 //    {
 //        return $this->createQueryBuilder('g')
