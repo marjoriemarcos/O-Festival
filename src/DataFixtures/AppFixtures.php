@@ -48,6 +48,8 @@ class AppFixtures extends Fixture
 
         // Artiste
         $artistList = [];
+        $selectedGenres = (array) array_rand($genreList, 5);
+        
         for ($i = 0; $i < 20; $i++) {
             $artist = (new Artist())
                 ->setName($faker->unique()->singerName())
@@ -55,19 +57,22 @@ class AppFixtures extends Fixture
                 ->setPicture($faker->unique()->singerPicture())
                 ->setVideo('https://www.youtube.com/embed/UvEwfQvVSGg?si=ZSXsQd_1zxTxu6jX')
                 ->setCreatedAt(new DateTimeImmutable('now', $timezone));
+            
             for ($j = 1; $j <= mt_rand(1, 2); $j++) {
-                $artist->addGenre($genreList[array_rand($genreList)]);
+                // Associer un des 4 genres sélectionnés aléatoirement
+                $artist->addGenre($genreList[$selectedGenres[array_rand($selectedGenres)]]);
             }
+            
             $manager->persist($artist);
             $artistList[] = $artist;
-        };
+        }
 
         // Slot
         $hour = [
-            '16 heures à 18 heures',
-            '18 heures à 20 heures',
-            '20 heures à 22 heures',
-            '22 heures à minuit',
+            '16h00 à 18h00',
+            '18h00 à 20h00',
+            '20h00 à 22h00',
+            '22h00 à 00h00',
         ];
 
         $dateDay = [
@@ -122,8 +127,8 @@ class AppFixtures extends Fixture
         ];
 
         // Dates du festival
-        $festivalStartDate = new DateTimeImmutable('2024-05-23');
-        $festivalEndDate = new DateTimeImmutable('2024-05-25');
+        $festivalStartDate = new DateTimeImmutable('2024-08-23');
+        $festivalEndDate = new DateTimeImmutable('2024-08-25');
 
         // Génération des tickets pour chaque jour (vendredi, samedi, dimanche)
         for ($i = 0; $i < 3; $i++) {

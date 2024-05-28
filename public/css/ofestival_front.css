@@ -29,12 +29,10 @@
     font-family: var(--font_roboto);
     text-transform: uppercase;
     font-weight: 800;
-
 }
 .open-font {
     font-family: 'Open Sans', sans-serif;
 }
-
 h1{
     font-size: 5rem;
 }
@@ -75,7 +73,6 @@ h2{
 .dark-yellow-bg {
     background-color: var(--dark_yellow);
 }
-
 .background-img-bg{
     background-image:url(../../images/back-ground.png);
     background-size: cover;
@@ -114,12 +111,10 @@ body {
     font-size: 2rem;  
     position: relative;
 }
-
 .nav-menu{
     display: flex;
     margin: 0;
 }
-
 .nav-link:hover,
 .nav-link:focus {
     color: var( --light_yellow);
@@ -140,7 +135,6 @@ body {
 .navbar-logo img {
     height: 10vh;
 }
-
 
 /** --------- BUTTONS --------- **/
 
@@ -173,7 +167,6 @@ body {
     margin-bottom: 20px;
     margin-right: 10px;
     padding-left: 10px;
-   
 }
 .btn-day:hover,
 .btn-day:focus {
@@ -213,39 +206,35 @@ body {
     z-index: 2;
 }
 
-/* SLIDE LINE-UP */
-.home-programming-slide {
+/* SLIDE ARTISTS  */
+
+.home-artist-list-slide {
     overflow: hidden;
     position: relative;
     width: 100%;
 }
 
-.home-programming-slide-inner {
+.home-artist-list-slide-inner {
     display: flex;
     transition: transform 0.5s ease;
     width: 100%; 
 }
 
-.home-programming-slide-artist {
-    flex: 0 0 25%; 
-    box-sizing: border-box;
-    padding: 0 0.25rem; 
-}
-.home-programming-slide {
+.home-artist-list-slide {
     display: flex;
     overflow: hidden;
     white-space: nowrap;
     transition: transform 0.3s ease;
 }
-
-.home-programming-slide-artist {
+.home-artist-list-slide-artist {
+    box-sizing: border-box;
+    padding: 0 0.25rem; 
     flex: 0 0 auto;
-    width: 25%; /* Ajustez cette valeur selon le nombre d'éléments par page */
+    width: 25%;
     box-sizing: border-box;
 }
-
-.home-programming-slide-prev,
-.home-programming-slide-next {
+.home-artist-list-slide-prev,
+.home-artist-list-slide-next {
     cursor: pointer;
     position: absolute;
     top: 50%;
@@ -256,20 +245,16 @@ body {
     transition: 0.3s;
     text-decoration: none;
 }
-
-.home-programming-slide-prev:hover,
-.home-programming-slide-next:hover {
+.home-artist-list-slide-prev:hover,
+.home-artist-list-slide-next:hover {
     color: var(--dark_yellow);
 }
-
-.home-programming-slide-prev {
+.home-artist-list-slide-prev {
     left: 0.5%;
 }
-
-.home-programming-slide-next {
+.home-artist-list-slide-next {
     right: 0.5%;
 }
-
 
 /** --------- CARD --------- **/
 
@@ -277,29 +262,71 @@ body {
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     height: 85%;
-}
-.img-zoom {
     overflow: hidden;
 }
+
+.card-artist{
+    margin-bottom: -2%;
+}
+
+.img-zoom {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
 .img-zoom img {
-    height: 100%;
-    width: 100%;
     transition: all 300ms ease-in-out;
+    height: 45vh; 
+    width: 100%; 
+    object-fit: cover;
 }
-.ticket-card-image img{
-    height: 100%;
-    width: 100%;
-    object-fit: fill;
-}
+
 .img-zoom:hover img {
     transform: scale(1.05);
 }
-.card h3 {
-    font-size: 3rem;
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+    transition: all 300ms ease-in-out;
+    pointer-events: none;
 }
+
+.card-img-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 300ms ease-in-out;
+}
+
+.card-img-overlay:hover .overlay {
+    height: 0; 
+}
+
+.card-img-overlay:hover img {
+    transform: scale(1.05);
+}
+
+.card h3 {
+    font-size: 2.25rem;
+}
+
 .card p {
     font-size: 0.9em;
 }
+
+.card a {
+    height: 100%;
+}
+
+
 
 /** --------- TICKETING --------- **/
 
@@ -311,17 +338,16 @@ body {
     font-weight: 800;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
 }
-
 .ticket-card-image{
     height: 40%;
 }
-
-
+.ticket-card-image img{
+    max-height: none;
+}
 .ticket-card-info-price{
     font-size: 2.25rem;
     color: var(--dark_yellow);
 }
-
 .ticket-card-content h3{
     width: 80%; 
     margin: auto;
@@ -331,13 +357,23 @@ body {
 .ticket-card-content h3:last-child {
     border-bottom: 2px solid var(--dark_yellow);
 }
-
 .ticket-card-content{
     font-size: 1.6rem;
 }
 .ticket-card-content .btn{
     width: 75%;
     font-size: 1rem;
+}
+
+.overlay-ticketing{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
+    transition: all 300ms ease-in-out;
+    pointer-events: none;
 }
 
 /** --------- ARTIST --------- **/
@@ -350,6 +386,9 @@ body {
     width: 100%;
     height: 100%; 
     object-fit: cover;
+}
+.artist-image img{
+    max-height: 90vh;
 }
 .artist-informations{
     background-color: white;
@@ -380,7 +419,6 @@ body {
 
 /** --------- SOCIAL-NETWORKS --------- **/
 
-
 .footer {
     display: flex;
     flex-wrap: wrap;
@@ -388,7 +426,6 @@ body {
     text-align: center;
     font-size: 2rem;
 }
-
 .social-icons,
 .nav-links {
     display: flex;
@@ -396,7 +433,6 @@ body {
     align-items: center;
     margin: 1rem 0;
 }
-
 .nav-link:hover {
     color: var(--light_yellow);
 }
@@ -433,7 +469,6 @@ body {
 .container-error404{
     height: 100vh;
 }
-
 .error404-content{
     position: relative;
 }
@@ -470,6 +505,12 @@ body {
     }
     .ticket-card-info-price{
         font-size: 1.5rem;
+    }
+    .card h3 {
+        font-size: 1.5rem;
+    }
+    .card p {
+        font-size: 1rem;
     }
 }
 
@@ -514,13 +555,17 @@ body {
         font-size: 2rem;
     }
     .card h3 {
-        font-size: 1.5rem;
-    }
-    .card p {
         font-size: 1rem;
     }
+    .card p {
+        font-size: 0.75rem;
+    }
 }
-
+@media (max-width: 991px) {
+    .artist-image img{
+        max-height: 45vh;
+    }
+}
 @media (max-width: 765px) {
     .info-img > img {
         height: 300px;
@@ -547,7 +592,7 @@ body {
     .container-home-video {
         height: 35vh;
     }
-    .home-programming-slide-artist:nth-child(n+2) {
+    .home-artist-list-slide-artist:nth-child(n+2) {
         display: none;
     }
     .card h3 {
@@ -566,7 +611,7 @@ body {
         width: auto;
     }
 
-    .line-up-sorting .btn{
+    .artist-list-sorting .btn{
         width: auto;
     }
     .artist-informations-show-day,
@@ -574,16 +619,16 @@ body {
         text-align: left;
     }
 
-    .home-programming-slide-artist {
-        flex: 0 0 100%; /* Une seule carte par ligne en dessous de 767px */
+    .home-artist-list-slide-artist {
+        flex: 0 0 100%;
         box-sizing: border-box;
-        padding: 0 0.25rem; /* Espacement horizontal entre les cartes */
+        padding: 0 0.25rem;
     }
     
-    .home-programming-slide-inner {
+    .home-artist-list-slide-inner {
         display: flex;
         transition: transform 0.5s ease;
-        width: 100%; /* S'assure que les éléments ne débordent pas */
+        width: 100%;
     }
 
 }
@@ -607,5 +652,12 @@ body {
     }
     .informations-content > p {
         font-size: 13px;
+    }
+
+    .card h3 {
+        font-size: 2rem;
+    }
+    .card p {
+        font-size: 1.5rem;
     }
 }
