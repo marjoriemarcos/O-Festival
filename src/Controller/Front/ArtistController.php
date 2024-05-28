@@ -1,10 +1,11 @@
+<?php
+
 namespace App\Controller\Front;
 
 use App\Repository\ArtistRepository;
 use App\Repository\GenreRepository;
 use App\Repository\SlotRepository;
 use App\Repository\StageRepository;
-use App\Services\fetchDataFromRepo as ServicesFetchDataFromRepo;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -12,37 +13,47 @@ use Symfony\Component\Routing\Attribute\Route;
 class ArtistController extends AbstractController
 {
     /**
-     * Displays the list of artists with associated slots.
+     * Affiche la liste des artistes avec des slots associés.
      *
-     * @param ServicesFetchDataFromRepo $fetchDataFromRepo The service that fetches data from the repositories
-     * @return Response The HTTP response containing the list of artists.
+     * @param ArtistRepository $artistRepository Le repository des artistes.
+     * @param StageRepository $stageRepository Le repository des stage.
+     * @param SlotRepository $slotRepository Le repository des dates.
+     * @param GenreRepository $genreRepository Le repository des genres. 
+     * @return Response La réponse HTTP contenant la liste des artistes.
      */
     #[Route('/programmation', name: 'app_artist_browse')]
-    public function browse(ServicesFetchDataFromRepo $fetchDataFromRepo): Response
+    public function browse(
+        ArtistRepository $artistRepository, 
+        SlotRepository $slotRepository,
+        StageRepository $stageRepository,
+        GenreRepository $genreRepository): Response
     {
-        // Fetch all artists with associated slots
+        // Récupération de tous les artistes avec des slots associés
         $artistBrowse = $artistRepository->findAllArtistByParams();
-        // Fetch all slots
+        // Récupération de tous les slots
         $slots = $slotRepository->findAll();
-        // Fetch all stages
+        // Récupération de tous les stages
         $stageList = $stageRepository->findAll();
-        // Fetch all genres
+        // Récupération des genres
         $genreList = $genreRepository->findGenresOfArtistsWithSlot();
 
         return $this->render('front/artist/browse.html.twig', [
-            'artistBrowse' => $data['artistList'],
-            'slots' => $data['slotList'],
-            'stageList' => $data['stageList'],
-            'genreList' => $data['genreList']
+            "artistBrowse" => $artistBrowse,
+            "slots" => $slots,
+            'stageList' => $stageList,
+            'genreList' => $genreList
         ]);
     }
 
     /**
-     * Displays the artists associated with a specific date.
+     * Affiche les artistes associés à une date spécifique.
      *
-     * @param string $date The date in 'Y-m-d' format.
-     * @param ServicesFetchDataFromRepo $fetchDataFromRepo The service that fetches data from the repositories
-     * @return Response The HTTP response containing the artists associated with the date.
+     * @param string $date La date au format 'Y-m-d'.
+     * @param ArtistRepository $artistRepository Le repository des artistes.
+     * @param StageRepository $stageRepository Le repository des stage.
+     * @param SlotRepository $slotRepository Le repository des dates.
+     * @param GenreRepository $genreRepository Le repository des genres. 
+     * @return Response La réponse HTTP contenant les artistes associés à la date.
      */
     #[Route('/programmation/{date}', name: 'app_artist_browse_by_date', methods: ['GET'])]
     public function browseByDate( 
@@ -56,78 +67,97 @@ class ArtistController extends AbstractController
         $genreList = $genreRepository->findGenresOfArtistsWithSlot();
         $artistBrowse = $artistRepository->findAllArtistByParams($date, null, null);
         return $this->render('front/artist/browse.html.twig', [
-            'artistBrowse' => $data['artistList'],
+            'artistBrowse' => $artistBrowse,
             'date' => $date,
-            'slots' => $data['slotList'],
-            'stageList' => $data['stageList'],
-            'genreList' => $data['genreList']
+            "slots" => $slots,
+            'stageList' => $stageList,
+            'genreList' => $genreList
         ]);
     }
 
     /**
-     * Displays the artists associated with a specific stage.
+     * Affiche les artistes associés à une scène spécifique.
      *
-     * @param int $stage The ID of the stage.
-     * @param ServicesFetchDataFromRepo $fetchDataFromRepo The service that fetches data from the repositories
-     * @return Response The HTTP response containing the artists associated with the stage.
+     * @param int $stage id de la scène'.
+     * @param ArtistRepository $artistRepository Le repository des artistes.
+     * @param StageRepository $stageRepository Le repository des stage.
+     * @param SlotRepository $slotRepository Le repository des dates.
+     * @param GenreRepository $genreRepository Le repository des genres. 
+     * @return Response La réponse HTTP contenant les artistes associés à une scène.
      */
     #[Route('/programmation/scene/{stage}', name: 'app_artist_browse_by_stage', methods: ['GET'])]
-    public function browseByStage (int $stage, ServicesFetchDataFromRepo $fetchDataFromRepo): Response 
+    public function browseByStage (
+        int $stage, 
+        ArtistRepository $artistRepository,
+        SlotRepository $slotRepository,
+        StageRepository $stageRepository,
+        GenreRepository $genreRepository): Response 
         {
         $slots = $slotRepository->findAll();
         $stageList = $stageRepository->findAll();
         $genreList = $genreRepository->findGenresOfArtistsWithSlot();
         $artistBrowse = $artistRepository->findAllArtistByParams(null, null, $stage);
-
         return $this->render('front/artist/browse.html.twig', [
-            'artistBrowse' => $data['artistList'],
-            'slots' => $data['slotList'],
-            'stageList' => $data['stageList'],
-            'genreList' => $data['genreList']
+            'artistBrowse' => $artistBrowse,
+            "slots" => $slots,
+            'stageList' => $stageList,
+            'genreList' => $genreList
+            
         ]);
     }
 
     /**
-     * Displays the artists associated with a specific genre.
+     * Affiche les artistes associés à un genre spécifique.
      *
-     * @param int $genre The ID of the genre.
-     * @param ServicesFetchDataFromRepo $fetchDataFromRepo The service that fetches data from the repositories
-     * @return Response The HTTP response containing the artists associated with the genre.
+     * @param int $genre id de genre.
+     * @param ArtistRepository $artistRepository Le repository des artistes.
+     * @param StageRepository $stageRepository Le repository des stage.
+     * @param SlotRepository $slotRepository Le repository des dates.
+     * @param GenreRepository $genreRepository Le repository des genres. 
+     * @return Response La réponse HTTP contenant les artistes associés à un genre.
      */
     #[Route('/programmation/genre/{genre}', name: 'app_artist_browse_by_genre', methods: ['GET'])]
-    public function browseByGenre (int $genre, ServicesFetchDataFromRepo $fetchDataFromRepo ): Response 
+    public function browseByGenre (
+        int $genre, 
+        ArtistRepository $artistRepository,
+        SlotRepository $slotRepository,
+        StageRepository $stageRepository,
+        GenreRepository $genreRepository ): Response 
         {
-			
         $slots = $slotRepository->findAll();
         $stageList = $stageRepository->findAll();
         $genreList = $genreRepository->findGenresOfArtistsWithSlot();
         $artistBrowse = $artistRepository->findAllArtistByParams(null, $genre, null);
 
         return $this->render('front/artist/browse.html.twig', [
-            'artistBrowse' => $data['artistList'],
-            'slots' => $data['slotList'],
-            'stageList' => $data['stageList'],
-            'genreList' => $data['genreList']
+            'artistBrowse' => $artistBrowse,
+            "slots" => $slots,
+            'stageList' => $stageList,
+            'genreList' => $genreList
+            
         ]);
     }
 
     /**
-     * Displays the details of an artist with associated slots.
+     * Affiche les détails d'un artiste avec des slots associés.
      *
-     * @param int $id The ID of the artist to display.
-     * @param ArtistRepository $artistRepository The repository of the artists.
-     * @return Response The HTTP response containing the artist's details.
+     * @param int $id L'ID de l'artiste à afficher.
+     * @param ArtistRepository $artistRepository Le repository des artistes.
+     * @return Response La réponse HTTP contenant les détails de l'artiste.
      */
     #[Route('/programmation/artiste/{id}', name: 'app_artist_read', requirements: ['id' => '\d+'])]
-    public function read(int $id, ArtistRepository $artistRepository): Response {
-        // Fetch the artist with associated slots by their ID
+    public function read(
+        int $id,
+        ArtistRepository $artistRepository
+    ): Response {
+        // Récupération de l'artiste avec des slots associés par son ID
         $artist = $artistRepository->findArtistWithSlot($id);
-        // Check if the artist exists
+        // Vérification si l'artiste existe
         if (!$artist) {
-            // Throw an exception if the artist does not exist
-            throw $this->createNotFoundException('This artist is not in the program!');
+            // Lancer une exception si l'artiste n'existe pas
+            throw $this->createNotFoundException('Cet artiste n\'est pas au programme!');
         }
-        // Render the template to display the artist's details
+        // Rendu du template pour afficher les détails de l'artiste
         return $this->render('front/artist/read.html.twig', [
             'artist' => $artist
         ]);
