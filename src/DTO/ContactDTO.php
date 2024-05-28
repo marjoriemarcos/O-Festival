@@ -6,15 +6,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class ContactDTO
 {
-    #[Assert\NotBlank]
-    #[Assert\Length(min: 3, max: 200)]
+    #[Assert\NotBlank(message: 'Merci d\'indiquer votre nom')]
+    #[Assert\Length(min: 3, max: 200, minMessage: '3 caractères minimum')]
     public string $name = '';
 
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Merci de remplir votre email')]
     #[Assert\Email]
-    public string $email ='';
+    public string $email = '';
 
-    #[Assert\NotBlank]
-    #[Assert\Length(min: 3, max: 200)]
-    public string $content ='';
+    #[Assert\NotBlank(message: 'Merci de remplir ce champ')]
+    #[Assert\Length(min: 3, max: 200, minMessage: '3 caractères minimum')]
+    public string $content = '';
 }

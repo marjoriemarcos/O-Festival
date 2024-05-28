@@ -17,17 +17,43 @@ class ContactType extends AbstractType
 {
     $builder
         ->add('name', TextType::class, [
-            'empty_data' => '',
+            'label' => 'Votre nom',
+            'attr' => [
+                'class' => 'form-control open-font',
+                'placeholder' => 'Entrez votre nom',
+            ],
+            'label_attr' => [
+                'class' => 'light-yellow-txt',
+            ]
         ])
         ->add('email', EmailType::class, [
-            'empty_data' => '',
+            'label' => 'Votre email',
+            'attr' => [
+                'class' => 'form-control open-font',
+                'placeholder' => 'Entrez votre email',
+            ],
+            'label_attr' => [
+                'class' => 'light-yellow-txt',
+            ],
         ])
         ->add('content', TextareaType::class, [
-            'empty_data' => '',
+            'label' => 'Votre message',
+            'attr' => [
+                'class' => 'form-control open-font',
+                'rows' => 3,
+                'placeholder' => 'Entrez votre message',
+            ],
+            'label_attr' => [
+                'class' => 'light-yellow-txt',
+            ]
         ])
 
         ->add('save', SubmitType::class, [
-            'label' => 'Envoyer'
+            'label' => 'Envoyer',
+            'attr' => [
+                'class' => 'btn btn-primary light-yellow-bg dark-blue-txt',
+            ]
+
         ])
     ;
 }
