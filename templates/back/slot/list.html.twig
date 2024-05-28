@@ -1,12 +1,5 @@
 {% extends 'back/base.html.twig' %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/slotButtonsSort.js') }}"></script>
-    <script src="{{ asset('js/backTablesSort.js') }}"></script>
-    <script src="{{ asset('js/search.js') }}"></script>
-{% endblock %}
-
 {% block title %}Liste des créneaux{% endblock %}
 
 {% block main %}
@@ -35,8 +28,7 @@
               <!-- Card title -->        
               <div class="card-header d-flex justify-content-between align-items-center">              
                 <div>
-                  <span class="fs-2 fw-bold">Liste des créneaux</span>
-                  <span class="fs-5" id="day-title"> - Tous les jours</span>
+                  <span class="fs-2 fw-bold "id="day-title">Tous les jours</span>
                 </div>
                   <a class="btn btn-success fw-bold" type="button" href="{{ path('app_slot_new_admin') }}">Ajouter un créneau</a>               
                 </div>
