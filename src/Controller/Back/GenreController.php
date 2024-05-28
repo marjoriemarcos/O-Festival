@@ -18,16 +18,21 @@ class GenreController extends AbstractController
     #[Route('/back/genre_list', name: 'app_genre_list_admin', methods: ['GET'])]
     public function list(GenreRepository $genreRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        //fetch genres with pagination
-        $query = $genreRepository->createQueryBuilder('g')
-            ->getQuery();
-        
+        // Create QueryBuilder to fetch genres
+        $queryBuilder = $genreRepository->createQueryBuilder('g')
+            ->orderBy('g.name', 'ASC'); // Order by genre name
+    
+        // Get the query from QueryBuilder
+        $query = $queryBuilder->getQuery();
+    
+        // Paginate the query
         $genreList = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            5 // limit per page
+            5 // Limit per page
         );
-
+    
+        // Render the template with the paginated list
         return $this->render('back/genre/list.html.twig', [
             'genreList' => $genreList,
         ]);

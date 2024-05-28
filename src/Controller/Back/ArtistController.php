@@ -11,28 +11,38 @@ use App\Form\ArtistType;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\ArtistRepository;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 
 class ArtistController extends AbstractController
 {
+
     #[Route('/back/artist_list', name: 'app_artist_list_admin', methods: ['GET'])]
     public function list(ArtistRepository $artistRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // Fetch artists with pagination
-        $query = $artistRepository->createQueryBuilder('a')
-            ->getQuery();
-    
+        // Create QueryBuilder to fetch artists and their genre names
+        $queryBuilder = $artistRepository->createQueryBuilder('a')
+            ->select('a, g')
+            ->leftJoin('a.genres', 'g')
+            ->orderBy('a.name', 'ASC');
+
+        // Get the query from QueryBuilder
+        $query = $queryBuilder->getQuery();
+
+        // Paginate the query
         $artistList = $paginator->paginate(
-            $query, 
-            $request->query->getInt('page', 1),
-            5 // limit per page
-        );     
-    
+        $query,
+        $request->query->getInt('page', 1),
+        5 // Limit per page
+        );
+
+        // Render the template with the paginated list
         return $this->render('back/artist/list.html.twig', [
             'artistList' => $artistList,
         ]);
     }
+
+    
+
 
     #[Route('/back/artist_list/{id<\d+>}', name: 'app_artist_read_admin', methods: ['GET'])]
     public function read(int $id, ArtistRepository $artistRepository): Response

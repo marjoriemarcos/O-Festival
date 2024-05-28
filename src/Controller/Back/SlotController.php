@@ -17,14 +17,19 @@ class SlotController extends AbstractController
     #[Route('/back/slot_list', name: 'app_slot_list_admin', methods: ['GET'])]
     public function list(SlotRepository $slotRepository): Response
     {
-        // Fetch slots
-        $slotList = $slotRepository->findAll();
-
+        // Create QueryBuilder to fetch slots with artist and stage
+        $queryBuilder = $slotRepository->createQueryBuilder('s')
+            ->select('s', 'artist', 'stage') // Select necessary columns
+            ->leftJoin('s.artist', 'artist') // Join artist entity
+            ->leftJoin('s.stage', 'stage'); // Join stage entity
+    
+        // Fetch slots using the QueryBuilder
+        $slotList = $queryBuilder->getQuery()->getResult();
+    
         return $this->render('back/slot/list.html.twig', [
             'slotList' => $slotList,
         ]);
     }
-
     #[Route('/back/slot_list/{id<\d+>}', name:'app_slot_read_admin', methods: ['GET'])]
     public function read(int $id, SlotRepository $slotRepository): Response
     {
