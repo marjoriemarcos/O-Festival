@@ -52,7 +52,7 @@ class ArtistController extends AbstractController
 
         // Check if the artist exists
         if (!$artist) {
-            throw $this->createNotFoundException('The artist does not exist.');
+            throw $this->createNotFoundException('Cet artiste n\'existe pas.');
         }
 
         // Pass the artist to the view
@@ -72,7 +72,7 @@ class ArtistController extends AbstractController
             $entityManager->persist($artist);
             $entityManager->flush();
     
-            $this->addFlash('success', 'The artist has been created successfully.');
+            $this->addFlash('success', 'L\'artiste a bien été créé.');
             return $this->redirectToRoute('app_artist_list_admin', [], Response::HTTP_SEE_OTHER);
         }
     
@@ -91,9 +91,15 @@ class ArtistController extends AbstractController
     
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-    
-            $this->addFlash('success', 'The artist has been updated successfully.');
-            return $this->redirectToRoute('app_artist_list_admin', [], Response::HTTP_SEE_OTHER);
+
+            // Get the ID of the edited artist
+            $editedArtistId = $artist->getId();
+
+            // Add flash message for successful modification    
+            $this->addFlash('success', 'L\'artiste a bien été modifié.');
+
+            // Redirect to the read page of the edited artist
+            return $this->redirectToRoute('app_artist_read_admin', ['id' => $editedArtistId], Response::HTTP_SEE_OTHER);
         }
     
         return $this->render('back/artist/edit.html.twig', [
@@ -108,9 +114,15 @@ class ArtistController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$artist->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($artist);
             $entityManager->flush();
-        }
-
+    
+            // Add flash message for successful deletion
+            $this->addFlash('success', 'L\'artiste a bien été supprimé.');
+        } else {
+            $this->addFlash('error', 'La suppression de l\'artiste a échoué. Le jeton CSRF est invalide.');
+        }      
+    
         return $this->redirectToRoute('app_artist_list_admin', [], Response::HTTP_SEE_OTHER);
     }
+    
     
 }

@@ -31,9 +31,9 @@ class UserController extends AbstractController
                 $entityManager->remove($user);
                 $entityManager->flush();
         
-                $this->addFlash('success', 'Le créneau a été supprimé avec succès.');
+                $this->addFlash('success', 'L\'administrateur a été supprimé avec succès.');
             } else {
-                $this->addFlash('error', 'La suppression du créneau a échoué. Le jeton CSRF est invalide.');
+                $this->addFlash('error', 'La suppression de l\'administrateur a échoué. Le jeton CSRF est invalide.');
             }        
         
             return $this->redirectToRoute('app_user_list_admin');

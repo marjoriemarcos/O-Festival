@@ -42,6 +42,7 @@ class StageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($stage);
             $entityManager->flush();
+            $this->addFlash('success', 'La scène a bien été créée.');
 
             return $this->redirectToRoute('app_stage_list_admin', [], Response::HTTP_SEE_OTHER);
         }
@@ -60,6 +61,7 @@ class StageController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+            $this->addFlash('success', 'La scène a bien été modifiée.');
 
             return $this->redirectToRoute('app_stage_list_admin', [], Response::HTTP_SEE_OTHER);
         }
@@ -76,7 +78,10 @@ class StageController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$stage->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($stage);
             $entityManager->flush();
-        }
+            $this->addFlash('success', 'La scène a bien été supprimée.');
+        } else {
+            $this->addFlash('error', 'La suppression de la scène a échoué. Le jeton CSRF est invalide.');
+        }      
 
         return $this->redirectToRoute('app_stage_list_admin', [], Response::HTTP_SEE_OTHER);
     }

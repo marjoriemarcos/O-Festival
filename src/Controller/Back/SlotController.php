@@ -38,7 +38,7 @@ class SlotController extends AbstractController
 
         // Check if the slot exists
         if (!$slot) {
-            throw $this->createNotFoundException('The slot does not exist.');
+            throw $this->createNotFoundException('Ce créneau n\'existe pas.');
         }
 
         return $this->render('back/slot/read.html.twig', [
@@ -56,6 +56,7 @@ class SlotController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($slot);
             $entityManager->flush();
+            $this->addFlash('success', 'Le créneau a bien été créé.');
 
             return $this->redirectToRoute('app_slot_list_admin', [], Response::HTTP_SEE_OTHER);
         }
@@ -75,7 +76,14 @@ class SlotController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_slot_list_admin', [], Response::HTTP_SEE_OTHER);
+            // Get the ID of the edited slot
+            $editedSlotId = $slot->getId();
+
+            // Add flash message for successful modification
+            $this->addFlash('success', 'Le créneau a bien été modifié.');
+
+            // Redirect to the read page of the edited slot
+            return $this->redirectToRoute('app_slot_read_admin', ['id' => $editedSlotId], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('back/slot/edit.html.twig', [

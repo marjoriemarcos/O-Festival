@@ -3,6 +3,15 @@
 {% block title %}Liste des genres{% endblock %}
 
 {% block main %}
+
+    {# Display flash messages #}
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
 <main>
     <div class="container">
         <h2 class="text-center my-5 fw-bold display-5">Liste des genres musicaux</h2>
