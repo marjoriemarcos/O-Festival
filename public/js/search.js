@@ -1,52 +1,88 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const searchButton = document.getElementById('searchButton');
-    const resetButton = document.getElementById('resetButton');
-    const searchInput = document.querySelector('.search-input');
-    const searchableTable = document.querySelector('.searchable-table');
-    const noResultsMessage = document.getElementById('noResultsMessage');
-    const tableWrapper = document.getElementById('tableWrapper');
+// search.js
 
-    searchButton.addEventListener('click', function() {
-        const searchTerm = searchInput.value.trim().toLowerCase();
-        const rows = searchableTable.querySelectorAll('tbody tr');
-        let hasResults = false;
+// Définition de l'objet search et de ses méthodes
+export const search = {
+    // Initialisation de la fonction
+    init: function() {
+        // Initialise les éléments HTML
+        search.initElements();
+        // Lie les gestionnaires d'événements
+        search.bind();
+    },
 
-        rows.forEach(function(row) {
-            const cells = row.querySelectorAll('td');
-            let found = false;
-            cells.forEach(function(cell) {
-                const text = cell.textContent.trim().toLowerCase();
-                if (text.includes(searchTerm)) {
-                    found = true;
-                    hasResults = true;
+    // Initialisation des éléments HTML
+    initElements: function() {
+        // Récupère les éléments HTML nécessaires
+        search.searchButton = document.getElementById('searchButton');
+        search.resetButton = document.getElementById('resetButton');
+        search.searchInput = document.querySelector('.search-input');
+        search.searchableTable = document.querySelector('.searchable-table');
+        search.noResultsMessage = document.getElementById('noResultsMessage');
+        search.tableWrapper = document.getElementById('tableWrapper');
+    },
+
+    // Gestion des événements
+    bind: function() {
+        // Définition du gestionnaire d'événement pour la recherche
+        const searchHandler = () => {
+            const searchTerm = search.searchInput.value.trim().toLowerCase();
+            const rows = search.searchableTable.querySelectorAll('tbody tr');
+            let hasResults = false;
+
+            // Parcours de chaque ligne du tableau
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                let found = false;
+                cells.forEach(cell => {
+                    const text = cell.textContent.trim().toLowerCase();
+                    // Vérification si le terme de recherche est présent dans la cellule
+                    if (text.includes(searchTerm)) {
+                        found = true;
+                        hasResults = true;
+                    }
+                });
+                // Affichage ou masquage de la ligne en fonction des résultats de recherche
+                if (found) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
                 }
             });
-            if (found) {
-                row.style.display = '';
+
+            // Affichage ou masquage du message de résultats vides et du conteneur du tableau
+            if (!hasResults) {
+                search.noResultsMessage.style.display = 'block';
+                search.tableWrapper.style.display = 'none';
             } else {
-                row.style.display = 'none';
+                search.noResultsMessage.style.display = 'none';
+                search.tableWrapper.style.display = '';
             }
-        });
 
-        if (!hasResults) {
-            noResultsMessage.style.display = 'block';
-            tableWrapper.style.display = 'none';
-        } else {
-            noResultsMessage.style.display = 'none';
-            tableWrapper.style.display = '';
-        }
+            // Affichage du bouton de réinitialisation
+            search.resetButton.style.display = 'block';
+        };
 
-        resetButton.style.display = 'block';
-    });
+        // Définition du gestionnaire d'événement pour la réinitialisation
+        const resetHandler = () => {
+            search.searchInput.value = '';
+            const rows = search.searchableTable.querySelectorAll('tbody tr');
+            // Réinitialisation de l'affichage des lignes
+            rows.forEach(row => {
+                row.style.display = '';
+            });
+            // Masquage du message de résultats vides et du bouton de réinitialisation
+            search.noResultsMessage.style.display = 'none';
+            search.tableWrapper.style.display = '';
+            search.resetButton.style.display = 'none';
+        };
 
-    resetButton.addEventListener('click', function() {
-        searchInput.value = '';
-        const rows = searchableTable.querySelectorAll('tbody tr');
-        rows.forEach(function(row) {
-            row.style.display = '';
-        });
-        noResultsMessage.style.display = 'none';
-        tableWrapper.style.display = '';
-        resetButton.style.display = 'none';
-    });
+        // Ajout des écouteurs d'événements pour la recherche et la réinitialisation
+        search.searchButton.addEventListener('click', searchHandler);
+        search.resetButton.addEventListener('click', resetHandler);
+    }
+};
+
+// Écouteur d'événement pour l'initialisation de la recherche lorsque le DOM est chargé
+document.addEventListener('DOMContentLoaded', function() {
+    search.init();
 });

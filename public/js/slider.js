@@ -1,3 +1,5 @@
+// slider.js
+
 export const slider = {
     currentIndex: 0,  // Index actuel du slider
     itemsPerPage: 4,  // Nombre d'éléments affichés par page
@@ -74,6 +76,3 @@ export const slider = {
         clearInterval(slider.interval);
     }
 };
-
-// Initialise le slider lorsque le contenu du DOM est chargé
-document.addEventListener("DOMContentLoaded", slider.init);

@@ -1,40 +1,56 @@
 // slotButtons.js
 
+// Définition de l'objet slotButtons
 export const slotButtons = {
-    init: function () {
-        const filterButtons = document.querySelectorAll('.filter-button');
-        const tableRows = document.querySelectorAll('#slots-table-body tr');
-        const dayTitle = document.getElementById('day-title');
-        
+    // Propriétés pour stocker les éléments HTML
+    filterButtons: null,
+    tableRows: null,
+    dayTitle: null,
+
+    // Méthode d'initialisation
+    init: function() {
+        // Initialisation des éléments HTML
+        slotButtons.filterButtons = document.querySelectorAll('.filter-button');
+        slotButtons.tableRows = document.querySelectorAll('#slots-table-body tr');
+        slotButtons.dayTitle = document.getElementById('day-title');
+
+        // Gestion des événements
+        slotButtons.bind();
+    },
+
+    // Méthode pour lier les gestionnaires d'événements
+    bind: function() {
+        // Fonction pour mettre à jour le titre du jour
         const updateDayTitle = (day) => {
-            switch(day) {
+            switch (day) {
                 case 'J1':
-                    dayTitle.textContent = ' - Jour 1';
+                    slotButtons.dayTitle.textContent = 'Jour 1';
                     break;
                 case 'J2':
-                    dayTitle.textContent = ' - Jour 2';
+                    slotButtons.dayTitle.textContent = 'Jour 2';
                     break;
                 case 'J3':
-                    dayTitle.textContent = ' - Jour 3';
+                    slotButtons.dayTitle.textContent = 'Jour 3';
                     break;
                 default:
-                    dayTitle.textContent = ' - Tous les jours';
+                    slotButtons.dayTitle.textContent = 'Tous les jours';
             }
         };
 
-        filterButtons.forEach(button => {
+        // Ajout des écouteurs d'événements aux boutons de filtre
+        slotButtons.filterButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const day = button.getAttribute('data-day');
-                
-                // Change button appearance
-                filterButtons.forEach(btn => btn.classList.remove('selected'));
+
+                // Changement de l'apparence du bouton
+                slotButtons.filterButtons.forEach(btn => btn.classList.remove('selected'));
                 button.classList.add('selected');
 
-                // Update day title
+                // Mise à jour du titre du jour
                 updateDayTitle(day);
-                
-                // Filter table rows
-                tableRows.forEach(row => {
+
+                // Filtrage des lignes de tableau
+                slotButtons.tableRows.forEach(row => {
                     if (day === 'all' || row.getAttribute('data-day') === day) {
                         row.style.display = '';
                     } else {
@@ -45,3 +61,6 @@ export const slotButtons = {
         });
     }
 };
+
+// Initialise le module slotButtons
+slotButtons.init();
