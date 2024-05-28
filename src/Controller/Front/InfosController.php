@@ -61,9 +61,6 @@ class InfosController extends AbstractController
 
         } elseif ($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash('error_contact', 'Merci de vérifier le formulaire de contact');
-
-            $data = $form->getData();
-            $form = $this->createForm(ContactType::class, $data);
         }
 
 
