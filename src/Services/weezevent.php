@@ -15,17 +15,55 @@ class weezevent
 {
     private HttpClientInterface $client;
     private string $token;
-    private string $username;
-    private string $password;
-    private string $apiKey;
+    private string $login = '';
+    private string $passwrd = '';
+    private string $apiKey = '';
+    private string $idEvent = '';
 
-    public function __construct(HttpClientInterface $client, string $username, string $password, string $key)
+    public function __construct(HttpClientInterface $client, string $username, string $password, string $key, string $event)
     {
         $this->client = $client;
-        $this->token = $this->fetchToken();
-        $this->username = $username;
-        $this->password = $password;
+        $this->login = $username;
+        $this->passwrd = $password;
         $this->apiKey = $key;
+        $this->idEvent = $event;
+        $this->token = $this->fetchToken();
+    }
+
+        /**
+     * Generate a token
+     *
+     * @return string token
+     */
+    public function fetchToken (): string
+    {
+        try {
+            
+            $response = $this->client->request(
+                'POST',
+                'https://api.weezevent.com/auth/access_token', [
+                    'query' => [
+                        'username' => $this->login,
+                        'password' => $this->passwrd,
+                        'api_key' =>  $this->apiKey,
+                    ],
+                ]);
+
+                if ($response->getStatusCode() !== 200) {
+                    throw new \Exception('Erreur lors de la récupération du token');
+                }
+
+                $tokenData = $response->toArray();
+
+                if (!isset($tokenData['accessToken'])) {
+                    throw new \Exception('La clé "accessToken" est manquante dans la réponse');
+                }
+                ;
+                return $tokenData['accessToken'];
+    
+        } catch (\Exception $e) {
+            return new Response('Erreur : ' . $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -35,13 +73,13 @@ class weezevent
      */
     public function fetchCustomerList(): array
     {
-        $baseUrl = 'https://api.weezevent.com/participant/list?api_key=4af7c955bdb1fb64c42597994b0a8cf5&access_token=' . $this->token . '&id_event[]=1146829&full=1';
+        $baseUrl = 'https://api.weezevent.com/participant/list?api_key=' . $this->apiKey . '&access_token=' . $this->token . '&id_event[]=' . $this->idEvent . '&full=1';
         
         try { 
             $response = $this->client->request(
                 'GET',
                 $baseUrl);
-    
+            
             if ($response->getStatusCode() !== 200) {
                 throw new \Exception('Erreur lors de la récupération de la liste');
             }
@@ -49,7 +87,7 @@ class weezevent
             return $content;
 
             } catch (\Exception $e) {
-                return new Response('Erreur : ' . $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+                throw new \Exception('Erreur lors de la récupération de la liste des clients: ' . $e->getMessage());
             }
 
     }
@@ -61,16 +99,17 @@ class weezevent
      */
     public function fetchTicketList(): array
     {
-        $baseUrl = 'https://api.weezevent.com/tickets?api_key=4af7c955bdb1fb64c42597994b0a8cf5&access_token=' . $this->token . '&id_event[]=1146829&full=1';
+        $baseUrl = 'https://api.weezevent.com/tickets?api_key=' . $this->apiKey . '&access_token=' . $this->token . '&id_event[]=' . $this->idEvent . '&full=1';
         
         try {
             $response = $this->client->request(
                 'GET',
                 $baseUrl);
-    
+
             if ($response->getStatusCode() !== 200) {
                 throw new \Exception('Erreur lors de la récupération de la liste');
             }
+
 
             $content = $response->toArray();
 
@@ -91,40 +130,10 @@ class weezevent
             return $ticketList;
 
             } catch (\Exception $e) {
-                return new Response('Erreur : ' . $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+                throw new \Exception('Erreur lors de la récupération de la liste des tickets: ' . $e->getMessage());
             }
 
     }
 
-    /**
-     * Generate a token
-     *
-     * @return string token
-     */
-    public function fetchToken (): string
-    {
-        try {
-            $response = $this->client->request(
-                'POST',
-                'https://api.weezevent.com/auth/access_token', [
-                    'query' => [
-                        'username' => 'marjorie.marcos@oclock.school',
-                        'password' => '.ybqeN3VAL2bd!H',
-                        'api_key' => '4af7c955bdb1fb64c42597994b0a8cf5',
-                    ],
-                ]);
 
-                if ($response->getStatusCode() !== 200) {
-                    throw new \Exception('Erreur lors de la récupération du token');
-                }
-    
-                $tokenData = $response->toArray();
-                $token = $tokenData['accessToken'];
-    
-            return $token;
-
-        } catch (\Exception $e) {
-            return new Response('Erreur : ' . $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-    }
 }
