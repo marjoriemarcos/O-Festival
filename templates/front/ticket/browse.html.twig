@@ -16,9 +16,10 @@
 						class="ticket-card col-lg-4 mt-5">
 						<!-- Image de la carte -->
 						<div class="ticket-card-image card img-zoom">
-							<img src="{{ pass.image }}" class="card-img-top" alt="">
+							<img src="{{ asset('images/' ~ pass.image) }}" class="card-img-top" alt="">
+							<div class="overlay-ticketing"></div>
 							<div class="card-img-overlay d-flex justify-content-center align-items-center">
-								<h3 class="card-title text-white">{{ pass.title }}</h3>
+								<h3 class="card-title text-white mb-0">{{ pass.title }}</h3>
 							</div>
 						</div>
 
@@ -106,7 +107,7 @@
 
 				<!-- Weezevent URL -->
 				<a title="Logiciel billetterie en ligne" href="https://widget.weezevent.com/ticket/E1146829/?code=68626&locale=fr-FR&width_auto=1&color_primary=0032FA" class="weezevent-widget-integration btn btn-primary btn-block" data-src="https://widget.weezevent.com/ticket/E1146829/?code=68626&locale=fr-FR&width_auto=1&color_primary=0032FA" data-width="100%" data-height="600" data-id="1146829" data-resize="0" data-width_auto="0" data-noscroll="0" data-use-container="yes" data-type="neo" target="_blank">Billetterie
-																																																																																																																																											                        Weezevent</a>
+																																																																																																																																																                        Weezevent</a>
 			</div>
 		</div>
 	</div>

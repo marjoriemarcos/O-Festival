@@ -38,9 +38,10 @@
 				<!-- Carte de l'artiste -->
 				<div class="home-artist-list-slide-inner col-md-3">
 					{% for artist in artistBrowse %}
-						<div class="home-artist-list-slide-artist current-card col-md-3">
-						<!-- Card -->
-						{{ include('front/fragments/_card_artist.html.twig') }}
+						<div
+							class="home-artist-list-slide-artist current-card col-md-3">
+							<!-- Card -->
+							{{ include('front/fragments/_card_artist.html.twig') }}
 						</div>
 
 					{% endfor %}
@@ -75,13 +76,16 @@
 			{% for pass in passes %}
 				{% if pass.data is not empty %}
 					<div class="home-ticket col-md-3 mb-2">
-						<div class="card img-zoom">
-							<a href="{{ path('app_ticket_browse') }}">
-								<img src="{{ asset('images/' ~ pass.image) }}" class="card-img-top" alt="">
-								<div class="card-img-overlay d-flex flex-column justify-content-end">
-									<h3 class="card-title text-white mb-0">{{ pass.title }}</h3>
-								</div>
-							</a>
+						<div class="card">
+							<div class="img-zoom">
+								<a href="{{ path('app_ticket_browse') }}">
+									<img src="{{ asset('images/' ~ pass.image) }}" class="card-img-top" alt="">
+									<div class="overlay"></div>
+									<div class="card-img-overlay d-flex flex-column justify-content-end">
+										<h3 class="card-title text-white mb-0">{{ pass.title }}</h3>
+									</div>
+								</a>
+							</div>
 						</div>
 					</div>
 				{% endif %}

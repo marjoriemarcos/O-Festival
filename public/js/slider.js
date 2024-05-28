@@ -66,7 +66,7 @@ export const slider = {
     },
 
     // Démarre le défilement automatique
-    startAutoSlid: function () {
+    startAutoSlide: function () {
         // Change les diapositives toutes les 3 secondes
         slider.interval = setInterval(slider.showNext, 3000);
     },

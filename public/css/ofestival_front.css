@@ -359,6 +359,17 @@ body {
     font-size: 1rem;
 }
 
+.overlay-ticketing{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
+    transition: all 300ms ease-in-out;
+    pointer-events: none;
+}
+
 /** --------- ARTIST --------- **/
 
 .container-artist {
@@ -486,6 +497,12 @@ body {
     .ticket-card-info-price{
         font-size: 1.5rem;
     }
+    .card h3 {
+        font-size: 1.5rem;
+    }
+    .card p {
+        font-size: 1rem;
+    }
 }
 
 @media only screen and (max-width: 1040px) {
@@ -529,10 +546,10 @@ body {
         font-size: 2rem;
     }
     .card h3 {
-        font-size: 1.5rem;
+        font-size: 1rem;
     }
     .card p {
-        font-size: 1rem;
+        font-size: 0.75rem;
     }
 }
 
@@ -622,5 +639,12 @@ body {
     }
     .informations-content > p {
         font-size: 13px;
+    }
+
+    .card h3 {
+        font-size: 2rem;
+    }
+    .card p {
+        font-size: 1.5rem;
     }
 }
