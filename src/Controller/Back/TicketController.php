@@ -52,7 +52,7 @@ class TicketController extends AbstractController
             $entityManager->persist($ticket);
             $entityManager->flush();
     
-            $this->addFlash('success', 'The ticket has been created successfully.');
+            $this->addFlash('success', 'Le billet a bien été créé.');
             return $this->redirectToRoute('app_ticket_list_admin', [], Response::HTTP_SEE_OTHER);
         }
     
@@ -71,8 +71,14 @@ class TicketController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
     
-            $this->addFlash('success', 'The ticket has been updated successfully.');
-            return $this->redirectToRoute('app_ticket_list_admin', [], Response::HTTP_SEE_OTHER);
+            // Get the ID of the edited ticket
+            $editedTicketId = $ticket->getId();
+    
+            // Add flash message for successful modification
+            $this->addFlash('success', 'Le billet a bien été modifié.');
+    
+            // Redirect to the read page of the edited ticket
+            return $this->redirectToRoute('app_ticket_read_admin', ['id' => $editedTicketId], Response::HTTP_SEE_OTHER);
         }
     
         return $this->render('back/ticket/edit.html.twig', [
@@ -90,9 +96,9 @@ class TicketController extends AbstractController
             $entityManager->remove($ticket);
             $entityManager->flush();
     
-            $this->addFlash('success', 'Le créneau a été supprimé avec succès.');
+            $this->addFlash('success', 'Le billet a été supprimé avec succès.');
         } else {
-            $this->addFlash('error', 'La suppression du créneau a échoué. Le jeton CSRF est invalide.');
+            $this->addFlash('error', 'La suppression du billet a échoué. Le jeton CSRF est invalide.');
         }        
     
         return $this->redirectToRoute('app_ticket_list_admin');

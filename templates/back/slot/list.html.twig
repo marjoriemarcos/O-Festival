@@ -4,8 +4,16 @@
 
 {% block main %}
 <main>
+    {# Display flash messages #}
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
     <div class="container">      
-      <h2 class="text-center my-5 fw-bold display-5">Liste des créneaux</h2>
+      <h2 class="text-center my-5 fw-bold display-5">Liste des créneaux</h2>      
         
         <!-- Search bar -->
       {{ include('back/fragments/_search_bar.html.twig')}}

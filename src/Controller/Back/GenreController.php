@@ -49,7 +49,8 @@ class GenreController extends AbstractController
             $entityManager->persist($genre);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_genre_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Le genre a bien été créé.');            
+            return $this->redirectToRoute('app_genre_list_admin', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('back/genre/new.html.twig', [
@@ -67,6 +68,7 @@ class GenreController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', 'Le genre a bien été modifié.');   
             return $this->redirectToRoute('app_genre_list_admin', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -82,7 +84,10 @@ class GenreController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$genre->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($genre);
             $entityManager->flush();
-        }
+            $this->addFlash('success', 'Le genre a bien été supprimé.');   
+        } else {
+            $this->addFlash('error', 'La suppression du genre a échoué. Le jeton CSRF est invalide.');
+        }      
 
         return $this->redirectToRoute('app_genre_list_admin', [], Response::HTTP_SEE_OTHER);
     }
