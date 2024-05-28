@@ -11,9 +11,9 @@ export const slider = {
     // Initialisation du slider
     init: function () {
         // Sélectionne le conteneur des diapositives
-        slider.slideContainer = document.querySelector(".home-programming-slide");
+        slider.slideContainer = document.querySelector(".home-artist-list-slide");
         // Récupère toutes les diapositives
-        slider.slides = Array.from(document.querySelectorAll(".home-programming-slide-artist"));
+        slider.slides = Array.from(document.querySelectorAll(".home-artist-list-slide-artist"));
         // Définit le nombre total d'éléments
         slider.totalItems = slider.slides.length;
 
@@ -32,8 +32,8 @@ export const slider = {
 
     // Lie les boutons de navigation aux fonctions correspondantes
     bind: function () {
-        document.querySelector(".home-programming-slide-prev").addEventListener("click", slider.showPrev);
-        document.querySelector(".home-programming-slide-next").addEventListener("click", slider.showNext);
+        document.querySelector(".home-artist-list-slide-prev").addEventListener("click", slider.showPrev);
+        document.querySelector(".home-artist-list-slide-next").addEventListener("click", slider.showNext);
     },
 
     // Met à jour le nombre d'éléments par page en fonction de la taille de la fenêtre
@@ -66,7 +66,7 @@ export const slider = {
     },
 
     // Démarre le défilement automatique
-    startAutoSlide: function () {
+    startAutoSlid: function () {
         // Change les diapositives toutes les 3 secondes
         slider.interval = setInterval(slider.showNext, 3000);
     },

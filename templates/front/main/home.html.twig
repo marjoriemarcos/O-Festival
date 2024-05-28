@@ -25,49 +25,51 @@
 
 		<!-- Programmation -->
 		<div
-			class="container-home-programming d-flex flex-column">
+			class="container-home-artist-list d-flex flex-column">
 
 			<!-- Titre de la section Programmation -->
-			<h2 class="home-programming-title py-5 px-5 medium-blue-bg text-white">
+			<h2 class="home-artist-list-title py-5 px-5 medium-blue-bg text-white">
 				Programmation
 			</h2>
 
 			<!-- Liste déroulante des artistes -->
 			<div
-				class="home-programming-slide row gx-1 px-5">
+				class="home-artist-list-slide row gx-1 px-5">
 				<!-- Carte de l'artiste -->
-				<div class="home-programming-slide-inner col-md-3">
+				<div class="home-artist-list-slide-inner col-md-3">
 					{% for artist in artistBrowse %}
-
-						<div class="home-programming-slide-artist current-card col-md-3">
-
-							<div class="card img-zoom">
-								<a href="{{ path('app_artist_read', {'id': artist.id}) }}">
-									<img src="{{ artist.picture }}" class="card-img-top" alt="{{ artist.name }}">
-									<div class="card-img-overlay d-flex flex-column justify-content-end">
-										<h3 class="card-title text-white mb-0">{{ artist.name }}</h3>
-										<p class="card-text text-white">
-											{{ artist.date|date("d/m/Y") }}
-											-
-											{{ artist.genres }}
-										</p>
-									</div>
-								</a>
+						<div class="home-artist-list-slide-artist current-card col-md-3">
+							<div class="card">
+								<div class="img-zoom">
+									<a href="{{ path('app_artist_read', {'id': artist.id}) }}">
+										<img src="{{ artist.picture }}" class="card-img-top" alt="{{ artist.name }}">
+										<div class="overlay"></div>
+										<!-- Ajout de l'overlay ici -->
+										<div class="card-img-overlay d-flex flex-column justify-content-end">
+											<h3 class="card-title text-white mb-0">{{ artist.name }}</h3>
+											<p class="card-text text-white">
+												{{ artist.date|date("d/m/Y") }}
+												-
+												{{ artist.genres }}
+											</p>
+										</div>
+									</a>
+								</div>
 							</div>
 						</div>
 
 					{% endfor %}
 				</div>
 				<!-- Boutons de navigation pour parcourir les artistes -->
-				<section class="home-programming-slide-direction">
-					<span class="home-programming-slide-prev" type="button" aria-label="Précédent">❮</span>
-					<span class="home-programming-slide-next" type="button" aria-label="Précédent">❯</span>
+				<section class="home-artist-list-slide-direction">
+					<span class="home-artist-list-slide-prev" type="button" aria-label="Précédent">❮</span>
+					<span class="home-artist-list-slide-next" type="button" aria-label="Précédent">❯</span>
 				</section>
 			</div>
 		</div>
 
 		<!-- Lien vers la page Line-Up -->
-		<div class="home-programming-slide-link dark-blue-bg text-center">
+		<div class="home-artist-list-slide-link dark-blue-bg text-center">
 			<a href="{{path('app_artist_browse')}}" class="btn btn-primary light-yellow-bg dark-blue-txt">Toute la programmation</a>
 		</div>
 	</div>

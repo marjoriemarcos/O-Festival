@@ -4,15 +4,13 @@
 {% endblock %}
 
 {% block main %}
-	<div class="container-line-up medium-blue-bg">
+	<div class="container-artist-list medium-blue-bg">
 		<h2 class="page-title adumu-font">Programmation</h2>
-
-		<div class="line-up-sorting px-5">
+		<div class="artist-list-sorting px-5">
 			<div
 				class="row gx-3">
-
 				<!-- Sort per day -->
-				<div class="line-up-sorting col-md-12">
+				<div class="artist-list-sorting col-md-12">
 					<ul class="list-inline">
 						<li class="list-inline-item">
 							<a href="{{path('app_artist_browse')}}" class="btn btn-secondary btn-id dark-yellow-bg px-4 mr-2 mb-2">Tous les jours</a>
@@ -33,39 +31,37 @@
 				</div>
 
 				<!-- Sort per stage -->
-				<div class="line-up-sorting col-md-12">
+				<div class="artist-list-sorting col-md-12">
 					<ul class="list-inline">
 						<li class="list-inline-item">
 							<a href="{{path('app_artist_browse')}}" class="btn btn-secondary btn-stage light-green-bg px-4 mr-2 mb-2">
-							Toutes les scènes</a>
-																																	                                    
+								Toutes les scènes
+							</a>
 						</li>
 						{% for stage in stageList %}
-
 							<li class="list-inline-item">
 								<a href="{{ path('app_artist_browse_by_stage', { 'stage': stage.id }) }}" class="btn btn-secondary btn-stage light-green-bg px-4 mr-2 mb-2">
-								{{stage.name}}</a>
-																																																			
+									{{stage.name}}
+								</a>
 							</li>
-							
 						{% endfor %}
 					</ul>
 				</div>
 
 				<!-- Sort per genre -->
-				<div class="line-up-sorting col-md-12">
+				<div class="artist-list-sorting col-md-12">
 					<ul class="list-inline">
 						<li class="list-inline-item">
-							<a href="{{path('app_artist_browse')}}" class="btn btn-secondary btn-genre light-blue-bg px-4 mr-2 mb-2">Touts les
-																																	                                    genres</a>
+							<a href="{{path('app_artist_browse')}}" class="btn btn-secondary btn-genre light-blue-bg px-4 mr-2 mb-2">
+								Touts les genres
+							</a>
 						</li>
 						{% for genre in genreList %}
-							
 							<li class="list-inline-item">
 								<a href="{{ path('app_artist_browse_by_genre', { 'genre': genre.id }) }}" class="btn btn-secondary btn-genre light-blue-bg px-4 mr-2 mb-2">
-								{{ genre.name }}</a>
+									{{ genre.name }}
+								</a>
 							</li>
-
 						{% endfor %}
 					</ul>
 				</div>
@@ -74,31 +70,31 @@
 
 
 		<!-- Artist List-->
-		<div class="line-up-artists-list px-5">
+		<div class="card-artist-list px-5">
 			<div
 				class="row gx-3">
-
-				<!-- Artist 1 -->
+				<!-- Artists Card -->
 				{% for artist in artistBrowse %}
-
-					<div class="line-up-artist col-md-4 col-12 mb-3">
-						<div class="card img-zoom">
-							<a href="{{ path('app_artist_read', {'id': artist.id}) }}">
-								<img src="{{artist.picture}}" class="img-fluid" alt="Artist 1">
-								<div class="card-img-overlay d-flex flex-column justify-content-end">
-									<h3 class="card-title text-white mb-0">{{artist.name}}</h3>
-									<p class="card-text text-white">
-										{{ artist.date|date("d/m/Y") }}
-										-
-										{{ artist.genres }}
-									</p>
-								</div>
-							</a>
+					<div class="card-artist col-md-4 col-12">
+						<div class="card">
+							<div class="img-zoom">
+								<a href="{{ path('app_artist_read', {'id': artist.id}) }}">
+									<img src="{{ artist.picture }}" class="card-img-top" alt="{{ artist.name }}">
+									<div class="overlay"></div>
+									<!-- Ajout de l'overlay ici -->
+									<div class="card-img-overlay d-flex flex-column justify-content-end">
+										<h3 class="card-title text-white mb-0">{{ artist.name }}</h3>
+										<p class="card-text text-white">
+											{{ artist.date|date("d/m/Y") }}
+											-
+											{{ artist.genres }}
+										</p>
+									</div>
+								</a>
+							</div>
 						</div>
 					</div>
-
 				{% endfor %}
-
 			</div>
 		</div>
 
