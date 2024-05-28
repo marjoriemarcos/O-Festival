@@ -6,8 +6,10 @@ export const search = {
     init: function() {
         // Initialise les éléments HTML
         search.initElements();
-        // Lie les gestionnaires d'événements
-        search.bind();
+        // Vérifie si les éléments nécessaires sont présents avant de lier les gestionnaires d'événements
+        if (search.searchButton && search.searchInput) {
+            search.bind();
+        }
     },
 
     // Initialisation des éléments HTML
@@ -24,7 +26,8 @@ export const search = {
     // Gestion des événements
     bind: function() {
         // Définition du gestionnaire d'événement pour la recherche
-        const searchHandler = () => {
+        const searchHandler = (event) => {
+            event.preventDefault(); // Empêche le comportement par défaut du formulaire
             const searchTerm = search.searchInput.value.trim().toLowerCase();
             const rows = search.searchableTable.querySelectorAll('tbody tr');
             let hasResults = false;
@@ -63,7 +66,8 @@ export const search = {
         };
 
         // Définition du gestionnaire d'événement pour la réinitialisation
-        const resetHandler = () => {
+        const resetHandler = (event) => {
+            event.preventDefault(); // Empêche le comportement par défaut du bouton de réinitialisation
             search.searchInput.value = '';
             const rows = search.searchableTable.querySelectorAll('tbody tr');
             // Réinitialisation de l'affichage des lignes
@@ -81,8 +85,3 @@ export const search = {
         search.resetButton.addEventListener('click', resetHandler);
     }
 };
-
-// Écouteur d'événement pour l'initialisation de la recherche lorsque le DOM est chargé
-document.addEventListener('DOMContentLoaded', function() {
-    search.init();
-});

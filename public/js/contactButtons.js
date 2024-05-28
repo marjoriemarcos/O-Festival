@@ -1,5 +1,6 @@
-export const contactButtons = {
+// contactButtons.js
 
+export const contactButtons = {
     filterButtons: null,
     tableRows: null,
     statusTitle: null,
@@ -9,8 +10,10 @@ export const contactButtons = {
         contactButtons.tableRows = document.querySelectorAll('#contact-table-body tr');
         contactButtons.statusTitle = document.getElementById('status-title');
 
-        // Appel de la fonction bind lors de l'initialisation
-        contactButtons.bind();
+        if (contactButtons.filterButtons.length > 0 && contactButtons.statusTitle !== null) {
+            // Appel de la fonction bind si les éléments nécessaires sont présents
+            contactButtons.bind();
+        }
     },
 
     // Fonction de liaison des événements
@@ -30,7 +33,6 @@ export const contactButtons = {
 
         contactButtons.filterButtons.forEach(button => {
             button.addEventListener('click', () => {
-
                 const status = button.getAttribute('data-status');
 
                 // Change button appearance
@@ -50,11 +52,5 @@ export const contactButtons = {
                 });
             });
         });
-
-        }
-
-
-
+    }
 };
-
-contactButtons.init();

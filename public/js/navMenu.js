@@ -9,8 +9,11 @@ export const navMenu = {
     init: function () {
         // Initialisation des éléments HTML
         navMenu.initElements();
-        // Gestion des événements
-        navMenu.bind();
+        // Vérification que les éléments ont bien été trouvés avant de gérer les événements
+        if (navMenu.menuBurgerElement && navMenu.navBarreElement) {
+            // Gestion des événements
+            navMenu.bind();
+        }
     },
 
     // Initialisation des éléments HTML
@@ -22,11 +25,15 @@ export const navMenu = {
     // Gestion des événements
     bind: function () {
         // Ajout d'un écouteur d'événement au clic sur le menu burger
-        navMenu.menuBurgerElement.addEventListener("click", function () {
-            // Ajout/Suppression de la classe "active" pour le menu burger
-            navMenu.menuBurgerElement.classList.toggle("active");
-            // Ajout/Suppression de la classe "active" pour la barre de navigation
-            navMenu.navBarreElement.classList.toggle("active");
-        });
+        navMenu.menuBurgerElement.addEventListener("click", navMenu.toggleMenu);
+    },
+
+    // Gestionnaire d'événements pour le clic sur le menu burger
+    toggleMenu: function () {
+        // Ajout/Suppression de la classe "active" pour le menu burger
+        navMenu.menuBurgerElement.classList.toggle("active");
+        // Ajout/Suppression de la classe "active" pour la barre de navigation
+        navMenu.navBarreElement.classList.toggle("active");
     }
 };
+

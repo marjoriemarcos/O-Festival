@@ -17,17 +17,20 @@ export const slider = {
         // Définit le nombre total d'éléments
         slider.totalItems = slider.slides.length;
 
-        // Ajoute un écouteur d'événement pour mettre à jour le nombre d'éléments par page lors du redimensionnement de la fenêtre
-        window.addEventListener("resize", slider.updateItemsPerPage);
-        // Met à jour le nombre d'éléments par page en fonction de la taille de la fenêtre
-        slider.updateItemsPerPage();
-        // Met à jour l'affichage des diapositives
-        slider.updateDisplay();
-        // Lie les boutons de navigation aux fonctions correspondantes
-        slider.bind();
+        // Vérifie si le slider est nécessaire avant de continuer
+        if (slider.slideContainer && slider.slides.length > 0) {
+            // Ajoute un écouteur d'événement pour mettre à jour le nombre d'éléments par page lors du redimensionnement de la fenêtre
+            window.addEventListener("resize", slider.updateItemsPerPage);
+            // Met à jour le nombre d'éléments par page en fonction de la taille de la fenêtre
+            slider.updateItemsPerPage();
+            // Met à jour l'affichage des diapositives
+            slider.updateDisplay();
+            // Lie les boutons de navigation aux fonctions correspondantes
+            slider.bind();
 
-        // Démarre le défilement automatique
-        slider.startAutoSlide();
+            // Démarre le défilement automatique
+            slider.startAutoSlide();
+        }
     },
 
     // Lie les boutons de navigation aux fonctions correspondantes

@@ -1,5 +1,3 @@
-// slotButtons.js
-
 // Définition de l'objet slotButtons
 export const slotButtons = {
     // Propriétés pour stocker les éléments HTML
@@ -8,18 +6,20 @@ export const slotButtons = {
     dayTitle: null,
 
     // Méthode d'initialisation
-    init: function() {
+    init: function () {
         // Initialisation des éléments HTML
         slotButtons.filterButtons = document.querySelectorAll('.filter-button');
         slotButtons.tableRows = document.querySelectorAll('#slots-table-body tr');
         slotButtons.dayTitle = document.getElementById('day-title');
 
-        // Gestion des événements
-        slotButtons.bind();
+        // Vérifiez si les éléments spécifiques à la page sont présents avant d'initialiser slotButtons
+        if (slotButtons.dayTitle) {
+            slotButtons.bind(); // Initialise slotButtons si les éléments sont présents
+        }
     },
 
     // Méthode pour lier les gestionnaires d'événements
-    bind: function() {
+    bind: function () {
         // Fonction pour mettre à jour le titre du jour
         const updateDayTitle = (day) => {
             switch (day) {
@@ -39,7 +39,9 @@ export const slotButtons = {
 
         // Ajout des écouteurs d'événements aux boutons de filtre
         slotButtons.filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault(); // Empêche le comportement par défaut du lien
+
                 const day = button.getAttribute('data-day');
 
                 // Changement de l'apparence du bouton
@@ -61,6 +63,3 @@ export const slotButtons = {
         });
     }
 };
-
-// Initialise le module slotButtons
-slotButtons.init();
