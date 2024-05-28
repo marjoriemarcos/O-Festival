@@ -1,0 +1,26 @@
+{% extends 'front/base.html.twig' %}
+
+{% block main %}
+
+        <div class="container-error404">
+            <section class="d-flex flex-column text-center">
+                <div class="error404-content">
+
+                    <!-- Image d'erreur 404 -->
+                    <img class="error404-img img-fluid" src="{{asset('/images/error.png')}}" alt="404">
+
+                    <!-- Message d'erreur 404 -->
+                    <p class="error404-text px-4 dark-blue-txt">
+                        OUPS ... le O'Festival ne se passe pas sur cette page !!!!
+                        {{ exception.message }} 
+                    </p>
+                </div>
+
+                <!-- Bouton de retour à la page d'accueil -->
+                <div class="error404-home-link mt-5">
+                    <a href="{{path('app_main_home')}}" class="btn btn-primary light-yellow-bg dark-blue-txt">ACCUEIL</a>
+                </div>
+            </section>
+        </div>
+  
+{% endblock %}
