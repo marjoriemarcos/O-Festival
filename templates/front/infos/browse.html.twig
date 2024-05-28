@@ -6,13 +6,13 @@
 {% block main %}
 
 	<div class="container-informations medium-blue-bg">
-		{% for message in app.flashes('success') %}
+		{% for message in app.flashes('success_contact') %}
 			<div class="alert alert-success alert-dismissible fade show" role="alert">
 				{{ message }}
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
 		{% endfor %}
-		{% for message in app.flashes('error') %}
+		{% for message in app.flashes('error_contact') %}
 			<div class="alert alert-danger alert-dismissible fade show" role="alert">
 				{{ message }}
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -20,7 +20,7 @@
 		{% endfor %}
 		<h2 class="page-title adumu-font">Infos pratiques</h2>
 		<div
-			class="row p-5 gx-0 background-img-bg">
+				class="row p-5 gx-0 background-img-bg">
 
 			<!-- Image -->
 			<div class="informations-image col-lg-6">
@@ -34,10 +34,10 @@
 					<p>
 						<strong>O'Festival 2024 ouvrira ses portes du
 							{{ openingDate }}
-							au
+								au
 							{{ closingDate }}
-							Il aura lieu au: 10 rue de Penthièvre à Paris (75008), 
-							l'entrée se fera par la rue de Pentihèvre (10 minutes à pied de la gare SNCF)</strong>
+								Il aura lieu au: 10 rue de Penthièvre à Paris (75008),
+								l'entrée se fera par la rue de Pentihèvre (10 minutes à pied de la gare SNCF)</strong>
 					</p>
 					<p>
 						<strong>Horaires d'ouvertures O'Festival</strong>
