@@ -223,13 +223,25 @@ body {
 .home-programming-slide-inner {
     display: flex;
     transition: transform 0.5s ease;
-    width: 100%; /* S'assure que les éléments ne débordent pas */
+    width: 100%; 
 }
 
 .home-programming-slide-artist {
-    flex: 0 0 25%; /* 4 éléments par ligne */
+    flex: 0 0 25%; 
     box-sizing: border-box;
-    padding: 0 0.25rem; /* Espacement horizontal entre les cartes */
+    padding: 0 0.25rem; 
+}
+.home-programming-slide {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: transform 0.3s ease;
+}
+
+.home-programming-slide-artist {
+    flex: 0 0 auto;
+    width: 25%; /* Ajustez cette valeur selon le nombre d'éléments par page */
+    box-sizing: border-box;
 }
 
 .home-programming-slide-prev,
