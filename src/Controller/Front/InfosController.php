@@ -2,32 +2,31 @@
 
 namespace App\Controller\Front;
 
-use App\Entity\Contact;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
 use App\DTO\ContactDTO;
+use App\Entity\Contact;
 use App\Form\ContactType;
 use App\Repository\TicketRepository;
 use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
 use IntlDateFormatter;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Routing\Attribute\Route;
 
 
 class InfosController extends AbstractController
 {
     #[Route('/infos-pratiques', name: 'app_infos_browse')]
-    public function browse(Request $request, MailerInterface $mailer,TicketRepository $ticketRepository,
-                           EntityManagerInterface $entityManager): Response
+    public function browse(Request $request, MailerInterface $mailer, TicketRepository $ticketRepository, EntityManagerInterface $entityManager): Response
     {
         // Récupérer les dates d'ouverture et de fermeture depuis la base de données
         $openingClosingDates = $ticketRepository->findOpeningAndClosingDates();
         $openingDate = new DateTimeImmutable($openingClosingDates['openingDate']);
         $closingDate = new DateTimeImmutable($openingClosingDates['closingDate']);
-    
+
         // Formater les dates en français
         $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
         $openingFormatted = $formatter->format($openingDate);
@@ -59,7 +58,8 @@ class InfosController extends AbstractController
             $this->addFlash('success_contact', 'Votre message a bien été envoyé');
 
             return $this->redirectToRoute('app_infos_browse');
-        } elseif  ($form->isSubmitted() && !$form->isValid()) {
+
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash('error_contact', 'Merci de vérifier le formulaire de contact');
         }
 

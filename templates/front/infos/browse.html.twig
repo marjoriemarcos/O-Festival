@@ -5,112 +5,96 @@
 
 {% block main %}
 
-	<div class="container-informations medium-blue-bg">
-		{% for message in app.flashes('success_contact') %}
-			<div class="alert alert-success alert-dismissible fade show" role="alert">
-				{{ message }}
-				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-			</div>
-		{% endfor %}
-		{% for message in app.flashes('error_contact') %}
-			<div class="alert alert-danger alert-dismissible fade show" role="alert">
-				{{ message }}
-				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-			</div>
-		{% endfor %}
-		<h2 class="page-title adumu-font">Infos pratiques</h2>
-		<div
-				class="row p-5 gx-0 background-img-bg">
+    <div class="container-informations medium-blue-bg">
+        {% for message in app.flashes('success_contact') %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error_contact') %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+        <h2 class="page-title adumu-font">Infos pratiques</h2>
+        <div class="row p-5 gx-0 background-img-bg">
 
-			<!-- Image -->
-			<div class="informations-image col-lg-6">
-				<img src="{{asset('/images/info-picture.jpg')}}" class="img-fluid" alt="Photo festival">
-			</div>
+            <!-- Image -->
+            <div class="informations-image col-lg-6">
+                <img src="{{ asset('/images/info-picture.jpg') }}" class="img-fluid" alt="Photo festival">
+            </div>
 
-			<!-- Main content -->
-			<div class="col-lg-6">
-				<article class="informations-content bg-white open-font dark-blue-txt p-5">
-					<h2>OUVERTURE DES PORTES</h2>
-					<p>
-						<strong>O'Festival 2024 ouvrira ses portes du
-							{{ openingDate }}
-								au
-							{{ closingDate }}
-								Il aura lieu au: 10 rue de Penthièvre à Paris (75008),
-								l'entrée se fera par la rue de Pentihèvre (10 minutes à pied de la gare SNCF)</strong>
-					</p>
-					<p>
-						<strong>Horaires d'ouvertures O'Festival</strong>
-						<br>
-						OUVERTURE >
-						{{ openingDate }}
-						à 15h00
-						<br>
-						FERMETURE >
-						{{ closingDate }}
-						à 23h59
-					</p>
-					<p>
-						<strong>
-							👉 CONSEIL : ACHETER VOTRE PASS
-							<a href="{{path('app_ticket_browse')}}">ICI</a>
-						</strong>
-					</p>
-					<p>
-						<strong>
-							Situé idéalement O'Festival vous régalera de bon son tout l'été
-						</strong>
-					</p>
-					<div class="informations-map">
-						<img src="{{asset('images/info-map.png')}}" alt="information durée transport carte">
-					</div>
-				</article>
-			</div>
-		</div>
+            <!-- Main content -->
+            <div class="col-lg-6">
+                <article class="informations-content bg-white open-font dark-blue-txt p-5">
+                    <h2>OUVERTURE DES PORTES</h2>
+                    <p>
+                        <strong>O'Festival 2024 ouvrira ses portes du
+                            {{ openingDate }}
+                                au
+                            {{ closingDate }}
+                                Il aura lieu au: 10 rue de Penthièvre à Paris (75008),
+                                l'entrée se fera par la rue de Pentihèvre (10 minutes à pied de la gare SNCF)</strong>
+                    </p>
+                    <p>
+                        <strong>Horaires d'ouvertures O'Festival</strong>
+                        <br>
+                        OUVERTURE >
+                        {{ openingDate }}
+                        à 15h00
+                        <br>
+                        FERMETURE >
+                        {{ closingDate }}
+                        à 23h59
+                    </p>
+                    <p>
+                        <strong>
+                            👉 CONSEIL : ACHETER VOTRE PASS
+                            <a href="{{ path('app_ticket_browse') }}">ICI</a>
+                        </strong>
+                    </p>
+                    <p>
+                        <strong>
+                            Situé idéalement O'Festival vous régalera de bon son tout l'été
+                        </strong>
+                    </p>
+                    <div class="informations-map">
+                        <img src="{{ asset('images/info-map.png') }}" alt="information durée transport carte">
+                    </div>
+                </article>
+            </div>
+        </div>
 
-		<!-- Contact form -->
-		<div class="container-contact p-5">
-			<div class="row justify-content-center">
-				<div class="col-lg-6">
-					<div class="contact-title text-center mt-md-5 mt-3 contact-form light-yellow-txt">
-						<h2>CONTACT</h2>
-					</div>
-					<div class="contact-content">
-						{{ form_start(form) }}
+        <!-- Contact form -->
+        <div class="container-contact p-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="contact-title text-center mt-md-5 mt-3 contact-form light-yellow-txt">
+                        <h2>CONTACT</h2>
+                    </div>
+                    <div class="contact-content">
+                        {{ form_start(form) }}
 
-						<div class="form-group mb-3">
-							{{ form_label(form.name, 'Nom', {'label_attr': {'class': 'light-yellow-txt'}}) }}
-							{{ form_widget(form.name, {'attr': {'class': 'form-control open-font', 'placeholder': 'Entrez votre nom'}}) }}
-							{% for error in form.name.vars.errors %}
-								<div class="alert alert-danger" role="alert">
-									{{ error.message }}
-								</div>
-							{% endfor %}
-						</div>
-						<div class="form-group mb-3">
-							{{ form_label(form.email, 'Email', {'label_attr': {'class': 'light-yellow-txt'}}) }}
-							{{ form_widget(form.email, {'attr': {'class': 'form-control open-font', 'placeholder': 'Entrez votre email'}}) }}
-						</div>
+                        <div class="form-group mb-3">
+                            {{ form_row(form.name) }}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{ form_row(form.email) }}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{ form_row(form.content) }}
+                        </div>
 
-						<div class="form-group mb-3">
-							{{ form_label(form.content, 'Content', {'label_attr': {'class': 'light-yellow-txt'}}) }}
-							{{ form_widget(form.content, {'attr': {'class': 'form-control open-font', 'rows': 3,
-								'placeholder': 'Entrez votre message'}}) }}
-							{% for error in form.name.vars.errors %}
-								<div class="alert alert-danger" role="alert">
-									{{ error.message }}
-								</div>
-							{% endfor %}
-						</div>
 
-						<div class="position-relative d-flex align-items-center justify-content-center p-3">
-							{{ form_widget(form.save, {'attr': {'class': 'btn btn-primary light-yellow-bg dark-blue-txt'}}) }}
-						</div>
-
-						{{ form_end(form) }}
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                        <div class="position-relative d-flex align-items-center justify-content-center p-3">
+                            {{ form_widget(form.save) }}
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
