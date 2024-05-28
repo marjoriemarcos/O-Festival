@@ -61,7 +61,9 @@ class ArtistController extends AbstractController
         ArtistRepository $artistRepository,
         SlotRepository $slotRepository,
         StageRepository $stageRepository,
-        GenreRepository $genreRepository): Response {
+        GenreRepository $genreRepository): Response 
+        {
+            
         $slots = $slotRepository->findAll();
         $stageList = $stageRepository->findAll();
         $genreList = $genreRepository->limitedGenre();

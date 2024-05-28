@@ -30,7 +30,7 @@ class weezevent
         $this->token = $this->fetchToken();
     }
 
-        /**
+    /**
      * Generate a token
      *
      * @return string token
@@ -38,7 +38,7 @@ class weezevent
     public function fetchToken (): string
     {
         try {
-            
+            // Va se connecter à l'API pour générer un token avec les informations passés dans le dossier .env.local + service.yaml
             $response = $this->client->request(
                 'POST',
                 'https://api.weezevent.com/auth/access_token', [
@@ -49,18 +49,23 @@ class weezevent
                     ],
                 ]);
 
+                // Si le statut est différent de 200 j'envoie une exception
                 if ($response->getStatusCode() !== 200) {
                     throw new \Exception('Erreur lors de la récupération du token');
                 }
 
+                // Met la réponse dabs une variable
                 $tokenData = $response->toArray();
 
+                // S'il n'y a pas de token dans le tableau alors j'envoie une exception
                 if (!isset($tokenData['accessToken'])) {
                     throw new \Exception('La clé "accessToken" est manquante dans la réponse');
-                }
-                ;
+                };
+
+                // Je retourne le token
                 return $tokenData['accessToken'];
     
+
         } catch (\Exception $e) {
             return new Response('Erreur : ' . $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -73,17 +78,22 @@ class weezevent
      */
     public function fetchCustomerList(): array
     {
+        // Je custom mon url avec les informations demandée clé API, token et IdEvent
         $baseUrl = 'https://api.weezevent.com/participant/list?api_key=' . $this->apiKey . '&access_token=' . $this->token . '&id_event[]=' . $this->idEvent . '&full=1';
         
         try { 
+            // J'envoie ma requete à l'API
             $response = $this->client->request(
                 'GET',
                 $baseUrl);
-            
+
+            // Si le statut est différent de 200 j'envoie une exception
             if ($response->getStatusCode() !== 200) {
                 throw new \Exception('Erreur lors de la récupération de la liste');
             }
+            // Je mets le contenu dans un tableau
             $content = $response->toArray();
+
             return $content;
 
             } catch (\Exception $e) {
@@ -99,20 +109,25 @@ class weezevent
      */
     public function fetchTicketList(): array
     {
+        // Je custom mon url avec les informations demandée clé API, token et IdEvent
         $baseUrl = 'https://api.weezevent.com/tickets?api_key=' . $this->apiKey . '&access_token=' . $this->token . '&id_event[]=' . $this->idEvent . '&full=1';
         
         try {
+            // J'envoie ma requete à l'API
             $response = $this->client->request(
                 'GET',
                 $baseUrl);
 
+            // Si le statut est différent de 200 j'envoie une exception
             if ($response->getStatusCode() !== 200) {
                 throw new \Exception('Erreur lors de la récupération de la liste');
             }
 
-
+            // Je mets le contenu dans un tableau
             $content = $response->toArray();
 
+            // j'extrait du tableau uniquement les identifiant de chaque ticket et je les mets dans un tableau
+            // Cela me servira dans le controlleur et dans la vue à afficher le type de billet (Pass 1 jour ...) et non pas juste l'identifiant (12589)
             $ticketList = [];
             foreach ($content['events'] as $event) {
                 foreach ($event['categories'] as $category  ) {
