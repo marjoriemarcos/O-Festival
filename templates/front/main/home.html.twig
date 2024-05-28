@@ -39,23 +39,8 @@
 				<div class="home-artist-list-slide-inner col-md-3">
 					{% for artist in artistBrowse %}
 						<div class="home-artist-list-slide-artist current-card col-md-3">
-							<div class="card">
-								<div class="img-zoom">
-									<a href="{{ path('app_artist_read', {'id': artist.id}) }}">
-										<img src="{{ artist.picture }}" class="card-img-top" alt="{{ artist.name }}">
-										<div class="overlay"></div>
-										<!-- Ajout de l'overlay ici -->
-										<div class="card-img-overlay d-flex flex-column justify-content-end">
-											<h3 class="card-title text-white mb-0">{{ artist.name }}</h3>
-											<p class="card-text text-white">
-												{{ artist.date|date("d/m/Y") }}
-												-
-												{{ artist.genres }}
-											</p>
-										</div>
-									</a>
-								</div>
-							</div>
+						<!-- Card -->
+						{{ include('front/fragments/_card_artist.html.twig') }}
 						</div>
 
 					{% endfor %}
