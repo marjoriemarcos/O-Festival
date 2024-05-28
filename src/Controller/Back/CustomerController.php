@@ -18,19 +18,25 @@ class CustomerController extends AbstractController
     #[Route('/back/customer_list', name: 'app_customer_list_admin', methods: ['GET'])]
     public function list(CustomerRepository $customerRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // Fetch customers with pagination
-        $query = $customerRepository->createQueryBuilder('c')
-            ->getQuery();
-        
+        // Create QueryBuilder to fetch customers and their tickets
+        $queryBuilder = $customerRepository->createQueryBuilder('c')
+            ->select('c, t') // Select customers and their tickets
+            ->leftJoin('c.tickets', 't') // Join tickets
+            ->orderBy('c.lastname', 'ASC'); // Order by customer lastname
+    
+        // Get the query from QueryBuilder
+        $query = $queryBuilder->getQuery();
+    
+        // Paginate the query
         $customerList = $paginator->paginate(
             $query, 
             $request->query->getInt('page', 1),
-            5 // limit per page
+            5 // Limit per page
         );
-        
+    
+        // Render the template with the paginated list
         return $this->render('back/customer/list.html.twig', [
-        'customerList' => $customerList,
-
+            'customerList' => $customerList,
         ]);
     }
 

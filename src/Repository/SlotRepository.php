@@ -129,7 +129,7 @@ class SlotRepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();
     }
 
-        /**
+    /**
      * Retrieves slots for a specific day.
      *
      * @param string $day The day for which to retrieve the slots (e.g., 'DAY 1').
@@ -137,10 +137,16 @@ class SlotRepository extends ServiceEntityRepository
      */
     public function findByDay(string $day): array
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.day = :day')
-            ->setParameter('day', $day)
-            ->getQuery()
-            ->getResult();
+    return $this->createQueryBuilder('s')
+    ->andWhere('s.day = :day')
+    ->setParameter('day', $day)
+    ->leftJoin('s.artist', 'a')  // Eager load artist
+    ->addSelect('a')             // Select artist fields
+    ->leftJoin('s.stage', 'st')  // Eager load stage
+    ->addSelect('st')            // Select stage fields
+    ->orderBy('s.hour', 'ASC')   // Optional: order by hour
+    ->getQuery()
+    ->getResult();
     }
+
 }
