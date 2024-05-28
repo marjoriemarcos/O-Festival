@@ -262,6 +262,7 @@ body {
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     height: 85%;
+    overflow: hidden;
 }
 
 .card-artist{
@@ -278,6 +279,8 @@ body {
     height: 100%;
     width: 100%;
     transition: all 300ms ease-in-out;
+    max-height: 300px;
+    object-fit: cover;
 }
 
 .img-zoom:hover img {
@@ -323,6 +326,7 @@ body {
 .card a {
     height: 100%;
 }
+
 
 
 /** --------- TICKETING --------- **/
@@ -380,6 +384,7 @@ body {
     width: 100%;
     height: 100%; 
     object-fit: cover;
+    max-height: 600px;
 }
 .artist-informations{
     background-color: white;
