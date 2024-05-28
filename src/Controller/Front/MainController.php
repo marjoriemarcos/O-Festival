@@ -13,8 +13,9 @@ class MainController extends AbstractController
     #[Route('/', name: 'app_main_home')]
     public function home(ArtistRepository $artistRepository, TicketRepository $ticketRepository): Response
     {
-        // Récupérer tous les artistes à partir du référentiel
-        $artistBrowse = $artistRepository->findAllArtistsWithSlot();
+        // Récupérer tous les artistes avec les scènes, les genres et les slot
+        $artistBrowse = $artistRepository->findAllArtistByParams();
+
         // Initialiser un tableau pour stocker les durées des billets
         $durations = [24, 48, 72];
         // Initialiser un tableau pour stocker les passes

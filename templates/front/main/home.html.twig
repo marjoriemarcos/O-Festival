@@ -47,9 +47,9 @@
 									<div class="card-img-overlay d-flex flex-column justify-content-end">
 										<h3 class="card-title text-white mb-0">{{ artist.name }}</h3>
 										<p class="card-text text-white">
-											{{ artist.slot.getFormattedDate() }}
+											{{ artist.date|date("d/m/Y") }}
 											-
-											{{ artist.genres|map(genre => genre.name)|join(' - ') }}
+											{{ artist.genres }}
 										</p>
 									</div>
 								</a>

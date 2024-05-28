@@ -29,7 +29,7 @@ class ArtistController extends AbstractController
         GenreRepository $genreRepository): Response
     {
         // Récupération de tous les artistes avec des slots associés
-        $artistBrowse = $artistRepository->findAllArtistBySlot();
+        $artistBrowse = $artistRepository->findAllArtistByParams();
         // Récupération de tous les slots
         $slots = $slotRepository->findAll();
         // Récupération de tous les stages
