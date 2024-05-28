@@ -1,35 +1,47 @@
 export const contactButtons = {
-    init: function () {
-        const filterButtons = document.querySelectorAll('.filter-button');
-        const tableRows = document.querySelectorAll('#contact-table-body tr');
-        const statusTitle = document.getElementById('status-title');
 
+    filterButtons: null,
+    tableRows: null,
+    statusTitle: null,
+
+    init: function () {
+        contactButtons.filterButtons = document.querySelectorAll('.filter-button');
+        contactButtons.tableRows = document.querySelectorAll('#contact-table-body tr');
+        contactButtons.statusTitle = document.getElementById('status-title');
+
+        // Appel de la fonction bind lors de l'initialisation
+        contactButtons.bind();
+    },
+
+    // Fonction de liaison des événements
+    bind: function () {
         const updateStatusTitle = (status) => {
             switch (status) {
                 case 'A traiter':
-                    statusTitle.textContent = ' - A traiter';
+                    contactButtons.statusTitle.textContent = 'Message à traiter';
                     break;
                 case 'Traité':
-                    statusTitle.textContent = ' - Traité';
+                    contactButtons.statusTitle.textContent = 'Message traité';
                     break;
                 default:
-                    statusTitle.textContent = ' - Tous les messages';
+                    contactButtons.statusTitle.textContent = 'Tous les messages';
             }
         };
 
-        filterButtons.forEach(button => {
+        contactButtons.filterButtons.forEach(button => {
             button.addEventListener('click', () => {
+
                 const status = button.getAttribute('data-status');
 
                 // Change button appearance
-                filterButtons.forEach(btn => btn.classList.remove('selected'));
+                contactButtons.filterButtons.forEach(btn => btn.classList.remove('selected'));
                 button.classList.add('selected');
 
                 // Update status title
                 updateStatusTitle(status);
 
                 // Filter table rows
-                tableRows.forEach(row => {
+                contactButtons.tableRows.forEach(row => {
                     if (status === 'all' || row.getAttribute('data-status') === status) {
                         row.style.display = '';
                     } else {
@@ -39,5 +51,10 @@ export const contactButtons = {
             });
         });
 
-    }
+        }
+
+
+
 };
+
+contactButtons.init();

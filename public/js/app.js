@@ -7,7 +7,7 @@ import { slotButtons } from "./slotButtons.js";
 import { ticketButtons } from "./ticketButtons.js";
 import { search } from "./search.js";
 import { tableSort } from "./tableSort.js";
-import {contactButtons} from "./contactButtons";
+import {contactButtons} from "./contactButtons.js";
 
 const app = {
     init: function () {
