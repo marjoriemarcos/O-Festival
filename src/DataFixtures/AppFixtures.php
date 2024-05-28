@@ -48,7 +48,7 @@ class AppFixtures extends Fixture
 
         // Artiste
         $artistList = [];
-        $selectedGenres = (array) array_rand($genreList, 4);
+        $selectedGenres = (array) array_rand($genreList, 5);
         
         for ($i = 0; $i < 20; $i++) {
             $artist = (new Artist())
@@ -69,10 +69,10 @@ class AppFixtures extends Fixture
 
         // Slot
         $hour = [
-            '16 heures à 18 heures',
-            '18 heures à 20 heures',
-            '20 heures à 22 heures',
-            '22 heures à minuit',
+            '16h00 à 18h00',
+            '18h00 à 20h00',
+            '20h00 à 22h00',
+            '22h00 à 00h00',
         ];
 
         $dateDay = [
