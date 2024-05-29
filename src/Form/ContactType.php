@@ -17,14 +17,14 @@ class ContactType extends AbstractType
 {
     $builder
         ->add('name', TextType::class, [
-            'label' => 'Votre nom',
-            'attr' => [
-                'class' => 'form-control open-font',
-                'placeholder' => 'Entrez votre nom',
-            ],
+            'label' => 'Votre Nom',
             'label_attr' => [
-                'class' => 'light-yellow-txt',
-            ]
+                'class' => 'light-yellow-txt'
+            ],
+            'attr' => [
+                'class' => 'form-control, open-font',
+                'placeholder' => 'Entrez votre Nom',
+            ],
         ])
         ->add('email', EmailType::class, [
             'label' => 'Votre email',

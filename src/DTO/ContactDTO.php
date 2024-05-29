@@ -11,7 +11,7 @@ class ContactDTO
     public string $name = '';
 
     #[Assert\NotBlank(message: 'Merci de remplir votre email')]
-    #[Assert\Email]
+    #[Assert\Email(message: 'Votre email n\'est pas valide')]
     public string $email = '';
 
     #[Assert\NotBlank(message: 'Merci de remplir ce champ')]
