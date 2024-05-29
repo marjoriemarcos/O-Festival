@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Artist;
+use App\Entity\Slot;
 use App\Form\ArtistType;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\ArtistRepository;
@@ -23,7 +24,7 @@ class ArtistController extends AbstractController
         $queryBuilder = $artistRepository->createQueryBuilder('a')
             ->select('a, g, s')
             ->leftJoin('a.genres', 'g')
-            ->leftJoin('a.slot', 's') // en supposant que la relation soit définie comme "slot" dans l'entité Artist
+            ->leftJoin('a.slot', 's')
             ->orderBy('a.name', 'ASC');
 
         // Get the query from QueryBuilder
@@ -46,7 +47,7 @@ class ArtistController extends AbstractController
 
 
     #[Route('/back/artist_list/{id<\d+>}', name: 'app_artist_read_admin', methods: ['GET'])]
-    public function read(int $id, ArtistRepository $artistRepository): Response
+    public function read(int $id, ArtistRepository $artistRepository, EntityManagerInterface $entityManager): Response
     {
         // Fetch the artist by its ID
         $artist = $artistRepository->find($id);
@@ -56,9 +57,13 @@ class ArtistController extends AbstractController
             throw $this->createNotFoundException('Cet artiste n\'existe pas.');
         }
 
+        // Check if the artist is associated with a slot
+        $slotRepository = $entityManager->getRepository(Slot::class);
+        $slot = $slotRepository->findOneBy(['artist' => $artist]);
         // Pass the artist to the view
         return $this->render('back/artist/read.html.twig', [
             'artist' => $artist,
+            'slot' => $slot,
         ]);
     }
 
