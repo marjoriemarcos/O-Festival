@@ -20,7 +20,6 @@ class TicketController extends AbstractController
     {
         // Fetch tickets
         $ticketList = $ticketRepository->findAll();
-
         return $this->render('back/ticket/list.html.twig', [
             'ticketList' => $ticketList,
         ]);
@@ -31,7 +30,7 @@ class TicketController extends AbstractController
     {
         // Fetch the ticket by its ID
         $ticket = $ticketRepository->find($id);
-
+        
         // Check if the ticket exists
         if (!$ticket) {
             throw $this->createNotFoundException('The ticket does not exist.');
@@ -42,16 +41,33 @@ class TicketController extends AbstractController
         ]);
     }
     #[Route('/back/ticket_list/new', name: 'app_ticket_new_admin', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, TicketRepository $ticketRepository): Response
     {
         $ticket = new Ticket();
         $form = $this->createForm(TicketType::class, $ticket);
         $form->handleRequest($request);
-    
+
+        
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            
+            $dataFromForm = $form->getData();
+            $realTitle = $dataFromForm->setRealTitle();
+            $dataFromForm->setTitle($realTitle);
+            dump($dataFromForm);
+            //$dataTitle = $dataFromForm->getTitle() . ' ' . $dataFromForm->getFee() . ' - ' . $dataFromForm->getStartAt()->format('Y-m-d') . ' - ' . $dataFromForm->getEndAt()->format('Y-m-d');
+
+            $existingTicket = $ticketRepository->findOneBy(['title' => $realTitle]);
+
+            if ($existingTicket) {
+                throw $this->createNotFoundException('Il y a déjà un billet avec ce titre.');
+                $this->addFlash('danger', 'Erreur lors de la saisie du billet.');
+                return $this->redirectToRoute('app_ticket_list_admin', [], Response::HTTP_SEE_OTHER);
+            }
+
             $entityManager->persist($ticket);
             $entityManager->flush();
-    
+
             $this->addFlash('success', 'Le billet a bien été créé.');
             return $this->redirectToRoute('app_ticket_list_admin', [], Response::HTTP_SEE_OTHER);
         }

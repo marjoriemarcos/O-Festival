@@ -77,6 +77,23 @@ class Ticket
         return $interval->h / 24;
     }
 
+
+
+    /**
+     * Retun the title add fee + date start and date end
+     *
+     * @return string
+     */
+    public function setRealTitle(): string
+    {
+        $startDateFormated = $this->formatedDateStart();
+        $endDateFormated = $this->formatedDateEnd();
+
+        $realTitle = $this->title . ' ' . $this->fee . ' - ' . $startDateFormated . ' - ' . $endDateFormated;
+        return $realTitle;
+    }
+    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -215,5 +232,15 @@ class Ticket
         $this->duration = $duration;
 
         return $this;
+    }
+
+    public function formatedDateStart(): string
+    {
+        return $this->startAt->format('d/m/Y');
+    }
+
+    public function formatedDateEnd(): string
+    {
+        return $this->endAt->format('d/m/Y');
     }
 }
