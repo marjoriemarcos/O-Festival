@@ -46,16 +46,12 @@ class TicketController extends AbstractController
         $ticket = new Ticket();
         $form = $this->createForm(TicketType::class, $ticket);
         $form->handleRequest($request);
-
         
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            
+        
             $dataFromForm = $form->getData();
             $realTitle = $dataFromForm->setRealTitle();
             $dataFromForm->setTitle($realTitle);
-            dump($dataFromForm);
-            //$dataTitle = $dataFromForm->getTitle() . ' ' . $dataFromForm->getFee() . ' - ' . $dataFromForm->getStartAt()->format('Y-m-d') . ' - ' . $dataFromForm->getEndAt()->format('Y-m-d');
 
             $existingTicket = $ticketRepository->findOneBy(['title' => $realTitle]);
 
