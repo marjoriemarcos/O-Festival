@@ -21,8 +21,9 @@ class ArtistController extends AbstractController
     {
         // Create QueryBuilder to fetch artists and their genre names
         $queryBuilder = $artistRepository->createQueryBuilder('a')
-            ->select('a, g')
+            ->select('a, g, s')
             ->leftJoin('a.genres', 'g')
+            ->leftJoin('a.slot', 's') // en supposant que la relation soit définie comme "slot" dans l'entité Artist
             ->orderBy('a.name', 'ASC');
 
         // Get the query from QueryBuilder
@@ -30,9 +31,9 @@ class ArtistController extends AbstractController
 
         // Paginate the query
         $artistList = $paginator->paginate(
-        $query,
-        $request->query->getInt('page', 1),
-        5 // Limit per page
+            $query,
+            $request->query->getInt('page', 1),
+            5 // Limit per page
         );
 
         // Render the template with the paginated list
@@ -41,7 +42,7 @@ class ArtistController extends AbstractController
         ]);
     }
 
-    
+
 
 
     #[Route('/back/artist_list/{id<\d+>}', name: 'app_artist_read_admin', methods: ['GET'])]
@@ -67,28 +68,28 @@ class ArtistController extends AbstractController
         $artist = new Artist();
         $form = $this->createForm(ArtistType::class, $artist);
         $form->handleRequest($request);
-    
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($artist);
             $entityManager->flush();
-    
+
             $this->addFlash('success', 'L\'artiste a bien été créé.');
             return $this->redirectToRoute('app_artist_list_admin', [], Response::HTTP_SEE_OTHER);
         }
-    
+
         return $this->render('back/artist/new.html.twig', [
             'artist' => $artist,
             'form' => $form->createView(),
         ]);
     }
-    
+
 
     #[Route('/back/artist_list/{id<\d+>}/edit', name: 'app_artist_edit_admin', methods: ['GET', 'POST'])]
     public function edit(Request $request, Artist $artist, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ArtistType::class, $artist);
         $form->handleRequest($request);
-    
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
@@ -101,7 +102,7 @@ class ArtistController extends AbstractController
             // Redirect to the read page of the edited artist
             return $this->redirectToRoute('app_artist_read_admin', ['id' => $editedArtistId], Response::HTTP_SEE_OTHER);
         }
-    
+
         return $this->render('back/artist/edit.html.twig', [
             'artist' => $artist,
             'form' => $form->createView(),
@@ -111,18 +112,16 @@ class ArtistController extends AbstractController
     #[Route('/back/artist_list/{id<\d+>}/delete', name: 'app_artist_delete_admin', methods: ['POST'])]
     public function delete(Request $request, Artist $artist, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$artist->getId(), $request->getPayload()->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $artist->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($artist);
             $entityManager->flush();
-    
+
             // Add flash message for successful deletion
             $this->addFlash('success', 'L\'artiste a bien été supprimé.');
         } else {
             $this->addFlash('error', 'La suppression de l\'artiste a échoué. Le jeton CSRF est invalide.');
-        }      
-    
+        }
+
         return $this->redirectToRoute('app_artist_list_admin', [], Response::HTTP_SEE_OTHER);
     }
-    
-    
 }
