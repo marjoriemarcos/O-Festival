@@ -76,15 +76,32 @@
                     </div>
                     <div class="contact-content">
                         {{ form_start(form) }}
-
                         <div class="form-group mb-3">
-                            {{ form_row(form.name) }}
+                            {{ form_label(form.name) }}
+                            {{ form_widget(form.name) }}
+                            {% for error in form.name.vars.errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ error.message }}
+                                </div>
+                            {% endfor %}
                         </div>
                         <div class="form-group mb-3">
-                            {{ form_row(form.email) }}
+                            {{ form_label(form.email) }}
+                            {{ form_widget(form.email) }}
+                            {% for error in form.email.vars.errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ error.message }}
+                                </div>
+                            {% endfor %}
                         </div>
                         <div class="form-group mb-3">
-                            {{ form_row(form.content) }}
+                            {{ form_label(form.content) }}
+                            {{ form_widget(form.content) }}
+                            {% for error in form.content.vars.errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ error.message }}
+                                </div>
+                            {% endfor %}
                         </div>
 
 
