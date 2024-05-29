@@ -1,16 +1,18 @@
 const closeMessage = {
     init: function () {
         // selection du btn
-        const closeButton = document.querySelector(".btn-close");
-        if (closeButton) {
-            closeButton.addEventListener("click", function () {
-                const alert = document.querySelector(".alert-success");
-                if (alert) {
-                    alert.remove();
-                }
+        const closeButtons = document.querySelector(".btn-close");
+        if (closeButtons) {
+            closeButtons.forEach(function (closeButton) {
+                closeButton.addEventListener("click", function () {
+                    const alert = this.closest(".alert");
+                    if (alert) {
+                        alert.remove();
+                    }
+                });
             });
         }
     }
 };
 
-export { closeMessage };
+export {closeMessage};

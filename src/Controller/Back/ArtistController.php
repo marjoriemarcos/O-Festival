@@ -75,6 +75,7 @@ class ArtistController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager->persist($artist);
             $entityManager->flush();
 
@@ -82,6 +83,11 @@ class ArtistController extends AbstractController
             return $this->redirectToRoute('app_artist_list_admin', [], Response::HTTP_SEE_OTHER);
         }
 
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('error', 'Erreur de validation : veuillez corriger les erreurs dans le formulaire.');
+
+        }
+		
         return $this->render('back/artist/new.html.twig', [
             'artist' => $artist,
             'form' => $form->createView(),
@@ -107,6 +113,11 @@ class ArtistController extends AbstractController
             // Redirect to the read page of the edited artist
             return $this->redirectToRoute('app_artist_read_admin', ['id' => $editedArtistId], Response::HTTP_SEE_OTHER);
         }
+        
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('error', 'Erreur de validation : veuillez corriger les erreurs dans le formulaire.');
+
+        }
 
         return $this->render('back/artist/edit.html.twig', [
             'artist' => $artist,
@@ -129,4 +140,6 @@ class ArtistController extends AbstractController
 
         return $this->redirectToRoute('app_artist_list_admin', [], Response::HTTP_SEE_OTHER);
     }
+	
 }
+
