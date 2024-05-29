@@ -36,9 +36,9 @@ export const tableSort = {
                     const bValue = b.children[columnIndex].innerText.trim();
 
                     if (sortOrder === 'asc') {
-                        return aValue.localeCompare(bValue);
-                    } else {
                         return bValue.localeCompare(aValue);
+                    } else {
+                        return aValue.localeCompare(bValue);
                     }
                 });
 
