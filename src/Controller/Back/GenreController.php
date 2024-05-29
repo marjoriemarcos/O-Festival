@@ -15,8 +15,8 @@ use Knp\Component\Pager\PaginatorInterface;
 
 class GenreController extends AbstractController
 {
-    #[Route('/back/genre_list', name: 'app_genre_list_admin', methods: ['GET'])]
-    public function list(GenreRepository $genreRepository, PaginatorInterface $paginator, Request $request): Response
+    #[Route('/back/genre', name: 'app_back_genre_browse', methods: ['GET'])]
+    public function browse(GenreRepository $genreRepository, PaginatorInterface $paginator, Request $request): Response
     {
         // Create QueryBuilder to fetch genres
         $queryBuilder = $genreRepository->createQueryBuilder('g')
@@ -33,13 +33,13 @@ class GenreController extends AbstractController
         );
     
         // Render the template with the paginated list
-        return $this->render('back/genre/list.html.twig', [
+        return $this->render('back/genre/browse.html.twig', [
             'genreList' => $genreList,
         ]);
     }
 
-    #[Route('/back/genre_list/new', name: 'app_genre_new_admin', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/back/genre/add', name: 'app_back_genre_add', methods: ['GET', 'POST'])]
+    public function add(Request $request, EntityManagerInterface $entityManager): Response
     {
         $genre = new Genre();
         $form = $this->createForm(GenreType::class, $genre);
@@ -50,16 +50,16 @@ class GenreController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Le genre a bien été créé.');            
-            return $this->redirectToRoute('app_genre_list_admin', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_genre_browse', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('back/genre/new.html.twig', [
+        return $this->render('back/genre/add.html.twig', [
             'genre' => $genre,
             'form' => $form,
         ]);
     }
 
-    #[Route('/back/genre_list/{id<\d+>}/edit', name: 'app_genre_edit_admin', methods: ['GET', 'POST'])]
+    #[Route('/back/genre/{id<\d+>}/edit', name: 'app_back_genre_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Genre $genre, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(GenreType::class, $genre);
@@ -69,7 +69,7 @@ class GenreController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Le genre a bien été modifié.');   
-            return $this->redirectToRoute('app_genre_list_admin', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_genre_browse', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('back/genre/edit.html.twig', [
@@ -78,7 +78,7 @@ class GenreController extends AbstractController
         ]);
     }
 
-    #[Route('/back/genre_list/{id<\d+>}/delete', name: 'app_genre_delete_admin', methods: ['POST'])]
+    #[Route('/back/genre/{id<\d+>}/delete', name: 'app_back_genre_delete', methods: ['POST'])]
     public function delete(Request $request, Genre $genre, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$genre->getId(), $request->getPayload()->get('_token'))) {
@@ -89,7 +89,7 @@ class GenreController extends AbstractController
             $this->addFlash('error', 'La suppression du genre a échoué. Le jeton CSRF est invalide.');
         }      
 
-        return $this->redirectToRoute('app_genre_list_admin', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_back_genre_browse', [], Response::HTTP_SEE_OTHER);
     }
    
 }

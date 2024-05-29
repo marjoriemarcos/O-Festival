@@ -1,0 +1,31 @@
+{# Étend la mise en page de base #}
+{% extends 'back/base.html.twig' %}
+
+{# Définit le bloc 'genreAddActive' pour indiquer que cette page est active dans le menu de navigation #}
+{% block genreAddActive %}active{% endblock %}
+
+{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block main %}
+    <div class="container">
+        <!-- Titre principal -->
+        <h2 class="text-center my-5 fw-bold display-5">Ajouter un genre musical</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <!-- Bouton de retour à la liste des genres -->
+                <a href="{{ path('app_back_genre_browse') }}" class="btn btn-primary fw-bold mb-4">
+                    <i class="bi bi-arrow-left"></i>
+                    Retour à la liste des genres
+                </a>
+                <div class="card">
+                    <div class="card-header fs-2 fw-bold">
+                        <i class="bi bi-music-note-list me-2"></i>Nouveau genre
+                    </div>
+                    <div class="card-body">
+                        <!-- Inclusion du formulaire pour ajouter un genre -->
+                        {{ include('back/fragments/_form.html.twig', {'button_label': 'Ajouter le genre'}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

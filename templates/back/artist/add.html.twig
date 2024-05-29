@@ -8,7 +8,7 @@
 {% block main %}
 	<div class="container">
 		{# Titre de la page #}
-		<h2 class="text-center my-5 fw-bold display-5">Créer un nouvel artiste</h2>
+		<h2 class="text-center my-5 fw-bold display-5">Ajouter un Artiste</h2>
 		<div class="row justify-content-center">
 			<div class="col-md-8">
 				{# Lien de retour à la liste des artistes #}
@@ -24,8 +24,8 @@
 						<i class="bi bi-person-plus me-2"></i>Nouvel Artiste
 					</div>
 					<div class="card-body">
-						{# Inclusion du formulaire pour créer un nouvel artiste, avec le label du bouton défini #}
-						{{ include('back/fragments/_form.html.twig', {'button_label': 'Créer l\'artiste'}) }}
+						{# Inclusion du formulaire pour ajouter un nouvel artiste, avec le label du bouton défini #}
+						{{ include('back/fragments/_form.html.twig', {'button_label': 'Ajouter l\'artiste'}) }}
 					</div>
 				</div>
 			</div>
