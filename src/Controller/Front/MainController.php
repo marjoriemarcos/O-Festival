@@ -5,16 +5,17 @@ namespace App\Controller\Front;
 use App\Repository\ArtistRepository;
 use App\Repository\TicketRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Services\fetchDataFromRepo as ServicesFetchDataFromRepo;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class MainController extends AbstractController
 {
     #[Route('/', name: 'app_main_home')]
-    public function home(ArtistRepository $artistRepository, TicketRepository $ticketRepository): Response
+    public function home(ServicesFetchDataFromRepo $fetchDataFromRepo, TicketRepository $ticketRepository): Response
     {
         // Récupérer tous les artistes avec les scènes, les genres et les slot
-        $artistBrowse = $artistRepository->findAllArtistByParams();
+        $data = $fetchDataFromRepo->fetchDataFromRepo();
 
         // Initialiser un tableau pour stocker les durées des billets
         $durations = [24, 48, 72];
@@ -34,7 +35,10 @@ class MainController extends AbstractController
             ];
         }
         return $this->render('front/main/home.html.twig', [
-            'artistBrowse' => $artistBrowse,
+            'artistList' => $data['artistList'], 
+            'slots' => $data['slotList'],
+            'stageList' => $data['stageList'],
+            'genreList' => $data['genreList'],
             'passes' => $passes
         ]);
     }

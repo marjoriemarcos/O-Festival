@@ -10,7 +10,11 @@
 				<p class="card-text text-white">
 					{{ artist.date|date("d/m/Y") }}
 					-
-					{{ artist.genres }}
+					{% for genre in artist.genres %}
+            			{{ genre.name }}{% if not loop.last %} - {% endif %}
+        			{% endfor %}
+					-
+					{{ artist.stage.name }}
 				</p>
 			</div>
 		</a>

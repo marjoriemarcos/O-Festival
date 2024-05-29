@@ -26,11 +26,13 @@
 
 					<!-- Day of the artist's performance -->
 					<h2 class="artist-informations-show-day dark-yellow-txt">
-						<p>{{ artist.slot.getFormattedDate() }}</p>
+						<p>{{ artist.slot.getFormattedDate() }} ({{artist.slot.day}})</p>
+						<p> De {{artist.slot.hour}} </p>
 					</h2>
 
 					<!-- Stage' name -->
 					<h3 class="artist-informations-stage light-green-txt">{{artist.slot.stage.name}}</h3>
+				
 
 					<!-- Musical genres -->
 					{% if artist.genres|length > 0 %}
@@ -53,42 +55,49 @@
 							<ul class="list-inline mb-0">
 								{% if artist.website %}
 									<li class="list-inline-item">
-										<a href="#">
+										<a href="{{artist.website}}">
 											<i class="bi bi-globe dark-blue-txt"></i>
 										</a>
 									</li>
 								{% endif %}
 								{% if artist.spotify %}
 									<li class="list-inline-item">
-										<a href="#">
+										<a href="{{artist.spotify}}">
 											<i class="fa-brands fa-spotify dark-blue-txt"></i>
 										</a>
 									</li>
 								{% endif %}
 								{% if artist.facebook %}
 									<li class="list-inline-item">
-										<a href="#">
+										<a href="{{artist.facebook}}">
 											<i class="fa-brands fa-facebook dark-blue-txt"></i>
+										</a>
+									</li>
+								{% endif %}
+								{% if artist.twitter %}
+									<li class="list-inline-item">
+										<a href="{{artist.twitter}}">
+											<i class="fa-brands fa-x-twitter dark-blue-txt"></i>
 										</a>
 									</li>
 								{% endif %}
 								{% if artist.instagram %}
 									<li class="list-inline-item">
-										<a href="#">
+										<a href="{{artist.instagram}}">
 											<i class="fa-brands fa-instagram dark-blue-txt"></i>
 										</a>
 									</li>
 								{% endif %}
 								{% if artist.snapchat %}
 									<li class="list-inline-item">
-										<a href="#">
+										<a href="{{artist.snapchat}}">
 											<i class="fa-brands fa-snapchat dark-blue-txt"></i>
 										</a>
 									</li>
 								{% endif %}
 								{% if artist.tiktok %}
 									<li class="list-inline-item">
-										<a href="#">
+										<a href="{{artist.tiktok}}">
 											<i class="fa-brands fa-tiktok dark-blue-txt"></i>
 										</a>
 									</li>

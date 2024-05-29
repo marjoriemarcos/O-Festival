@@ -24,7 +24,7 @@ class ArtistRepository extends ServiceEntityRepository
      * @param int $id
      * @return Artist|null
      */
-    public function findArtistWithSlot(int $id): ?Artist
+    public function findArtistBySlot(int $id): ?Artist
     {
         return $this->createQueryBuilder('artist')
             // Utilisation d'une jointure interne pour inclure uniquement les artistes avec des slots
@@ -37,6 +37,22 @@ class ArtistRepository extends ServiceEntityRepository
             ->getQuery()
             // Exécution de la requête et récupération d'un seul résultat ou null
             ->getOneOrNullResult();
+    }
+
+    /**
+     * Retrieves all artists who are associated with at least one slot.
+     *
+     * This method uses an inner join between the Artist entity and the Slot entity,
+     * ensuring that only artists who have an associated slot are returned.
+     *
+     * @return Artist[] Returns an array of Artist entities that have associated slots.
+     */
+    public function findArtistsWithSlots(): array
+    {
+        return $this->createQueryBuilder('artist')
+            ->innerJoin('App\Entity\Slot', 'slot', 'WITH', 'slot.artist = artist.id')
+            ->getQuery()
+            ->getResult();
     }
 
     /**

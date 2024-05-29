@@ -6,13 +6,10 @@ use App\Repository\ArtistRepository;
 use App\Repository\GenreRepository;
 use App\Repository\SlotRepository;
 use App\Repository\StageRepository;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
-
 
 /***
  * 
- * Class that allows you to retrieve data from sevrals repo
+ * Class that allows you to retrieve data from several repositories
  * 
  */
 class fetchDataFromRepo
@@ -31,24 +28,48 @@ class fetchDataFromRepo
     }
 
     /**
-     * 
      * Method that allows you to retrieve data from ArtistRepository, SlotRepository, StageRepository, GenreRepository
      *
+     * @param string|null $date Optional date parameter to filter by date
+     * @param int|null $genre Optional genre ID to filter by genre
+     * @param int|null $stage Optional stage ID to filter by stage
      * @return array of data
      */
-    public function fetchDataFromRepo ($date = null, $genre = null, $stage = null): array
+    public function fetchDataFromRepo(?string $date = null, ?int $genre = null, ?int $stage = null): array
     {
-        $paramDate = $date;
-        $paramGenre = $genre;
-        $paramStage = $stage;
         $data = [];
-        // Get data artist from BDD
-        $data['artistList'] = $this->artistRepository->findAllArtistByParams($paramDate, $paramGenre, $paramStage);
-        // Get data slots from BDD
+
+        // Get data slots from Database
         $data['slotList'] = $this->slotRepository->findAll();
-        // Get data stage from BDD
-        $data['stageList'] = $this->stageRepository->findAll();
-        // Get data genre from BDD
+
+        // Get data artist associated with slots from Database
+        $artistsWithSlots = $this->artistRepository->findArtistsWithSlots();
+
+        // Filter artists based on parameters
+        $artistsData = array_filter($artistsWithSlots, function ($artist) use ($date, $genre, $stage) {
+            return (!$date || $artist->getSlot()->getDate()->format('Y-m-d') === $date)
+                && (!$genre || $artist->getGenres()->exists(function ($key, $element) use ($genre) {
+                    return $element->getId() === $genre;
+                }))
+                && (!$stage || $artist->getSlot()->getStage()->getId() === $stage);
+        });
+
+        // Format artists data
+        $data['artistList'] = array_map(function ($artist) {
+            return [
+                'id' => $artist->getId(),
+                'picture' => $artist->getPicture(),
+                'name' => $artist->getName(),
+                'date' => $artist->getSlot()->getDate(),
+                'genres' => $artist->getGenres(),
+                'stage' => $artist->getSlot()->getStage()
+            ];
+        }, $artistsData);
+
+        // Get data stages associated with slots from Database
+        $data['stageList'] = $this->stageRepository->findStagesWithSlots();
+
+        // Get data genres associated with artists from Database
         $data['genreList'] = $this->genreRepository->findGenresOfArtistsWithSlot();
 
         return $data;
