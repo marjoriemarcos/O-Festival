@@ -25,9 +25,19 @@
             
             <div class="d-flex">
               <button class="btn btn-primary fw-bold me-2 filter-button selected" data-day="all" type="button">Tous les jours</button>
-              <button class="btn btn-primary fw-bold me-2 filter-button" data-day="J1" type="button">Jour 1</button>
-              <button class="btn btn-primary fw-bold me-2 filter-button" data-day="J2" type="button">Jour 2</button>
-              <button class="btn btn-primary fw-bold filter-button" data-day="J3" type="button">Jour 3</button>
+                
+                <!--Initialize an empty array to store the days that have already been displayed-->
+                {% set displayed_names = [] %}
+                <!--Loop through each item in slotList-->
+                {% for slot in slotList %}
+                <!--Check if the current day (slot.day) has not already been displayed-->
+                    {% if slot.day not in displayed_names %}
+                        <button class="btn btn-primary fw-bold me-2 filter-button" data-day="{{slot.day}}" type="button">{{slot.day}} - {{slot.date|date('d/m/Y')}}</button>
+                        <!--Add the current day (slot.day) to the list of displayed days-->
+                        {% set displayed_names = displayed_names | merge([slot.day]) %}
+                    {% endif %}
+                {% endfor %}
+              
             </div>
           </div>
           <!-- Slot card -->
@@ -49,11 +59,16 @@
                   <table class="table table-bordered searchable-table"  id="tableWrapper">
                     <thead class="thead-dark">
                       <tr>
-                        <th scope="col" data-sortable><i class="bi bi-calendar me-2"></i>Jour</th> 
-                        <th scope="col"><i class="bi bi-clock me-2"></i> Heure</th>
-                        <th scope="col" data-sortable><i class="bi bi-person me-2"></i> Artiste</th>
-                        <th scope="col" data-sortable><i class="bi bi-house me-2"></i> Scène</th>
-                        <th class="col-1"><i class="bi bi-gear me-2"></i> Actions</th>
+                        <th scope="col" data-sortable><i class="bi bi-calendar me-2 text-center">
+                          <a href="#" class="btn" role="button" data-bs-toggle="button">Jour</a></i></th> 
+                        <th scope="col" data-sortable><i class="bi bi-clock me-2"></i> 
+                          <a href="#" class="btn" role="button" data-bs-toggle="button">Heure</a></th>
+                        <th scope="col" data-sortable><i class="bi bi-person me-2"></i> 
+                          <a href="#" class="btn" role="button" data-bs-toggle="button">Artiste</a></th>
+                        <th scope="col" data-sortable><i class="bi bi-house me-2"></i> 
+                          <a href="#" class="btn" role="button" data-bs-toggle="button">Scène</a></th>
+                        <th class="col"><i class="bi bi-gear me-2"></i> 
+                            <a href="#" class="btn" role="button" data-bs-toggle="button">Action</a></th>
                       </tr>
                     </thead>
                     <tbody id="slots-table-body">

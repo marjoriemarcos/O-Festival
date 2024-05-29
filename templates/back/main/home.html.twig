@@ -13,7 +13,8 @@
                     {% for day, slots in {'JOUR 1': slotsDay1, 'JOUR 2': slotsDay2, 'JOUR 3': slotsDay3} %}
                         <div class="col-md-4">
                             <div class="card">
-                                <div class="card-header fs-2 fw-bold">{{ day }}</div>
+                                <div class="card-header fs-2 fw-bold">{{ day }} -  {{slots.0.date|date('d/m/Y')}}
+                                </div>
                                 <div class="card-body">
                                     <ul class="list-group list-group-flush">
                                         {% for slot in slots %}
@@ -23,7 +24,7 @@
                                                     <div>
                                                         <h6 class="fw-bold mb-0">{{ slot.artist.name }}</h6>
                                                         <p class="mb-0">Scène {{ slot.stage.name }}</p>
-                                                        <p class="mb-0">{{ slot.date|date('d/m/Y') }} - {{ slot.hour }}</p>
+                                                        <p class="mb-0">{{ slot.date|date('d/m/Y') }} <br> {{ slot.hour }}</p>
                                                     </div>
                                                     <div class="d-flex">
                                                         <a href="{{ path('app_slot_read_admin', {id: slot.id}) }}" class="btn btn-primary bi bi-search me-2"></a>

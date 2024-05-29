@@ -20,20 +20,27 @@ export const slotButtons = {
 
     // Méthode pour lier les gestionnaires d'événements
     bind: function () {
+        let btnFilter = document.querySelectorAll('.filter-button');
+                
+        let tabBtnContent = [];
+        for (let i = 0; i < btnFilter.length; i++) {
+            tabBtnContent.push(btnFilter[i].textContent);
+        }
         // Fonction pour mettre à jour le titre du jour
         const updateDayTitle = (day) => {
             switch (day) {
                 case 'J1':
-                    slotButtons.dayTitle.textContent = 'Jour 1';
+                    slotButtons.dayTitle.textContent = tabBtnContent[1];
                     break;
                 case 'J2':
-                    slotButtons.dayTitle.textContent = 'Jour 2';
+                    slotButtons.dayTitle.textContent = tabBtnContent[2];
                     break;
                 case 'J3':
-                    slotButtons.dayTitle.textContent = 'Jour 3';
+                    slotButtons.dayTitle.textContent = tabBtnContent[3];
                     break;
                 default:
                     slotButtons.dayTitle.textContent = 'Tous les jours';
+
             }
         };
 
@@ -41,7 +48,7 @@ export const slotButtons = {
         slotButtons.filterButtons.forEach(button => {
             button.addEventListener('click', (event) => {
                 event.preventDefault(); // Empêche le comportement par défaut du lien
-
+            
                 const day = button.getAttribute('data-day');
 
                 // Changement de l'apparence du bouton
@@ -50,7 +57,6 @@ export const slotButtons = {
 
                 // Mise à jour du titre du jour
                 updateDayTitle(day);
-
                 // Filtrage des lignes de tableau
                 slotButtons.tableRows.forEach(row => {
                     if (day === 'all' || row.getAttribute('data-day') === day) {
