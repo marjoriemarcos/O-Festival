@@ -1,0 +1,60 @@
+{# Étend la mise en page de base #}
+{% extends 'back/base.html.twig' %}
+
+{# Définit le bloc 'customerBrowseApiActive' pour indiquer que cette page est active dans le menu de navigation #}
+{% block customerBrowseApiActive %}active{% endblock %}
+
+{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block main %}
+    <div class="container">
+        <!-- Titre principal -->
+        <h2 class="text-center my-5 fw-bold display-5">Liste des participant</h2>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <!-- Titre de la carte -->
+                    <div class="card-header">
+                        <h3 class="fs-2 fw-bold mb-0">Participant</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col" data-sortable><i class="bi bi-person me-2"></i>Id participant</th>
+                                        <th scope="col" data-sortable><i class="bi bi-person me-2"></i>Prénom</th>
+                                        <th scope="col"><i class="bi bi-person me-2"></i>Nom</th>
+                                        <th scope="col"><i class="bi bi-envelope me-2"></i>Email</th>
+                                        <th scope="col"><i class="bi bi-ticket me-2"></i>Ticket_id</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Boucle à travers customerList et les afficher -->
+                                    {% for customer in customerList %}
+                                        <tr>
+                                            <!-- Affiche l'ID du participant -->
+                                            <td>{{ customer.id_participant }}</td>
+                                            
+                                            <!-- Affiche le prénom du propriétaire -->
+                                            <td>{{ customer.owner.first_name }}</td>
+                                            
+                                            <!-- Affiche le nom de famille du propriétaire -->
+                                            <td>{{ customer.owner.last_name }}</td>
+                                            
+                                            <!-- Affiche l'email du propriétaire -->
+                                            <td>{{ customer.owner.email }}</td>
+                                            
+                                            <!-- Affiche l'ID du ticket associé -->
+                                            <td>{{ ticketList[customer.id_ticket] }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,89 +1,108 @@
+{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-{% block title %}{{customer.firstname}} {{customer.lastname}}{% endblock %}
+{# Définit le bloc 'customerReadActive' pour indiquer que cette page est active dans le menu de navigation #}
+{% block customerReadActive %}active{% endblock %}
 
+{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
 {% block main %}
 
-<main>
-    <div class="container">     
-      <h2 class="text-center my-5 fw-bold display-5">Détails du Client {{customer.firstname}} {{customer.lastname}}</h2>
-      <div class="container mt-5">
-        <div class="row justify-content-center">
-          <!-- Customer Card -->
-          <div class="col-md-8">
-            <a href="{{path('app_customer_list_admin')}}" class="btn btn-primary fw-bold mb-4">
-              <i class="bi bi-arrow-left"></i> Retour à la liste des clients
-            </a>
-            <div class="card">
-              <!--Card Title -->
-              <div class="card-header d-flex justify-content-between align-items-center">
-                <span class="fs-2 fw-bold">
-                  <i class="bi bi-person me-2"></i> {{customer.firstname}} {{customer.lastname}}
-                </span>
-                <div class="d-flex">
-                  {{ include('back/customer/_delete_form.html.twig', {'customer': customer}) }}
+    <div class="container">
+        {# Titre principal de la page #}
+        <h2 class="text-center my-5 fw-bold display-5">Détails du Client</h2>
+        
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                {# Carte du client #}
+                <div class="col-md-8">
+                    {# Bouton pour retourner à la liste des clients #}
+                    <a href="{{ path('app_back_customer_browse') }}" class="btn btn-primary fw-bold mb-4">
+                        <i class="bi bi-arrow-left"></i> Retour à la liste des clients
+                    </a>
+                    
+                    <div class="card">
+                        {# En-tête de la carte avec le nom du client et le bouton de suppression #}
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span class="fs-2 fw-bold">
+                                <i class="bi bi-person me-2"></i>
+                                {{ customer.firstname }} {{ customer.lastname }}
+                            </span>
+                            <div class="d-flex">
+                                <form method="post" action="{{ path('app_back_customer_delete', {'id': customer.id}) }}" onsubmit="return confirm('Voulez-vous supprimer {{ customer.lastname }} {{ customer.firstname }}?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ customer.id) }}">
+                                    <button class="btn btn-danger bi bi-trash">{{ button_label|default('') }}</button>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        {# Corps de la carte avec les détails du client #}
+                        <div class="card-body">
+                            {# Date de naissance #}
+                            <div class="d-flex align-items-center mt-3">
+                                <i class="bi bi-calendar3 me-2"></i>
+                                <h6 class="fw-bold mb-0">Date de naissance :</h6>
+                                <p class="mb-0 ms-2">{{ customer.birthdate | date('d/m/Y') }}</p>
+                            </div>
+                            
+                            {# Email #}
+                            <div class="d-flex align-items-center mt-3">
+                                <i class="bi bi-envelope me-2"></i>
+                                <h6 class="fw-bold mb-0">Email :</h6>
+                                <p class="mb-0 ms-2">{{ customer.email }}</p>
+                            </div>
+                            
+                            {# Numéro de téléphone #}
+                            <div class="d-flex align-items-center mt-3">
+                                <i class="bi bi-phone me-2"></i>
+                                <h6 class="fw-bold mb-0">Numéro de téléphone :</h6>
+                                <p class="mb-0 ms-2">{{ customer.phoneNumber }}</p>
+                            </div>
+                            
+                            {# Adresse #}
+                            <div class="d-flex align-items-center mt-3">
+                                <i class="bi bi-geo-alt me-2"></i>
+                                <h6 class="fw-bold mb-0">Adresse :</h6>
+                                <p class="mb-0 ms-2">{{ customer.adress }}</p>
+                            </div>
+                            
+                            {# Code postal #}
+                            <div class="d-flex align-items-center mt-3">
+                                <i class="bi bi-geo-alt me-2"></i>
+                                <h6 class="fw-bold mb-0">Code postal :</h6>
+                                <p class="mb-0 ms-2">{{ customer.postcode }}</p>
+                            </div>
+                            
+                            {# Ville #}
+                            <div class="d-flex align-items-center mt-3">
+                                <i class="bi bi-geo-alt me-2"></i>
+                                <h6 class="fw-bold mb-0">Ville :</h6>
+                                <p class="mb-0 ms-2">{{ customer.town }}</p>
+                            </div>
+                            
+                            {# Tickets achetés #}
+                            <div class="d-flex align-items-center mt-3">
+                                <i class="bi bi-ticket me-2"></i>
+                                <h6 class="fw-bold mb-0">Tickets achetés :</h6>
+                            </div>
+                            
+                            {# Liste des tickets achetés par le client #}
+                            <ul class="list-group mt-3">
+                                {% for ticket in customer.getTickets %}
+                                    <li class="list-group-item">
+                                        <a href="{{ path('app_ticket_read_admin', {id: ticket.id}) }}">
+                                            <i class="bi bi-ticket me-2"></i>
+                                            {{ ticket.title }}
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="list-group-item">Ce client n'a pas acheté de tickets</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="card-body">
-                <!-- Birthdate -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-calendar3 me-2"></i>
-                  <h6 class="fw-bold mb-0">Date de naissance :</h6>
-                  <p class="mb-0 ms-2">{{customer.birthdate |date('d/m/Y')}}</p>
-                </div>
-                <!-- Email -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-envelope me-2"></i>
-                  <h6 class="fw-bold mb-0">Email :</h6>
-                  <p class="mb-0 ms-2">{{customer.email}}</p>
-                </div>
-                <!-- Phone number -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-phone me-2"></i>
-                  <h6 class="fw-bold mb-0">Numéro de téléphone :</h6>
-                  <p class="mb-0 ms-2">{{customer.phoneNumber}}</p>
-                </div>
-                <!-- Address -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-geo-alt me-2"></i>
-                  <h6 class="fw-bold mb-0">Adresse :</h6>
-                  <p class="mb-0 ms-2">{{customer.adress}}</p>
-                </div>
-                <!-- Postcode -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-geo-alt me-2"></i>
-                  <h6 class="fw-bold mb-0">Code postal :</h6>
-                  <p class="mb-0 ms-2">{{customer.postcode}}</p>
-                </div>
-                <!-- City -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-geo-alt me-2"></i>
-                  <h6 class="fw-bold mb-0">Ville :</h6>
-                  <p class="mb-0 ms-2">{{customer.town}}</p>
-                </div>
-                <!-- Bought tickets -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-ticket me-2"></i>
-                  <h6 class="fw-bold mb-0">Tickets achetés :</h6>
-                </div>
-                  <ul class="list-group mt-3">
-                    {% for ticket in customer.getTickets %}
-                      <li class="list-group-item">
-                       <a href="{{ path('app_ticket_read_admin', {id: ticket.id}) }}">
-                        <i class="bi bi-ticket me-2"></i>{{ ticket.title }}
-                       </a>
-                      </li>
-                    {% else %}
-                      <li class="list-group-item">Ce client n'a pas acheté de tickets</li>
-                    {% endfor %}
-                  </ul>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </main>
 
 {% endblock %}
-

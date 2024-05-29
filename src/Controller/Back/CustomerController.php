@@ -15,8 +15,8 @@ use Knp\Component\Pager\PaginatorInterface;
 
 class CustomerController extends AbstractController
 {
-    #[Route('/back/customer_list', name: 'app_customer_list_admin', methods: ['GET'])]
-    public function list(CustomerRepository $customerRepository, PaginatorInterface $paginator, Request $request): Response
+    #[Route('/back/customer', name: 'app_back_customer_browse', methods: ['GET'])]
+    public function browse(CustomerRepository $customerRepository, PaginatorInterface $paginator, Request $request): Response
     {
         // Create QueryBuilder to fetch customers and their tickets
         $queryBuilder = $customerRepository->createQueryBuilder('c')
@@ -35,12 +35,12 @@ class CustomerController extends AbstractController
         );
     
         // Render the template with the paginated list
-        return $this->render('back/customer/list.html.twig', [
+        return $this->render('back/customer/browse.html.twig', [
             'customerList' => $customerList,
         ]);
     }
 
-    #[Route('/back/customer_list/{id}', name: 'app_customer_read_admin', methods: ['GET'])]
+    #[Route('/back/customer/{id}', name: 'app_back_customer_read', methods: ['GET'])]
     public function read(int $id, CustomerRepository $customerRepository): Response
     {
         // Fetch the customer by its ID
@@ -56,7 +56,7 @@ class CustomerController extends AbstractController
         ]);
     }
 
-    #[Route('/back/customer_list/{id<\d+>}/delete', name: 'app_customer_delete_admin', methods: ['POST'])]
+    #[Route('/back/customer/{id<\d+>}/delete', name: 'app_back_customer_delete', methods: ['POST'])]
     public function delete(Request $request, Customer $customer, EntityManagerInterface $entityManager): Response
     {
         var_dump($request->request->all());
@@ -69,12 +69,12 @@ class CustomerController extends AbstractController
             $this->addFlash('error', 'La suppression du client a échoué. Le jeton CSRF est invalide.');
         }        
     
-        return $this->redirectToRoute('app_customer_list_admin');
+        return $this->redirectToRoute('app_back_customer_browse');
     }
 
 
-    #[Route('/back/ticket_list/api', name: 'app_ticket_api', methods: ['GET'])]
-    public function ticketApiList(weezevent $weezevent)
+    #[Route('/back/customer-api', name: 'app_back_customer_browse_api', methods: ['GET'])]
+    public function browseApi(weezevent $weezevent)
     {   // Va chercher la liste des commandes des client
         $content = $weezevent->fetchCustomerList();
         $customerList = $content['participants'];
@@ -82,7 +82,7 @@ class CustomerController extends AbstractController
         // Va chercher la liste de type de billets
         $ticketList = $weezevent->fetchTicketList();
 
-        return $this->render('back/customer/listApi.html.twig', [
+        return $this->render('back/customer/browse.api.html.twig', [
         'customerList' => $customerList,
         'ticketList' => $ticketList,
         ]);
