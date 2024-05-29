@@ -5,16 +5,16 @@
 {% block title %}{{artist.name}}{% endblock %}
 
 {% block main %}
-<div class="container-artist background-img-fixed-bg p-5" style="background-color: #e1e5f2;">
-    <div class="row gx-0">
+<div class="container-artist background-img-fixed-bg">
+    <div class="row pt-5 gx-0 ">
         <!-- Picture of the artist -->
-        <div class="artist-image col-lg-6 mb-4 mb-lg-0">
-            <img src="{{ artist.picture }}" alt="Photo de {{ artist.name }}" class="img-fluid rounded">
+        <div class="artist-image col-lg-6">
+            <img src="{{ artist.picture }}" alt="Photo de {{ artist.name }}" class="img-fluid">
         </div>
 
         <!-- Information on the artist -->
         <div class="col-lg-6">
-            <div class="artist-informations p-4 rounded">
+            <div class="artist-informations p-4">
                 <!-- Artist's name -->
                 <h1 class="artist-informations-name display-8">{{ artist.name|upper }}</h1>
 

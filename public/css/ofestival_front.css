@@ -341,13 +341,6 @@ body {
     height: 100%;
 }
 
-@media (max-width: 576px) {  
-    .card-artist .card-title,
-    .card-artist .card-text {
-        font-size: 1.2em; 
-    }
-}
-
 
 /** --------- TICKETING --------- **/
 
@@ -408,9 +401,7 @@ body {
     height: 100%; 
     object-fit: cover;
 }
-.artist-image img{
-    max-height: 90vh;
-}
+
 .artist-informations{
     background-color: white;
     height: 100%;
@@ -681,6 +672,15 @@ body {
         padding: 0;
     }
 }
+
+
+@media (max-width: 576px) {  
+    .card-artist .card-title,
+    .card-artist .card-text {
+        font-size: 1.2em; 
+    }
+}
+
 
 @media (max-width: 400px) {
     .informations-content > h2 {
