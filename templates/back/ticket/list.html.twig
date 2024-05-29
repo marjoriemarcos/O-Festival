@@ -49,25 +49,24 @@
 								<table class="table table-bordered table-hover searchable-table" id="tableWrapper">
 									<thead class="thead-dark">
 										<tr>
-											<th class="col-5" data-sortable>
-												<i class="bi bi-file-earmark-text me-2"></i>
-												Titre</th>
+											<th class="col-5" data-sortable><i class="bi bi-file-earmark-text me-2">
+												<a href="#" class="btn" role="button" data-bs-toggle="button">Titre</a></i></th>
 											<th class="col-1" data-sortable>
-												<i class="bi bi-currency-euro me-2"></i>
-												Prix</th>
+												<i class="bi bi-currency-euro me-2"><a href="#" class="btn" role="button" data-bs-toggle="button">Prix</a></i>
+												</th>
 											<th class="col-1" data-sortable>
-												<i class="bi bi-box-seam me-2"></i>
-												Quantité</th>
+												<i class="bi bi-box-seam me-2"><a href="#" class="btn" role="button" data-bs-toggle="button">Quantité</a></i>
+												</th>
 											<th class="col-1">
-												<i class="bi bi-gear me-2"></i>
-												Actions</th>
+												<i class="bi bi-gear me-2"><a href="#" class="btn" role="button" data-bs-toggle="button">Action</a></i>
+												</th>
 										</tr>
 									</thead>
 									<tbody id="tickets-table-body">
 										{% for ticket in ticketList %}
 											<tr data-duration="{{ ticket.duration }}">
 												<td>{{ ticket.title }}</td>
-												<td>{{ ticket.price }}</td>
+												<td>{{ ticket.price }} €</td>
 												<td>{{ ticket.quantity }}</td>
 												<td>
 													<div
