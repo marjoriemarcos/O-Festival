@@ -1,116 +1,112 @@
 {% extends 'front/base.html.twig' %}
 
-{% block artistActive %}active
-{% endblock %}
+{% block artistActive %}active{% endblock %}
 
 {% block main %}
+    <div class="container-artist background-img-fixed-bg">
+        <div class="row pt-5 gx-0">
+            <!-- Picture of the artist -->
+            <div class="artist-image col-lg-6">
+                <img src="{{ artist.picture }}" alt="Photo de {{ artist.name }}" class="img-fluid">
+            </div>
 
-	<div class="container-artist background-img-fixed-bg">
+            <!-- Information on the artist -->
+            <div class="col-lg-6">
+                <div class="artist-informations open-font p-4">
+                    <!-- Artist's name -->
+                    <h1 class="artist-informations-name dark-blue-txt">{{ artist.name }}</h1>
 
+                    <!-- Day and time of the artist's performance -->
+                    <h2 class="artist-informations-show-day dark-yellow-txt">
+                        <p>{{ artist.slot.getFormattedDate() }} ({{ artist.slot.day }})</p>
+                        <p> De {{ artist.slot.hour }}</p>
+                    </h2>
 
-		<div
-			class="row pt-5 gx-0 ">
+                    <!-- Stage's name -->
+                    <h3 class="artist-informations-stage light-green-txt">{{ artist.slot.stage.name }}</h3>
+                    
+                    <!-- Musical genres -->
+                    {% if artist.genres|length > 0 %}
+                        {% for genre in artist.genres %}
+                            <span class="artist-informations-genre btn btn-secondary btn-sm disabled light-blue-bg px-4 mt-3">
+                                {{ genre.name }}
+                            </span>
+                        {% endfor %}
+                    {% endif %}
 
-			<!-- Picture of the artist -->
-			<div class="artist-image col-lg-6">
-				<img src="{{artist.picture}}" alt="Photo de {{artist.name}}" class="img-fluid">
-			</div>
+                    <!-- Artist's description -->
+                    <div class="artist-informations-description open-font mt-4 mb-4">
+                        <p>{{ artist.description }}</p>
+                    </div>
 
-			<!-- Information on the artist -->
-			<div class="col-lg-6">
-				<div
-					class="artist-informations open-font p-4">
+                    <!-- Artist's socials -->
+                    {% if artist.website %}
+                        <div class="artist-informations-social-networks">
+                            <ul class="list-inline mb-0">
+                                {% if artist.website %}
+                                    <li class="list-inline-item">
+                                        <a href="{{ artist.website }}">
+                                            <i class="bi bi-globe dark-blue-txt"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                {% if artist.spotify %}
+                                    <li class="list-inline-item">
+                                        <a href="{{ artist.spotify }}">
+                                            <i class="fa-brands fa-spotify dark-blue-txt"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                {% if artist.facebook %}
+                                    <li class="list-inline-item">
+                                        <a href="{{ artist.facebook }}">
+                                            <i class="fa-brands fa-facebook dark-blue-txt"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                {% if artist.twitter %}
+                                    <li class="list-inline-item">
+                                        <a href="{{ artist.twitter }}">
+                                            <i class="fa-brands fa-x-twitter dark-blue-txt"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                {% if artist.instagram %}
+                                    <li class="list-inline-item">
+                                        <a href="{{ artist.instagram }}">
+                                            <i class="fa-brands fa-instagram dark-blue-txt"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                {% if artist.snapchat %}
+                                    <li class="list-inline-item">
+                                        <a href="{{ artist.snapchat }}">
+                                            <i class="fa-brands fa-snapchat dark-blue-txt"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                {% if artist.tiktok %}
+                                    <li class="list-inline-item">
+                                        <a href="{{ artist.tiktok }}">
+                                            <i class="fa-brands fa-tiktok dark-blue-txt"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
 
-					<!-- Artist's name -->
-					<h1 class="artist-informations-name dark-blue-txt">{{artist.name}}</h1>
+        <div class="row mt-5 text-center">
+            <!-- Video -->
+            <div class="artist-video embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item w-100 h-100" src="{{ artist.video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
 
-					<!-- Day of the artist's performance -->
-					<h2 class="artist-informations-show-day dark-yellow-txt">
-						<p>{{ artist.slot.getFormattedDate() }}</p>
-					</h2>
-
-					<!-- Stage' name -->
-					<h3 class="artist-informations-stage light-green-txt">{{artist.slot.stage.name}}</h3>
-
-					<!-- Musical genres -->
-					{% if artist.genres|length > 0 %}
-						{% for genre in artist.genres %}
-							<span class="artist-informations-genre btn btn-secondary btn-sm disabled light-blue-bg px-4 mt-3">
-								{{genre.name}}
-							</span>
-						{% endfor %}
-					{% endif %}
-					<!-- Artist's description -->
-					<div class="artist-informations-description open-font mt-4 mb-4">
-						<p>
-							{{artist.description}}
-						</p>
-					</div>
-
-					<!-- Artist's socials -->
-					{% if artist.website or artist.spotify or artist.facebook or artist.instagram or artist.snapchat or artist.tiktok %}
-						<div class="artist-informations-social-networks">
-							<ul class="list-inline mb-0">
-								{% if artist.website %}
-									<li class="list-inline-item">
-										<a href="#">
-											<i class="bi bi-globe dark-blue-txt"></i>
-										</a>
-									</li>
-								{% endif %}
-								{% if artist.spotify %}
-									<li class="list-inline-item">
-										<a href="#">
-											<i class="fa-brands fa-spotify dark-blue-txt"></i>
-										</a>
-									</li>
-								{% endif %}
-								{% if artist.facebook %}
-									<li class="list-inline-item">
-										<a href="#">
-											<i class="fa-brands fa-facebook dark-blue-txt"></i>
-										</a>
-									</li>
-								{% endif %}
-								{% if artist.instagram %}
-									<li class="list-inline-item">
-										<a href="#">
-											<i class="fa-brands fa-instagram dark-blue-txt"></i>
-										</a>
-									</li>
-								{% endif %}
-								{% if artist.snapchat %}
-									<li class="list-inline-item">
-										<a href="#">
-											<i class="fa-brands fa-snapchat dark-blue-txt"></i>
-										</a>
-									</li>
-								{% endif %}
-								{% if artist.tiktok %}
-									<li class="list-inline-item">
-										<a href="#">
-											<i class="fa-brands fa-tiktok dark-blue-txt"></i>
-										</a>
-									</li>
-								{% endif %}
-							</ul>
-						</div>
-					{% endif %}
-				</div>
-			</div>
-		</div>
-
-		<div
-			class="row mt-5 text-center">
-
-			<!-- Video -->
-			<div class="artist-video embed-responsive embed-responsive-16by9">
-				<iframe class="embed-responsive-item w-100 h-100" src="{{artist.video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-			</div>
-
-			<!--  Link to the ticket shop -->
-			{{ include('front/fragments/_ticket_button.html.twig') }}
-		</div>
-	</div>
-
+            <!-- Link to the ticket shop -->
+            {{ include('front/fragments/_ticket_button.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

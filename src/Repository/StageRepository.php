@@ -16,6 +16,20 @@ class StageRepository extends ServiceEntityRepository
         parent::__construct($registry, Stage::class);
     }
 
+        
+    /**
+     * Retrieves all stages that are associated with at least one slot.
+     *   
+     * @return Stage[] Returns an array of Stage entities that have associated slots.
+     */
+    public function findStagesWithSlots(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->innerJoin('s.slots', 'slot')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Stage[] Returns an array of Stage objects
 //     */

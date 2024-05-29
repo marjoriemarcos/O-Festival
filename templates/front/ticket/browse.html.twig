@@ -5,7 +5,7 @@
 
 {% block main %}
 
-	<div class="container-ticketing medium-blue-bg roboto-font">
+	<div class="container-ticketing medium-blue-bg">
 		<h2 class="page-title adumu-font">Billetterie</h2>
 		<div class="ticket-list row justify-content-around mb-4">
 
@@ -90,10 +90,8 @@
 									{% endfor %}
 								</div>
 
-								<!-- Bouton d'Achat -->
-								<div class="col-md-12 text-center mt-3">
-									<a href="#" class="btn btn-primary light-yellow-bg dark-blue-txt">Acheter maintenant</a>
-								</div>
+								<!-- Ticket Button -->
+								{{ include('front/fragments/_ticket_button.html.twig', {'button_label': 'Acheter maintenant', 'anchor': 'weezevent'}) }}
 							</div>
 						</div>
 					</div>
@@ -101,7 +99,7 @@
 			{% endfor %}
 		</div>
 		<!-- Weezevent Ticketing Service -->
-		<div class="weezevent container-fluid gx-0">
+		<div id="weezevent" class="weezevent container-fluid gx-0">
 			<div
 				class=" medium-blue-bg py-3">
 

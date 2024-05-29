@@ -1,119 +1,100 @@
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<!-- Required meta tags -->
-		<meta charset="utf-8">
-		<meta name="author" content="Badri CHOULAK, Nicolas JOUBERT, Talya LALAOUI, Marjorie MARCOS">
-		<meta name="description" content="O'Festival">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>
-			{% block title %}O'Festival
-			{% endblock %}
-		</title>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Badri CHOULAK, Nicolas JOUBERT, Talya LALAOUI, Marjorie MARCOS">
+    <meta name="description" content="O'Festival - Your ultimate destination for music, arts, and culture.">
 
-		{% block meta %}
-			<!-- Additional meta tags can be added in child templates -->
-		{% endblock %}
+    <title>O'Festival - {% block title %}{% endblock %}</title>
 
-		{% block stylesheets %}
-			<!-- reset CSS -->
-			<link
-			rel="stylesheet" href="{{ asset('css/reset_front.css') }}">
-			<!-- Bootstrap CSS -->
-			<link
-			rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-			<!-- Bootstrap icons -->
-			<link
-			rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-			<!-- our CSS -->
-			<link
-			rel="stylesheet" href="{{ asset('css/ofestival_front.css') }}">
-			<!-- Adumu font family -->
-			<link
-			href="https://fonts.cdnfonts.com/css/adumu-inline" rel="stylesheet">
-			<!-- Roboto font family -->
-			<link href="https://fonts.cdnfonts.com/css/roboto-condensed-3" rel="stylesheet">
-		{% endblock %}
+    <!-- Stylesheets -->
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/reset_front.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{{ asset('css/ofestival_front.css') }}">
+    <link href="https://fonts.cdnfonts.com/css/adumu-inline" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/roboto-condensed-3" rel="stylesheet">
+    {% endblock %}
 
-		<!-- favicon -->
-		<link rel="shortcut icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
+</head>
 
-	</head>
+<body>
+<header>
+    <div class="header roboto-font text-white">
+        <!-- Navbar -->
+        <nav class="navbar dark-blue-bg px-5">
+            <a class="navbar-brand navbar-logo" href="{{ path('app_main_home') }}">
+                <img src="{{ asset('images/logoNav.png') }}" alt="Logo de O'Festival" class="img-fluid">
+            </a>
+            <ul class="nav-menu dark-blue-bg">
+                <li class="nav-item me-5">
+                    <a href="{{ path('app_artist_browse') }}" class="nav-link">Programmation</a>
+                </li>
+                <li class="nav-item me-5">
+                    <a href="{{ path('app_ticket_browse') }}" class="nav-link">Billetterie</a>
+                </li>
+                <li class="nav-item me-5">
+                    <a href="{{ path('app_infos_browse') }}" class="nav-link">Infos pratiques</a>
+                </li>
+            </ul>
+            <div class="hamburger me-0">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </div>
+</header>
 
-	<body>
-		<header>
-			<div
-				class="header roboto-font  text-white">
-				<!--Navbar-->
-				<nav class="navbar dark-blue-bg px-5">
-					<a class="navbar-brand navbar-logo" href="{{path('app_main_home')}}">
-						<img src="{{ asset('images/logoNav.png') }}" alt="Logo de O'Festival" class="img-fluid">
-					</a>
-					<ul class="nav-menu dark-blue-bg">
-						<li class="nav-item me-5">
-							<a href="{{path('app_artist_browse')}}" class="nav-link">Programmation</a>
-						</li>
-						<li class="nav-item me-5">
-							<a href="{{path('app_ticket_browse')}}" class="nav-link">Billetterie</a>
-						</li>
-						<li class="nav-item me-5">
-							<a href="{{path('app_infos_browse')}}" class="nav-link">Infos pratiques</a>
-						</li>
-					</ul>
-					<div class="hamburger me-0">
-						<span class="bar"></span>
-						<span class="bar"></span>
-						<span class="bar"></span>
-					</div>
-				</nav>
-			</header>
-			<main>
-				{% block main %}{% endblock %}
-			</main>
+<main>
+    {% block main %}{% endblock %}
+</main>
 
-			<!--Footer-->
-			<footer>
-				<div class="footer light-blue-bg roboto-font text-white p-2">
-					<div class="social-icons">
-						<a class="mx-2" href="#">
-							<i class="fa-brands fa-facebook light-yellow-txt"></i>
-						</a>
-						<a class="mx-2" href="#">
-							<i class="fa-brands fa-x-twitter light-yellow-txt"></i>
-						</a>
-						<a class="mx-2" href="#">
-							<i class="fa-brands fa-instagram light-yellow-txt"></i>
-						</a>
-						<a class="mx-2" href="#">
-							<i class="fa-brands fa-snapchat light-yellow-txt"></i>
-						</a>
-						<a class="mx-2" href="#">
-							<i class="fa-brands fa-youtube light-yellow-txt"></i>
-						</a>
-					</div>
+<!-- Footer -->
+<footer>
+    <div class="footer light-blue-bg roboto-font text-white p-2">
+        <div class="social-icons">
+            <a class="mx-2" href="#">
+                <i class="fab fa-facebook light-yellow-txt"></i>
+            </a>
+            <a class="mx-2" href="#">
+                <i class="fab fa-twitter light-yellow-txt"></i>
+            </a>
+            <a class="mx-2" href="#">
+                <i class="fab fa-instagram light-yellow-txt"></i>
+            </a>
+            <a class="mx-2" href="#">
+                <i class="fab fa-snapchat light-yellow-txt"></i>
+            </a>
+            <a class="mx-2" href="#">
+                <i class="fab fa-youtube light-yellow-txt"></i>
+            </a>
+        </div>
 
-					<ul class="nav-links list-inline">
-						<li class="list-inline-item">
-							<a class="nav-link mx-2" href="{{ path('app_infos_browse') }}">Contact</a>
-						</li>
-						<li class="list-inline-item">
-							<a class="nav-link mx-2" href="#">Partenaires</a>
-						</li>
-						<li class="list-inline-item">
-							<a class="nav-link mx-2" href="{{path('app_legal_notice_browse')}}">Mentions légales</a>
-						</li>
-					</ul>
-				</div>
-			</footer>
+        <ul class="nav-links list-inline">
+            <li class="list-inline-item">
+                <a class="nav-link mx-2" href="{{ path('app_infos_browse')}}#contact-form">Contact</a>
+            </li>
+            <li class="list-inline-item">
+                <a class="nav-link mx-2" href="#">Partenaires</a>
+            </li>
+            <li class="list-inline-item">
+                <a class="nav-link mx-2" href="{{ path('app_legal_notice_browse')}}">Mentions légales</a>
+            </li>
+        </ul>
+    </div>
+</footer>
 
-			{% block javascripts %}
-				<!-- Bootstrap JS -->
-				<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-				<!-- our JS -->
-				<script type="module" src="{{ asset('js/app.js') }}" crossorigin="anonymous"></script>
-				<!-- font Awesome -->
-				<script src="https://kit.fontawesome.com/2789e31df4.js" crossorigin="anonymous"></script>
-			{% endblock %}
-		</body>
-	</body>
+{% block javascripts %}
+<!-- JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script type="module" src="{{ asset('js/app.js') }}" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/2789e31df4.js" crossorigin="anonymous"></script>
+{% endblock %}
+</body>
 </html>

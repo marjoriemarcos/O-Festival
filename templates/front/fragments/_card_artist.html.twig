@@ -1,18 +1,19 @@
 <!-- Artists Card -->
-
 <div class="card">
-	<div class="img-zoom">
-		<a href="{{ path('app_artist_read', {'id': artist.id}) }}">
-			<img src="{{ artist.picture }}" class="card-img-top" alt="{{ artist.name }}">
-			<div class="overlay"></div>
-			<div class="card-img-overlay d-flex flex-column justify-content-end">
-				<h3 class="card-title text-white mb-0">{{ artist.name }}</h3>
-				<p class="card-text text-white">
-					{{ artist.date|date("d/m/Y") }}
-					-
-					{{ artist.genres }}
-				</p>
-			</div>
-		</a>
-	</div>
+    <div class="img-zoom">
+        <a href="{{ path('app_artist_read', {'id': artist.id}) }}">
+            <img src="{{ artist.picture }}" class="card-img-top" alt="{{ artist.name }}">
+            <div class="overlay"></div>
+            <div class="card-img-overlay d-flex flex-column justify-content-end">
+                <h3 class="card-title text-white mb-0">{{ artist.name }}</h3>
+                <p class="card-text text-white">
+                    {{ artist.date|date("d/m/Y") }} - 
+                    {% for genre in artist.genres %}
+                        {{ genre.name }}{% if not loop.last %} - {% endif %}
+                    {% endfor %} - 
+                    {{ artist.stage.name }}
+                </p>
+            </div>
+        </a>
+    </div>
 </div>
