@@ -4,17 +4,18 @@
 {% endblock %}
 
 {% block main %}
-	<main>
-		{# Afficher les messages flash #}
-		{% for type, messages in app.flashes %}
-			{% for message in messages %}
-				<div class="alert alert-{{ type }}">
-					{{ message }}
-				</div>
-			{% endfor %}
-		{% endfor %}
-		<div class="container">
-			<h2 class="text-center my-5 fw-bold display-5">Liste des Artistes</h2>
+<main>
+    {# Display flash messages #}
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }} alert-dismissible">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div class="container">      
+        <h2 class="text-center my-5 fw-bold display-5">Liste des Artistes</h2>
 
 			{{ include('back/fragments/_search_bar.html.twig') }}
 

@@ -34,14 +34,7 @@ class ArtistType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'by_reference' => false,                    
-            ])
-            ->add('slot', EntityType::class, [
-                'class' => Slot::class,
-                'choice_label' => function (Slot $slot) {
-                    return $slot->getDate()->format('d/m/Y') . ' ' . $slot->getHour();
-                }, // Use a combination of 'date' and 'hour' for slot display
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

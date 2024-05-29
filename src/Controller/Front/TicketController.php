@@ -10,45 +10,46 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class TicketController extends AbstractController
 {
+    // Displays the ticket page
     #[Route('/billetterie', name: 'app_ticket_browse')]
     public function browse(TicketRepository $ticketRepository): Response
     {
-        // Initialiser un tableau pour stocker les durées des billets
-        $durations = [24, 48, 72];
-        // Initialiser un tableau pour stocker les passes
+        // Initialize an array to store passes
         $passes = [];
-        
-        // Initialiser un formateur de dates en français
+
+        // Initialize a date formatter for French locale
         $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::NONE, 'Europe/Paris');
 
-        // Boucler sur chaque durée pour récupérer les billets correspondants
-        foreach ($durations as $duration) {
-            // Récupérer les billets pour la durée spécifiée
+        // Fetch tickets for different durations and format their dates
+        foreach ([24, 48, 72] as $duration) {
+            // Fetch tickets for the specified duration
             $tickets = $ticketRepository->findTicketsByDuration($duration);
             
-            // Formater les dates pour chaque billet
+            // Format dates for each ticket
             foreach ($tickets as $ticket) {
                 $ticket->formattedStartAt = $formatter->format($ticket->getStartAt());
                 $ticket->formattedEndAt = $formatter->format($ticket->getEndAt());
             }
 
-            // Ajouter les billets à la liste des passes
+            // Add tickets to the passes list
             $passes[] = [
                 'data' => $tickets,
-                'title' => 'PASS ' . ($duration / 24) . ' JOUR(S)',
-                'image' => '../images/pass-' . ($duration / 24) . '-jours.jpg',
+                'title' => 'PASS ' . ($duration / 24) . ' DAY(S)',
+                'image' => 'pass-' . ($duration / 24) . '-jours.jpg',
             ];
         }
 
-        // Transmettre les données à la vue
+        // Pass data to the view
         return $this->render('front/ticket/browse.html.twig', [
             'passes' => $passes,
         ]);
     }
 
+    // Placeholder method for adding tickets (currently not implemented)
     #[Route('/billetterie', name: 'app_ticket_add', methods: 'POST')]
     public function add(): Response
     {
+        // Placeholder method, currently not implemented
         return $this->render('front/ticket/browse.html.twig', [
             'controller_name' => 'TicketController',
         ]);

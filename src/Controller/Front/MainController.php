@@ -5,36 +5,45 @@ namespace App\Controller\Front;
 use App\Repository\ArtistRepository;
 use App\Repository\TicketRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Services\fetchDataFromRepo as ServicesFetchDataFromRepo;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class MainController extends AbstractController
 {
+    // Displays the home page
     #[Route('/', name: 'app_main_home')]
-    public function home(ArtistRepository $artistRepository, TicketRepository $ticketRepository): Response
-    {
-        // Récupérer tous les artistes avec les scènes, les genres et les slot
-        $artistBrowse = $artistRepository->findAllArtistByParams();
+    public function home(
+        ServicesFetchDataFromRepo $fetchDataFromRepo,
+        TicketRepository $ticketRepository
+    ): Response {
+        // Fetch all data about artists, stages, genres, and slots
+        $data = $fetchDataFromRepo->fetchDataFromRepo();
 
-        // Initialiser un tableau pour stocker les durées des billets
+        // Initialize an array to store ticket durations
         $durations = [24, 48, 72];
-        // Initialiser un tableau pour stocker les passes
+        // Initialize an array to store passes
         $passes = [];
 
-        // Boucler sur chaque durée pour récupérer les billets correspondants
+        // Iterate over each duration to fetch corresponding tickets
         foreach ($durations as $duration) {
-            // Récupérer les billets pour la durée spécifiée
+            // Fetch tickets for the specified duration
             $tickets = $ticketRepository->findTicketsByDuration($duration);
 
-            // Ajouter les billets à la liste des passes
+            // Add tickets to the passes list
             $passes[] = [
                 'data' => $tickets,
-                'title' => 'PASS ' . ($duration / 24) . ' JOUR(S)',
-                'image' => '../images/pass-' . ($duration / 24) . '-jours.jpg',
+                'title' => 'PASS ' . ($duration / 24) . ' DAY(S)',
+                'image' => 'pass-' . ($duration / 24) . '-jours.jpg',
             ];
         }
+
+        // Render the home page view with data
         return $this->render('front/main/home.html.twig', [
-            'artistBrowse' => $artistBrowse,
+            'artistList' => $data['artistList'], 
+            'slots' => $data['slotList'],
+            'stageList' => $data['stageList'],
+            'genreList' => $data['genreList'],
             'passes' => $passes
         ]);
     }

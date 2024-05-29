@@ -8,8 +8,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ArtistRepository::class)]
+#[UniqueEntity('name')]
 class Artist
 {
     #[ORM\Id]
@@ -24,6 +26,7 @@ class Artist
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank]
+    #[Assert\Length(min: 3)]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]

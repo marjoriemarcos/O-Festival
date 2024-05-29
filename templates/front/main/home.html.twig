@@ -1,17 +1,14 @@
 {% extends 'front/base.html.twig' %}
 
-{% block homeActive %}active
-{% endblock %}
+{% block homeActive %}active{% endblock %}
 
 {% block main %}
-	<!-- Conteneur principal de la page d'accueil -->
-	<div
-		class="container-home dark-blue-bg roboto-font">
-		<!-- Frise supérieure -->
-		<img
-		src="{{asset('images/frise-1.png')}}" class="card-img-top">
+	<!-- Main container -->
+	<div class="container-home dark-blue-bg roboto-font">
+		<!-- Header Image -->
+		<img src="{{asset('images/frise-1.png')}}" class="card-img-top" alt="">
 
-		<!-- Vidéo d'accueil -->
+		<!-- Video Section -->
 		<div class="container-home-video container-fluid text-center position-relative d-flex align-items-center justify-content-center">
 			<video autoplay loop muted plays-inline class="home-video">
 				<source src="{{asset('images/video-home.mp4')}}" type="video/mp4">
@@ -19,60 +16,47 @@
 			<h1 class="home-title text-white adumu-font">O'FESTIVAL</h1>
 		</div>
 
-		<!-- Frise intermédiaire -->
-		<img
-		src="{{asset('images/frise-2.png')}}" class="card-img-top">
+		<!-- Intermediate section -->
+		<img src="{{asset('images/frise-2.png')}}" class="card-img-top" alt="">
 
-		<!-- Programmation -->
-		<div
-			class="container-home-artist-list d-flex flex-column">
+		<!-- Schedule -->
+		<div class="container-home-artist-list d-flex flex-column">
+			<!-- Schedule title -->
+			<h2 class="home-artist-list-title py-5 px-5 medium-blue-bg text-white">Programmation</h2>
 
-			<!-- Titre de la section Programmation -->
-			<h2 class="home-artist-list-title py-5 px-5 medium-blue-bg text-white">
-				Programmation
-			</h2>
-
-			<!-- Liste déroulante des artistes -->
-			<div
-				class="home-artist-list-slide row gx-1 px-5">
-				<!-- Carte de l'artiste -->
-				<div class="home-artist-list-slide-inner col-md-3">
-					{% for artist in artistBrowse %}
-						<div
-							class="home-artist-list-slide-artist current-card col-md-3">
-							<!-- Card -->
-							{{ include('front/fragments/_card_artist.html.twig') }}
-						</div>
-
-					{% endfor %}
-				</div>
-				<!-- Boutons de navigation pour parcourir les artistes -->
-				<section class="home-artist-list-slide-direction">
-					<span class="home-artist-list-slide-prev" type="button" aria-label="Précédent">❮</span>
-					<span class="home-artist-list-slide-next" type="button" aria-label="Précédent">❯</span>
-				</section>
+		<!-- Artists slider -->
+		<div class="home-artist-list-slide row gx-1 px-5">
+			<!-- Artist card -->
+			<div class="home-artist-list-slide-inner col-md-3">
+				{% for artist in artistList %}
+					<div class="home-artist-list-slide-artist current-card col-md-3">
+						<!-- Card -->
+						{{ include('front/fragments/_card_artist.html.twig') }}
+					</div>
+				{% endfor %}
 			</div>
+			<!-- Navigation buttons to browse artists -->
+			<section class="home-artist-list-slide-direction">
+				<span class="home-artist-list-slide-prev" type="button" aria-label="Previous">❮</span>
+				<span class="home-artist-list-slide-next" type="button" aria-label="Next">❯</span>
+			</section>
 		</div>
 
-		<!-- Lien vers la page Line-Up -->
+
+		<!-- Link to Line-Up page -->
 		<div class="home-artist-list-slide-link dark-blue-bg text-center">
 			<a href="{{path('app_artist_browse')}}" class="btn btn-primary light-yellow-bg dark-blue-txt">Toute la programmation</a>
 		</div>
 	</div>
 
-	<!-- Billetterie -->
-	<div
-		class="container-home-ticketing dark-blue-bg d-flex flex-column roboto-font">
+	<!-- Ticket shop -->
+	<div class="container-home-ticketing dark-blue-bg d-flex flex-column roboto-font">
+		<!-- Ticketing title -->
+		<h2 class="home-ticket-title py-5 px-5 medium-blue-bg text-white">Billetterie</h2>
 
-		<!-- Titre de la section Billetterie -->
-		<h2 class="home-ticket-title py-5 px-5 medium-blue-bg text-white ">
-			Billetterie
-		</h2>
-
-		<!-- Liste des billets -->
-		<div
-			class="home-ticket-list row justify-content-around mx-3 mb-2 mt-3">
-			<!-- Billet -->
+		<!-- Ticket list -->
+		<div class="home-ticket-list row justify-content-around mx-3 mb-2 mt-3">
+			<!-- Ticket -->
 			{% for pass in passes %}
 				{% if pass.data is not empty %}
 					<div class="home-ticket col-md-3 mb-2">
@@ -92,7 +76,7 @@
 			{% endfor %}
 		</div>
 
-		<!-- Lien vers la billetterie -->
-		{{ include('front/fragments/_ticket_button.html.twig', {'button_label': 'Acheter maintenant'}) }}
+		<!-- Link to ticketing page -->
+		{{ include('front/fragments/_ticket_button.html.twig', {'button_label': 'Acheter maintenant', 'anchor': 'weezevent'}) }}
 	</div>
-</div>{% endblock %}
+{% endblock %}
