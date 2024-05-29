@@ -1,90 +1,74 @@
 {% extends 'front/base.html.twig' %}
 
-{% block programmationActive %}active
-{% endblock %}
+{% block programmationActive %}active{% endblock %}
 
 {% block main %}
-	<div class="container-artist-list medium-blue-bg">
-		<h2 class="page-title adumu-font">Programmation</h2>
-		<div class="artist-list-sorting px-5">
-			<div
-				class="row gx-3">
-				<!-- Sort per day -->
-				<div class="artist-list-sorting col-md-12">
-					<ul class="list-inline">
-						<li class="list-inline-item">
-							<a href="{{path('app_artist_browse')}}" class="btn btn-secondary btn-id dark-yellow-bg px-4 mr-2 mb-2">Tous les jours</a>
-						</li>
-						{% set uniqueDates = [] %}
-						{% for slot in slots %}
-							{% set formattedDate = slot.date|date('Y-m-d') %}
-							{% if formattedDate not in uniqueDates %}
-								<!-- Si la date n'est pas déjà présente, nous l'ajoutons au tableau des dates uniques et affichons le lien -->
-								{% set uniqueDates = uniqueDates|merge([formattedDate]) %}
-								<li class="list-inline-item">
-									<a href="{{ path('app_artist_browse_by_date', { 'date': formattedDate }) }}" class="btn btn-secondary btn-id dark-yellow-bg px-4 mr-2 mb-2">{{ slot.getFormattedDate }}</a>
-								</li>
-							{% endif %}
-						{% endfor %}
+    <div class="container-artist-list medium-blue-bg">
+        <h2 class="page-title adumu-font">Programmation</h2>
 
-					</ul>
-				</div>
+        <!-- Sorting options -->
+        <div class="artist-list-sorting px-5">
+            <!-- Sort per day -->
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <!-- Button to display all days -->
+                    <a href="{{path('app_artist_browse')}}" class="btn btn-secondary btn-id dark-yellow-bg px-4 mr-2 mb-2">Tous les jours</a>
+                </li>
+                {% set uniqueDates = [] %}
+                {% for slot in slots %}
+                    {% set formattedDate = slot.date|date('Y-m-d') %}
+                    {% if formattedDate not in uniqueDates %}
+                        <!-- Button to sort by individual day -->
+                        <li class="list-inline-item">
+                            <a href="{{ path('app_artist_browse_by_date', { 'date': formattedDate }) }}" class="btn btn-secondary btn-id dark-yellow-bg px-4 mr-2 mb-2">{{ slot.getFormattedDate }}</a>
+                        </li>
+                        {% set uniqueDates = uniqueDates|merge([formattedDate]) %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
 
-				<!-- Sort per stage -->
-				<div class="artist-list-sorting col-md-12">
-					<ul class="list-inline">
-						<li class="list-inline-item">
-							<a href="{{path('app_artist_browse')}}" class="btn btn-secondary btn-stage light-green-bg px-4 mr-2 mb-2">
-								Toutes les scènes
-							</a>
-						</li>
-						{% for stage in stageList %}
-							<li class="list-inline-item">
-								<a href="{{ path('app_artist_browse_by_stage', { 'stage': stage.id }) }}" class="btn btn-secondary btn-stage light-green-bg px-4 mr-2 mb-2">
-									{{stage.name}}
-								</a>
-							</li>
-						{% endfor %}
-					</ul>
-				</div>
+            <!-- Sort per stage -->
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <!-- Button to display all stages -->
+                    <a href="{{path('app_artist_browse')}}" class="btn btn-secondary btn-stage light-green-bg px-4 mr-2 mb-2">Toutes les scènes</a>
+                </li>
+                {% for stage in stageList %}
+                    <!-- Button to sort by individual stage -->
+                    <li class="list-inline-item">
+                        <a href="{{ path('app_artist_browse_by_stage', { 'stage': stage.id }) }}" class="btn btn-secondary btn-stage light-green-bg px-4 mr-2 mb-2">{{ stage.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
 
-				<!-- Sort per genre -->
-				<div class="artist-list-sorting col-md-12">
-					<ul class="list-inline">
-						<li class="list-inline-item">
-							<a href="{{path('app_artist_browse')}}" class="btn btn-secondary btn-genre light-blue-bg px-4 mr-2 mb-2">
-								Touts les genres
-							</a>
-						</li>
-						{% for genre in genreList %}
-							<li class="list-inline-item">
-								<a href="{{ path('app_artist_browse_by_genre', { 'genre': genre.id }) }}" class="btn btn-secondary btn-genre light-blue-bg px-4 mr-2 mb-2">
-									{{ genre.name }}
-								</a>
-							</li>
-						{% endfor %}
-					</ul>
-				</div>
-			</div>
-		</div>
+            <!-- Sort per genre -->
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <!-- Button to display all genres -->
+                    <a href="{{path('app_artist_browse')}}" class="btn btn-secondary btn-genre light-blue-bg px-4 mr-2 mb-2">Touts les genres</a>
+                </li>
+                {% for genre in genreList %}
+                    <!-- Button to sort by individual genre -->
+                    <li class="list-inline-item">
+                        <a href="{{ path('app_artist_browse_by_genre', { 'genre': genre.id }) }}" class="btn btn-secondary btn-genre light-blue-bg px-4 mr-2 mb-2">{{ genre.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
 
+        <!-- Artist List -->
+        <div class="card-artist-list px-5">
+            <div class="row gx-3">
+                {% for artist in artistList %}
+                    <div class="card-artist col-md-4 col-12">
+                        <!-- Include the artist card fragment -->
+                        {{ include('front/fragments/_card_artist.html.twig', {'artist': artist}) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
 
-		<!-- Artist List-->
-		<div class="card-artist-list px-5">
-			<div
-				class="row gx-3">
-				<!-- Artists Card -->
-				{% for artist in artistList %}
-					<div
-						class="card-artist col-md-4 col-12">
-						<!-- Card -->
-						{{ include('front/fragments/_card_artist.html.twig') }}
-					</div>
-				{% endfor %}
-			</div>
-		</div>
-
-		<!-- Link to the Ticketing Page -->
-		{{ include('front/fragments/_ticket_button.html.twig') }}
-	</div>
+        <!-- Link to the Ticketing Page -->
+        {{ include('front/fragments/_ticket_button.html.twig') }}
+    </div>
 {% endblock %}
