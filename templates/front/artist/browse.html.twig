@@ -2,6 +2,8 @@
 
 {% block programmationActive %}active{% endblock %}
 
+{% block title %}Programmation{% endblock %}
+
 {% block main %}
     <div class="container-artist-list medium-blue-bg">
         <h2 class="page-title adumu-font">Programmation</h2>
@@ -45,7 +47,7 @@
             <ul class="list-inline">
                 <li class="list-inline-item">
                     <!-- Button to display all genres -->
-                    <a href="{{path('app_artist_browse')}}" class="btn btn-secondary btn-genre light-blue-bg px-4 mr-2 mb-2">Touts les genres</a>
+                    <a href="{{path('app_artist_browse')}}" class="btn btn-secondary btn-genre light-blue-bg px-4 mr-2 mb-2">Tous les genres</a>
                 </li>
                 {% for genre in genreList %}
                     <!-- Button to sort by individual genre -->

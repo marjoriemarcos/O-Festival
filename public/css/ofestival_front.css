@@ -1,6 +1,7 @@
 /** --------- VARIABLES --------- **/
 
 :root {
+    --dark_blue_artist: #002d72;    
     --dark_blue: #05608a;
     --medium_blue: #4e7ba3;
     --light_blue: #65C6DC;
@@ -8,7 +9,8 @@
     --yellow: #efdca1;
     --light_yellow: #EECE6A;
     --dark_green: #03a35f;
-    --light_green: #009060;    
+    --light_green: #009060;
+    --green_artist: #498d68;
     --font_adumu: 'Adumu', sans-serif;
     --font_roboto: 'Roboto Condensed', sans-serif;
 }
@@ -168,6 +170,8 @@ body {
     margin-right: 10px;
     padding-left: 10px;
 }
+
+
 .btn-day:hover,
 .btn-day:focus {
     background-color: var(--light_yellow);
@@ -258,6 +262,8 @@ body {
 
 /** --------- CARD --------- **/
 
+/** --------- CARD --------- **/
+
 .card {
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -267,6 +273,16 @@ body {
 
 .card-artist{
     margin-bottom: -2%;
+}
+
+.card-artist, .cart-title {
+    font-weight: 1200;
+}
+
+.white-background {
+    background: white;
+    padding: 5px;
+    font-weight: 300;    
 }
 
 .img-zoom {
@@ -326,6 +342,12 @@ body {
     height: 100%;
 }
 
+@media (max-width: 576px) {  
+    .card-artist .card-title,
+    .card-artist .card-text {
+        font-size: 1.2em; 
+    }
+}
 
 
 /** --------- TICKETING --------- **/
@@ -395,23 +417,38 @@ body {
     height: 100%;
 }  
 .artist-informations-name{
-    font-size: 2rem;
+    font-size: 3rem;
+    color: var(--dark_blue_artist);
+    font-weight: bold;
 } 
-.artist-informations-show-day,
-.artist-informations-stage{
-    font-size: 1.25rem;
+.artist-informations-show-day
+{
+    font-size: 2rem;
     margin-bottom: 0;
     text-shadow: none;
+    font-weight: bold;
+    color: var(--dark_blue_artist);    
 }
-.artist-informations-genre {
-    padding: 0.75rem 1.5rem;
-}  
+
+.artist-informations-stage {
+    font-size: 2rem;
+    margin-bottom: 0;
+    text-shadow: none;
+    font-weight: bold;
+    color: var(--green_artist)
+}
+
+.artist-informations .btn {
+    background-color: var(--dark_blue_artist);
+    color: white;
+}    
 .artist-informations-description {
     height: 300px;
     overflow-y: auto;
 } 
 .artist-informations-social-networks i{
-    font-size: 2.5rem;
+    font-size: 2rem;
+    color: var(--dark_blue_artist)
 }
 .artist-video {
     height: 75vh;
