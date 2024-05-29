@@ -1,88 +1,102 @@
 {% extends 'back/base.html.twig' %}
 
-{% block title %}Liste des créneaux{% endblock %}
+{% block title %}Liste des créneaux
+{% endblock %}
 
 {% block main %}
-<main>
-    {# Display flash messages #}
-    {% for type, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="alert alert-{{ type }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}
-    <div class="container">      
-      <h2 class="text-center my-5 fw-bold display-5">Liste des créneaux</h2>      
-        
-        <!-- Search bar -->
-      {{ include('back/fragments/_search_bar.html.twig')}}
+	<main>
+		<div class="container">
+			<h2 class="text-center my-5 fw-bold display-5">Liste des créneaux</h2>
 
-      <div class="container mt-5">
-        <div class="row justify-content-center">
-          <!-- Sort per day -->
-          <div class="col-md-8 mb-3">
-            
-            <div class="d-flex">
-              <button class="btn btn-primary fw-bold me-2 filter-button selected" data-day="all" type="button">Tous les jours</button>
-              <button class="btn btn-primary fw-bold me-2 filter-button" data-day="J1" type="button">Jour 1</button>
-              <button class="btn btn-primary fw-bold me-2 filter-button" data-day="J2" type="button">Jour 2</button>
-              <button class="btn btn-primary fw-bold filter-button" data-day="J3" type="button">Jour 3</button>
-            </div>
-          </div>
-          <!-- Slot card -->
-          <div class="col-md-8">
-            <div class="card">
-              <!-- Card title -->        
-              <div class="card-header d-flex justify-content-between align-items-center">              
-                <div>
-                  <span class="fs-2 fw-bold "id="day-title">Tous les jours</span>
-                </div>
-                  <a class="btn btn-success fw-bold" type="button" href="{{ path('app_slot_new_admin') }}">Ajouter un créneau</a>               
-                </div>
+			<!-- Search bar -->
+			{{ include('back/fragments/_search_bar.html.twig')}}
 
-              </div>
-              <div class="card-body">
-                <!-- No results message -->
-                {{ include('back/fragments/_noResult_message.html.twig') }}
-                <div class="table-responsive">
-                  <table class="table table-bordered searchable-table"  id="tableWrapper">
-                    <thead class="thead-dark">
-                      <tr>
-                        <th scope="col" data-sortable><i class="bi bi-calendar me-2"></i>Jour</th> 
-                        <th scope="col"><i class="bi bi-clock me-2"></i> Heure</th>
-                        <th scope="col" data-sortable><i class="bi bi-person me-2"></i> Artiste</th>
-                        <th scope="col" data-sortable><i class="bi bi-house me-2"></i> Scène</th>
-                        <th class="col-1"><i class="bi bi-gear me-2"></i> Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody id="slots-table-body">
-                      <!-- Slot -->
-                      {% for slot in slotList %}
-                      <tr data-day="{{ slot.day }}">
-                        <td>{{ slot.day }}</td>
-                        <td>{{ slot.hour }}</td>
-                        <td>{{ slot.artist.name }}</td>
-                        <td>{{ slot.stage.name }}</td>
-                        <td>
-                          <div class="d-flex">
-                            <!-- Action buttons -->
-                            <a href="{{ path('app_slot_read_admin', {id: slot.id}) }}" class="btn btn-primary bi bi-search me-2"></a>
-                            {{ include('back/slot/_delete_form.html.twig', {'slot': slot}) }}
-                          </div>
-                        </td>
-                      </tr> 
-                      {% endfor %}                                           
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        
-        </div>
-      </div>
-    </div>
-</main>
+			<div class="container mt-5">
+				<div
+					class="row justify-content-center">
+					<!-- Sort per day -->
+					<div class="col-md-8 mb-3">
 
-{% endblock %}
+						<div class="d-flex">
+							<button class="btn btn-primary fw-bold me-2 filter-button selected" data-day="all" type="button">Tous les jours</button>
+							<button class="btn btn-primary fw-bold me-2 filter-button" data-day="J1" type="button">Jour 1</button>
+							<button class="btn btn-primary fw-bold me-2 filter-button" data-day="J2" type="button">Jour 2</button>
+							<button class="btn btn-primary fw-bold filter-button" data-day="J3" type="button">Jour 3</button>
+						</div>
+					</div>
+					<!-- Slot card -->
+					<div
+						class="col-md-8">
+						{# Display flash messages #}
+						{% for type, messages in app.flashes %}
+							{% for message in messages %}
+								<div class="alert alert-{{ type }}">
+									{{ message }}
+								</div>
+							{% endfor %}
+						{% endfor %}
+						<div
+							class="card">
+							<!-- Card title -->
+							<div class="card-header d-flex justify-content-between align-items-center">
+								<div>
+									<span class="fs-2 fw-bold " id="day-title">Tous les jours</span>
+								</div>
+								<a class="btn btn-success fw-bold" type="button" href="{{ path('app_slot_new_admin') }}">Ajouter un créneau</a>
+							</div>
+
+						</div>
+						<div
+							class="card-body">
+							<!-- No results message -->
+							{{ include('back/fragments/_noResult_message.html.twig') }}
+							<div class="table-responsive">
+								<table class="table table-bordered searchable-table" id="tableWrapper">
+									<thead class="thead-dark">
+										<tr>
+											<th scope="col" data-sortable>
+												<i class="bi bi-calendar me-2"></i>Jour</th>
+											<th scope="col">
+												<i class="bi bi-clock me-2"></i>
+												Heure</th>
+											<th scope="col" data-sortable>
+												<i class="bi bi-person me-2"></i>
+												Artiste</th>
+											<th scope="col" data-sortable>
+												<i class="bi bi-house me-2"></i>
+												Scène</th>
+											<th class="col-1">
+												<i class="bi bi-gear me-2"></i>
+												Actions</th>
+										</tr>
+									</thead>
+									<tbody
+										id="slots-table-body">
+										<!-- Slot -->
+										{% for slot in slotList %}
+											<tr data-day="{{ slot.day }}">
+												<td>{{ slot.day }}</td>
+												<td>{{ slot.hour }}</td>
+												<td>{{ slot.artist.name }}</td>
+												<td>{{ slot.stage.name }}</td>
+												<td>
+													<div
+														class="d-flex">
+														<!-- Action buttons -->
+														<a href="{{ path('app_slot_read_admin', {id: slot.id}) }}" class="btn btn-primary bi bi-search me-2"></a>
+														{{ include('back/slot/_delete_form.html.twig', {'slot': slot}) }}
+													</div>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</main>{% endblock %}
