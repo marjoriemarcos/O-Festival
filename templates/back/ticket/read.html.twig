@@ -1,81 +1,83 @@
 {% extends "back/base.html.twig" %}
 
-{% block title %}Billet {{ ticket.title }}{% endblock %}
+{% block title %}Billet
+	{{ ticket.title }}
+{% endblock %}
 
 {% block main %}
-<main>
-    {# Display flash messages #}
-    {% for type, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="alert alert-{{ type }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}    
-    <div class="container">
-        <h2 class="text-center my-5 fw-bold display-5">Détails du Billet {{ ticket.title }}</h2>
-        <div class="container mt-5">
-            <div class="row justify-content-center">
-                <!-- Ticket Card -->
-                <div class="col-md-8">
-                    <a href="{{ path('app_ticket_list_admin') }}" class="btn btn-primary fw-bold mb-4">
-                        <i class="bi bi-arrow-left"></i> Retour à la liste des tickets
-                    </a>
-                    <div class="card">
-                        <!-- Title Card -->
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <span class="fs-2 fw-bold">
-                                <i class="bi bi-ticket me-2"></i>{{ ticket.title }}
-                            </span>
-                            <div class="d-flex">
-                                <a href="{{path('app_ticket_edit_admin', {id: ticket.id})}}" class="btn btn-warning me-2 bi bi-pencil"></a>
-                                {{ include('back/ticket/_delete_form.html.twig', {'ticket': ticket}) }}
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <!-- Duration -->
-                            <div class="d-flex align-items-center mt-3">
-                                <i class="bi bi-clock me-2" style="font-size: 1.5rem;"></i>
-                                <h6 class="fw-bold mb-0">Durée :</h6>
-                                <p class="mb-0 ms-2">{{ ticket.startAt | date('d/m/Y') }} au {{ ticket.endAt | date('d/m/Y') }}</p>
-                            </div>
-                            <!-- Fee -->
-                            <div class="d-flex align-items-center mt-3">
-                                <i class="bi bi-person-badge me-2" style="font-size: 1.5rem;"></i>
-                                <h6 class="fw-bold mb-0">Type de Forfait :</h6>
-                                <p class="mb-0 ms-2">{{ ticket.fee }}</p>
-                            </div>
-                            <!-- Price -->
-                            <div class="d-flex align-items-center mt-3">
-                                <i class="bi bi-currency-euro me-2" style="font-size: 1.5rem;"></i>
-                                <h6 class="fw-bold mb-0">Prix :</h6>
-                                <p class="mb-0 ms-2">{{ ticket.price }}</p>
-                            </div>
-                            <!-- Quantity -->
-                            <div class="d-flex align-items-center mt-3">
-                                <i class="bi bi-box-seam me-2" style="font-size: 1.5rem;"></i>
-                                <h6 class="fw-bold mb-0">Quantité :</h6>
-                                <p class="mb-0 ms-2">{{ ticket.quantity }}</p>
-                            </div>
-                            <!-- Customers -->
-                            <div class="d-flex align-items-center mt-3">
-                                <i class="bi bi-people me-2" style="font-size: 1.5rem;"></i>
-                                <h6 class="fw-bold mb-0">Clients :</h6>
-                            </div>
-                            <ul class="list-group mt-3">
-                                {% for customer in ticket.customers %}
-                                <li class="list-group-item">
-                                    <a href="{{ path('app_customer_read_admin', {id: customer.id}) }}">
-                                    <i class="bi bi-person me-2"></i>{{ customer.firstname }} {{customer.lastname}}
-                                    </a>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</main>
+	<main>
+		{# Display flash messages #}
+		{% for type, messages in app.flashes %}
+			{% for message in messages %}
+				<div class="alert alert-{{ type }}">
+					{{ message }}
+				</div>
+			{% endfor %}
+		{% endfor %}
+		<div class="container">
+			<h2 class="text-center my-5 fw-bold display-5">Détails du Billet
+				{{ ticket.title }}</h2>
+			<div class="container mt-5">
+				<div
+					class="row justify-content-center">
+					<!-- Ticket Card -->
+					<div class="col-md-8">
+						<a href="{{ path('app_ticket_list_admin') }}" class="btn btn-primary fw-bold mb-4">
+							<i class="bi bi-arrow-left"></i>
+							Retour à la liste des tickets
+						</a>
+						<div
+							class="card">
+							<!-- Title Card -->
+							<div class="card-header d-flex justify-content-between align-items-center">
+								<span class="fs-2 fw-bold">
+									<i class="bi bi-ticket me-2"></i>
+									{{ ticket.title }}
+								</span>
+								<div class="d-flex">
+									<a href="{{path('app_ticket_edit_admin', {id: ticket.id})}}" class="btn btn-warning me-2 bi bi-pencil"></a>
+									{{ include('back/ticket/_delete_form.html.twig', {'ticket': ticket}) }}
+								</div>
+							</div>
+							<div
+								class="card-body">
+								<!-- Duration -->
+								<div class="d-flex align-items-center mt-3">
+									<i class="bi bi-clock me-2" style="font-size: 1.5rem;"></i>
+									<h6 class="fw-bold mb-0">Durée :</h6>
+									{% if ticket.startAt|date('d/m/Y') == ticket.endAt|date('d/m/Y') %}
+										<p class="mb-0 ms-2">le
+											{{ ticket.startAt|date('d/m/Y') }}</p>
+									{% else %}
+										<p class="mb-0 ms-2">du
+											{{ ticket.startAt|date('d/m/Y') }}
+											au
+											{{ ticket.endAt|date('d/m/Y') }}</p>
+									{% endif %}
+								</div>
+								<!-- Fee -->
+								<div class="d-flex align-items-center mt-3">
+									<i class="bi bi-person-badge me-2" style="font-size: 1.5rem;"></i>
+									<h6 class="fw-bold mb-0">Type de Forfait :</h6>
+									<p class="mb-0 ms-2">{{ ticket.fee }}</p>
+								</div>
+								<!-- Price -->
+								<div class="d-flex align-items-center mt-3">
+									<i class="bi bi-currency-euro me-2" style="font-size: 1.5rem;"></i>
+									<h6 class="fw-bold mb-0">Prix :</h6>
+									<p class="mb-0 ms-2">{{ ticket.price }}</p>
+								</div>
+								<!-- Quantity -->
+								<div class="d-flex align-items-center mt-3">
+									<i class="bi bi-box-seam me-2" style="font-size: 1.5rem;"></i>
+									<h6 class="fw-bold mb-0">Quantité :</h6>
+									<p class="mb-0 ms-2">{{ ticket.quantity }}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
 {% endblock %}
