@@ -1,80 +1,82 @@
-// slider.js
-
 export const slider = {
-    currentIndex: 0,  // Index actuel du slider
-    itemsPerPage: 4,  // Nombre d'éléments affichés par page
-    slideContainer: null,  // Conteneur des diapositives
-    slides: [],  // Liste des diapositives
-    totalItems: 0,  // Nombre total d'éléments
-    interval: null,  // Identifiant de l'intervalle pour le défilement automatique
+    currentIndex: 0,  // Current index of the slider
+    itemsPerPage: 4,  // Number of items displayed per page
+    slideContainer: null,  // Slides container
+    slides: [],  // List of slides
+    totalItems: 0,  // Total number of items
+    interval: null,  // Interval identifier for automatic scrolling
 
-    // Initialisation du slider
+    // Initialize the slider
     init: function () {
-        // Sélectionne le conteneur des diapositives
+        // Select the slide container
         slider.slideContainer = document.querySelector(".home-artist-list-slide");
-        // Récupère toutes les diapositives
+        // Get all slides
         slider.slides = Array.from(document.querySelectorAll(".home-artist-list-slide-artist"));
-        // Définit le nombre total d'éléments
+        // Set the total number of items
         slider.totalItems = slider.slides.length;
 
-        // Vérifie si le slider est nécessaire avant de continuer
+        // Check if the slider is needed before proceeding
         if (slider.slideContainer && slider.slides.length > 0) {
-            // Ajoute un écouteur d'événement pour mettre à jour le nombre d'éléments par page lors du redimensionnement de la fenêtre
+            // Add an event listener to update the number of items per page when resizing the window
             window.addEventListener("resize", slider.updateItemsPerPage);
-            // Met à jour le nombre d'éléments par page en fonction de la taille de la fenêtre
+            // Update the number of items per page based on the window size
             slider.updateItemsPerPage();
-            // Met à jour l'affichage des diapositives
+            // Update the display of slides
             slider.updateDisplay();
-            // Lie les boutons de navigation aux fonctions correspondantes
+            // Bind navigation buttons to corresponding functions
             slider.bind();
 
-            // Démarre le défilement automatique
+            // Start automatic scrolling
             slider.startAutoSlide();
         }
     },
 
-    // Lie les boutons de navigation aux fonctions correspondantes
+    // Bind navigation buttons to corresponding functions
     bind: function () {
         document.querySelector(".home-artist-list-slide-prev").addEventListener("click", slider.showPrev);
         document.querySelector(".home-artist-list-slide-next").addEventListener("click", slider.showNext);
+
+        // Stop automatic slide when mouse hovers over slide container
+        slider.slideContainer.addEventListener("mouseenter", slider.stopAutoSlide);
+        slider.slideContainer.addEventListener("mouseleave", slider.startAutoSlide);
     },
 
-    // Met à jour le nombre d'éléments par page en fonction de la taille de la fenêtre
+    // Update the number of items per page based on the window size
     updateItemsPerPage: function () {
         const screenWidth = window.innerWidth;
         slider.itemsPerPage = screenWidth < 775 ? 1 : 4;
         slider.updateDisplay();
     },
 
-    // Met à jour l'affichage des diapositives
+    // Update the display of slides
     updateDisplay: function () {
         slider.slides.forEach((slide, index) => {
-            // Affiche les diapositives comprises entre l'index courant et l'index courant + le nombre d'éléments par page
+            // Display slides between the current index and the current index + the number of items per page
             slide.style.display = index >= slider.currentIndex && index < slider.currentIndex + slider.itemsPerPage ? "block" : "none";
         });
     },
 
-    // Affiche la diapositive précédente
+    // Show the previous slide
     showPrev: function () {
-        // Décrémente l'index courant ou le remet à la fin si on est au début
+        // Decrement the current index or set it to the end if at the beginning
         slider.currentIndex = slider.currentIndex > 0 ? slider.currentIndex - 1 : slider.totalItems - slider.itemsPerPage;
         slider.updateDisplay();
     },
 
-    // Affiche la diapositive suivante
+    // Show the next slide
     showNext: function () {
-        // Incrémente l'index courant ou le remet au début si on est à la fin
+        // Increment the current index or set it to the beginning if at the end
         slider.currentIndex = slider.currentIndex < slider.totalItems - slider.itemsPerPage ? slider.currentIndex + 1 : 0;
         slider.updateDisplay();
     },
 
-    // Démarre le défilement automatique
+    // Start automatic scrolling
     startAutoSlide: function () {
-        // Change les diapositives toutes les 3 secondes
-        slider.interval = setInterval(slider.showNext, 3000);
+        // Change slides every 3 seconds
+        slider.interval = setInterval(slider.showNext, 2000);
     },
 
-    // Arrête le défilement automatique
+    // Stop automatic scrolling
     stopAutoSlide: function () {
         clearInterval(slider.interval);
     }

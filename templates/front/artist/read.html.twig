@@ -2,111 +2,122 @@
 
 {% block artistActive %}active{% endblock %}
 
+{% block title %}{{artist.name}}{% endblock %}
+
 {% block main %}
-    <div class="container-artist background-img-fixed-bg">
-        <div class="row pt-5 gx-0">
-            <!-- Picture of the artist -->
-            <div class="artist-image col-lg-6">
-                <img src="{{ artist.picture }}" alt="Photo de {{ artist.name }}" class="img-fluid">
-            </div>
-
-            <!-- Information on the artist -->
-            <div class="col-lg-6">
-                <div class="artist-informations open-font p-4">
-                    <!-- Artist's name -->
-                    <h1 class="artist-informations-name dark-blue-txt">{{ artist.name }}</h1>
-
-                    <!-- Day and time of the artist's performance -->
-                    <h2 class="artist-informations-show-day dark-yellow-txt">
-                        <p>{{ artist.slot.getFormattedDate() }} ({{ artist.slot.day }})</p>
-                        <p> De {{ artist.slot.hour }}</p>
-                    </h2>
-
-                    <!-- Stage's name -->
-                    <h3 class="artist-informations-stage light-green-txt">{{ artist.slot.stage.name }}</h3>
-                    
-                    <!-- Musical genres -->
-                    {% if artist.genres|length > 0 %}
-                        {% for genre in artist.genres %}
-                            <span class="artist-informations-genre btn btn-secondary btn-sm disabled light-blue-bg px-4 mt-3">
-                                {{ genre.name }}
-                            </span>
-                        {% endfor %}
-                    {% endif %}
-
-                    <!-- Artist's description -->
-                    <div class="artist-informations-description open-font mt-4 mb-4">
-                        <p>{{ artist.description }}</p>
-                    </div>
-
-                    <!-- Artist's socials -->
-                    {% if artist.website %}
-                        <div class="artist-informations-social-networks">
-                            <ul class="list-inline mb-0">
-                                {% if artist.website %}
-                                    <li class="list-inline-item">
-                                        <a href="{{ artist.website }}">
-                                            <i class="bi bi-globe dark-blue-txt"></i>
-                                        </a>
-                                    </li>
-                                {% endif %}
-                                {% if artist.spotify %}
-                                    <li class="list-inline-item">
-                                        <a href="{{ artist.spotify }}">
-                                            <i class="fa-brands fa-spotify dark-blue-txt"></i>
-                                        </a>
-                                    </li>
-                                {% endif %}
-                                {% if artist.facebook %}
-                                    <li class="list-inline-item">
-                                        <a href="{{ artist.facebook }}">
-                                            <i class="fa-brands fa-facebook dark-blue-txt"></i>
-                                        </a>
-                                    </li>
-                                {% endif %}
-                                {% if artist.twitter %}
-                                    <li class="list-inline-item">
-                                        <a href="{{ artist.twitter }}">
-                                            <i class="fa-brands fa-x-twitter dark-blue-txt"></i>
-                                        </a>
-                                    </li>
-                                {% endif %}
-                                {% if artist.instagram %}
-                                    <li class="list-inline-item">
-                                        <a href="{{ artist.instagram }}">
-                                            <i class="fa-brands fa-instagram dark-blue-txt"></i>
-                                        </a>
-                                    </li>
-                                {% endif %}
-                                {% if artist.snapchat %}
-                                    <li class="list-inline-item">
-                                        <a href="{{ artist.snapchat }}">
-                                            <i class="fa-brands fa-snapchat dark-blue-txt"></i>
-                                        </a>
-                                    </li>
-                                {% endif %}
-                                {% if artist.tiktok %}
-                                    <li class="list-inline-item">
-                                        <a href="{{ artist.tiktok }}">
-                                            <i class="fa-brands fa-tiktok dark-blue-txt"></i>
-                                        </a>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
+<div class="container-artist background-img-fixed-bg p-5" style="background-color: #e1e5f2;">
+    <div class="row gx-0">
+        <!-- Picture of the artist -->
+        <div class="artist-image col-lg-6 mb-4 mb-lg-0">
+            <img src="{{ artist.picture }}" alt="Photo de {{ artist.name }}" class="img-fluid rounded">
         </div>
 
-        <div class="row mt-5 text-center">
-            <!-- Video -->
-            <div class="artist-video embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item w-100 h-100" src="{{ artist.video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
+        <!-- Information on the artist -->
+        <div class="col-lg-6">
+            <div class="artist-informations p-4 rounded">
+                <!-- Artist's name -->
+                <h1 class="artist-informations-name display-8">{{ artist.name|upper }}</h1>
 
-            <!-- Link to the ticket shop -->
-            {{ include('front/fragments/_ticket_button.html.twig') }}
+                <!-- Day and time of the artist's performance -->
+                <div class="artist-informations-show-day mb-2">
+                    <h3>
+                        <p>LE {{ artist.slot.getFormattedDate()|upper }}</p>
+                    </h3>
+                    <h3>
+                        <p>DE {{ artist.slot.hour|upper }}</p>
+                    </h3>
+                </div>
+
+                <!-- Stage's name -->
+                <h3 class="artist-informations-stage h5 mb-3">{{ artist.slot.stage.name|upper }}</h3>
+                
+				<!-- Musical genres -->
+				{% if artist.genres|length > 0 %}
+					<ul class="list-inline">
+						{% for genre in artist.genres %}
+							<li class="list-inline-item">
+								<a href="{{ path('app_artist_browse_by_genre', { 'genre': genre.id }) }}" class="btn btn-secondary btn-genre px-4 mr-2 mb-2">
+									{{ genre.name }}
+								</a>
+							</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+
+
+                <!-- Artist's description -->
+                <div class="artist-informations-description my-4">
+                    <p>{{ artist.description }} Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur ut aliquam quia quod nisi hic libero aspernatur quasi? Praesentium nihil tenetur repellat, minima voluptatem mollitia exercitationem deserunt dolor accusantium voluptas dolorem corrupti, autem asperiores ullam magni repudiandae nulla fugit debitis molestias. Molestias earum facere harum sit beatae odio iste aut? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos dolorem ad laborum perferendis est? Veniam incidunt, laboriosam neque consequuntur non, architecto ipsa odio aperiam ullam, mollitia fuga quasi harum blanditiis nobis. Numquam necessitatibus reprehenderit dignissimos voluptates sed enim vitae? Excepturi dolores cumque numquam neque itaque, inventore non facilis. A harum consectetur, quidem totam ipsum quisquam numquam vero ex saepe, voluptates impedit assumenda expedita reprehenderit itaque pariatur minus consequuntur iusto quaerat eos sit? Magni distinctio ipsum quo, minus praesentium deleniti numquam nostrum quasi maiores illum odit eum corrupti porro molestiae, ea veniam vitae voluptate? Error nostrum quasi praesentium quia, quo facilis!</p>
+                </div>
+
+                <!-- Artist's socials -->
+                {% if artist.website or artist.spotify or artist.facebook or artist.twitter or artist.instagram or artist.snapchat or artist.tiktok %}
+                    <div class="artist-informations-social-networks">
+                        <ul class="list-inline mb-0">
+                            {% if artist.website %}
+                                <li class="list-inline-item">
+                                    <a href="{{ artist.website }}" aria-label="Website">
+                                        <i class="bi bi-globe"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if artist.spotify %}
+                                <li class="list-inline-item">
+                                    <a href="{{ artist.spotify }}" aria-label="Spotify">
+                                        <i class="fa-brands fa-spotify"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if artist.facebook %}
+                                <li class="list-inline-item">
+                                    <a href="{{ artist.facebook }}" aria-label="Facebook">
+                                        <i class="fa-brands fa-facebook"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if artist.twitter %}
+                                <li class="list-inline-item">
+                                    <a href="{{ artist.twitter }}" aria-label="Twitter">
+                                        <i class="fa-brands fa-x-twitter"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if artist.instagram %}
+                                <li class="list-inline-item">
+                                    <a href="{{ artist.instagram }}" aria-label="Instagram">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if artist.snapchat %}
+                                <li class="list-inline-item">
+                                    <a href="{{ artist.snapchat }}" aria-label="Snapchat">
+                                        <i class="fa-brands fa-snapchat"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if artist.tiktok %}
+                                <li class="list-inline-item">
+                                    <a href="{{ artist.tiktok }}" aria-label="TikTok">
+                                        <i class="fa-brands fa-tiktoks"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
         </div>
     </div>
+
+    <div class="row mt-5 text-center">
+        <!-- Video -->
+        <div class="artist-video embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item w-100 h-100 rounded" src="{{ artist.video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <!-- Link to the ticket shop -->
+        {{ include('front/fragments/_ticket_button.html.twig') }}
+    </div>
+</div>
 {% endblock %}

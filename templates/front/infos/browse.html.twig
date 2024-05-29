@@ -2,12 +2,14 @@
 
 {% block infosActive %}active{% endblock %}
 
+{% block title %}Informations pratiques{% endblock %}
+
 {% block main %}
         <div class="container-informations medium-blue-bg">
             {# Flash messages #}
             {% for type, messages in app.flashes %}
                 {% for message in messages %}
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <div class="alert alert-{{ type == 'success_contact' ? 'success' : 'danger' }} alert-dismissible fade show" role="alert">
                         {{ message }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
