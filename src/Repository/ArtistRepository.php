@@ -93,7 +93,7 @@ class ArtistRepository extends ServiceEntityRepository
         // Puis ont rajoute la fin de la requete SQL
         $sql .= '
             GROUP BY artist.id, slot.id, slot.date, stage.name
-            ORDER BY artist.name ASC
+            ORDER BY slot.date ASC
         ';
     
         $resultSet = $conn->executeQuery($sql, $params);
