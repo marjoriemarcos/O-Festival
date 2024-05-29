@@ -50,7 +50,7 @@ class SlotController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $slot = new Slot();
-        $form = $this->createForm(SlotType::class, $slot);
+        $form = $this->createForm(SlotType::class, $slot, ['isNew' => true]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -70,7 +70,7 @@ class SlotController extends AbstractController
     #[Route('/back/slot_list/{id<\d+>}/edit', name: 'app_slot_edit_admin', methods: ['GET', 'POST'])]
     public function edit(Request $request, Slot $slot, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(SlotType::class, $slot);
+        $form = $this->createForm(SlotType::class, $slot, ['isNew' => false]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
