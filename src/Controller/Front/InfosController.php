@@ -62,12 +62,20 @@ class InfosController extends AbstractController
                 ->htmlTemplate('emails/contact.html.twig')
                 ->context(['data' => $data]);
             $mailer->send($mail);
-
-            // Add success flash message
             $this->addFlash('success_contact', 'Votre message a bien été envoyé.');
+
+            // RENVOYER MAIL DE CONFIRMATION mais solution payante par mailgun
+            /*$confirmationMail = (new TemplatedEmail())
+                ->to($data->email)
+                ->from('ofestival2024@gmail.com')
+                ->subject('Confirmation de réception de votre message')
+                ->htmlTemplate('emails/contact_confirmation.html.twig')
+                ->context(['data' => $data]);
+            $mailer->send($confirmationMail);*/
 
             // Redirect to the same page after successful submission
             return $this->redirectToRoute('app_infos_browse');
+          
         } elseif ($form->isSubmitted() && !$form->isValid()) {
             // Add error flash message if form is submitted but not valid
             $this->addFlash('error_contact', 'Une erreur est survenue. Veuillez vérifier le formulaire de contact.');
