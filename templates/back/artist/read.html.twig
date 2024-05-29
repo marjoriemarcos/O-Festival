@@ -1,140 +1,152 @@
+{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-{%block title%}{{artist.name}}{%endblock%}
+{# Définit le bloc 'artistReadActive' pour indiquer que cette page est active dans le menu de navigation #}
+{% block artistReadActive %}active{% endblock %}
 
+{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
 {% block main %}
-	<main>
-		{# Display flash messages #}
-		{% for type, messages in app.flashes %}
-			{% for message in messages %}
-				<div class="alert alert-{{ type }}">
-					{{ message }}
-				</div>
-			{% endfor %}
-		{% endfor %}
-		<div class="container">
-			<h2 class="text-center my-5 fw-bold display-5">Détails de l'Artiste</h2>
-			<div class="container mt-5">
-				<div
-					class="row justify-content-center">
-					<!-- Artist card -->
-					<div class="col-md-8">
-						<a href="{{path('app_artist_list_admin')}}" class="btn btn-primary fw-bold mb-4">
-							<i class="bi bi-arrow-left"></i>
-							Retour à la liste des artistes
-						</a>
+    <div class="container">
+        {# Titre de la page #}
+        <h2 class="text-center my-5 fw-bold display-5">Détails de l'Artiste</h2>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                {# Colonne principale pour le contenu #}
+                <div class="col-md-8">
+                    {# Lien de retour à la liste des artistes #}
+                    <a href="{{ path('app_back_artist_browse') }}" class="btn btn-primary fw-bold mb-4">
+                        <i class="bi bi-arrow-left"></i>
+                        Retour à la liste des artistes
+                    </a>
+                    {# Inclusion des messages flash #}
+                    {{ include('back/fragments/_message.html.twig') }}
 
+                    {# Carte pour les informations de créneau #}
+                    <div class="card mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span class="fs-4 fw-bold">Informations du Créneau</span>
+                            {% if slot %}
+                                <div class="d-flex">
+                                    {# Lien pour voir les détails du créneau #}
+                                    <a href="{{ path('app_slot_read_admin', {id: slot.id}) }}" class="btn btn-primary bi bi-search me-2"></a>
+                                </div>
+                            </div>
 
-						<!-- Card for Slot Information -->
-						<div class="card mb-4">
-							<div class="card-header d-flex justify-content-between align-items-center">
-								<span class="fs-4 fw-bold">Informations du Créneau</span>
-								{% if slot %}
-									<div class="d-flex">
-										<a href="{{ path('app_slot_read_admin', {id: slot.id}) }}" class="btn btn-primary bi bi-search me-2"></a>
-									</div>
-								</div>
+                            <div class="card-body">
+                                <div class="slot-details">
+                                    <p class="mb-1">
+                                        <strong><i class="bi bi-calendar-date me-2" style="font-size: 1.5rem;"></i>Date:</strong>
+                                        {{ artist.slot.day }}-{{ artist.slot.date|date('d/m/Y') }}</p>
 
-								<div class="card-body">
-									<div class="slot-details">
-										<p class="mb-1">
-											<strong>
-												<i class="bi bi-calendar-date me-2" style="font-size: 1.5rem;"></i>Date:</strong>
-											{{ artist.slot.day }}-{{ artist.slot.date|date('d/m/Y') }}</p>
+                                    <p class="mb-1">
+                                        <strong><i class="bi bi-clock me-2" style="font-size: 1.5rem;"></i>Heure:</strong>
+                                        {{ artist.slot.hour }}
+                                    </p>
+                                    <p class="mb-1">
+                                        <strong><i class="bi bi-music-note me-2" style="font-size: 1.5rem;"></i>Scène:</strong>
+                                        {{ artist.slot.stage.name }}</p>
+                                </div>
+                            {% else %}
+                                <div class="d-flex">
+                                    {# Lien pour ajouter un créneau #}
+                                    <a class="btn btn-success fw-bold" type="button" href="{{ path('app_slot_new_admin') }}">Ajouter un créneau</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted mb-3">Pas de créneau</p>
+                            {% endif %}
+                        </div>
+                    </div>
 
-										<p class="mb-1">
-											<strong>
-												<i class="bi bi-clock me-2" style="font-size: 1.5rem;"></i>Heure:</strong>
-											{{ artist.slot.hour }}
-										</p>
-										<p class="mb-1">
-											<strong>
-												<i class="bi bi-music-note me-2" style="font-size: 1.5rem;"></i>Scène:</strong>
-											{{ artist.slot.stage.name }}</p>
-									</div>
-								{% else %}
-									<div class="d-flex">
-										<a class="btn btn-success fw-bold" type="button" href="{{ path('app_slot_new_admin') }}">Ajouter un créneau</a>  
-									</div>
-								</div>
-								<div class="card-body">
-									<p class="text-muted mb-3">Pas de créneau</p>
-								{% endif %}
-							</div>
-						</div>
-
-
-						<div
-							class="card">
-							<!-- Card title -->
-							<div class="card-header d-flex justify-content-between align-items-center">
-								<span class="fs-2 fw-bold">{{artist.name}}</span>
-								<div class="d-flex">
-									<a href="{{path('app_artist_edit_admin', {id: artist.id})}}" class="btn btn-warning me-2 bi bi-pencil"></a>
-									{{ include('back/artist/_delete_form.html.twig', {'artist': artist}) }}
-								</div>
-							</div>
-							<div
-								class="card-body">
-								<!-- Artist picture -->
-								<img
-								src="{{artist.picture}}" alt="Image de l'artiste {{artist.name}}" class="card-img-top" style="width: 100%;">
-								<!-- Musical genres -->
-								<h6 class="fw-bold mt-4">Genres Musicaux</h6>
-								{% for genre in artist.genres %}
-									<span class="badge bg-primary">{{ genre.name }}</span>
-								{% endfor %}
-								<!-- Description -->
-								<div class="mb-4">
-									<h6 class="fw-bold">Description</h6>
-									<p>{{artist.description}}</p>
-								</div>
-								<!-- YouTube Video Link -->
-								<h6 class="fw-bold">Vidéo YouTube</h6>
-								<div class="my-2">
-									<a href="{{artist.video}}" target="_blank" class="badge bg-danger me-0">Vidéo</a>
-								</div>
-								<!-- Socials -->
-								<h6 class="fw-bold">Réseaux Sociaux</h6>
-								<div class="d-flex">
-									<ul class="list-inline mb-0">
-										<li class="list-inline-item">
-											<a href="{{artist.website}}">
-												<i class="bi bi-globe fs-3 dark-blue-txt"></i>
-											</a>
-										</li>
-										<li class="list-inline-item">
-											<a href="{{artist.spotify}}">
-												<i class="fa-brands fa-spotify fs-3 dark-blue-txt"></i>
-											</a>
-										</li>
-										<li class="list-inline-item">
-											<a href="{{artist.facebook}}">
-												<i class="fa-brands fa-facebook fs-3 dark-blue-txt"></i>
-											</a>
-										</li>
-										<li class="list-inline-item">
-											<a href="{{artist.instagram}}">
-												<i class="fa-brands fa-instagram fs-3 dark-blue-txt"></i>
-											</a>
-										</li>
-										<li class="list-inline-item">
-											<a href="{{artist.snapchat}}">
-												<i class="fa-brands fa-snapchat fs-3 dark-blue-txt"></i>
-											</a>
-										</li>
-										<li class="list-inline-item">
-											<a href="{{artist.tiktok}}">
-												<i class="fa-brands fa-tiktok fs-3 dark-blue-txt"></i>
-											</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</main>
+                    {# Carte principale pour les détails de l'artiste #}
+                    <div class="card">
+                        {# En-tête de la carte avec le nom de l'artiste et les actions d'édition et de suppression #}
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span class="fs-2 fw-bold">{{ artist.name }}</span>
+                            <div class="d-flex">
+                                {# Lien pour éditer l'artiste #}
+                                <a href="{{ path('app_back_artist_edit', {id: artist.id}) }}" class="btn btn-warning me-2 bi bi-pencil"></a>
+                                {# Formulaire pour supprimer l'artiste #}
+                                <form method="post" action="{{ path('app_back_artist_delete', {'id': artist.id}) }}" onsubmit="return confirm('Voulez-vous supprimer {{ artist.name }}?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ artist.id) }}">
+                                    <button class="btn btn-danger bi bi-trash">{{ button_label|default('') }}</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {# Image de l'artiste #}
+                            <img src="{{ artist.picture }}" alt="Image de l'artiste {{ artist.name }}" class="card-img-top" style="width: 100%;">
+                            
+                            {# Genres musicaux de l'artiste #}
+                            <h6 class="fw-bold mt-4">Genres Musicaux</h6>
+                            {% for genre in artist.genres %}
+                                <span class="badge bg-primary">{{ genre.name }}</span>
+                            {% endfor %}
+                            
+                            {# Description de l'artiste #}
+                            <div class="mb-4">
+                                <h6 class="fw-bold">Description</h6>
+                                <p>{{ artist.description }}</p>
+                            </div>
+                            
+                            {# Lien vers la vidéo YouTube de l'artiste #}
+                            <h6 class="fw-bold">Vidéo YouTube</h6>
+                            <div class="my-2">
+                                <a href="{{ artist.video }}" target="_blank" class="badge bg-danger me-0">Vidéo</a>
+                            </div>
+                            
+                            {# Réseaux sociaux de l'artiste #}
+                            <h6 class="fw-bold">Réseaux Sociaux</h6>
+                            <div class="d-flex">
+                                <ul class="list-inline mb-0">
+                                    {% if artist.website %}
+                                        <li class="list-inline-item">
+                                            <a href="{{ artist.website }}">
+                                                <i class="bi bi-globe fs-3 dark-blue-txt"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if artist.spotify %}
+                                        <li class="list-inline-item">
+                                            <a href="{{ artist.spotify }}">
+                                                <i class="fa-brands fa-spotify fs-3 dark-blue-txt"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if artist.facebook %}
+                                        <li class="list-inline-item">
+                                            <a href="{{ artist.facebook }}">
+                                                <i class="fa-brands fa-facebook fs-3 dark-blue-txt"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if artist.instagram %}
+                                        <li class="list-inline-item">
+                                            <a href="{{ artist.instagram }}">
+                                                <i class="fa-brands fa-instagram fs-3 dark-blue-txt"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if artist.snapchat %}
+                                        <li class="list-inline-item">
+                                            <a href="{{ artist.snapchat }}">
+                                                <i class="fa-brands fa-snapchat fs-3 dark-blue-txt"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if artist.tiktok %}
+                                        <li class="list-inline-item">
+                                            <a href="{{ artist.tiktok }}">
+                                                <i class="fa-brands fa-tiktok fs-3 dark-blue-txt"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -82,8 +82,8 @@
 							<li class="nav-item dropdown mx-4">
 								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Artiste</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item fs-4" href="{{path('app_artist_list_admin')}}">Liste</a>
-									<a class="dropdown-item fs-4" href="{{path('app_artist_new_admin')}}">Ajouter</a>
+									<a class="dropdown-item fs-4" href="{{path('app_back_artist_browse')}}">Liste</a>
+									<a class="dropdown-item fs-4" href="{{path('app_back_artist_add')}}">Ajouter</a>
 								</div>
 							</li>
 							<!-- Dropdown Menu for Genres -->
@@ -115,8 +115,7 @@
 								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Clients</a>
 								<div class="dropdown-menu">
 									<a class="dropdown-item fs-4" href="{{path('app_customer_list_admin')}}">Liste</a>
-									<a class="dropdown-item fs-4" href="{{path('app_contact_list_admin')
-									}}">Messages</a>
+									<a class="dropdown-item fs-4" href="{{path('app_contact_list_admin') }}">Messages</a>
 									<a class="dropdown-item fs-4" href="{{path('app_ticket_api')}}">Liste participant
 										<br>
 										via Api - Weezevent</a>
@@ -157,9 +156,9 @@
 				</div>
 			</nav>
 		</header>
-		{{ include('back/fragments/_message.html.twig') }}
-		{% block main %}{% endblock %}
-
+		<main>
+			{% block main %}{% endblock %}
+		</main>
 		<!--Footer-->
 		<footer class="bg-primary mt-5"></footer>
 
