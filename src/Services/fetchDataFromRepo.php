@@ -42,13 +42,13 @@ class fetchDataFromRepo
         $paramGenre = $genre;
         $paramStage = $stage;
         $data = [];
-        // Récupération de tous les artistes avec des slots associés
+        // Get data artist from BDD
         $data['artistList'] = $this->artistRepository->findAllArtistByParams($paramDate, $paramGenre, $paramStage);
-        // Récupération de tous les slots
+        // Get data slots from BDD
         $data['slotList'] = $this->slotRepository->findAll();
-        // Récupération de tous les stages
+        // Get data stage from BDD
         $data['stageList'] = $this->stageRepository->findAll();
-        // Récupération de 4 des genre
+        // Get data genre from BDD
         $data['genreList'] = $this->genreRepository->limitedGenre();
 
         return $data;

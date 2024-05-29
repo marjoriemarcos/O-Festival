@@ -107,7 +107,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 15vh; 
+    height: 12vh; 
     font-size: 2rem;  
     position: relative;
 }
@@ -133,13 +133,13 @@ body {
     background-color: #101010;
 }
 .navbar-logo img {
-    height: 10vh;
+    height: 7vh;
 }
 
 /** --------- BUTTONS --------- **/
 
 .btn-primary {
-    padding: 1%;
+    padding: 0.5%;
     font-size: 1.75em;
     width: 30%;
     border: none;
