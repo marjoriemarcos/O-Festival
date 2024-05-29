@@ -1,0 +1,32 @@
+{# Étend la mise en page de base #}
+{% extends 'back/base.html.twig' %}
+
+{# Définit le bloc 'slotAddActive' pour indiquer que cette page est active dans le menu de navigation #}
+{% block slotAddActive %}active{% endblock %}
+
+{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block main %}
+    <div class="container">
+        <h2 class="text-center my-5 fw-bold display-5">Ajouter un Créneau</h2>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <!-- Card -->
+                <div class="col-md-8">
+                    <a href="{{ path('app_back_slot_browse') }}" class="btn btn-primary fw-bold mb-4">
+                        <i class="bi bi-arrow-left"></i> Retour à la programmation
+                    </a>
+                    <div class="card">
+                        <!-- Card title -->
+                        <div class="card-header fs-2 fw-bold">
+                            <i class="bi bi-calendar3 me-2"></i>Nouveau Créneau
+                        </div>
+                        <div class="card-body">
+                            <!-- Inclusion du formulaire pour créer un nouveau créneau -->
+                            {{ include('back/fragments/_form.html.twig', {'button_label': 'Créer le créneau'}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

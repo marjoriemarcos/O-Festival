@@ -28,7 +28,7 @@
                             {% if slot %}
                                 <div class="d-flex">
                                     {# Lien pour voir les détails du créneau #}
-                                    <a href="{{ path('app_slot_read_admin', {id: slot.id}) }}" class="btn btn-primary bi bi-search me-2"></a>
+                                    <a href="{{ path('app_back_slot_read', {id: slot.id}) }}" class="btn btn-primary bi bi-search me-2"></a>
                                 </div>
                             </div>
 
@@ -49,7 +49,7 @@
                             {% else %}
                                 <div class="d-flex">
                                     {# Lien pour ajouter un créneau #}
-                                    <a class="btn btn-success fw-bold" type="button" href="{{ path('app_slot_new_admin') }}">Ajouter un créneau</a>
+                                    <a class="btn btn-success fw-bold" type="button" href="{{ path('app_back_slot_add') }}">Ajouter un créneau</a>
                                 </div>
                             </div>
                             <div class="card-body">
