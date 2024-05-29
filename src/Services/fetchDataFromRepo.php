@@ -49,7 +49,7 @@ class fetchDataFromRepo
         // Get data stage from BDD
         $data['stageList'] = $this->stageRepository->findAll();
         // Get data genre from BDD
-        $data['genreList'] = $this->genreRepository->limitedGenre();
+        $data['genreList'] = $this->genreRepository->findGenresOfArtistsWithSlot();
 
         return $data;
     }
