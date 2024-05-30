@@ -1,5 +1,0 @@
-<form method="post" action="{{ path('app_slot_delete_admin', {'id': slot.id}) }}" onsubmit="return confirm('Voulez-vous supprimer ce créneau?');">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ slot.id) }}">
-    <button class="btn btn-danger bi bi-trash">{{ button_label|default('')}}</button>
-</form>
-

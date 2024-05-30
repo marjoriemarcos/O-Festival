@@ -12,24 +12,24 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ContactController extends AbstractController
 {
-    #[Route('/back/contact_list', name: 'app_contact_list_admin')]
-    public function list(ContactRepository $contactRepository): Response
+    #[Route('/back/contact', name: 'app_back_contact_browse')]
+    public function browse(ContactRepository $contactRepository): Response
     {
         $contactList = $contactRepository->findAll();
 
-        return $this->render('back/contact/list.html.twig', [
+        return $this->render('back/contact/browse.html.twig', [
             'contactList' => $contactList,
         ]);
     }
 
-    #[Route('/back/contact_list/{id<\d+>}/edit', name: 'app_contact_edit_admin', methods: ['GET', 'POST'])]
+    #[Route('/back/contact/{id<\d+>}/edit', name: 'app_back_contact_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Contact $contact, EntityManagerInterface $entityManager): Response
     {
         $treatment = $request->request->get('treatment');
         $contact->setTreatment($treatment);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_contact_list_admin');
+        return $this->redirectToRoute('app_back_contact_browse');
 
     }
 

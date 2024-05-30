@@ -1,0 +1,110 @@
+{# Étend la mise en page de base #}
+{% extends 'back/base.html.twig' %}
+
+{# Définit le bloc 'artistBrowseActive' pour indiquer que cette page est active dans le menu de navigation #}
+{% block artistBrowseActive %}active{% endblock %}
+
+{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block main %}
+    <div class="container">
+        {# Titre de la page #}
+        <h2 class="text-center my-5 fw-bold display-5">Liste des Artistes</h2>
+
+        {# Inclusion du fragment pour la barre de recherche #}
+        {{ include('back/fragments/_search_bar.html.twig') }}
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                {# Inclusion du fragment pour afficher les messages de succès ou d'erreur #}
+                {{ include('back/fragments/_message.html.twig') }}
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span class="fs-2 fw-bold">Artistes</span>
+                        {# Lien pour ajouter un nouvel artiste #}
+                        <a class="btn btn-success fw-bold" href="{{ path('app_back_artist_add') }}">Ajouter un Artiste</a>
+                    </div>
+                    <div class="card-body">
+                        {# Inclusion du fragment pour afficher un message si aucun résultat n'est trouvé #}
+                        {{ include('back/fragments/_noResult_message.html.twig') }}
+                        <div class="table-responsive" id="tableWrapper">
+                            <table class="table table-bordered searchable-table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">
+                                            <i class="bi bi-person me-2"></i>
+                                            Photo
+                                        </th>
+                                        <th scope="col" data-sortable>
+                                            <i class="bi bi-person me-2"></i>
+                                            Nom
+                                        </th>
+                                        <th scope="col">
+                                            <i class="bi bi-music-note-list me-2"></i>
+                                            Genres musicaux
+                                        </th>
+                                        <th scope="col">
+                                            <i class="bi bi-calendar me-2"></i>
+                                            Créneau
+                                        </th>
+                                        <th class="col-1">
+                                            <i class="bi bi-gear me-2"></i>
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {# Boucle sur la liste des artistes #}
+                                    {% for artist in artistList %}
+                                        <tr>
+                                            {# Affiche la photo de l'artiste #}
+                                            <td><img src="{{ artist.picture }}" alt="Image de l'artiste {{ artist.name }}" class="img-thumbnail" style="max-width: 100px;"></td>
+                                            {# Affiche le nom de l'artiste #}
+                                            <td>{{ artist.name }}</td>
+                                            {# Affiche les genres musicaux de l'artiste #}
+                                            <td>
+                                                {% for genre in artist.genres %}
+                                                    <span class="badge bg-primary">{{ genre.name }}</span>
+                                                {% endfor %}
+                                            </td>
+                                            {# Affiche le créneau de l'artiste #}
+                                            <td>
+                                                {% if artist.slot %}
+                                                    <p class="mb-0">
+                                                        {{ artist.slot.day }} - {{ artist.slot.date|date('d/m/Y') }}
+                                                    </p>
+                                                    <p class="mb-0">
+                                                        {{ artist.slot.hour }}
+                                                    </p>
+                                                    <p class="mb-0">
+                                                        {{ artist.slot.stage.name }}
+                                                    </p>
+                                                {% else %}
+                                                    <span class="text-muted">Pas de créneau</span>
+                                                {% endif %}
+                                            </td>
+                                            {# Affiche les actions possibles pour chaque artiste (voir, supprimer) #}
+                                            <td>
+                                                <div class="d-flex">
+                                                    <a href="{{ path('app_back_artist_read', { id: artist.id }) }}" class="btn btn-primary bi bi-search me-2"></a>
+                                                    <form method="post" action="{{ path('app_back_artist_delete', {'id': artist.id}) }}" onsubmit="return confirm('Voulez-vous supprimer {{ artist.name }}?');">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ artist.id) }}">
+                                                        <button class="btn btn-danger bi bi-trash">{{ button_label|default('') }}</button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                            {# Affiche la pagination #}
+                            <div id="pagination-container" class="pagination justify-content-center">
+                                {{ knp_pagination_render(artistList) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

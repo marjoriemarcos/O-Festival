@@ -14,7 +14,7 @@ use App\Entity\Slot;
 
 class SlotController extends AbstractController
 {
-    #[Route('/back/slot_list', name: 'app_slot_list_admin', methods: ['GET'])]
+    #[Route('/back/slot', name: 'app_back_slot_browse', methods: ['GET'])]
     public function list(SlotRepository $slotRepository): Response
     {
         // Create QueryBuilder to fetch slots with artist and stage
@@ -26,11 +26,11 @@ class SlotController extends AbstractController
         // Fetch slots using the QueryBuilder
         $slotList = $queryBuilder->getQuery()->getResult();
     
-        return $this->render('back/slot/list.html.twig', [
+        return $this->render('back/slot/browse.html.twig', [
             'slotList' => $slotList,
         ]);
     }
-    #[Route('/back/slot_list/{id<\d+>}', name:'app_slot_read_admin', methods: ['GET'])]
+    #[Route('/back/slot/{id<\d+>}', name:'app_back_slot_read', methods: ['GET'])]
     public function read(int $id, SlotRepository $slotRepository): Response
     {
         // Fetch the slot by its ID
@@ -46,8 +46,8 @@ class SlotController extends AbstractController
         ]);
     }
 
-    #[Route('/back/slot_list/new', name: 'app_slot_new_admin', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/back/slot/add', name: 'app_back_slot_add', methods: ['GET', 'POST'])]
+    public function add(Request $request, EntityManagerInterface $entityManager): Response
     {
         $slot = new Slot();
         $form = $this->createForm(SlotType::class, $slot, ['isNew' => true]);
@@ -58,16 +58,16 @@ class SlotController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', 'Le créneau a bien été créé.');
 
-            return $this->redirectToRoute('app_slot_list_admin', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_slot_browse', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('back/slot/new.html.twig', [
+        return $this->render('back/slot/add.html.twig', [
             'slot' => $slot,
             'form' => $form,
         ]);
     }
 
-    #[Route('/back/slot_list/{id<\d+>}/edit', name: 'app_slot_edit_admin', methods: ['GET', 'POST'])]
+    #[Route('/back/slot/{id<\d+>}/edit', name: 'app_back_slot_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Slot $slot, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(SlotType::class, $slot, ['isNew' => false]);
@@ -83,7 +83,7 @@ class SlotController extends AbstractController
             $this->addFlash('success', 'Le créneau a bien été modifié.');
 
             // Redirect to the read page of the edited slot
-            return $this->redirectToRoute('app_slot_read_admin', ['id' => $editedSlotId], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_slot_read', ['id' => $editedSlotId], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('back/slot/edit.html.twig', [
@@ -92,7 +92,7 @@ class SlotController extends AbstractController
         ]);
     }
 
-    #[Route('/back/slot_list/{id<\d+>}/delete', name: 'app_slot_delete_admin', methods: ['POST'])]
+    #[Route('/back/slot/{id<\d+>}/delete', name: 'app_back_slot_delete', methods: ['POST'])]
     public function delete(Request $request, Slot $slot, EntityManagerInterface $entityManager): Response
     {
         var_dump($request->request->all());
@@ -105,7 +105,7 @@ class SlotController extends AbstractController
             $this->addFlash('error', 'La suppression du créneau a échoué. Le jeton CSRF est invalide.');
         }        
     
-        return $this->redirectToRoute('app_slot_list_admin');
+        return $this->redirectToRoute('app_back_slot_browse');
     }
     
 }

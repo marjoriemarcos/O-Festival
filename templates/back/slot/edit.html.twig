@@ -1,30 +1,37 @@
+{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-{% block title %}Éditer le Créneau{% endblock %}
+{# Définit le bloc 'slotEditActive' pour indiquer que cette page est active dans le menu de navigation #}
+{% block slotEditActive %}active{% endblock %}
 
-{% block main %}    
+{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block main %}
     <div class="container">
         <h2 class="text-center my-5 fw-bold display-5">Éditer le Créneau</h2>
         <div class="container mt-5">
             <div class="row justify-content-center">
-                <!-- Card -->
                 <div class="col-md-8">
-                    <a href="{{ path('app_slot_list_admin') }}" class="btn btn-primary fw-bold mb-4">
-                        <i class="bi bi-arrow-left"></i> Retour à la programmation
+                    <a href="{{ path('app_back_slot_read', { id: slot.id }) }}" class="btn btn-primary fw-bold mb-4">
+                        <i class="bi bi-arrow-left"></i>
+                        Retour au détails du créneau
                     </a>
+                    {# Inclusion du fragment pour afficher les messages de succès ou d'erreur #}
+                    {{ include('back/fragments/_message.html.twig') }}
                     <div class="card">
-                        <!-- Card title -->
-                        <div class="card-header fs-2 fw-bold">
-                            <i class="bi bi-calendar3 me-2"></i>Éditer le Créneau
+                        <!-- Card header -->
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span class="fs-2 fw-bold">{{ slot.day }}-{{ slot.date|date('d/m/y') }} {{ slot.hour }}</span>
+                            <div class="d-flex">
+                                <!-- Formulaire de suppression du créneau -->
+                                <form method="post" action="{{ path('app_back_slot_delete', {'id': slot.id}) }}" onsubmit="return confirm('Voulez-vous supprimer le créneau du {{ slot.date|date('d/m/y') }} de {{ slot.hour }}?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ slot.id) }}">
+                                    <button class="btn btn-danger bi bi-trash">{{ button_label|default('')}}</button>
+                                </form>
+                            </div>
                         </div>
                         <div class="card-body">
-                            <!-- Include the form for editing a slot -->
-                            {{ include('back/slot/_form.html.twig', {'slot': slot, 'button_label': 'Mettre à jour'}) }}
-                        </div>
-                        <!-- Card footer (containing buttons) -->
-                        <div class="card-footer">
-                            <!-- Include the form for deleting a slot -->
-                            {{ include('back/slot/_delete_form.html.twig', {'slot': slot, 'button_label': 'Supprimer'}) }}
+                            <!-- Inclusion du formulaire pour éditer le créneau -->
+                            {{ include('back/fragments/_form.html.twig', {'slot': slot, 'button_label': 'Mettre à jour'}) }}
                         </div>
                     </div>
                 </div>

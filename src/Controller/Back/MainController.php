@@ -9,7 +9,7 @@ use App\Repository\SlotRepository;
 
 class MainController extends AbstractController
 {
-    #[Route('/back', name: 'app_main_home_admin')]
+    #[Route('/back', name: 'app_back_home')]
     public function home(SlotRepository $slotRepository): Response
     {
         // Fetch the slots from the database

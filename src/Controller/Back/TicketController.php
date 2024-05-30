@@ -15,17 +15,17 @@ use App\Entity\Ticket;
 
 class TicketController extends AbstractController
 {
-    #[Route('/back/ticket_list', name: 'app_ticket_list_admin', methods: ['GET'])]
-    public function list(TicketRepository $ticketRepository): Response
+    #[Route('/back/ticket', name: 'app_back_ticket_browse', methods: ['GET'])]
+    public function browse(TicketRepository $ticketRepository): Response
     {
         // Fetch tickets
         $ticketList = $ticketRepository->findAll();
-        return $this->render('back/ticket/list.html.twig', [
+        return $this->render('back/ticket/browse.html.twig', [
             'ticketList' => $ticketList,
         ]);
     }
 
-    #[Route('/back/ticket_list/{id<\d+>}', name:'app_ticket_read_admin', methods: ['GET'])]
+    #[Route('/back/ticket/{id<\d+>}', name:'app_back_ticket_read', methods: ['GET'])]
     public function read(int $id, TicketRepository $ticketRepository): Response
     {
         // Fetch the ticket by its ID
@@ -40,7 +40,7 @@ class TicketController extends AbstractController
             'ticket' => $ticket,
         ]);
     }
-    #[Route('/back/ticket_list/new', name: 'app_ticket_new_admin', methods: ['GET', 'POST'])]
+    #[Route('/back/ticket/add', name: 'app_back_ticket_add', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, TicketRepository $ticketRepository): Response
     {
         $ticket = new Ticket();
@@ -58,23 +58,23 @@ class TicketController extends AbstractController
             if ($existingTicket) {
                 throw $this->createNotFoundException('Il y a déjà un billet avec ce titre.');
                 $this->addFlash('danger', 'Erreur lors de la saisie du billet.');
-                return $this->redirectToRoute('app_ticket_list_admin', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_back_ticket_browse', [], Response::HTTP_SEE_OTHER);
             }
 
             $entityManager->persist($ticket);
             $entityManager->flush();
 
             $this->addFlash('success', 'Le billet a bien été créé.');
-            return $this->redirectToRoute('app_ticket_list_admin', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_ticket_browse', [], Response::HTTP_SEE_OTHER);
         }
     
-        return $this->render('back/ticket/new.html.twig', [
+        return $this->render('back/ticket/add.html.twig', [
             'ticket' => $ticket,
             'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/back/ticket_list/{id<\d+>}/edit', name: 'app_ticket_edit_admin', methods: ['GET', 'POST'])]
+    #[Route('/back/ticket/{id<\d+>}/edit', name: 'app_back_ticket_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Ticket $ticket, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(TicketType::class, $ticket);
@@ -90,7 +90,7 @@ class TicketController extends AbstractController
             $this->addFlash('success', 'Le billet a bien été modifié.');
     
             // Redirect to the read page of the edited ticket
-            return $this->redirectToRoute('app_ticket_read_admin', ['id' => $editedTicketId], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_ticket_read', ['id' => $editedTicketId], Response::HTTP_SEE_OTHER);
         }
     
         return $this->render('back/ticket/edit.html.twig', [
@@ -100,7 +100,7 @@ class TicketController extends AbstractController
     }
     
 
-    #[Route('/back/ticket_list/{id<\d+>}/delete', name: 'app_ticket_delete_admin', methods: ['POST'])]
+    #[Route('/back/ticket/{id<\d+>}/delete', name: 'app_back_ticket_delete', methods: ['POST'])]
     public function delete(Request $request, Ticket $ticket, EntityManagerInterface $entityManager): Response
     {
         var_dump($request->request->all());
@@ -113,7 +113,7 @@ class TicketController extends AbstractController
             $this->addFlash('error', 'La suppression du billet a échoué. Le jeton CSRF est invalide.');
         }        
     
-        return $this->redirectToRoute('app_ticket_list_admin');
+        return $this->redirectToRoute('app_back_ticket_browse');
     }
 
     

@@ -14,7 +14,7 @@ use Knp\Component\Pager\PaginatorInterface;
 
 class StageController extends AbstractController
 {
-    #[Route('/back/stage_list', name: 'app_stage_list_admin', methods: ['GET'])]
+    #[Route('/back/stage', name: 'app_back_stage_browse', methods: ['GET'])]
     public function list(StageRepository $stageRepository, PaginatorInterface $paginator, Request $request): Response
     {
         // Fetch stages with pagination
@@ -27,12 +27,12 @@ class StageController extends AbstractController
             5 // limit per page
         );
         
-        return $this->render('back/stage/list.html.twig', [
+        return $this->render('back/stage/browse.html.twig', [
             'stageList' => $stageList,
         ]);
     }
 
-    #[Route('/back/stage_list/new', name: 'app_stage_new_admin', methods: ['GET', 'POST'])]
+    #[Route('/back/stage/add', name: 'app_back_stage_add', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $stage = new Stage();
@@ -44,16 +44,16 @@ class StageController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', 'La scène a bien été créée.');
 
-            return $this->redirectToRoute('app_stage_list_admin', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_stage_browse', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('back/stage/new.html.twig', [
+        return $this->render('back/stage/add.html.twig', [
             'stage' => $stage,
             'form' => $form,
         ]);
     }
 
-    #[Route('/back/stage_list/{id<\d+>}/edit', name: 'app_stage_edit_admin', methods: ['GET', 'POST'])]
+    #[Route('/back/stage/{id<\d+>}/edit', name: 'app_back_stage_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Stage $stage, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(StageType::class, $stage);
@@ -63,7 +63,7 @@ class StageController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', 'La scène a bien été modifiée.');
 
-            return $this->redirectToRoute('app_stage_list_admin', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_stage_browse', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('back/stage/edit.html.twig', [
@@ -72,7 +72,7 @@ class StageController extends AbstractController
         ]);
     }
 
-    #[Route('/back/stage_list/{id<\d+>}/delete', name: 'app_stage_delete_admin', methods: ['POST'])]
+    #[Route('/back/stage/{id<\d+>}/delete', name: 'app_back_stage_delete', methods: ['POST'])]
     public function delete(Request $request, Stage $stage, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$stage->getId(), $request->getPayload()->get('_token'))) {
@@ -83,6 +83,6 @@ class StageController extends AbstractController
             $this->addFlash('error', 'La suppression de la scène a échoué. Le jeton CSRF est invalide.');
         }      
 
-        return $this->redirectToRoute('app_stage_list_admin', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_back_stage_browse', [], Response::HTTP_SEE_OTHER);
     }
 }

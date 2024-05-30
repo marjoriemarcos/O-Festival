@@ -1,69 +1,77 @@
+{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-{%block title%}Créneau {{slot.date| date('d/m/Y')}} {{slot.hour}}{%endblock%}
+{# Définit le bloc 'slotReadActive' pour indiquer que cette page est active dans le menu de navigation #}
+{% block slotReadActive %}active
+{% endblock %}
 
+{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
 {% block main %}
-<main>
-    {# Display flash messages #}
-    {% for type, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="alert alert-{{ type }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}  
-    <div class="container">
-     <h2 class="text-center my-5 fw-bold display-5">Détails du Créneau</h2>
-      <div class="container mt-5">
-        <div class="row justify-content-center">
-          <!-- Card -->
-          <div class="col-md-8">
-            <a href="{{path('app_slot_list_admin')}}" class="btn btn-primary fw-bold mb-4">
-              <i class="bi bi-arrow-left"></i> Retour à la programmation
-            </a>
-            <div class="card">
-              <!-- Card title -->
-              <div class="card-header d-flex justify-content-between align-items-center">
-                <span class="fs-2 fw-bold">
-                  <i class="bi bi-calendar3 me-2"></i>{{slot.date| date('d/m/Y')}}, de {{slot.hour}}
-                </span>
-                <div class="d-flex">
-                  <a href="{{path('app_slot_edit_admin', {id: slot.id})}}" class="btn btn-warning me-2 bi bi-pencil"></a>
-                  {% include 'back/slot/_delete_form.html.twig' with {'slot': slot} %}
-                </div>
-              </div>
-              <div class="card-body">
-                <!-- Artist -->
-                <div class="d-flex align-items-center">
-                  <i class="bi bi-person me-2" style="font-size: 1.5rem;"></i>
-                  <h6 class="fw-bold mb-0">Artiste :</h6>
-                  <a href="{{path('app_artist_read_admin', {id: slot.artist.id})}}">
-                  <p class="mb-0 ms-2">{{slot.artist.name}}</p>
-                  </a>
-                </div>
-                <!-- Day -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-calendar-date me-2" style="font-size: 1.5rem;"></i>
-                  <h6 class="fw-bold mb-0">Jour de Passage :</h6>
-                  <p class="mb-0 ms-2">Le {{slot.day}} ({{slot.date| date('d/m/Y')}})</p>
-                </div>
-                <!-- Hour -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-clock me-2" style="font-size: 1.5rem;"></i>
-                  <h6 class="fw-bold mb-0">Heure de Passage :</h6>
-                  <p class="mb-0 ms-2">{{slot.hour}}</p>
-                </div>
-                <!-- Stage name -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-music-note me-2" style="font-size: 1.5rem;"></i>
-                  <h6 class="fw-bold mb-0">Nom de la Scène :</h6>
-                  <p class="mb-0 ms-2">{{slot.stage.name}}</p>
-                </div>                
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
+	<div class="container">
+		<h2 class="text-center my-5 fw-bold display-5">Détails du Créneau</h2>
+		<div class="container mt-5">
+			<div
+				class="row justify-content-center">
+				<!-- Card -->
+				<div class="col-md-8">
+					<a href="{{path('app_back_slot_browse')}}" class="btn btn-primary fw-bold mb-4">
+						<i class="bi bi-arrow-left"></i>
+						Retour à la programmation
+					</a>
+					{# Inclusion du fragment pour afficher les messages de succès ou d'erreur #}
+					{{ include('back/fragments/_message.html.twig') }}
+					<div
+						class="card">
+						<!-- Card title -->
+						<div class="card-header d-flex justify-content-between align-items-center">
+							<span class="fs-2 fw-bold">
+								<i class="bi bi-calendar3 me-2"></i>
+								{{slot.date| date('d/m/Y')}},
+								{{slot.hour}}
+							</span>
+							<div class="d-flex">
+								<a href="{{path('app_back_slot_edit', {id: slot.id})}}" class="btn btn-warning me-2 bi bi-pencil"></a>
+								<!-- Formulaire de suppression du créneau -->
+								<form method="post" action="{{ path('app_back_slot_delete', {'id': slot.id}) }}" onsubmit="return confirm('Voulez-vous supprimer le créneau du {{ slot.date|date('d/m/y') }} de {{ slot.hour }}?');">
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ slot.id) }}">
+									<button class="btn btn-danger bi bi-trash">{{ button_label|default('')}}</button>
+								</form>
+							</div>
+						</div>
+						<div
+							class="card-body">
+							<!-- Artist -->
+							<div class="d-flex align-items-center">
+								<i class="bi bi-person me-2" style="font-size: 1.5rem;"></i>
+								<h6 class="fw-bold mb-0">Artiste :</h6>
+								<a href="{{path('app_back_artist_read', {id: slot.artist.id})}}">
+									<p class="mb-0 ms-2">{{slot.artist.name}}</p>
+								</a>
+							</div>
+							<!-- Day -->
+							<div class="d-flex align-items-center mt-3">
+								<i class="bi bi-calendar-date me-2" style="font-size: 1.5rem;"></i>
+								<h6 class="fw-bold mb-0">Jour de Passage :</h6>
+								<p class="mb-0 ms-2">Le
+									{{slot.day}}
+									({{slot.date| date('d/m/Y')}})</p>
+							</div>
+							<!-- Hour -->
+							<div class="d-flex align-items-center mt-3">
+								<i class="bi bi-clock me-2" style="font-size: 1.5rem;"></i>
+								<h6 class="fw-bold mb-0">Heure de Passage :</h6>
+								<p class="mb-0 ms-2">{{slot.hour}}</p>
+							</div>
+							<!-- Stage name -->
+							<div class="d-flex align-items-center mt-3">
+								<i class="bi bi-music-note me-2" style="font-size: 1.5rem;"></i>
+								<h6 class="fw-bold mb-0">Nom de la Scène :</h6>
+								<p class="mb-0 ms-2">{{slot.stage.name}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

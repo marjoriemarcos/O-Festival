@@ -1,0 +1,85 @@
+{# Étend la mise en page de base #}
+{% extends 'back/base.html.twig' %}
+
+{# Définit le bloc 'customerBrowseActive' pour indiquer que cette page est active dans le menu de navigation #}
+{% block customerBrowseActive %}active{% endblock %}
+
+{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block main %}
+	<div class="container">
+		{# Titre principal de la page #}
+		<h2 class="text-center my-5 fw-bold display-5">Liste des clients</h2>
+		
+		{# Barre de recherche incluse à partir d'un fragment #}
+		{{ include('back/fragments/_search_bar.html.twig') }}
+
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				{# Inclusion du fragment pour afficher les messages de succès ou d'erreur #}
+				{{ include('back/fragments/_message.html.twig') }}
+				<div class="card">
+					{# Titre de la carte #}
+					<div class="card-header">
+						<h3 class="fs-2 fw-bold mb-0">Clients</h3>
+					</div>
+					<div class="card-body">
+						{# Message à afficher si aucun résultat n'est trouvé, inclus à partir d'un fragment #}
+						{{ include('back/fragments/_noResult_message.html.twig') }}
+						<div class="table-responsive" id="tableWrapper">
+							<table class="table table-bordered searchable-table">
+								<thead class="thead-dark">
+									<tr>
+										<th scope="col" data-sortable>
+											<i class="bi bi-person me-2"></i>Nom
+										</th>
+										<th scope="col" data-sortable>
+											<i class="bi bi-person me-2"></i>Prénom
+										</th>
+										<th scope="col">
+											<i class="bi bi-ticket me-2"></i>Tickets achetés
+										</th>
+										<th class="col-1">
+											<i class="bi bi-gear me-2"></i>Actions
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									{# Boucle pour afficher chaque client dans customerList #}
+									{% for customer in customerList %}
+										<tr>
+											<td>{{ customer.lastname }}</td>
+											<td>{{ customer.firstname }}</td>
+											<td>
+												{# Boucle pour afficher les tickets achetés par le client #}
+												{% for ticket in customer.getTickets %}
+													<li>{{ ticket.Title }}</li>
+												{% else %}
+													<li>Ce client n'a pas acheté de tickets</li>
+												{% endfor %}
+											</td>
+											<td>
+												<div class="d-flex">
+													{# Boutons d'action : voir et supprimer #}
+													<a href="{{ path('app_back_customer_read', {id: customer.id}) }}" class="btn btn-primary bi bi-search me-2"></a>
+													<form method="post" action="{{ path('app_back_customer_delete', {'id': customer.id}) }}" onsubmit="return confirm('Voulez-vous supprimer {{ customer.lastname }} {{ customer.firstname }}?');">
+														<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ customer.id) }}">
+														<button class="btn btn-danger bi bi-trash">{{ button_label|default('') }}</button>
+													</form>
+												</div>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+
+							{# Pagination pour naviguer entre les pages de résultats #}
+							<div id="pagination-container" class="pagination justify-content-center">
+								{{ knp_pagination_render(customerList) }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

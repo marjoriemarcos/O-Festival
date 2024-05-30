@@ -55,7 +55,7 @@
 				<div
 					class="container-fluid">
 					<!-- Website Logo -->
-					<a class="navbar-brand" href="{{path('app_main_home_admin')}}">
+					<a class="navbar-brand" href="{{path('app_back_home')}}">
 						<img src="{{asset('images/logoNav.png')}}" alt="O'Festival Logo" class="img-fluid w-25">
 					</a>
 					<!-- Collapse -->
@@ -74,50 +74,49 @@
 							<li class="nav-item dropdown mx-4">
 								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Créneaux</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item fs-4" href="{{path('app_slot_list_admin')}}">Liste</a>
-									<a class="dropdown-item fs-4" href="{{path('app_slot_new_admin')}}">Ajouter</a>
+									<a class="dropdown-item fs-4" href="{{path('app_back_slot_browse')}}">Liste</a>
+									<a class="dropdown-item fs-4" href="{{path('app_back_slot_add')}}">Ajouter</a>
 								</div>
 							</li>
 							<!-- Dropdown Menu for Artists -->
 							<li class="nav-item dropdown mx-4">
 								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Artiste</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item fs-4" href="{{path('app_artist_list_admin')}}">Liste</a>
-									<a class="dropdown-item fs-4" href="{{path('app_artist_new_admin')}}">Ajouter</a>
+									<a class="dropdown-item fs-4" href="{{path('app_back_artist_browse')}}">Liste</a>
+									<a class="dropdown-item fs-4" href="{{path('app_back_artist_add')}}">Ajouter</a>
 								</div>
 							</li>
 							<!-- Dropdown Menu for Genres -->
 							<li class="nav-item dropdown mx-4">
 								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Genre</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item fs-4" href="{{path('app_genre_list_admin')}}">Liste</a>
-									<a class="dropdown-item fs-4" href="{{path('app_genre_new_admin')}}">Ajouter</a>
+									<a class="dropdown-item fs-4" href="{{path('app_back_genre_browse')}}">Liste</a>
+									<a class="dropdown-item fs-4" href="{{path('app_back_genre_add')}}">Ajouter</a>
 								</div>
 							</li>
 							<!-- Dropdown Menu for Stages -->
 							<li class="nav-item dropdown mx-4">
 								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Scène</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item fs-4" href="{{path('app_stage_list_admin')}}">Liste</a>
-									<a class="dropdown-item fs-4" href="{{path('app_stage_new_admin')}}">Ajouter</a>
+									<a class="dropdown-item fs-4" href="{{path('app_back_stage_browse')}}">Liste</a>
+									<a class="dropdown-item fs-4" href="{{path('app_back_stage_add')}}">Ajouter</a>
 								</div>
 							</li>
 							<!-- Dropdown Menu for Tickets -->
 							<li class="nav-item dropdown mx-4">
 								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Billet</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item fs-4" href="{{path('app_ticket_list_admin')}}">Liste</a>
-									<a class="dropdown-item fs-4" href="{{path('app_ticket_new_admin')}}">Ajouter</a>
+									<a class="dropdown-item fs-4" href="{{path('app_back_ticket_browse')}}">Liste</a>
+									<a class="dropdown-item fs-4" href="{{path('app_back_ticket_add')}}">Ajouter</a>
 								</div>
 							</li>
 							<!-- Dropdown Menu for Customers -->
 							<li class="nav-item dropdown mx-4">
 								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Clients</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item fs-4" href="{{path('app_customer_list_admin')}}">Liste</a>
-									<a class="dropdown-item fs-4" href="{{path('app_contact_list_admin')
-									}}">Messages</a>
-									<a class="dropdown-item fs-4" href="{{path('app_ticket_api')}}">Liste participant
+									<a class="dropdown-item fs-4" href="{{path('app_back_customer_browse')}}">Liste</a>
+									<a class="dropdown-item fs-4" href="{{path('app_back_contact_browse') }}">Messages</a>
+									<a class="dropdown-item fs-4" href="{{path('app_back_customer_browse_api')}}">Liste participant
 										<br>
 										via Api - Weezevent</a>
 								</div>
@@ -126,7 +125,7 @@
 							<li class="nav-item dropdown mx-4">
 								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrateurs</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item fs-4" href="{{path('app_user_list_admin')}}">Liste</a>
+									<a class="dropdown-item fs-4" href="{{path('app_back_user_browse')}}">Liste</a>
 								</div>
 							</li>
 						</ul>
@@ -142,13 +141,7 @@
 								</a>
 								<ul class="dropdown-menu">
 									<li>
-										<a class="dropdown-item" href="#">Profil</a>
-									</li>
-									<li>
-										<hr class="dropdown-divider">
-									</li>
-									<li>
-										<a class="dropdown-item" href="{{path('app_logout')}}">Déconnexion</a>
+										<a class="dropdown-item" href="{{path('app_back_login')}}">Déconnexion</a>
 									</li>
 								</ul>
 							</li>
@@ -157,9 +150,9 @@
 				</div>
 			</nav>
 		</header>
-		{{ include('back/fragments/_message.html.twig') }}
-		{% block main %}{% endblock %}
-
+		<main>
+			{% block main %}{% endblock %}
+		</main>
 		<!--Footer-->
 		<footer class="bg-primary mt-5"></footer>
 

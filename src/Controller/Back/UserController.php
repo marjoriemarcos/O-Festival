@@ -13,17 +13,17 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends AbstractController
 {
-    #[Route('/back/user_list', name: 'app_user_list_admin')]
-    public function list(UserRepository $userRepository): Response
+    #[Route('/back/user', name: 'app_back_user_browse')]
+    public function browse(UserRepository $userRepository): Response
     {
         // Fetch users with ROLE_ADMIN
         $adminList = $userRepository->findByRole('ROLE_ADMIN');
 
-        return $this->render('back/user/list.html.twig', [
+        return $this->render('back/user/browse.html.twig', [
             'adminList' => $adminList,
         ]);}
 
-        #[Route('/back/user_list/{id<\d+>}/delete', name: 'app_user_delete_admin', methods: ['POST'])]
+        #[Route('/back/user/{id<\d+>}/delete', name: 'app_back_user_delete', methods: ['POST'])]
         public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
         {
             var_dump($request->request->all());
@@ -36,6 +36,6 @@ class UserController extends AbstractController
                 $this->addFlash('error', 'La suppression de l\'administrateur a échoué. Le jeton CSRF est invalide.');
             }        
         
-            return $this->redirectToRoute('app_user_list_admin');
+            return $this->redirectToRoute('app_back_user_browse');
         }
 }

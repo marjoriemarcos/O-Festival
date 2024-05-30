@@ -1,0 +1,99 @@
+{# Étend la mise en page de base #}
+{% extends 'back/base.html.twig' %}
+
+{# Définit le bloc 'slotBrowseActive' pour indiquer que cette page est active dans le menu de navigation #}
+{% block slotBrowseActive %}active
+{% endblock %}
+
+{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block main %}
+	<div class="container">
+		<h2 class="text-center my-5 fw-bold display-5">Liste des Créneaux</h2>
+
+		<!-- Search bar -->
+		{{ include('back/fragments/_search_bar.html.twig')}}
+
+		<div class="container mt-5">
+			<div class="row justify-content-center">
+				<!-- Sort per day -->
+				<div class="col-md-8 mb-3">
+					<div class="d-flex">
+						{# Boutons de filtre pour trier les créneaux par jour #}
+						<button class="btn btn-primary fw-bold me-2 filter-button selected" data-day="all" type="button">Tous les jours</button>
+						<button class="btn btn-primary fw-bold me-2 filter-button" data-day="J1" type="button">Jour 1</button>
+						<button class="btn btn-primary fw-bold me-2 filter-button" data-day="J2" type="button">Jour 2</button>
+						<button class="btn btn-primary fw-bold filter-button" data-day="J3" type="button">Jour 3</button>
+					</div>
+				</div>
+				<!-- Slot card -->
+				<div class="col-md-8">
+					{# Inclusion du fragment pour afficher les messages de succès ou d'erreur #}
+					{{ include('back/fragments/_message.html.twig') }}
+					<div class="card">
+						<!-- Card title -->
+						<div class="card-header d-flex justify-content-between align-items-center">
+							<div>
+								<span class="fs-2 fw-bold " id="day-title">Tous les jours</span>
+							</div>
+							<a class="btn btn-success fw-bold" type="button" href="{{ path('app_back_slot_add') }}">Ajouter un Créneau</a>
+						</div>
+
+						<div class="card-body">
+							<!-- Message si aucun résultat -->
+							{{ include('back/fragments/_noResult_message.html.twig') }}
+							<div class="table-responsive">
+								<table class="table table-bordered searchable-table" id="tableWrapper">
+									<thead class="thead-dark">
+										<tr>
+											<th scope="col" data-sortable>
+												<i class="bi bi-calendar me-2"></i>Jour
+											</th>
+											<th scope="col">
+												<i class="bi bi-clock me-2"></i>
+												Heure
+											</th>
+											<th scope="col" data-sortable>
+												<i class="bi bi-person me-2"></i>
+												Artiste
+											</th>
+											<th scope="col" data-sortable>
+												<i class="bi bi-house me-2"></i>
+												Scène
+											</th>
+											<th class="col-1">
+												<i class="bi bi-gear me-2"></i>
+												Actions
+											</th>
+										</tr>
+									</thead>
+									<tbody id="slots-table-body">
+										<!-- Boucle pour afficher les créneaux -->
+										{% for slot in slotList %}
+											<tr data-day="{{ slot.day }}">
+												<td>{{ slot.day }}-{{ slot.date|date('d/m/y') }}</td>
+												<td>{{ slot.hour }}</td>
+												<td>{{ slot.artist.name }}</td>
+												<td>{{ slot.stage.name }}</td>
+												<td>
+													<div class="d-flex">
+														<!-- Boutons d'action -->
+														<a href="{{ path('app_back_slot_read', {id: slot.id}) }}" class="btn btn-primary bi bi-search me-2"></a>
+														<!-- Formulaire de suppression du créneau -->
+														<form method="post" action="{{ path('app_back_slot_delete', {'id': slot.id}) }}" onsubmit="return confirm('Voulez-vous supprimer le créneau du {{ slot.date|date('d/m/y') }} de {{ slot.hour }}?');">
+															<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ slot.id) }}">
+															<button class="btn btn-danger bi bi-trash">{{ button_label|default('')}}</button>
+														</form>
+													</div>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

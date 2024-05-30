@@ -1,14 +1,17 @@
+{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-{% block title %}Nouvelle scène{% endblock %}
+{# Définit le bloc 'stageAddActive' pour indiquer que cette page est active dans le menu de navigation #}
+{% block stageAddActive %}active{% endblock %}
 
+{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
 {% block main %}
-    <main>
-        <div class="container">
+       <div class="container">
             <h2 class="text-center my-5 fw-bold display-5">Créer une nouvelle scène</h2>
             <div class="row justify-content-center">
                 <div class="col-md-8">
-                    <a href="{{ path('app_stage_list_admin') }}" class="btn btn-primary fw-bold mb-4">
+                    <!-- Bouton de retour à la liste des scènes -->
+                    <a href="{{ path('app_back_stage_browse') }}" class="btn btn-primary fw-bold mb-4">
                         <i class="bi bi-arrow-left"></i> Retour à la liste des scènes
                     </a>
                     <div class="card">
@@ -16,11 +19,11 @@
                             <i class="bi bi-person-plus me-2"></i>Nouvelle scène
                         </div>
                         <div class="card-body">
-                            {{ include('back/stage/_form.html.twig', {'button_label': 'Créer la scène'}) }}
+                            <!-- Inclusion du formulaire pour créer une nouvelle scène -->
+                            {{ include('back/fragments/_form.html.twig', {'button_label': 'Créer la scène'}) }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
 {% endblock %}
