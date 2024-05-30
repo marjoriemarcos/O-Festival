@@ -1,0 +1,72 @@
+# translations/messages.fr.yaml
+contact:
+  form:
+      name: "Votre Nom"
+      email: "Votre email"
+      message: "Votre message"
+      submit: "Envoyer"
+      name_placeholder: "Entrez votre Nom"
+      email_placeholder: "Entrez votre email"
+      message_placeholder: "Entrez votre message"
+      name_required: "Veuillez saisir votre nom."
+      email_required: "Veuillez saisir votre adresse email."
+      message_required: "Veuillez saisir votre message."
+
+artist:
+    form:
+        name: "Nom"
+        description: "Description"
+        picture: "Image"
+        video: "Vidéo"
+        website: "Site Web"
+        facebook: "Facebook"
+        twitter: "Twitter"
+        instagram: "Instagram"
+        spotify: "Spotify"
+        snapchat: "Snapchat"
+        tiktok: "TikTok"
+        genres: "Genres"
+
+genre:
+    form:
+        name: "Nom"
+
+slot:
+    form:
+        date: "Date"
+        day: "Jour"
+        day1: "Jour 1"
+        day2: "Jour 2"
+        day3: "Jour 3"
+        hour: "Horaire"
+        hourPlaceholder: "hh:mm - hh:mm"
+        artist: "Artiste"
+        stage: "Scène"
+
+stage:
+    form:
+        name: "Nom"
+
+ticket:
+    form:
+        title: "Titre"
+        title1Day: "Pass 1 Jour"
+        title2Day: "Pass 2 Jours"
+        title3Day: "Pass 3 Jours"
+        startAt: "Début de validité"
+        endAt: "Fin de validité"
+        price: "Prix (€)"
+        pricePlaceholder: "Ex: 20.00€"
+        quantity: "Quantité"
+        fee: "Forfait"
+        fullFee: "Plein tarif"
+        studentFee : "Tarif étudiant"
+        childFee :  "Tarif enfant (-12 ans)"
+        duration: "Durée"
+        duration24: "24 heures"
+        duration48: "48 heures"
+        duration72: "72 heures"
+        
+        
+
+        

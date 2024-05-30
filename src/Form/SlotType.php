@@ -28,30 +28,33 @@ class SlotType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        // Ajoute les champs au formulaire
+        // Add fields to the form
         $builder
             ->add('date', null, [
                 'widget' => 'single_text',
+                'label' => 'slot.form.date',
             ])
             ->add('day', ChoiceType::class, [
                 'choices' => [
-                    'Jour 1' => 'J1',
-                    'Jour 2' => 'J2',
-                    'Jour 3' => 'J3',
+                    'slot.form.day1' => 'J1',
+                    'slot.form.day2' => 'J2',
+                    'slot.form.day3' => 'J3',
                 ],
+                'label' => 'slot.form.day',
             ])
             ->add('hour', TextType::class, [
-                'label' => 'Heure',
+                'label' => 'slot.form.hour',                
                 'attr' => [
-                    'placeholder' => 'hh:mm-hh:mm',
+                    'placeholder' => 'slot.form.hourPlaceholder',
                 ],
             ]);
 
-        // Ajoute le champ 'artist' en fonction du contexte (new/edit)
+        // Add the 'artist' field based on context (new/edit)
         if ($options['isNew']) {
-            // Si c'est le formulaire "new", utilise une requête personnalisée
+            // If it's the "new" form, use a custom query
             $builder->add('artist', EntityType::class, [
                 'class' => Artist::class,
+                'label' => 'slot.form.artist',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('a')
                         ->leftJoin('a.slot', 's')
@@ -60,13 +63,14 @@ class SlotType extends AbstractType
                 'choice_label' => 'name',
             ]);
         } else {
-            // Si c'est le formulaire "edit", affiche tous les artistes disponibles et sélectionne celui qui est déjà indiqué
+            // If it's the "edit" form, display all available artists and select the one already indicated
             $builder->add('artist', EntityType::class, [
                 'class' => Artist::class,
+                'label' => 'slot.form.artist',
                 'choice_label' => 'name',
                 'query_builder' => function (EntityRepository $er) use ($options) {
-                    $slot = $options['data']; // Récupérer les données du formulaire
-                    $artistId = $slot->getArtist()->getId(); // Récupérer l'ID de l'artiste associé au slot
+                    $slot = $options['data']; // Get form data
+                    $artistId = $slot->getArtist()->getId(); // Get ID of artist associated with the slot
 
                     return $er->createQueryBuilder('a')
                         ->leftJoin('a.slot', 's')
@@ -76,13 +80,14 @@ class SlotType extends AbstractType
             ]);
         }
 
-        // Ajoute le champ 'stage'
+        // Add the 'stage' field
         $builder->add('stage', EntityType::class, [
             'class' => Stage::class,
+            'label' => 'slot.form.stage',
             'choice_label' => 'name',
         ]);
 
-        // Ajoute un écouteur d'événements pour valider le formulaire lors de la soumission
+        // Add an event listener to validate the form on submission
         $builder->addEventListener(FormEvents::SUBMIT, [$this, 'validate']);
     }
 
@@ -90,7 +95,7 @@ class SlotType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Slot::class,
-            'isNew' => true, // Par défaut, c'est le formulaire "new"
+            'isNew' => true, // By default, it's the "new" form
         ]);
     }
 
@@ -99,74 +104,71 @@ class SlotType extends AbstractType
         $form = $event->getForm();
         $slot = $form->getData();
 
-        // Vérifie si l'heure est au bon format
+        // Check if the hour is in the correct format
         if (!preg_match('/^\d{2}:\d{2}-\d{2}:\d{2}$/', $slot->getHour())) {
-            // Ajoute une erreur de formulaire si le format de l'heure est incorrect
-            $form->addError(new FormError('L\'heure doit être au format hh:mm-hh:mm'));
+            // Add a form error if the hour format is incorrect
+            $form->addError(new FormError('The hour must be in the format hh:mm-hh:mm'));
         }
 
-        // Vérifie si c'est une nouvelle création
+        // Check if it's a new creation
         if ($form->getConfig()->getOption('isNew')) {
-            // Vérifie si l'association date et heure existe déjà dans un autre slot
+            // Check if the date and hour association already exists in another slot
             if (!$this->isDateAndHourUnique($slot)) {
-                // Ajoute une erreur de formulaire si l'association date et heure n'est pas unique
-                $form->addError(new FormError('Ce créneau existe déjà. Veuillez changer le jour ou l\'heure de passage.'));
+                // Add a form error if the date and hour association is not unique
+                $form->addError(new FormError('This slot already exists. Please change the day or time.'));
             }
-        } else { // Si c'est une édition
-            // Vérifie si l'association date et heure existe déjà dans un autre slot (sauf celui actuel)
+        } else { // If it's an edit
+            // Check if the date and hour association already exists in another slot (except the current one)
             if (!$this->isDateAndHourUniqueForEdit($slot)) {
-                // Ajoute une erreur de formulaire si l'association date et heure n'est pas unique
-                $form->addError(new FormError('Un autre créneau existe déjà avec cette date et cette heure.'));
+                // Add a form error if the date and hour association is not unique
+                $form->addError(new FormError('Another slot already exists with this date and time.'));
             }
         }
     }
 
     private function isDateAndHourUnique(Slot $slot): bool
     {
-        // Récupère la date et l'heure du slot
+        // Get the date and hour of the slot
         $date = $slot->getDate();
         $hour = $slot->getHour();
-    
-        // Récupère le repository Slot
+
+        // Get the Slot repository
         $repository = $this->entityManager->getRepository(Slot::class);
-    
-        // Recherche un slot avec la même date et heure
+
+        // Search for a slot with the same date and hour
         $existingSlot = $repository->findOneBy(['date' => $date, 'hour' => $hour]);
-    
-        // Si aucun slot avec la même date et heure n'est trouvé, l'association est unique
+
+        // If no slot with the same date and hour is found, the association is unique
         return $existingSlot === null;
     }
 
-
     private function isDateAndHourUniqueForEdit(Slot $slot): bool
     {
-        // Récupère la date et l'heure du slot
+        // Get the date and hour of the slot
         $date = $slot->getDate();
         $hour = $slot->getHour();
-        $slotId = $slot->getId(); // Récupérer l'ID du slot actuel
+        $slotId = $slot->getId(); // Get the ID of the current slot
 
-        // Récupère le repository Slot
+        // Get the Slot repository
         $repository = $this->entityManager->getRepository(Slot::class);
 
-        // Récupère tous les slots de la base de données, sauf celui actuel
+        // Get all slots from the database except the current one
         $slots = $repository->createQueryBuilder('s')
             ->where('s.id != :slotId')
             ->setParameter('slotId', $slotId)
             ->getQuery()
             ->getResult();
 
-        // Parcourt tous les slots
+        // Iterate through all slots
         foreach ($slots as $existingSlot) {
-            // Compare la date et l'heure de chaque slot avec celles du slot actuel
+            // Compare the date and hour of each slot with those of the current slot
             if ($existingSlot->getDate() == $date && $existingSlot->getHour() == $hour) {
-                // Si une correspondance est trouvée, l'association n'est pas unique
-
+                // If a match is found, the association is not unique
                 return false;
             }
         }
 
-        // Si aucune correspondance n'est trouvée, l'association est unique
+        // If no match is found, the association is unique
         return true;
     }
 }
-
