@@ -4,7 +4,6 @@ namespace App\Controller\Back;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,7 +35,6 @@ class SlotController extends AbstractController
         if (!$slot) {
             throw $this->createNotFoundException('Ce créneau n\'existe pas.');
         }
-
         return $this->render('back/slot/read.html.twig', [
             'slot' => $slot,
         ]);

@@ -31,9 +31,11 @@ class SlotType extends AbstractType
         // Ajoute les champs au formulaire
         $builder
             ->add('date', null, [
+                'label' => 'Date',
                 'widget' => 'single_text',
             ])
             ->add('day', ChoiceType::class, [
+                'label' => 'Jour',
                 'choices' => [
                     'Jour 1' => 'J1',
                     'Jour 2' => 'J2',
@@ -57,12 +59,14 @@ class SlotType extends AbstractType
                         ->leftJoin('a.slot', 's')
                         ->where('s.id IS NULL');
                 },
+                'label' => 'Artiste', // Ajout du label en français
                 'choice_label' => 'name',
             ]);
         } else {
             // Si c'est le formulaire "edit", affiche tous les artistes disponibles et sélectionne celui qui est déjà indiqué
             $builder->add('artist', EntityType::class, [
                 'class' => Artist::class,
+                'label' => 'Artiste', // Ajout du label en français
                 'choice_label' => 'name',
                 'query_builder' => function (EntityRepository $er) use ($options) {
                     $slot = $options['data']; // Récupérer les données du formulaire
@@ -126,13 +130,13 @@ class SlotType extends AbstractType
         // Récupère la date et l'heure du slot
         $date = $slot->getDate();
         $hour = $slot->getHour();
-    
+
         // Récupère le repository Slot
         $repository = $this->entityManager->getRepository(Slot::class);
-    
+
         // Recherche un slot avec la même date et heure
         $existingSlot = $repository->findOneBy(['date' => $date, 'hour' => $hour]);
-    
+
         // Si aucun slot avec la même date et heure n'est trouvé, l'association est unique
         return $existingSlot === null;
     }
@@ -169,4 +173,3 @@ class SlotType extends AbstractType
         return true;
     }
 }
-

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Back;
 
+use App\Entity\Slot;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -17,16 +18,17 @@ class StageController extends AbstractController
     #[Route('/back/stage', name: 'app_back_stage_browse', methods: ['GET'])]
     public function list(StageRepository $stageRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // Fetch stages with pagination
-        $query = $stageRepository->createQueryBuilder('s')
-            ->getQuery();
+        // Récupère tous les scènes triés par nom
+        $stageList = $stageRepository->findBy([], ['name' => 'ASC']);
 
+        // Paginer la requête
         $stageList = $paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1),
-            5 // limit per page
+            $stageList,
+            $request->query->getInt('page', 1), // Utilisez la requête au lieu de stageList
+            5 // Limite par page
         );
-        
+
+        // Rend la vue avec la liste paginée
         return $this->render('back/stage/browse.html.twig', [
             'stageList' => $stageList,
         ]);
@@ -75,13 +77,24 @@ class StageController extends AbstractController
     #[Route('/back/stage/{id<\d+>}/delete', name: 'app_back_stage_delete', methods: ['POST'])]
     public function delete(Request $request, Stage $stage, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$stage->getId(), $request->getPayload()->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $stage->getId(), $request->request->get('_token'))) {
+            // Récupérer tous les slots liés à la scène
+            $slotRepository = $entityManager->getRepository(Slot::class);
+            $slots = $slotRepository->findBy(['stage' => $stage]);
+
+            // Supprimer chaque slot lié à la scène
+            foreach ($slots as $slot) {
+                $entityManager->remove($slot);
+            }
+
+            // Supprimer la scène elle-même
             $entityManager->remove($stage);
             $entityManager->flush();
-            $this->addFlash('success', 'La scène a bien été supprimée.');
+
+            $this->addFlash('success', 'La scène et tous les slots associés ont été supprimés avec succès.');
         } else {
             $this->addFlash('error', 'La suppression de la scène a échoué. Le jeton CSRF est invalide.');
-        }      
+        }
 
         return $this->redirectToRoute('app_back_stage_browse', [], Response::HTTP_SEE_OTHER);
     }
