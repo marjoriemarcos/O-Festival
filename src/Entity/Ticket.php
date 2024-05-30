@@ -27,10 +27,10 @@ class Ticket
     #[Assert\GreaterThanOrEqual(0)]
     private ?float $price = null;
 
-    #[ORM\Column] 
+    #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(nullable: true)]   
+    #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(nullable: true)]
@@ -77,8 +77,6 @@ class Ticket
         return $interval->h / 24;
     }
 
-
-
     /**
      * Retun the title add fee + date start and date end
      *
@@ -86,13 +84,29 @@ class Ticket
      */
     public function setRealTitle(): string
     {
-        $startDateFormated = $this->formatedDateStart();
-        $endDateFormated = $this->formatedDateEnd();
+        // Récupère le titre, le tarif, la date de début et la date de fin du billet
+        $title = $this->getTitle();
+        $fee = $this->getFee();
+        $startAt = $this->getStartAt();
+        $endAt = $this->getEndAt();
 
-        $realTitle = $this->title . ' ' . $this->fee . ' - ' . $startDateFormated . ' - ' . $endDateFormated;
+        // Convertit les dates en chaînes de caractères au format 'jour/mois/année'
+        $startDateString = $startAt->format('d/m/Y');
+        $endDateString = $endAt->format('d/m/Y');
+
+        // Construit le titre réel en fonction des dates de début et de fin
+        if ($startAt == $endAt) {
+            // Si la date de début est égale à la date de fin, utilise un format de titre différent
+            $realTitle = "$title $fee le $startDateString";
+        } else {
+            // Sinon, utilise un format de titre indiquant la période
+            $realTitle = "$title $fee du $startDateString au $endDateString";
+        }
+
+        // Retourne le titre réel
         return $realTitle;
     }
-    
+
 
     public function getId(): ?int
     {

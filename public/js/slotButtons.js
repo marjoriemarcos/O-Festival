@@ -69,3 +69,6 @@ export const slotButtons = {
         });
     }
 };
+
+// Initialiser le module slotButtons
+slotButtons.init();

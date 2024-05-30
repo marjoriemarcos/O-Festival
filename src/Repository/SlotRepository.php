@@ -149,4 +149,23 @@ class SlotRepository extends ServiceEntityRepository
     ->getResult();
     }
 
+    /**
+     * Retrieves all slots sorted by date and hour with related entities preloaded.
+     *
+     * @return Slot[] The sorted slots with preloaded relations.
+     */
+    public function findAllSorted(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->select('s', 'artist', 'stage')
+            ->leftJoin('s.artist', 'artist')
+            ->leftJoin('s.stage', 'stage')
+            ->orderBy('s.date', 'ASC')
+            ->addOrderBy('s.hour', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    
 }

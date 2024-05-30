@@ -126,25 +126,17 @@ class SlotType extends AbstractType
         // Récupère la date et l'heure du slot
         $date = $slot->getDate();
         $hour = $slot->getHour();
-
+    
         // Récupère le repository Slot
         $repository = $this->entityManager->getRepository(Slot::class);
-
-        // Récupère tous les slots de la base de données
-        $slots = $repository->findAll();
-
-        // Parcourt tous les slots
-        foreach ($slots as $existingSlot) {
-            // Compare la date et l'heure de chaque slot avec celles du slot actuel
-            if ($existingSlot->getDate() == $date && $existingSlot->getHour() == $hour) {
-                // Si une correspondance est trouvée, l'association n'est pas unique
-                return false;
-            }
-        }
-
-        // Si aucune correspondance n'est trouvée, l'association est unique
-        return true;
+    
+        // Recherche un slot avec la même date et heure
+        $existingSlot = $repository->findOneBy(['date' => $date, 'hour' => $hour]);
+    
+        // Si aucun slot avec la même date et heure n'est trouvé, l'association est unique
+        return $existingSlot === null;
     }
+
 
     private function isDateAndHourUniqueForEdit(Slot $slot): bool
     {
@@ -177,3 +169,4 @@ class SlotType extends AbstractType
         return true;
     }
 }
+
