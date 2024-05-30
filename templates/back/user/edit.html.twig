@@ -1,0 +1,41 @@
+{# Étend la mise en page de base #}
+{% extends 'back/base.html.twig' %}
+
+{# Définit le bloc 'artistEditActive' pour indiquer que cette page est active dans le menu de navigation #}
+{% block artistEditActive %}active{% endblock %}
+
+{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block main %}
+    <div class="container">
+        {# Titre de la page #}
+        <h2 class="text-center my-5 fw-bold display-5">Éditer l'administrateur</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                {# Lien de retour aux détails de l'artiste #}
+                <a href="{{ path('app_back_user_browse') }}" class="btn btn-primary fw-bold mb-4">
+                    <i class="bi bi-arrow-left"></i>
+                    Retour sur la liste des administrateurs
+                </a>
+                {# Inclusion du fragment pour afficher les messages de succès ou d'erreur #}
+                {{ include('back/fragments/_message.html.twig') }}
+                <div class="card">
+                    {# En-tête de la carte avec le nom de l'artiste et un bouton pour supprimer l'artiste #}
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span class="fs-2 fw-bold">{{ user.firstname }} {{ user.lastname }}</span>
+                        <div class="d-flex">
+                            {# Formulaire pour supprimer l'administrateur #}
+                            <form method="post" action="{{ path('app_back_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Voulez-vous supprimer {{ user.firstname }}?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                                <button class="btn btn-danger bi bi-trash">{{ button_label|default('') }}</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        {# Inclusion du formulaire pour éditer l'artiste, avec un label de bouton personnalisé #}
+                        {{ include('back/fragments/_form.html.twig', {'user': user, 'button_label': 'Mettre à jour'}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
