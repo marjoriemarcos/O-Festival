@@ -61,8 +61,7 @@ class SlotType extends AbstractType
                     return $er->createQueryBuilder('a')
                         ->leftJoin('a.slot', 's')
                         ->where('s.id IS NULL');
-                },
-                'label' => 'Artiste', // Ajout du label en français
+                },                
                 'choice_label' => 'name',
             ]);
         } else {
@@ -110,7 +109,7 @@ class SlotType extends AbstractType
         // Check if the hour is in the correct format
         if (!preg_match('/^\d{2}:\d{2}-\d{2}:\d{2}$/', $slot->getHour())) {
             // Add a form error if the hour format is incorrect
-            $form->addError(new FormError('The hour must be in the format hh:mm-hh:mm'));
+            $form->addError(new FormError('L\'heure doit être au format hh:mm-hh:mm'));
         }
 
         // Check if it's a new creation
@@ -118,13 +117,13 @@ class SlotType extends AbstractType
             // Check if the date and hour association already exists in another slot
             if (!$this->isDateAndHourUnique($slot)) {
                 // Add a form error if the date and hour association is not unique
-                $form->addError(new FormError('This slot already exists. Please change the day or time.'));
+                $form->addError(new FormError('Ce créneau existe. Merci de choisir un autre horaire.'));
             }
         } else { // If it's an edit
             // Check if the date and hour association already exists in another slot (except the current one)
             if (!$this->isDateAndHourUniqueForEdit($slot)) {
                 // Add a form error if the date and hour association is not unique
-                $form->addError(new FormError('Another slot already exists with this date and time.'));
+                $form->addError(new FormError('Un créneau existe déjà à cette date et heure.'));
             }
         }
     }

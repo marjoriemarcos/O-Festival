@@ -39,8 +39,8 @@ slot:
         day2: "Jour 2"
         day3: "Jour 3"
         hour: "Horaire"
-        hourPlaceholder: "hh:mm - hh:mm"
         artist: "Artiste"
+        hourPlaceholder: "hh:mm-hh:mm"
         stage: "Scène"
 
 stage:
