@@ -2,7 +2,6 @@
 
 namespace App\Controller\Back;
 
-use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -18,21 +17,17 @@ class GenreController extends AbstractController
     #[Route('/back/genre', name: 'app_back_genre_browse', methods: ['GET'])]
     public function browse(GenreRepository $genreRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // Create QueryBuilder to fetch genres
-        $queryBuilder = $genreRepository->createQueryBuilder('g')
-            ->orderBy('g.name', 'ASC'); // Order by genre name
-    
-        // Get the query from QueryBuilder
-        $query = $queryBuilder->getQuery();
-    
-        // Paginate the query
+        // Récupère tous les genres triés par nom
+        $genreList = $genreRepository->findBy([], ['name' => 'ASC']);
+
+        // Paginer la requête
         $genreList = $paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1),
-            5 // Limit per page
+            $genreList,
+            $request->query->getInt('page', 1), // Utilisez la requête au lieu de genreList
+            5 // Limite par page
         );
     
-        // Render the template with the paginated list
+        // Rend la vue avec la liste paginée
         return $this->render('back/genre/browse.html.twig', [
             'genreList' => $genreList,
         ]);
@@ -91,5 +86,4 @@ class GenreController extends AbstractController
 
         return $this->redirectToRoute('app_back_genre_browse', [], Response::HTTP_SEE_OTHER);
     }
-   
 }
