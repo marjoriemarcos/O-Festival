@@ -274,9 +274,10 @@ body {
     margin-bottom: -2%;
 }
 
-.card-artist, .cart-title {
-    font-weight: 1200;
+.card-artist, .card-title {
+    font-weight: 900;
 }
+
 
 .white-background {
     background: white;
@@ -434,6 +435,7 @@ body {
 }    
 .artist-informations-description {
     height: 300px;
+    font-weight: 100;
     overflow-y: auto;
 } 
 .artist-informations-social-networks i{

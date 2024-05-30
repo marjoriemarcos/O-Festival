@@ -16,10 +16,10 @@
         <div class="col-lg-6">
             <div class="artist-informations p-4">
                 <!-- Artist's name -->
-                <h1 class="artist-informations-name display-8">{{ artist.name|upper }}</h1>
+                <h1 class="artist-informations-name roboto-font display-8">{{ artist.name|upper }}</h1>
 
                 <!-- Day and time of the artist's performance -->
-                <div class="artist-informations-show-day mb-2">
+                <div class="artist-informations-show-day roboto-font mb-2">
                     <h3>
                         <p>LE {{ artist.slot.getFormattedDate()|upper }}</p>
                     </h3>
@@ -29,7 +29,7 @@
                 </div>
 
                 <!-- Stage's name -->
-                <h3 class="artist-informations-stage h5 mb-3">{{ artist.slot.stage.name|upper }}</h3>
+                <h3 class="artist-informations-stage roboto-font h5 mb-3">{{ artist.slot.stage.name|upper }}</h3>
                 
 				<!-- Musical genres -->
 				{% if artist.genres|length > 0 %}
@@ -46,7 +46,7 @@
 
 
                 <!-- Artist's description -->
-                <div class="artist-informations-description my-4">
+                <div class="artist-informations-description open-font my-4">
                     <p>{{ artist.description }}</p>
                 </div>
 

@@ -73,7 +73,7 @@ export const slider = {
     // Start automatic scrolling
     startAutoSlide: function () {
         // Change slides every 3 seconds
-        slider.interval = setInterval(slider.showNext, 2000);
+        slider.interval = setInterval(slider.showNext, 3000);
     },
 
     // Stop automatic scrolling
