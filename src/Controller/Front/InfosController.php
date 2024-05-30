@@ -28,72 +28,75 @@ class InfosController extends AbstractController
     }
 
     /**
-     * Displays practical information including opening and closing dates, and handles the contact form submission.     *     * @param Request $request The HTTP request object.
-     * @param MailerInterface $mailer The mailer interface to send emails.
-     * @param TicketRepository $ticketRepository The repository to fetch ticket-related data.
-     * @param EntityManagerInterface $entityManager The entity manager to handle database operations.
-     *     * @return Response The HTTP response object containing the rendered view.
-     *     * @throws TransportExceptionInterface If there is an issue sending the email.
-     *     * @Route('/infos-pratiques', name='app_infos_browse')
-     */    #[Route('/infos-pratiques', name: 'app_infos_browse')]
-public function browse(Request $request, TicketRepository $ticketRepository, EntityManagerInterface
-                               $entityManager): Response
-{
-    // Récupérer les dates d'ouverture et de fermeture depuis la base de données
-    $openingClosingDates = $ticketRepository->findOpeningAndClosingDates();
-    $openingDate = new DateTimeImmutable($openingClosingDates['openingDate']);
-    $closingDate = new DateTimeImmutable($openingClosingDates['closingDate']);
+     * Displays practical information including opening and closing dates, and handles the contact form submission.
+     * *     * @param Request $request The HTTP request object.
+     * @param MailerInterface        $mailer           The mailer interface to send emails.
+     * @param TicketRepository       $ticketRepository The repository to fetch ticket-related data.
+     * @param EntityManagerInterface $entityManager    The entity manager to handle database operations.
+     *                                                 * @return Response The HTTP response object containing the
+     *                                                 rendered view.
+     *                                                 * @throws TransportExceptionInterface If there is an issue
+     *                                                 sending the email.
+     *                                                 * @Route('/infos-pratiques', name='app_infos_browse')
+     */
+    #[Route('/infos-pratiques', name: 'app_infos_browse')]
+    public function browse(Request $request, TicketRepository $ticketRepository, EntityManagerInterface $entityManager): Response
+    {
+        // Récupérer les dates d'ouverture et de fermeture depuis la base de données
+        $openingClosingDates = $ticketRepository->findOpeningAndClosingDates();
+        $openingDate = new DateTimeImmutable($openingClosingDates['openingDate']);
+        $closingDate = new DateTimeImmutable($openingClosingDates['closingDate']);
 
-    // Formater les dates en français
-    $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
-    $openingFormatted = $formatter->format($openingDate);
-    $closingFormatted = $formatter->format($closingDate);
+        // Formater les dates en français
+        $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
+        $openingFormatted = $formatter->format($openingDate);
+        $closingFormatted = $formatter->format($closingDate);
 
-    // Create the contact form
-    $data = new ContactDTO();
-    $form = $this->createForm(ContactType::class, $data);
-    $form->handleRequest($request);
+        // Create the contact form
+        $data = new ContactDTO();
+        $form = $this->createForm(ContactType::class, $data);
+        $form->handleRequest($request);
 
-    if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
-        // Create a new Contact entity and set its properties
-        $contact = new Contact();
-        $contact->setName($data->name);
-        $contact->setEmail($data->email);
-        $contact->setContent($data->content);
-        $contact->setTreatment('A traiter');
+            // Create a new Contact entity and set its properties
+            $contact = new Contact();
+            $contact->setName($data->name);
+            $contact->setEmail($data->email);
+            $contact->setContent($data->content);
+            $contact->setTreatment('A traiter');
 
-        // Persist the contact entity to the database
-        $entityManager->persist($contact);
-        $entityManager->flush();
+            // Persist the contact entity to the database
+            $entityManager->persist($contact);
+            $entityManager->flush();
 
-        // Send the contact email using the SendEmailService
-        $this->sendEmailService->sendContactEmail(
-            'ofestival2024@gmail.com',
-            $data->email,
-            'Information',
-            ['data' => $data]
-        );
+            // Send the contact email using the SendEmailService
+            $this->sendEmailService->sendContactEmail(
+                'ofestival2024@gmail.com',
+                $data->email,
+                'Information',
+                ['data' => $data]
+            );
 
-        $this->addFlash('success_contact', 'Votre message a bien été envoyé');
+            $this->addFlash('success_contact', 'Votre message a bien été envoyé');
 
-        // RENVOYER MAIL DE CONFIRMATION mais solution payante par mailgun
-        /*$this->sendEmailService->sendConfirmationEmail(                $data->email,                'ofestival2024@gmail.com',                'Confirmation de réception de votre message',                ['data' => $data]            );*/
-        return $this->redirectToRoute('app_infos_browse');
+            // RENVOYER MAIL DE CONFIRMATION mais solution payante par mailgun
+            $this->sendEmailService->sendConfirmationEmail($data->email, 'ofestival2024@gmail.com', 'Confirmation de réception de votre message', ['data' => $data]);
+            return $this->redirectToRoute('app_infos_browse');
 
-    } elseif ($form->isSubmitted() && !$form->isValid()) {
-        $this->addFlash('error_contact', 'Merci de vérifier le formulaire de contact');
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('error_contact', 'Merci de vérifier le formulaire de contact');
+        }
+
+
+        // Render the view with the contact form and the formatted dates
+        return $this->render('front/infos/browse.html.twig', [
+            'controller_name' => 'InfosController',
+            'form'            => $form->createView(),
+            'openingDate'     => $openingFormatted,
+            'closingDate'     => $closingFormatted,
+        ]);
     }
-
-
-    // Render the view with the contact form and the formatted dates
-    return $this->render('front/infos/browse.html.twig', [
-        'controller_name' => 'InfosController',
-        'form'            => $form->createView(),
-        'openingDate'     => $openingFormatted,
-        'closingDate'     => $closingFormatted,
-    ]);
-}
 
     #[Route('/infos-pratiques/send', name: 'app_infos_send_request', methods: 'POST')]
     public function sendRequest(): Response
