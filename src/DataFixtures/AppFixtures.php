@@ -117,7 +117,7 @@ class AppFixtures extends Fixture
         }
 
 
-        // Ticket 
+// Ticket 
 
         // Liste des fees et leurs prix
         $feeList = [
@@ -127,15 +127,14 @@ class AppFixtures extends Fixture
         ];
 
         // Dates du festival
-        $festivalStartDate = new DateTimeImmutable('2024-08-23');
-        $festivalMiddelDate = new DateTimeImmutable('2024-08-24');
-        $festivalEndDate = new DateTimeImmutable('2024-08-25');
+        $festivalStartDate = new DateTimeImmutable('2024-05-23');
+        $festivalEndDate = new DateTimeImmutable('2024-05-25');
 
         // Génération des tickets pour chaque jour (vendredi, samedi, dimanche)
         for ($i = 0; $i < 3; $i++) {
             foreach ($feeList as $fee => $price) {
                 $ticket = new Ticket();
-                $ticket->setTitle("Pass 1 JOUR $fee - " . $festivalStartDate->format('d/m/Y') . ' - ' . $festivalStartDate->format('d/m/Y')) ;
+                $ticket->setTitle("Pass 1 JOUR $fee - " . $festivalStartDate->format('d/m/Y'));
                 $ticket->setStartAt($festivalStartDate);
                 $ticket->setEndAt($festivalStartDate);
                 $ticket->setDuration(24);
@@ -149,29 +148,11 @@ class AppFixtures extends Fixture
             $festivalStartDate = $festivalStartDate->modify('+1 day');
         }
 
-        $festivalStartDate = new DateTimeImmutable('2024-08-23');
-        $festivalMiddelDate = new DateTimeImmutable('2024-08-24');
-        $festivalEndDate = new DateTimeImmutable('2024-08-25');
-        // Génération des tickets pour les 2 premier jours (vendredi et samedi)
-        foreach ($feeList as $fee => $price) {
-            $ticket = new Ticket();
-            $ticket->setTitle("Pass 2 JOURS $fee - " . $festivalStartDate->format('d/m/Y') . ' - ' . $festivalMiddelDate->format('d/m/Y'));
-            $ticket->setStartAt($festivalStartDate);
-            $ticket->setEndAt($festivalMiddelDate);
-            $ticket->setDuration(48);
-            $ticket->setFee($fee);
-            $ticket->setPrice($price * 1.75); // Prix plus cher pour 2 jours
-            $ticket->setQuantity(mt_rand(0, 30)); // Quantité aléatoire entre 0 et 30
-            $ticket->setCreatedAt(new DateTimeImmutable('now', $timezone));
-            // Persister le ticket
-            $manager->persist($ticket);
-        }
-
         // Génération des tickets pour les 2 derniers jours (samedi et dimanche)
         foreach ($feeList as $fee => $price) {
             $ticket = new Ticket();
-            $ticket->setTitle("Pass 2 JOURS $fee - " . $festivalMiddelDate->format('d/m/Y') . ' - ' . $festivalEndDate->format('d/m/Y'));
-            $ticket->setStartAt($festivalMiddelDate);
+            $ticket->setTitle("Pass 2 JOURS $fee du " . $festivalStartDate->format('d/m/Y') . ' au ' . $festivalEndDate->format('d/m/Y'));
+            $ticket->setStartAt($festivalEndDate->modify('-1 day'));
             $ticket->setEndAt($festivalEndDate);
             $ticket->setDuration(48);
             $ticket->setFee($fee);
@@ -182,11 +163,10 @@ class AppFixtures extends Fixture
             $manager->persist($ticket);
         }
 
-
         // Génération des tickets pour le premier et le dernier jour (vendredi et dimanche)
         foreach ($feeList as $fee => $price) {
             $ticket = new Ticket();
-            $ticket->setTitle("Pass 3 JOURS $fee - " . $festivalStartDate->format('d/m/Y') . ' - ' . $festivalEndDate->format('d/m/Y'));
+            $ticket->setTitle("Pass 3 JOURS $fee du " . $festivalStartDate->format('d/m/Y') . ' au ' . $festivalEndDate->format('d/m/Y'));
             $ticket->setStartAt($festivalEndDate->modify('-2 day'));
             $ticket->setEndAt($festivalEndDate);
             $ticket->setDuration(72);
@@ -200,6 +180,7 @@ class AppFixtures extends Fixture
 
         // Flush tous les tickets persistés pour les sauvegarder dans la base de données
         $manager->flush();
+
 
         // user
         $userList = [
