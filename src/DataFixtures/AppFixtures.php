@@ -134,7 +134,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 3; $i++) {
             foreach ($feeList as $fee => $price) {
                 $ticket = new Ticket();
-                $ticket->setTitle("Pass 1 JOUR $fee - " . $festivalStartDate->format('d/m/Y'));
+                $ticket->setTitle("Pass 1 JOUR $fee le " . $festivalStartDate->format('d/m/Y'));
                 $ticket->setStartAt($festivalStartDate);
                 $ticket->setEndAt($festivalStartDate);
                 $ticket->setDuration(24);
