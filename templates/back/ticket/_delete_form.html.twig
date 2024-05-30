@@ -1,4 +1,0 @@
-<form method="post" action="{{ path('app_ticket_delete_admin', {'id': ticket.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ce billet?');">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ticket.id) }}">
-    <button class="btn btn-danger bi bi-trash">{{ button_label|default('')}}</button>
-</form>

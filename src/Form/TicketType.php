@@ -24,7 +24,6 @@ class TicketType extends AbstractType
                     'Pass 3 JOURS' => 'Pass 3 JOURS',
                 ],
             ])
-            ->add('price')
             ->add('startAt', DateType::class, [
                 'input' => 'datetime_immutable',    
                 "attr" => [
@@ -34,10 +33,11 @@ class TicketType extends AbstractType
             ->add('endAt', DateType::class, [
                 'input' => 'datetime_immutable',
             ])
-            ->add('quantity', IntegerType::class, [
-                'attr' => [
-                    'min' => 0,
-                    'step' => 1,
+            ->add('duration', ChoiceType::class, [
+                'choices' => [
+                    '24 heures' => 24,
+                    '48 heures' => 48,
+                    '72 heures' => 72,
                 ],
             ])
             ->add('fee', ChoiceType::class, [
@@ -47,14 +47,13 @@ class TicketType extends AbstractType
                     'Tarif Enfant (-12 ans)' => 'Tarif Enfant (-12 ans)',
                 ],
             ])
-            ->add('duration', ChoiceType::class, [
-                'choices' => [
-                    '24 heures' => 24,
-                    '48 heures' => 48,
-                    '72 heures' => 72,
+            ->add('price')
+            ->add('quantity', IntegerType::class, [
+                'attr' => [
+                    'min' => 0,
+                    'step' => 1,
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

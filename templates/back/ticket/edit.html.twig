@@ -1,33 +1,41 @@
+{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-{% block title %}Éditer le billet {{ ticket.title }}{% endblock %}
+{# Définit le bloc 'ticketEditActive' pour indiquer que cette page est active dans le menu de navigation #}
+{% block ticketEditActive %}active{% endblock %}
 
+{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
 {% block main %}
-    <main>
-        <div class="container">
-            <h2 class="text-center my-5 fw-bold display-5">Éditer le billet</h2>
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <a href="{{ path('app_ticket_list_admin') }}" class="btn btn-primary fw-bold mb-4">
-                        <i class="bi bi-arrow-left"></i> Retour à la liste des billets
-                    </a>
+	<div class="container">
+		<h2 class="text-center my-5 fw-bold display-5">Éditer le billet</h2>
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				<!-- Bouton de retour aux détails du billet -->
+				<a href="{{ path('app_back_ticket_read', { id: ticket.id }) }}" class="btn btn-primary fw-bold mb-4">
+					<i class="bi bi-arrow-left"></i>
+					Retour au détails du billet
+				</a>
+                    {# Inclusion du fragment pour afficher les messages de succès ou d'erreur #}
+                    {{ include('back/fragments/_message.html.twig') }}
                     <div class="card">
-                        <!-- Card title -->
-                        <div class="card-header fs-2 fw-bold">
-                            <i class="bi bi-calendar3 me-2"></i>Éditer le billet
+                        <!-- Card header -->
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <!-- Titre du billet -->
+                            <span class="fs-2 fw-bold">{{ ticket.title }}</span>
+                            <!-- Bouton de suppression -->
+                            <div class="d-flex">
+                                <form method="post" action="{{ path('app_back_ticket_delete', {'id': ticket.id}) }}" onsubmit="return confirm('Voulez-vous supprimer {{ ticket.title}}?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ticket.id) }}">
+                                    <button class="btn btn-danger bi bi-trash">{{ button_label|default('')}}</button>
+                                </form>
+                            </div>
                         </div>
                         <div class="card-body">
-                            <!-- Include the form for editing a ticket -->
-                            {{ include('back/ticket/_form.html.twig', {'ticket': ticket, 'button_label': 'Mettre à jour'}) }}
-                        </div>
-                        <!-- Card footer (containing buttons) -->
-                        <div class="card-footer">
-                            <!-- Include the form for deleting a ticket -->
-                            {{ include('back/ticket/_delete_form.html.twig', {'ticket': ticket, 'button_label': 'Supprimer'}) }}
+                            <!-- Inclusion du formulaire pour éditer le billet -->
+                            {{ include('back/fragments/_form.html.twig', {'ticket': ticket, 'button_label': 'Mettre à jour'}) }}
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </main>
+			</div>
+		</div>
+	</div>
 {% endblock %}
