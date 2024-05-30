@@ -95,7 +95,6 @@ class SlotController extends AbstractController
     #[Route('/back/slot/{id<\d+>}/delete', name: 'app_back_slot_delete', methods: ['POST'])]
     public function delete(Request $request, Slot $slot, EntityManagerInterface $entityManager): Response
     {
-        var_dump($request->request->all());
         if ($this->isCsrfTokenValid('delete' . $slot->getId(), $request->request->get('_token'))) {
             $entityManager->remove($slot);
             $entityManager->flush();

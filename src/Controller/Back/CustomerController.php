@@ -59,7 +59,6 @@ class CustomerController extends AbstractController
     #[Route('/back/customer/{id<\d+>}/delete', name: 'app_back_customer_delete', methods: ['POST'])]
     public function delete(Request $request, Customer $customer, EntityManagerInterface $entityManager): Response
     {
-        var_dump($request->request->all());
         if ($this->isCsrfTokenValid('delete' . $customer->getId(), $request->request->get('_token'))) {
             $entityManager->remove($customer);
             $entityManager->flush();

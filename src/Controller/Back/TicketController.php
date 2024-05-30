@@ -103,7 +103,6 @@ class TicketController extends AbstractController
     #[Route('/back/ticket/{id<\d+>}/delete', name: 'app_back_ticket_delete', methods: ['POST'])]
     public function delete(Request $request, Ticket $ticket, EntityManagerInterface $entityManager): Response
     {
-        var_dump($request->request->all());
         if ($this->isCsrfTokenValid('delete' . $ticket->getId(), $request->request->get('_token'))) {
             $entityManager->remove($ticket);
             $entityManager->flush();
