@@ -49,7 +49,7 @@ class AppFixtures extends Fixture
         // Artiste
         $artistList = [];
         $selectedGenres = (array) array_rand($genreList, 5);
-        
+
         for ($i = 0; $i < 20; $i++) {
             $artist = (new Artist())
                 ->setName($faker->unique()->singerName())
@@ -57,12 +57,12 @@ class AppFixtures extends Fixture
                 ->setPicture($faker->unique()->singerPicture())
                 ->setVideo('https://www.youtube.com/embed/UvEwfQvVSGg?si=ZSXsQd_1zxTxu6jX')
                 ->setCreatedAt(new DateTimeImmutable('now', $timezone));
-            
+
             for ($j = 1; $j <= mt_rand(1, 2); $j++) {
                 // Associer un des 4 genres sélectionnés aléatoirement
                 $artist->addGenre($genreList[$selectedGenres[array_rand($selectedGenres)]]);
             }
-            
+
             $manager->persist($artist);
             $artistList[] = $artist;
         }
@@ -117,7 +117,7 @@ class AppFixtures extends Fixture
         }
 
 
-// Ticket 
+        // Ticket 
 
         // Liste des fees et leurs prix
         $feeList = [
@@ -149,10 +149,11 @@ class AppFixtures extends Fixture
         }
 
         // Génération des tickets pour les 2 derniers jours (samedi et dimanche)
+        $twoDayStartDate = $festivalEndDate->modify('-1 day');
         foreach ($feeList as $fee => $price) {
             $ticket = new Ticket();
-            $ticket->setTitle("Pass 2 JOURS $fee du " . $festivalStartDate->format('d/m/Y') . ' au ' . $festivalEndDate->format('d/m/Y'));
-            $ticket->setStartAt($festivalEndDate->modify('-1 day'));
+            $ticket->setTitle("Pass 2 JOURS $fee du " . $twoDayStartDate->format('d/m/Y') . ' au ' . $festivalEndDate->format('d/m/Y'));
+            $ticket->setStartAt($twoDayStartDate);
             $ticket->setEndAt($festivalEndDate);
             $ticket->setDuration(48);
             $ticket->setFee($fee);
@@ -164,10 +165,11 @@ class AppFixtures extends Fixture
         }
 
         // Génération des tickets pour le premier et le dernier jour (vendredi et dimanche)
+        $threeDayStartDate = $festivalEndDate->modify('-2 days');
         foreach ($feeList as $fee => $price) {
             $ticket = new Ticket();
-            $ticket->setTitle("Pass 3 JOURS $fee du " . $festivalStartDate->format('d/m/Y') . ' au ' . $festivalEndDate->format('d/m/Y'));
-            $ticket->setStartAt($festivalEndDate->modify('-2 day'));
+            $ticket->setTitle("Pass 3 JOURS $fee du " . $threeDayStartDate->format('d/m/Y') . ' au ' . $festivalEndDate->format('d/m/Y'));
+            $ticket->setStartAt($threeDayStartDate);
             $ticket->setEndAt($festivalEndDate);
             $ticket->setDuration(72);
             $ticket->setFee($fee);
