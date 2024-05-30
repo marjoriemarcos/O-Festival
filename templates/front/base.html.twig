@@ -41,6 +41,11 @@
                 <li class="nav-item me-5">
                     <a href="{{ path('app_infos_browse') }}" class="nav-link">Infos pratiques</a>
                 </li>
+                <li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_back_home') }}" class="nav-link">Back-office</a>
+                    {% endif %}
+                </li>
             </ul>
             <div class="hamburger me-0">
                 <span class="bar"></span>
