@@ -48,7 +48,7 @@
                                                 <td>{{ contact.content | slice(0, 50) }}</td>
                                                 <td>
                                                     {# Formulaire pour changer le statut du traitement du message #}
-                                                    <form method="POST" action="{{ path('app_contact_edit_admin', {'id': contact.id}) }}">
+                                                    <form method="POST" action="{{ path('app_back_contact_edit', {'id': contact.id}) }}">
                                                         <select name="treatment">
                                                             <option value="A traiter" {% if contact.treatment == 'A traiter' %} selected {% endif %}>A traiter</option>
                                                             <option value="Traité" {% if contact.treatment == 'Traité' %} selected {% endif %}>Traité</option>
