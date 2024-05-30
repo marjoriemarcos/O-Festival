@@ -18,23 +18,17 @@ class CustomerController extends AbstractController
     #[Route('/back/customer', name: 'app_back_customer_browse', methods: ['GET'])]
     public function browse(CustomerRepository $customerRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // Create QueryBuilder to fetch customers and their tickets
-        $queryBuilder = $customerRepository->createQueryBuilder('c')
-            ->select('c, t') // Select customers and their tickets
-            ->leftJoin('c.tickets', 't') // Join tickets
-            ->orderBy('c.lastname', 'ASC'); // Order by customer lastname
-    
-        // Get the query from QueryBuilder
-        $query = $queryBuilder->getQuery();
-    
-        // Paginate the query
+        // Récupère tous les clients triés par nom
+        $customerList = $customerRepository->findBy([], ['lastname' => 'ASC']);
+
+        // Paginer la requête
         $customerList = $paginator->paginate(
-            $query, 
-            $request->query->getInt('page', 1),
-            5 // Limit per page
+            $customerList,
+            $request->query->getInt('page', 1), // Utilisez la requête au lieu de genreList
+            5 // Limite par page
         );
     
-        // Render the template with the paginated list
+        // Rend la vue avec la liste paginée
         return $this->render('back/customer/browse.html.twig', [
             'customerList' => $customerList,
         ]);
@@ -43,10 +37,10 @@ class CustomerController extends AbstractController
     #[Route('/back/customer/{id}', name: 'app_back_customer_read', methods: ['GET'])]
     public function read(int $id, CustomerRepository $customerRepository): Response
     {
-        // Fetch the customer by its ID
+        // Récupère le client par son ID
         $customer = $customerRepository->find($id);
         
-        // Check if the customer exists
+        // Vérifie si le client existe
         if (!$customer) {
             throw $this->createNotFoundException('The customer does not exist.');
         }
@@ -74,16 +68,17 @@ class CustomerController extends AbstractController
 
     #[Route('/back/customer-api', name: 'app_back_customer_browse_api', methods: ['GET'])]
     public function browseApi(weezevent $weezevent)
-    {   // Va chercher la liste des commandes des client
+    {   
+        // Va chercher la liste des commandes des clients
         $content = $weezevent->fetchCustomerList();
         $customerList = $content['participants'];
 
-        // Va chercher la liste de type de billets
+        // Va chercher la liste de types de billets
         $ticketList = $weezevent->fetchTicketList();
 
         return $this->render('back/customer/browse.api.html.twig', [
-        'customerList' => $customerList,
-        'ticketList' => $ticketList,
+            'customerList' => $customerList,
+            'ticketList' => $ticketList,
         ]);
     
     }
