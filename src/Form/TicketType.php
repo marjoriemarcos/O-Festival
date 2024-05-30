@@ -18,50 +18,47 @@ class TicketType extends AbstractType
         $builder
         ->add('title', ChoiceType::class, [
             'choices' => [
-                'Pass 1 JOUR' => 'Pass 1 JOUR',
-                'Pass 2 JOURS' => 'Pass 2 JOURS',
-                'Pass 3 JOURS' => 'Pass 3 JOURS',
+                'ticket.form.title1Day' => 'Pass 1 JOUR',
+                'ticket.form.title2Day' => 'Pass 2 JOURS',
+                'ticket.form.title3Day' => 'Pass 3 JOURS',
             ],
-            'label' => 'Type de Pass',
+            'label' => 'ticket.form.title',
         ])
         ->add('startAt', DateType::class, [
             'input' => 'datetime_immutable',
             'widget' => 'single_text',
-            'label' => 'Date de début',
-            'attr' => [
-                'placeholder' => 'Ex : Pass 1 JOUR',
-            ],
+            'label' => 'ticket.form.startAt',
         ])
         ->add('endAt', DateType::class, [
             'input' => 'datetime_immutable',
             'widget' => 'single_text',
-            'label' => 'Date de fin',
+            'label' => 'ticket.form.endAt',
         ])
         ->add('duration', ChoiceType::class, [
             'choices' => [
-                '24 heures' => 24,
-                '48 heures' => 48,
-                '72 heures' => 72,
+                'ticket.form.duration24' => 24,
+                'ticket.form.duration48' => 48,
+                'ticket.form.duration72' => 72,
             ],
-            'label' => 'Durée',
+            'label' => 'ticket.form.duration',
         ])
         ->add('fee', ChoiceType::class, [
             'choices' => [
-                'Plein Tarif' => 'Plein Tarif',
-                'Tarif Étudiant' => 'Tarif Étudiant',
-                'Tarif Enfant (-12 ans)' => 'Tarif Enfant (-12 ans)',
+                'ticket.form.fullFee' => 'Plein Tarif',
+                'ticket.form.studentFee' => 'Tarif Étudiant',
+                'ticket.form.childFee' => 'Tarif Enfant (-12 ans)',
             ],
-            'label' => 'Tarif',
+            'label' => 'ticket.form.fee',
         ])
         ->add('price', NumberType::class, [
-            'label' => 'Prix (€)',
+            'label' => 'ticket.form.price',
             'scale' => 2,
             'attr' => [
-                'placeholder' => 'Ex : 20.00',
+                'placeholder' => 'ticket.form.pricePlaceholder',
             ],
         ])
         ->add('quantity', IntegerType::class, [
-            'label' => 'Quantité',
+            'label' => 'ticket.form.quantity',
             'attr' => [
                 'min' => 0,
                 'step' => 1,

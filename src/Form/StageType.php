@@ -12,9 +12,9 @@ class StageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('name', null, [
-            'label' => 'Nom', 
-        ]);
+            ->add('name', null, [
+                    'label' => 'stage.form.name',
+                ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

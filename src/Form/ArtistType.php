@@ -6,9 +6,9 @@ use App\Entity\Artist;
 use App\Entity\Genre;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 class ArtistType extends AbstractType
 {
@@ -16,53 +16,54 @@ class ArtistType extends AbstractType
     {
         $builder
             ->add('name', null, [
-                'label' => 'Nom',
+                'label' => 'artist.form.name',
             ])
             ->add('description', null, [
-                'label' => 'Description',
+                'label' => 'artist.form.description',
             ])
             ->add('picture', UrlType::class, [
-                'label' => 'Image (URL)',
+                'label' => 'artist.form.picture',
             ])
             ->add('video', UrlType::class, [
-                'label' => 'Vidéo (URL)',
+                'label' => 'artist.form.video',
                 'required' => false,
             ])
             ->add('website', UrlType::class, [
-                'label' => 'Site Web (URL)',
+                'label' => 'artist.form.website',
                 'required' => false,
             ])
             ->add('facebook', UrlType::class, [
-                'label' => 'Facebook (URL)',
+                'label' => 'artist.form.facebook',
                 'required' => false,
             ])
             ->add('twitter', UrlType::class, [
-                'label' => 'Twitter (URL)',
+                'label' => 'artist.form.twitter',
                 'required' => false,
             ])
             ->add('instagram', UrlType::class, [
-                'label' => 'Instagram (URL)',
+                'label' => 'artist.form.instagram',
                 'required' => false,
             ])
             ->add('spotify', UrlType::class, [
-                'label' => 'Spotify (URL)',
+                'label' => 'artist.form.spotify',
                 'required' => false,
             ])
             ->add('snapchat', UrlType::class, [
-                'label' => 'Snapchat (URL)',
+                'label' => 'artist.form.snapchat',
                 'required' => false,
             ])
             ->add('tiktok', UrlType::class, [
-                'label' => 'TikTok (URL)',
+                'label' => 'artist.form.tiktok',
                 'required' => false,
             ])
             ->add('genres', EntityType::class, [
-                'label' => 'Genres',
+
                 'class' => Genre::class,
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true,
                 'by_reference' => false,
+                'label' => 'artist.form.genres',
             ]);
     }
 

@@ -13,8 +13,10 @@ class GenreType extends AbstractType
     {
         $builder
             ->add('name', null, [
-                'label' => 'Nom', 
-            ]);
+                'label' => 'genre.form.name',
+            ])           
+        ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void
