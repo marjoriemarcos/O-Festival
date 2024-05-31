@@ -1,0 +1,29 @@
+{# Étend la mise en page de base #}
+{% extends 'back/base.html.twig' %}
+
+{# Définit le bloc 'sponsorAddActive' pour indiquer que cette page est active dans le menu de navigation #}
+{% block sponsorAddActive %}active{% endblock %}
+
+{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block main %}
+       <div class="container">
+            <h2 class="text-center my-5 fw-bold display-5">Ajouter un nouveau partenaire</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <!-- Bouton de retour à la liste des partenaires -->
+                    <a href="{{ path('app_back_sponsor_browse') }}" class="btn btn-primary fw-bold mb-4">
+                        <i class="bi bi-arrow-left"></i> Retour à la liste des partenaires
+                    </a>
+                    <div class="card">
+                        <div class="card-header fs-2 fw-bold">
+                            <i class="bi bi-person-plus me-2"></i>Nouveau partenaire
+                        </div>
+                        <div class="card-body">
+                            <!-- Inclusion du formulaire pour créer une nouvelle partenaire -->
+                            {{ include('back/fragments/_form.html.twig', {'button_label': 'Créer le partenaire'}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
