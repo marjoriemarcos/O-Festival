@@ -99,7 +99,7 @@ class TicketType extends AbstractType
         );
     
         // Vérifier si des tickets existent
-        if (!empty($existingTickets)) {
+        if (empty($existingTickets)) {
             $event->getForm()->addError(new FormError('Il y a déjà un billet avec ce titre, ces dates, et ce tarif.'));
         }
         // Vérifie si la date de début est bien inférieure à la date de fin
