@@ -81,7 +81,11 @@ class InfosController extends AbstractController
             $this->addFlash('success_contact', 'Votre message a bien été envoyé');
 
             // RENVOYER MAIL DE CONFIRMATION mais solution payante par mailgun
-            $this->sendEmailService->sendConfirmationEmail($data->email, 'ofestival2024@gmail.com', 'Confirmation de réception de votre message', ['data' => $data]);
+            $this->sendEmailService->sendConfirmationEmail(
+                $data->email,
+                'ofestival2024@gmail.com',
+                'Confirmation de réception de votre message',
+                ['data' => $data]);
             return $this->redirectToRoute('app_infos_browse');
 
         } elseif ($form->isSubmitted() && !$form->isValid()) {
