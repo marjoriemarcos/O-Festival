@@ -377,7 +377,7 @@ body {
 }
 
 .ticket-card-info-festival{
-    min-height: 235px;
+    min-height: 250px;
 }
 .ticket-card-content .btn{
     width: 75%;
@@ -546,6 +546,9 @@ body {
     }
     .card p {
         font-size: 1rem;
+    }
+    .ticket-card-info-festival{
+        min-height: 175px;
     }
 }
 
