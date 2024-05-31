@@ -1,119 +1,123 @@
 {% extends 'front/base.html.twig' %}
 
-{% block ticketingActive %}active
-{% endblock %}
+{% block ticketActive %}light-yellow-txt{% endblock %}
 
 {% block title %}Billetterie{% endblock %}
 {% block main %}
 
-	<div class="container-ticketing medium-blue-bg">
-		<h2 class="page-title adumu-font">Billetterie</h2>
-		<div class="ticket-list row justify-content-around mb-4">
+    <div class="container-ticketing medium-blue-bg">
+        <h2 class="page-title adumu-font">Billetterie</h2>
+        <div class="ticket-list row justify-content-around mb-4">
 
-			{% for pass in passes %}
-				{% if pass.data is not empty %}
-					<!-- Div pour chaque type de passe -->
-					<div
-						class="ticket-card col-lg-4 mt-5">
-						<!-- Image de la carte -->
-						<div class="ticket-card-image card img-zoom">
-							<img src="{{ asset('images/' ~ pass.image) }}" class="card-img-top" alt="">
-							<div class="overlay-ticketing"></div>
-							<div class="card-img-overlay d-flex justify-content-center align-items-center">
-								<h3 class="card-title text-white mb-0">{{ pass.title }}</h3>
-							</div>
-						</div>
+            {% for pass in passes %}
+                {% if pass.data is not empty %}
+                    <!-- Div pour chaque type de passe -->
+                    <div class="ticket-card col-lg-4 mt-5">
+                        <!-- Image de la carte -->
+                        <div class="ticket-card-image card img-zoom">
+                            <img src="{{ asset('images/' ~ pass.image) }}" class="card-img-top" alt="">
+                            <div class="overlay-ticketing"></div>
+                            <div class="card-img-overlay d-flex justify-content-center align-items-center">
+                                <h3 class="card-title text-white mb-0">{{ pass.title }}</h3>
+                            </div>
+                        </div>
 
-						<!-- Contenu de la carte de billet -->
-						<div class="ticket-card-content open-font dark-blue-bg mx-auto pb-3 text-white">
-							<div
-								class="row align-items-center">
-								<!-- Afficher les dates de début et de fin différents -->
-								<div
-									class="col-md-12 text-center mt-3 pb-3">
-									<!-- Initialisation des combinaisons affichées -->
-									{% set displayedCombinations = [] %}
-									{% for data in pass.data %}
-										<!-- Formatage des dates de début et de fin -->
-										{% set startFormatted = data.formattedStartAt %}
-										{% set endFormatted = data.formattedEndAt %}
-										{% set combination = startFormatted ~ ' - ' ~ endFormatted %}
+                        <!-- Contenu de la carte de billet -->
+                        <div class="ticket-card-content open-font dark-blue-bg mx-auto pb-3 text-white">
+                            <div class="row align-items-center">
+                                <!-- Afficher les dates de début et de fin différents -->
+                                <div class="col-md-12 text-center mt-3 pb-3">
+                                    <!-- Initialisation des combinaisons affichées -->
+                                    {% set displayedCombinations = [] %}
+                                    {% for data in pass.data %}
+                                        <!-- Formatage des dates de début et de fin -->
+                                        {% set startFormatted = data.formattedStartAt %}
+                                        {% set endFormatted = data.formattedEndAt %}
+                                        {% set combination = startFormatted ~ ' - ' ~ endFormatted %}
 
-										<!-- Vérification pour éviter les doublons -->
-										{% if combination not in displayedCombinations %}
-											<h3>
-												<!-- Afficher la date si début et fin sont identiques -->
-												{% if data.startAt == data.endAt %}
-													{{ startFormatted }}<br>
-													<!-- Afficher l'intervalle de dates si différentes -->
-												{% else %}
-													Du
-													{{ startFormatted }}
-													au
-													{{ endFormatted }}<br><br>
-												{% endif %}
-											</h3>
-											<!-- Ajout de la combinaison à la liste des combinaisons affichées -->
-											{% set displayedCombinations = displayedCombinations|merge([combination]) %}
-										{% endif %}
-									{% endfor %}
-								</div>
+                                        <!-- Vérification pour éviter les doublons -->
+                                        {% if combination not in displayedCombinations %}
+                                            <h3>
+                                                <!-- Afficher la date si début et fin sont identiques -->
+                                                {% if data.startAt == data.endAt %}
+                                                    {{ startFormatted }}<br>
+                                                    <!-- Afficher l'intervalle de dates si différentes -->
+                                                {% else %}
+                                                    Du
+                                                    {{ startFormatted }}
+                                                    au
+                                                    {{ endFormatted }}<br><br>
+                                                {% endif %}
+                                            </h3>
+                                            <!-- Ajout de la combinaison à la liste des combinaisons affichées -->
+                                            {% set displayedCombinations = displayedCombinations|merge([combination]) %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
 
-								<!-- Afficher les tarifs différents avec leurs prix associés -->
-								<div class="ticket-card-info-festival text-center mt-3 px-4">
-									{% set displayedFees = [] %}
-									{% for p in pass.data %}
-										<!-- Vérification pour éviter les doublons -->
-										{% if p.fee not in displayedFees %}
-											<div class="row mb-3 align-items-center">
-												<div
-													class="col-md-6 text-right">
-													<!-- Afficher le nom du tarif -->
-													<span class="ticket-card-info-festival-goer">{{ p.fee }}:</span>
-												</div>
-												<div
-													class="col-md-6">
-													<!-- Afficher le prix du tarif -->
-													<span
-														class="ticket-card-info-price">
+                                <!-- Afficher les tarifs différents avec leurs prix associés -->
+                                <div class="ticket-card-info-festival text-center mt-3 px-4">
+                                    {% set displayedFees = [] %}
+                                    {% for p in pass.data %}
+                                        <!-- Vérification pour éviter les doublons -->
+                                        {% if p.fee not in displayedFees %}
+                                            <div class="row mb-3 align-items-center">
+                                                <div class="col-md-6 text-right">
+                                                    <!-- Afficher le nom du tarif -->
+                                                    <span class="ticket-card-info-festival-goer">{{ p.fee }}:</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <!-- Afficher le prix du tarif -->
+                                                    <span class="ticket-card-info-price">
 														<!-- Afficher "GRATUIT" si le prix est 0 -->
 														{% if p.price == 0 %}
-															GRATUIT
-														{% else %}
-															{{ p.price }}€
-														{% endif %}
+                                                            GRATUIT
+                                                        {% else %}
+                                                            {{ p.price }}€
+                                                        {% endif %}
 													</span>
-												</div>
-											</div>
-											<!-- Ajout du tarif à la liste des tarifs affichés -->
-											{% set displayedFees = displayedFees|merge([p.fee]) %}
-										{% endif %}
-									{% endfor %}
-								</div>
+                                                </div>
+                                            </div>
+                                            <!-- Ajout du tarif à la liste des tarifs affichés -->
+                                            {% set displayedFees = displayedFees|merge([p.fee]) %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
 
-								<!-- Ticket Button -->
-								{{ include('front/fragments/_ticket_button.html.twig', {'button_label': 'Acheter maintenant', 'anchor': 'weezevent'}) }}
-							</div>
-						</div>
-					</div>
-				{% endif %}
-			{% endfor %}
-		</div>
-		<!-- Weezevent Ticketing Service -->
-		<div id="weezevent" class="weezevent container-fluid gx-0">
-			<div
-				class=" medium-blue-bg py-3">
+                                <!-- Ticket Button -->
+                                {{ include('front/fragments/_ticket_button.html.twig', {'button_label': 'Acheter maintenant', 'anchor': 'weezevent'}) }}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <!-- Weezevent Ticketing Service -->
+        <div id="weezevent" class="weezevent container-fluid gx-0">
+            <div class=" medium-blue-bg py-3">
 
-				<!-- Weezevent URL -->
-				<a title="Logiciel billetterie en ligne" href="https://widget.weezevent.com/ticket/E1146829/?code=68626&locale=fr-FR&width_auto=1&color_primary=0032FA" class="weezevent-widget-integration btn btn-primary btn-block" data-src="https://widget.weezevent.com/ticket/E1146829/?code=68626&locale=fr-FR&width_auto=1&color_primary=0032FA" data-width="100%" data-height="600" data-id="1146829" data-resize="0" data-width_auto="0" data-noscroll="0" data-use-container="yes" data-type="neo" target="_blank">Billetterie
-																																																																																																																																																                        Weezevent</a>
-			</div>
-		</div>
-	</div>
+                <!-- Weezevent URL -->
+                <a title="Logiciel billetterie en ligne"
+                   href="https://widget.weezevent.com/ticket/E1146829/?code=68626&locale=fr-FR&width_auto=1&color_primary=0032FA"
+                   class="weezevent-widget-integration btn btn-primary btn-block"
+                   data-src="https://widget.weezevent.com/ticket/E1146829/?code=68626&locale=fr-FR&width_auto=1&color_primary=0032FA"
+                   data-width="100%"
+                   data-height="600"
+                   data-id="1146829"
+                   data-resize="0"
+                   data-width_auto="0"
+                   data-noscroll="0"
+                   data-use-container="yes"
+                   data-type="neo"
+                   target="_blank">Billetterie
+                                   Weezevent</a>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
 {% block javascripts %}
-	{{ parent() }}
-	<script src="https://widget.weezevent.com/weez.js" type="text/javascript"></script>
+    {{ parent() }}
+    <script src="https://widget.weezevent.com/weez.js" type="text/javascript"></script>
 {% endblock %}

@@ -72,7 +72,9 @@
 
 							<!-- Dropdown Menu for Slots -->
 							<li class="nav-item dropdown mx-4">
-								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Créneaux</a>
+								<a class="nav-link dropdown-toggle fs-4 fw-bold {% block slotActive %}{% endblock
+								%}" data-bs-toggle="dropdown"
+								   role="button" aria-haspopup="true" aria-expanded="false">Créneaux</a>
 								<div class="dropdown-menu">
 									<a class="dropdown-item fs-4" href="{{path('app_back_slot_browse')}}">Liste</a>
 									<a class="dropdown-item fs-4" href="{{path('app_back_slot_add')}}">Ajouter</a>
@@ -80,15 +82,20 @@
 							</li>
 							<!-- Dropdown Menu for Artists -->
 							<li class="nav-item dropdown mx-4">
-								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Artiste</a>
+								<a class="nav-link dropdown-toggle fs-4 fw-bold {% block artistActive %}{% endblock %}" data-bs-toggle="dropdown" href="#"
+								   role="button" aria-haspopup="true" aria-expanded="false">Artiste</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item fs-4" href="{{path('app_back_artist_browse')}}">Liste</a>
-									<a class="dropdown-item fs-4" href="{{path('app_back_artist_add')}}">Ajouter</a>
+									<a class="dropdown-item fs-4 "
+									   href="{{path('app_back_artist_browse')}}">Liste</a>
+									<a class="dropdown-item fs-4"
+									   href="{{path('app_back_artist_add')}}">Ajouter</a>
 								</div>
 							</li>
 							<!-- Dropdown Menu for Genres -->
 							<li class="nav-item dropdown mx-4">
-								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Genre</a>
+								<a class="nav-link dropdown-toggle fs-4 fw-bold {% block genreActive %}{% endblock %}"
+								   data-bs-toggle="dropdown" href="#"
+								   role="button" aria-haspopup="true" aria-expanded="false">Genre</a>
 								<div class="dropdown-menu">
 									<a class="dropdown-item fs-4" href="{{path('app_back_genre_browse')}}">Liste</a>
 									<a class="dropdown-item fs-4" href="{{path('app_back_genre_add')}}">Ajouter</a>
@@ -96,7 +103,8 @@
 							</li>
 							<!-- Dropdown Menu for Stages -->
 							<li class="nav-item dropdown mx-4">
-								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Scène</a>
+								<a class="nav-link dropdown-toggle fs-4 fw-bold {% block stageActive %}{% endblock %}" data-bs-toggle="dropdown" href="#"
+								   role="button" aria-haspopup="true" aria-expanded="false">Scène</a>
 								<div class="dropdown-menu">
 									<a class="dropdown-item fs-4" href="{{path('app_back_stage_browse')}}">Liste</a>
 									<a class="dropdown-item fs-4" href="{{path('app_back_stage_add')}}">Ajouter</a>
@@ -104,7 +112,9 @@
 							</li>
 							<!-- Dropdown Menu for Tickets -->
 							<li class="nav-item dropdown mx-4">
-								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Billet</a>
+								<a class="nav-link dropdown-toggle fs-4 fw-bold {% block ticketActive %}{% endblock %}"
+								   data-bs-toggle="dropdown" href="#"
+								   role="button" aria-haspopup="true" aria-expanded="false">Billet</a>
 								<div class="dropdown-menu">
 									<a class="dropdown-item fs-4" href="{{path('app_back_ticket_browse')}}">Liste</a>
 									<a class="dropdown-item fs-4" href="{{path('app_back_ticket_add')}}">Ajouter</a>
@@ -112,7 +122,9 @@
 							</li>
 							<!-- Dropdown Menu for Customers -->
 							<li class="nav-item dropdown mx-4">
-								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Clients</a>
+								<a class="nav-link dropdown-toggle fs-4 fw-bold {% block customerActive %}{% endblock
+								%}" data-bs-toggle="dropdown" href="#"
+								   role="button" aria-haspopup="true" aria-expanded="false">Clients</a>
 								<div class="dropdown-menu">
 									<a class="dropdown-item fs-4" href="{{path('app_back_customer_browse')}}">Liste</a>
 									<a class="dropdown-item fs-4" href="{{path('app_back_contact_browse') }}">Messages</a>
@@ -123,7 +135,9 @@
 							</li>
 							<!-- Dropdown Menu for Admins -->
 							<li class="nav-item dropdown mx-4">
-								<a class="nav-link dropdown-toggle fs-4 fw-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrateurs</a>
+								<a class="nav-link dropdown-toggle fs-4 fw-bold {% block userActive %}{% endblock
+								%}" data-bs-toggle="dropdown" href="#"
+								   role="button" aria-haspopup="true" aria-expanded="false">Administrateurs</a>
 								<div class="dropdown-menu">
 									<a class="dropdown-item fs-4" href="{{path('app_back_user_browse')}}">Liste</a>
 								</div>
