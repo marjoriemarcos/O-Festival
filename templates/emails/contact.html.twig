@@ -1,12 +1,85 @@
-<p>
-    Une demande d'information a été reçue
-</p>
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>O'festival - Demande de contact</title>
+        <style>
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                font-family: 'Adumu', Arial, sans-serif;
+                color: #333;
+                line-height: 1.6;
+            }
 
-<ul>
-    <li>Nom : {{ data.name}} </li>
-    <li>Email : {{ data.email}} </li>
-</ul>
-<p>
-    <strong> Message</strong> : </br>
-    {{ data.content | nl2br }}
-</p>
+            .header {
+                background-color: #05608a;
+                padding: 20px;
+                text-align: center;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+            .footer {
+                background-color: #FABB25;
+                padding: 10px;
+                text-align: center;
+                font-size: 14px;
+                color: #002d72;
+                font-weight: bold;
+            }
+
+            .block {
+                margin: 20px 0;
+            }
+
+            .bottom {
+                margin-top: 30px;
+            }
+
+            ul {
+                list-style: none;
+                padding: 0;
+            }
+
+            ul li {
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <img src="https://images.wakelet.com/resize?id=3KEjlHHHfSCzO068-vHRw&h=437&w=1536&q=85"
+                     alt="O'festival"
+                     width="200"
+                     height="auto"/>
+            </div>
+            <div class="content">
+                <h1 class="text-center">Demande de contact</h1>
+                <ul>
+                    <li><strong>Nom :</strong> {{ data.name }} </li>
+                    <li><strong>Email :</strong> {{ data.email }} </li>
+                </ul>
+                <p class="block">
+                    <strong> Message :</strong>
+                    </br>
+                    {{ data.content | nl2br }}
+                </p>
+
+            </div>
+            <div class="footer">
+                <p class="block bottom">
+                    🎶️ Vive la musique 🎶
+                </p>
+            </div>
+        </div>
+    </body>
+</html>
