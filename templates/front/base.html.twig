@@ -48,24 +48,27 @@
                             <a href="{{ path('app_infos_browse') }}"
                                class="nav-link {% block infosActive %}{% endblock %}">Infos pratiques</a>
                         </li>
-                        <li>
+                        <li class="nav-item me-5">
                             {% if is_granted('ROLE_ADMIN') %}
                                 <a href="{{ path('app_back_home') }}" class="nav-link">Back-office</a>
                             {% endif %}
                         </li>
                     </ul>
                     <div class="hamburger me-0">
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                        <span class="bar"></span>
+                        <span class="bar dark-yellow-bg"></span>
+                        <span class="bar dark-yellow-bg"></span>
+                        <span class="bar dark-yellow-bg"></span>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <span class="bar"></span>
+                        {% endif %}
                     </div>
                 </nav>
             </div>
         </header>
 
-<main class="page-content">
-    {% block main %}{% endblock %}
-</main>
+        <main class="page-content">
+            {% block main %}{% endblock %}
+        </main>
 
         <!-- Footer -->
         <footer>
@@ -88,19 +91,19 @@
                     </a>
                 </div>
 
-		<ul class="nav-links list-inline">
-            <li class="list-inline-item">
-                <a class="nav-link mx-2" href="{{ path('app_infos_browse')}}#contact-form">Contact</a>
-            </li>
-            <li class="list-inline-item">
-                <a class="nav-link mx-2" href="{{ path('app_sponsor_browse')}}">Partenaires</a>
-            </li>
-            <li class="list-inline-item">
-                <a class="nav-link mx-2" href="{{ path('app_legal_notice_browse')}}">Mentions légales</a>
-            </li>
-        </ul>
-    </div>
-</footer>
+                <ul class="nav-links list-inline">
+                    <li class="list-inline-item">
+                        <a class="nav-link mx-2" href="{{ path('app_infos_browse') }}#contact-form">Contact</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="nav-link mx-2" href="{{ path('app_sponsor_browse') }}">Partenaires</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="nav-link mx-2" href="{{ path('app_legal_notice_browse') }}">Mentions légales</a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
 
         {% block javascripts %}
             <!-- JavaScript -->
