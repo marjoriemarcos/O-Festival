@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Ticket;
+use App\Repository\TicketRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -10,9 +12,20 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class TicketType extends AbstractType
 {
+    private EntityManagerInterface $entityManager;
+    private TicketRepository $ticketRepo;
+
+    public function __construct (EntityManagerInterface $entityManager, TicketRepository $ticketRepo) {
+        $this->entityManager = $entityManager;
+        $this->ticketRepo = $ticketRepo;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -64,6 +77,57 @@ class TicketType extends AbstractType
                 'step' => 1,
             ],
         ]);
+
+        // Ajout des écouteurs sur les deux fonctions lors de l'envoie du formulaire
+        $builder->addEventListener(FormEvents::SUBMIT, [$this, 'validateData']);
+        $builder->addEventListener(FormEvents::SUBMIT, [$this, 'getLongTitle']);
+    }
+
+    public function validateData (FormEvent $event): void 
+    {
+        // Récupère les data du formulaire qui vient d'etre envoyé
+        $dataFromForm = $event->getForm()->getData();
+        // Récupère le repository
+        $ticketRepository = $this->entityManager->getRepository(Ticket::class);
+    
+        // Rechercher les tickets existants par les paramètres du formulaire
+        $existingTickets = $ticketRepository->findTicketsByParams(
+            $dataFromForm->getTitle(),
+            $dataFromForm->getStartAt(),
+            $dataFromForm->getEndAt(),
+            $dataFromForm->getFee()
+        );
+    
+        // Vérifier si des tickets existent
+        if (!empty($existingTickets)) {
+            $event->getForm()->addError(new FormError('Il y a déjà un billet avec ce titre, ces dates, et ce tarif.'));
+        }
+        // Vérifie si la date de début est bien inférieure à la date de fin
+        if ($dataFromForm->getStartAt() > $dataFromForm->getEndAt()) {
+            $event->getForm()->addError(new FormError('La date début doit être inférieure à la date de fin.'));
+        }
+
+    }
+
+    public function getLongTitle (FormEvent $event)
+    {
+        // Récupère le formulaire envoyé
+        $dataFromForm = $event->getForm()->getData();
+
+        // Récupère les données envoyés via le formulaire
+        $title = $dataFromForm->getTitle();
+        $fee = $dataFromForm->getFee();
+        $startAt = $dataFromForm->getStartAt()->format('d-m-Y');
+        $endAt = $dataFromForm->getEndAt()->format('d-m-Y');
+
+        // Met en forme le titre qui sera envoyé en base de données
+        $dataFromForm->setTitle(sprintf(
+            '%s %s du %s au %s',
+            $title,
+            $fee,
+            $startAt,
+            $endAt
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -15,6 +15,8 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+     ;
+
         $builder
             ->add('email', EmailType::class, [
                 'label' => 'Email',
@@ -35,15 +37,20 @@ class UserType extends AbstractType
                     'Administrateur' => 'ROLE_ADMIN',
                 ],
  
-            ])
-            ->add('password', PasswordType::class)
+            ]);
+            // Check if it's a form add or a form edit
+             if ($options['is_add']) {
+                $builder->add('password', PasswordType::class);
+            }
         ;
     }
+    
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'is_add' => false, 
         ]);
     }
 }

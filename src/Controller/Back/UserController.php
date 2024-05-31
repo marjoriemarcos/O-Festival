@@ -14,13 +14,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
-    private $passwordHasher;
-
-
-    public function __construct(UserPasswordHasherInterface $passwordHasher)
-{
-    $this->passwordHasher = $passwordHasher;
-}
 
     #[Route('/back/user', name: 'app_back_user_browse')]
     public function browse(UserRepository $userRepository): Response
@@ -33,15 +26,16 @@ class UserController extends AbstractController
         ]);}
 
         #[Route('/back/user/add', name: 'app_back_user_add', methods: ['GET', 'POST'])]
-        public function add(Request $request, EntityManagerInterface $entityManager): Response
+        public function add(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
         {
             $user = new User();
-            $form = $this->createForm(UserType::class, $user);
+            // add a option in a form
+            $form = $this->createForm(UserType::class, $user, ['is_add' => true]);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
                 // Hash du password     
-                $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
+                $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
 
                 $entityManager->persist($user);
                 $entityManager->flush();
@@ -68,15 +62,12 @@ class UserController extends AbstractController
     
             if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager->flush();
-    
-                // Get the ID of the edited artist
-                $UserId = $user->getId();
-    
+       
                 // Add flash message for successful modification    
                 $this->addFlash('success', 'L\'administrateur a bien été modifié.');
     
                 // Redirect to the read page of the edited artist
-                return $this->redirectToRoute('app_back_user_add', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_back_user_browse', [], Response::HTTP_SEE_OTHER);
             }
             
             if ($form->isSubmitted() && !$form->isValid()) {

@@ -70,16 +70,17 @@ class TicketController extends AbstractController
         // Vérifie si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
             // Génère le titre réel du billet
-            $dataFromForm = $form->getData();
-            $realTitle = $dataFromForm->setRealTitle();
-            $ticket->setTitle($realTitle);
+            // $dataFromForm = $form->getData();
+            // $realTitle = $dataFromForm->setRealTitle();
+            // $ticket->setTitle($realTitle);
 
             // Vérifie si un billet avec ce titre existe déjà
-            $existingTicket = $ticketRepository->findOneBy(['title' => $realTitle]);
-            if ($existingTicket) {
-                $this->addFlash('danger', 'Ce billet existe déjà!');
-                return $this->redirectToRoute('app_back_ticket_add', [], Response::HTTP_SEE_OTHER);
-            }
+            // $existingTicket = $ticketRepository->findOneBy(['title' => $realTitle]);
+
+            // if ($existingTicket) {
+            //     $this->addFlash('danger', 'Ce billet existe déjà!');
+            //     return $this->redirectToRoute('app_back_ticket_add', [], Response::HTTP_SEE_OTHER);
+            // }
 
             // Persiste le nouveau billet et enregistre dans la base de données
             $entityManager->persist($ticket);
@@ -110,17 +111,7 @@ class TicketController extends AbstractController
 
         // Vérifie si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
-            // Régénère le titre réel du billet
-            $realTitle = $ticket->setRealTitle();
-            $ticket->setTitle($realTitle);
-
-            // Vérifie si un billet avec ce nouveau titre existe déjà
-            $existingTicket = $ticketRepository->findOneBy(['title' => $realTitle]);
-            if ($existingTicket && $existingTicket->getId() !== $ticket->getId()) {
-                $this->addFlash('danger', 'Il y a déjà un billet avec ce titre.');
-                return $this->redirectToRoute('app_back_ticket_edit', ['id' => $ticket->getId()], Response::HTTP_SEE_OTHER);
-            }
-
+            
             // Enregistre les modifications dans la base de données
             $entityManager->flush();
 
