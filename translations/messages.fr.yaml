@@ -66,6 +66,12 @@ ticket:
         duration24: "24 heures"
         duration48: "48 heures"
         duration72: "72 heures"
+
+sponsor:
+    form:
+        name: "Nom"
+        icon: "Logo"
+    
         
         
 

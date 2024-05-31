@@ -1,0 +1,39 @@
+{# Étend la mise en page de base #}
+{% extends 'back/base.html.twig' %}
+
+{# Définit le bloc 'sponsorEditActive' pour indiquer que cette page est active dans le menu de navigation #}
+{% block sponsorEditActive %}active
+{% endblock %}
+
+{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block main %}
+	<div class="container">
+		<h2 class="text-center my-5 fw-bold display-5">Éditer le partenaire</h2>
+		<div class="row justify-content-center">
+			<div
+				class="col-md-8">
+				<!-- Bouton de retour à la liste des partenaires -->
+				<a href="{{ path('app_back_sponsor_browse') }}" class="btn btn-primary fw-bold mb-4">
+					<i class="bi bi-arrow-left"></i>
+					Retour à la liste des partenaires
+				</a>
+				<div class="card">
+					<div class="card-header d-flex justify-content-between align-items-center">
+						<span class="fs-2 fw-bold">{{ sponsor.name }}</span>
+						<div class="d-flex">
+							<form method="post" action="{{ path('app_back_sponsor_delete', {'id': sponsor.id}) }}" onsubmit="return confirm('Souhaitez-vous vraiment supprimer {{ sponsor.name }}?');">
+								<input
+								type="hidden" name="_token" value="{{ csrf_token('delete' ~ sponsor.id) }}">
+								<!-- Bouton pour supprimer le sponsor -->
+								<button class="btn btn-danger bi bi-trash">{{ button_label|default('')}}</button>
+							</form>
+						</div>
+					</div>
+					<div class="card-body">
+						{{ include('back/fragments/_form.html.twig', {'sponsor': sponsor, 'button_label': 'Mettre à jour'}) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

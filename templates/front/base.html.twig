@@ -63,9 +63,9 @@
             </div>
         </header>
 
-        <main>
-            {% block main %}{% endblock %}
-        </main>
+<main class="page-content">
+    {% block main %}{% endblock %}
+</main>
 
         <!-- Footer -->
         <footer>
@@ -88,21 +88,19 @@
                     </a>
                 </div>
 
-                <ul class="nav-links list-inline">
-                    <li class="list-inline-item">
-                        <a class="nav-link mx-2 {% block footerInfosActive %}{% endblock %}"
-                           href="{{ path('app_infos_browse') }}#contact-form">Contact</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="nav-link mx-2" href="#">Partenaires</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="nav-link mx-2 {% block footerLegalNoticeActive %}{% endblock %}" href="{{ path
-                            ('app_legal_notice_browse') }}">Mentions légales</a>
-                    </li>
-                </ul>
-            </div>
-        </footer>
+		<ul class="nav-links list-inline">
+            <li class="list-inline-item">
+                <a class="nav-link mx-2" href="{{ path('app_infos_browse')}}#contact-form">Contact</a>
+            </li>
+            <li class="list-inline-item">
+                <a class="nav-link mx-2" href="{{ path('app_sponsor_browse')}}">Partenaires</a>
+            </li>
+            <li class="list-inline-item">
+                <a class="nav-link mx-2" href="{{ path('app_legal_notice_browse')}}">Mentions légales</a>
+            </li>
+        </ul>
+    </div>
+</footer>
 
         {% block javascripts %}
             <!-- JavaScript -->

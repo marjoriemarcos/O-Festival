@@ -1,0 +1,68 @@
+{# Étend la mise en page de base #}
+{% extends 'back/base.html.twig' %}
+
+{# Définit le bloc 'sponsorBrowseActive' pour indiquer que cette page est active dans le menu de navigation #}
+{% block sponsorBrowseActive %}active{% endblock %}
+
+{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block main %}
+
+    <div class="container">
+        <h2 class="text-center my-5 fw-bold display-5">Liste des Partenaires</h2>
+
+        <!-- Search Bar -->
+        {{ include('back/fragments/_search_bar.html.twig')}}
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                {# Inclusion du fragment pour afficher les messages de succès ou d'erreur #}
+                {{ include('back/fragments/_message.html.twig') }}
+                <div class="card">
+                    <!-- Card title -->
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h3 class="fs-2 fw-bold mb-0">Partenaires</h3>
+                        <a class="btn btn-success fw-bold ms-auto" type="button" href="{{path('app_back_sponsor_add')}}">Ajouter un Partenaire</a>
+                    </div>
+                    <div class="card-body">
+                        <!-- No results message -->
+                        {{ include('back/fragments/_noResult_message.html.twig') }}
+
+                        <div class="table-responsive" id="tableWrapper">
+                            <table class="table table-bordered searchable-table">
+                                <!-- Table header -->
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col" data-sortable><i class="bi bi-house me-2"></i>Nom</th>
+                                        <th class="col-1"><i class="bi bi-gear me-2"></i>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Loop through sponsorList and display them -->
+                                    {% for sponsor in sponsorList %}
+                                        <tr>
+                                            <td>{{ sponsor.name }}</td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <a href="{{ path('app_back_sponsor_edit', {id: sponsor.id}) }}" class="btn btn-warning bi bi-pencil me-2"></a>
+                                                    <form method="post" action="{{ path('app_back_sponsor_delete', {'id': sponsor.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer {{ sponsor.name }}?');">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sponsor.id) }}">
+                                                        <button class="btn btn-danger bi bi-trash">{{ button_label|default('')}}</button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div id="pagination-container" class="pagination justify-content-center">
+                            {{ knp_pagination_render(sponsorList) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
