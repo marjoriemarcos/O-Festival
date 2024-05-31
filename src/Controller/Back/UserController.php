@@ -7,21 +7,88 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\UserRepository;
 use App\Entity\User;
+use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
+    private $passwordHasher;
+
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
+{
+    $this->passwordHasher = $passwordHasher;
+}
+
     #[Route('/back/user', name: 'app_back_user_browse')]
     public function browse(UserRepository $userRepository): Response
     {
         // Fetch users with ROLE_ADMIN
-        $adminList = $userRepository->findByRole('ROLE_ADMIN');
+        $adminList = $userRepository->findAll();
 
         return $this->render('back/user/browse.html.twig', [
             'adminList' => $adminList,
         ]);}
+
+        #[Route('/back/user/add', name: 'app_back_user_add', methods: ['GET', 'POST'])]
+        public function add(Request $request, EntityManagerInterface $entityManager): Response
+        {
+            $user = new User();
+            $form = $this->createForm(UserType::class, $user);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                // Hash du password     
+                $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
+
+                $entityManager->persist($user);
+                $entityManager->flush();
+    
+                $this->addFlash('success', 'L\'administrateur a bien été créé.');
+                return $this->redirectToRoute('app_back_user_browse', [], Response::HTTP_SEE_OTHER);
+            }
+
+            if ($form->isSubmitted() && !$form->isValid()) {
+                $this->addFlash('error', 'Erreur de validation : veuillez corriger les erreurs dans le formulaire.');
+    
+            }
+            return $this->render('back/user/add.html.twig', [
+                'user' => $user,
+                'form' => $form->createView(),
+            ]);
+        }
+
+        #[Route('/back/user/{id<\d+>}/edit', name: 'app_back_user_edit', methods: ['GET', 'POST'])]
+        public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
+        {
+            $form = $this->createForm(UserType::class, $user);
+            $form->handleRequest($request);
+    
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->flush();
+    
+                // Get the ID of the edited artist
+                $UserId = $user->getId();
+    
+                // Add flash message for successful modification    
+                $this->addFlash('success', 'L\'administrateur a bien été modifié.');
+    
+                // Redirect to the read page of the edited artist
+                return $this->redirectToRoute('app_back_user_add', [], Response::HTTP_SEE_OTHER);
+            }
+            
+            if ($form->isSubmitted() && !$form->isValid()) {
+                $this->addFlash('error', 'Erreur de validation : veuillez corriger les erreurs dans le formulaire.');
+    
+            }
+    
+            return $this->render('back/user/edit.html.twig', [
+                'user' => $user,
+                'form' => $form->createView(),
+            ]);
+        }
 
         #[Route('/back/user/{id<\d+>}/delete', name: 'app_back_user_delete', methods: ['POST'])]
         public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
