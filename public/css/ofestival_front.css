@@ -375,9 +375,13 @@ body {
 .ticket-card-content{
     font-size: 1.6rem;
 }
+
+.ticket-card-info-festival{
+    min-height: 235px;
+}
 .ticket-card-content .btn{
     width: 75%;
-    font-size: 1rem;
+    font-size: 1.25rem;
 }
 
 .overlay-ticketing{
@@ -390,6 +394,8 @@ body {
     transition: all 300ms ease-in-out;
     pointer-events: none;
 }
+
+
 
 /** --------- ARTIST --------- **/
 
