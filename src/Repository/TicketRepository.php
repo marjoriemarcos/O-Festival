@@ -68,4 +68,22 @@ class TicketRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleResult();
     }
+
+
+    public function findTicketsByPArams($title, $startAt, $endAt, $fee )
+    {
+        return $this->createQueryBuilder('ticket')
+            // Sélectionne les billets avec la durée spécifiée
+            ->where('ticket.title = :title')
+            ->andWhere('ticket.startAt = :startAt')
+            ->andWhere('ticket.endAt = :endAt')
+            ->andWhere('ticket.fee = :fee')
+            ->setParameter('title', $title)
+            ->setParameter('startAt', $startAt)
+            ->setParameter('endAt', $endAt)
+            ->setParameter('fee', $fee)
+            // Trie les résultats par prix décroissant
+            ->getQuery()
+            ->getResult();
+    }
 }

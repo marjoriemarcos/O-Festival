@@ -28,14 +28,8 @@ class fetchDataFromRepo
             FROM App\Entity\Artist artist
             JOIN artist.slot slot
             JOIN slot.stage stage
-            JOIN artist.genres genre
-            WHERE (:date IS NULL OR slot.date = :date)
-            AND (:genre IS NULL OR genre.id = :genre)
-            AND (:stage IS NULL OR stage.id = :stage)'
-        )
-        ->setParameter('date', $date)
-        ->setParameter('genre', $genre)
-        ->setParameter('stage', $stage);
+            JOIN artist.genres genre'
+        );
 
         $results = $query->getResult();
 
@@ -47,26 +41,55 @@ class fetchDataFromRepo
         ];
 
         foreach ($results as $result) {
-            $data['artistList'][] = [
-                'id' => $result->getId(),
-                'picture' => $result->getPicture(),
-                'name' => $result->getName(),
-                'date' => $result->getSlot()->getDate(),
-                'genres' => $result->getGenres(),
-                'stage' => $result->getSlot()->getStage()
-            ];
+            $includeResult = true;
 
-            if (!in_array($result->getSlot(), $data['slotList'])) {
+            // Format and compare dates
+            if ($date !== null) {
+                $slotDate = $result->getSlot()->getDate()->format('Y-m-d');
+                if ($slotDate !== $date) {
+                    $includeResult = false;
+                }
+            }
+
+            if ($genre !== null) {
+                $genreFound = false;
+                foreach ($result->getGenres() as $g) {
+                    if ($g->getId() === $genre) {
+                        $genreFound = true;
+                        break;
+                    }
+                }
+                if (!$genreFound) {
+                    $includeResult = false;
+                }
+            }
+
+            if ($stage !== null && $result->getSlot()->getStage()->getId() !== $stage) {
+                $includeResult = false;
+            }
+
+            if ($includeResult) {
+                $data['artistList'][] = [
+                    'id' => $result->getId(),
+                    'picture' => $result->getPicture(),
+                    'name' => $result->getName(),
+                    'date' => $result->getSlot()->getDate()->format('Y-m-d'),
+                    'genres' => $result->getGenres(),
+                    'stage' => $result->getSlot()->getStage()
+                ];
+            }
+
+            if (!in_array($result->getSlot(), $data['slotList'], true)) {
                 $data['slotList'][] = $result->getSlot();
             }
 
-            if (!in_array($result->getSlot()->getStage(), $data['stageList'])) {
+            if (!in_array($result->getSlot()->getStage(), $data['stageList'], true)) {
                 $data['stageList'][] = $result->getSlot()->getStage();
             }
 
-            foreach ($result->getGenres() as $genre) {
-                if (!in_array($genre, $data['genreList'])) {
-                    $data['genreList'][] = $genre;
+            foreach ($result->getGenres() as $g) {
+                if (!in_array($g, $data['genreList'], true)) {
+                    $data['genreList'][] = $g;
                 }
             }
         }

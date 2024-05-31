@@ -171,25 +171,43 @@ body {
     padding-left: 10px;
 }
 
+.btn-day {
+    background-color: var(--dark_yellow);
+}
+
+.btn-stage {
+    background-color: var(--light_green);
+}
+
+.btn-genre {
+    background-color: var(--light_blue);
+}
 
 .btn-day:hover,
-.btn-day:focus {
+.btn-day:focus,
+.btn-day.active{
     background-color: var(--light_yellow);
-    color: white;
-    transform: scale(1.05)
+    color: white;  
+    transform: scale(1.05);  
 }
+
 .btn-stage:hover,
-.btn-stage:focus {
+.btn-stage:focus,
+.btn-stage.active {
     background-color: var(--dark_green);
-    color: white;
-    transform: scale(1.05)
+    color: white;   
+    transform: scale(1.05);  
 }
+
 .btn-genre:hover,
-.btn-genre:focus {
+.btn-genre:focus,
+.btn-genre.active {
     background-color: var(--medium_blue);
-    color: white;
-    transform: scale(1.05)
+    color: white;  
+    transform: scale(1.05);   
 }
+
+
 
 /** --------- INDEX PAGE --------- **/
 
