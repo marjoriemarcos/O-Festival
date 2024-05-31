@@ -516,22 +516,49 @@ body {
 .container-error404{
     height: 100vh;
 }
-.error404-content{
-    position: relative;
+.error404-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
+
+.error404-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .error404-img {
     object-fit: contain;
     height: 300px;
-}
-.error404-text {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 50px;
+    margin: 0 -150px;
+    max-width: 100%;
 }
 
-/** ------------ CONNEXION -----------**/
+.error404-text {
+    text-align: center;
+
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.vinyles-img {
+    animation: spin 5s linear infinite;
+}
+
+@media (max-width: 390px) {
+    .error404-img {
+        object-fit: contain;
+        height: 300px;
+        margin: 0 -130px;
+        max-width: 100%;
+    }
+}
+    /** ------------ CONNEXION -----------**/
 
 .container-connextion{
     height: 100vh;
