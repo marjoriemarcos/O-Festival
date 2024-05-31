@@ -18,7 +18,8 @@ class SendEmailService
     }
 
     /**
-     * Sends a contact email using the provided details.     *     * @param string $to      The recipient email address.
+     * Sends a contact email using the provided details.
+     * @param string $to      The recipient email address.
      * @param string $from    The sender email address.
      * @param string $subject The subject of the email.
      * @param array  $context The context data to be passed to the email template.
@@ -37,7 +38,8 @@ class SendEmailService
     }
 
     /**
-     * Sends a confirmation email using the provided details.     *     * @param string $to      The recipient email address.
+     * Sends a confirmation email using the provided details.
+     * @param string $to The recipient email address.
      * @param string $from    The sender email address.
      * @param string $subject The subject of the email.
      * @param array  $context The context data to be passed to the email template.
