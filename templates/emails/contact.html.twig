@@ -67,13 +67,14 @@
                 <ul>
                     <li><strong>Nom :</strong> {{ data.name }} </li>
                     <li><strong>Email :</strong> {{ data.email }} </li>
+                    <li>
+                        <p>
+                            <strong> Message :</strong>
+                            </br>
+                            {{ data.content | nl2br }}
+                        </p>
+                    </li>
                 </ul>
-                <p class="block">
-                    <strong> Message :</strong>
-                    </br>
-                    {{ data.content | nl2br }}
-                </p>
-
             </div>
             <div class="footer">
                 <p class="block bottom">
