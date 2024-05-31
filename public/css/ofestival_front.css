@@ -91,40 +91,26 @@ html, body {
     height: 100%;
     width: 100%;
     overflow-x: hidden;
-    margin: 0;
-    padding: 0;
+}
+body {
     display: flex;
     flex-direction: column;
 }
-
 .page-title {
     line-height: 1.5em;
     color: white;
-    padding: 2.5% 0;
+    padding: 2.5% 0 2.5% 0;
     text-align: center;
-    margin: 0;
 }
-
-.page-content {
-    flex: 1;
-}
-
-
-footer {
-    margin-top: 0;
-    margin-bottom: 0; 
-    flex-shrink: 0;
-}
-
 
 /** --------- NAV BAR --------- **/
 
-.navbar { 
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 12vh; 
-    font-size: 2rem;  
+    height: 12vh;
+    font-size: 2rem;
     position: relative;
 }
 .nav-menu{
@@ -137,7 +123,7 @@ footer {
 }
 .hamburger {
     display: none;
-    
+
 }
 .bar {
     display: block;
@@ -146,7 +132,7 @@ footer {
     margin: 5px auto;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
-    background-color: #101010;
+    /*background-color: #101010;*/
 }
 .navbar-logo img {
     height: 7vh;
@@ -189,20 +175,20 @@ footer {
 .btn-day:hover,
 .btn-day:focus {
     background-color: var(--light_yellow);
-    color: white;  
-    transform: scale(1.05)  
+    color: white;
+    transform: scale(1.05)
 }
 .btn-stage:hover,
 .btn-stage:focus {
     background-color: var(--dark_green);
-    color: white;   
-    transform: scale(1.05)  
+    color: white;
+    transform: scale(1.05)
 }
 .btn-genre:hover,
 .btn-genre:focus {
     background-color: var(--medium_blue);
-    color: white;  
-    transform: scale(1.05)   
+    color: white;
+    transform: scale(1.05)
 }
 
 /** --------- INDEX PAGE --------- **/
@@ -235,7 +221,7 @@ footer {
 .home-artist-list-slide-inner {
     display: flex;
     transition: transform 0.5s ease;
-    width: 100%; 
+    width: 100%;
 }
 
 .home-artist-list-slide {
@@ -246,7 +232,7 @@ footer {
 }
 .home-artist-list-slide-artist {
     box-sizing: border-box;
-    padding: 0 0.25rem; 
+    padding: 0 0.25rem;
     flex: 0 0 auto;
     width: 25%;
     box-sizing: border-box;
@@ -296,7 +282,7 @@ footer {
 .white-background {
     background: white;
     padding: 5px;
-    font-weight: 300;    
+    font-weight: 300;
 }
 
 .img-zoom {
@@ -307,8 +293,8 @@ footer {
 
 .img-zoom img {
     transition: all 300ms ease-in-out;
-    height: 45vh; 
-    width: 100%; 
+    height: 45vh;
+    width: 100%;
     object-fit: cover;
 }
 
@@ -337,7 +323,7 @@ footer {
 }
 
 .card-img-overlay:hover .overlay {
-    height: 0; 
+    height: 0;
 }
 
 .card-img-overlay:hover img {
@@ -365,7 +351,7 @@ footer {
 .ticket-card-info-festival-goer,
 .ticket-card-info-price{
     font-weight: 800;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 .ticket-card-image{
     height: 40%;
@@ -378,7 +364,7 @@ footer {
     color: var(--dark_yellow);
 }
 .ticket-card-content h3{
-    width: 80%; 
+    width: 80%;
     margin: auto;
     font-size: 1.5rem;
     text-transform: none;
@@ -389,13 +375,9 @@ footer {
 .ticket-card-content{
     font-size: 1.6rem;
 }
-
-.ticket-card-info-festival{
-    min-height: 250px;
-}
 .ticket-card-content .btn{
     width: 75%;
-    font-size: 1.25rem;
+    font-size: 1rem;
 }
 
 .overlay-ticketing{
@@ -409,36 +391,34 @@ footer {
     pointer-events: none;
 }
 
-
-
 /** --------- ARTIST --------- **/
 
 .container-artist {
     padding: 0 15% 0 15%;
-} 
+}
 .artist-image img,
 .informations-image img {
     width: 100%;
-    height: 100%; 
+    height: 100%;
     object-fit: cover;
 }
 
 .artist-informations{
     background-color: white;
     height: 100%;
-}  
+}
 .artist-informations-name{
     font-size: 3rem;
     color: var(--dark_blue_artist);
     font-weight: bold;
-} 
+}
 .artist-informations-show-day
 {
     font-size: 2rem;
     margin-bottom: 0;
     text-shadow: none;
     font-weight: bold;
-    color: var(--dark_blue_artist);    
+    color: var(--dark_blue_artist);
 }
 
 .artist-informations-stage {
@@ -452,12 +432,12 @@ footer {
 .artist-informations .btn {
     background-color: var(--dark_blue_artist);
     color: white;
-}    
+}
 .artist-informations-description {
     height: 300px;
     font-weight: 100;
     overflow-y: auto;
-} 
+}
 .artist-informations-social-networks i{
     font-size: 2rem;
     color: var(--dark_blue_artist)
@@ -512,63 +492,6 @@ footer {
     height: 100%;
 }
 
-/** ------------ LEGAL NOTICE PAGE -----------**/
-
-.container-legal-notice {
-    display: flex;
-    flex-direction: column;      
-    height: 100%;
-}
-
-
-/** ------------ SPONSORS PAGE -----------**/
-
-
-.container-sponsor {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.content {
-    flex: 1;
-    padding: 10px;
-}
-
-.sponsor-logos {    
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.sponsor-logo {
-    margin: 0 10px 10px 0;
-}
-
-.sponsor-card {
-    border: none;    
-    display: inline-block;
-    padding: 10px; 
-}
-
-.sponsor-card-body {
-    padding: 0; 
-}
-
-.sponsor-logo img {
-    max-width: 100%;
-    max-height: 100px;
-}
-
-@media only screen and (min-width: 768px) {
-    .container-sponsor {
-        padding: 20px;
-    }
-    
-    .sponsor-logo {
-        margin: 0 20px 20px 0;
-    }
-}
 
 /** ------------ ERROR 404 -----------**/
 
@@ -597,7 +520,7 @@ footer {
 }
 
 /** ------------ RESPONSIVE -----------**/
-     
+
 @media(max-width: 1375px){
     .nav-menu,
     .btn{
@@ -617,9 +540,6 @@ footer {
     }
     .card p {
         font-size: 1rem;
-    }
-    .ticket-card-info-festival{
-        min-height: 175px;
     }
 }
 
