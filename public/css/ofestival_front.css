@@ -95,12 +95,28 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
+    margin: 0;
+    padding: 0;
 }
+
 .page-title {
     line-height: 1.5em;
     color: white;
     padding: 2.5% 0 2.5% 0;
+    padding: 2.5% 0;
     text-align: center;
+    margin: 0;
+}
+
+.page-content {
+    flex: 1;
+}
+
+
+footer {
+    margin-top: 0;
+    margin-bottom: 0; 
+    flex-shrink: 0;
 }
 
 /** --------- NAV BAR --------- **/
@@ -482,6 +498,64 @@ body {
 }
 .nav-link:hover {
     color: var(--light_yellow);
+}
+
+/** ------------ LEGAL NOTICE PAGE -----------**/
+
+.container-legal-notice {
+    display: flex;
+    flex-direction: column;      
+    height: 100%;
+}
+
+
+/** ------------ SPONSORS PAGE -----------**/
+
+
+.container-sponsor {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.content {
+    flex: 1;
+    padding: 10px;
+}
+
+.sponsor-logos {    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.sponsor-logo {
+    margin: 0 10px 10px 0;
+}
+
+.sponsor-card {
+    border: none;    
+    display: inline-block;
+    padding: 10px; 
+}
+
+.sponsor-card-body {
+    padding: 0; 
+}
+
+.sponsor-logo img {
+    max-width: 100%;
+    max-height: 100px;
+}
+
+@media only screen and (min-width: 768px) {
+    .container-sponsor {
+        padding: 20px;
+    }
+
+    .sponsor-logo {
+        margin: 0 20px 20px 0;
+    }
 }
 
 /** ------------ INFORMATIONS -----------**/
