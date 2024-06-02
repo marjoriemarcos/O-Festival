@@ -138,6 +138,7 @@ class AppFixtures extends Fixture
                 $ticket->setStartAt($festivalStartDate);
                 $ticket->setEndAt($festivalStartDate);
                 $ticket->setDuration(24);
+                $ticket->setType('Pass 1 JOUR');
                 $ticket->setFee($fee);
                 $ticket->setPrice($price);
                 $ticket->setQuantity(mt_rand(0, 30)); // Quantité aléatoire entre 0 et 30
@@ -157,6 +158,7 @@ class AppFixtures extends Fixture
             $ticket->setEndAt($festivalEndDate);
             $ticket->setDuration(48);
             $ticket->setFee($fee);
+            $ticket->setType('Pass 2 JOURS');
             $ticket->setPrice($price * 1.75); // Prix plus cher pour 2 jours
             $ticket->setQuantity(mt_rand(0, 30)); // Quantité aléatoire entre 0 et 30
             $ticket->setCreatedAt(new DateTimeImmutable('now', $timezone));
@@ -173,6 +175,7 @@ class AppFixtures extends Fixture
             $ticket->setEndAt($festivalEndDate);
             $ticket->setDuration(72);
             $ticket->setFee($fee);
+            $ticket->setType('Pass 3 JOURS');
             $ticket->setPrice($price * 2.5); // Prix le plus cher pour 3 jours
             $ticket->setQuantity(mt_rand(0, 30)); // Quantité aléatoire entre 0 et 30
             $ticket->setCreatedAt(new DateTimeImmutable('now', $timezone));

@@ -70,20 +70,46 @@ class TicketRepository extends ServiceEntityRepository
     }
 
 
-    public function findTicketsByPArams($title, $startAt, $endAt, $fee )
+
+
+    public function findTicketsByParams($type, $startAt, $endAt, $fee)
     {
-        return $this->createQueryBuilder('ticket')
-            // Sélectionne les billets avec la durée spécifiée
-            ->where('ticket.title = :title')
-            ->andWhere('ticket.startAt = :startAt')
-            ->andWhere('ticket.endAt = :endAt')
-            ->andWhere('ticket.fee = :fee')
-            ->setParameter('title', $title)
-            ->setParameter('startAt', $startAt)
-            ->setParameter('endAt', $endAt)
-            ->setParameter('fee', $fee)
-            // Trie les résultats par prix décroissant
-            ->getQuery()
-            ->getResult();
+        $conn = $this->getEntityManager()->getConnection();
+    
+        // Construction de la requête SQL
+        $sql = '
+            SELECT * FROM ticket t
+            WHERE t.type = :type
+            AND t.start_at = :startAt
+            AND t.end_at = :endAt
+            AND t.fee = :fee
+        ';
+    //WHERE LEFT(t.title, 6) LIKE :title
+        // Formatage des dates en chaînes de caractères
+        if ($startAt instanceof \DateTimeInterface) {
+            $startAtFormatted = $startAt->format('Y-m-d H:i:s');
+        } else {
+            throw new \InvalidArgumentException('startAt doit être une instance de \DateTimeInterface.');
+        }
+    
+        if ($endAt instanceof \DateTimeInterface) {
+            $endAtFormatted = $endAt->format('Y-m-d H:i:s');
+        } else {
+            throw new \InvalidArgumentException('endAt doit être une instance de \DateTimeInterface.');
+        }
+    
+        // Préparation de la requête avec les paramètres
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery([
+            'type' => $type,
+            'startAt' => $startAtFormatted,
+            'endAt' => $endAtFormatted,
+            'fee' => $fee,
+        ]);
+    
+        // Retourne les résultats sous forme de tableau d'associations
+        return $result->fetchAllAssociative();
     }
 }
+
+

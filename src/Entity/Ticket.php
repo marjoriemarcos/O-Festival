@@ -16,9 +16,9 @@ class Ticket
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 64)]
+    #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
-    #[Assert\Length(max: 64)]
+    #[Assert\Length(max: 255)]
     private ?string $title = null;
 
     #[ORM\Column]
@@ -59,6 +59,9 @@ class Ticket
 
     #[ORM\Column(nullable: true)]
     private ?int $duration = null;
+
+    #[ORM\Column(length: 64)]
+    private ?string $type = null;
 
     public function __construct()
     {
@@ -225,5 +228,17 @@ class Ticket
     public function formatedDateEnd(): string
     {
         return $this->endAt->format('d/m/Y');
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): static
+    {
+        $this->type = $type;
+
+        return $this;
     }
 }

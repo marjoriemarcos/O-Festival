@@ -29,7 +29,7 @@ class TicketType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('title', ChoiceType::class, [
+        ->add('type', ChoiceType::class, [
             'choices' => [
                 'ticket.form.title1Day' => 'Pass 1 JOUR',
                 'ticket.form.title2Day' => 'Pass 2 JOURS',
@@ -88,18 +88,19 @@ class TicketType extends AbstractType
         // Récupère les data du formulaire qui vient d'etre envoyé
         $dataFromForm = $event->getForm()->getData();
         // Récupère le repository
-        $ticketRepository = $this->entityManager->getRepository(Ticket::class);
+        //$ticketRepository = $this->entityManager->getRepository(Ticket::class);
     
         // Rechercher les tickets existants par les paramètres du formulaire
-        $existingTickets = $ticketRepository->findTicketsByParams(
-            $dataFromForm->getTitle(),
+        $existingTickets = $this->ticketRepo->findTicketsByParams(
+            $dataFromForm->getType(),
             $dataFromForm->getStartAt(),
             $dataFromForm->getEndAt(),
             $dataFromForm->getFee()
         );
     
+        //dump($this->ticketRepo);die;
         // Vérifier si des tickets existent
-        if (empty($existingTickets)) {
+        if (!empty($existingTickets)) {
             $event->getForm()->addError(new FormError('Il y a déjà un billet avec ce titre, ces dates, et ce tarif.'));
         }
         // Vérifie si la date de début est bien inférieure à la date de fin
@@ -115,19 +116,33 @@ class TicketType extends AbstractType
         $dataFromForm = $event->getForm()->getData();
 
         // Récupère les données envoyés via le formulaire
-        $title = $dataFromForm->getTitle();
+        $type = $dataFromForm->getType();
+        $startAt = $dataFromForm->getStartAt()->format('d/m/Y');
+        $endAt = $dataFromForm->getEndAt()->format('d/m/Y');
         $fee = $dataFromForm->getFee();
-        $startAt = $dataFromForm->getStartAt()->format('d-m-Y');
-        $endAt = $dataFromForm->getEndAt()->format('d-m-Y');
 
-        // Met en forme le titre qui sera envoyé en base de données
-        $dataFromForm->setTitle(sprintf(
-            '%s %s du %s au %s',
-            $title,
-            $fee,
-            $startAt,
-            $endAt
-        ));
+        if ($startAt === $endAt) {
+            // Met en forme le titre qui sera envoyé en base de données
+            $dataFromForm->setTitle(sprintf(
+                '%s %s le %s',
+                $type,
+                $fee,
+                $startAt,
+            ));
+
+        } else {
+
+            // Met en forme le titre qui sera envoyé en base de données
+            $dataFromForm->setTitle(sprintf(
+                '%s %s du %s au %s',
+                $type,
+                $fee,
+                $startAt,
+                $endAt
+            ));
+
+        }
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void
