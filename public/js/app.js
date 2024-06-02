@@ -8,6 +8,7 @@ import { ticketButtons } from "./ticketButtons.js";
 import { search } from "./search.js";
 import { tableSort } from "./tableSort.js";
 import {contactButtons} from "./contactButtons.js";
+import { fetchWeezeventData } from "./fetchWeezeventData.js";
 
 const app = {
     init: function () {
@@ -19,6 +20,7 @@ const app = {
         search.init();
         tableSort.init();
         contactButtons.init();
+        fetchWeezeventData();
     }
 };
 

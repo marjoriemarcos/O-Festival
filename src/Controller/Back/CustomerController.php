@@ -4,6 +4,7 @@ namespace App\Controller\Back;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\CustomerRepository;
 use App\Entity\Customer;
@@ -66,8 +67,8 @@ class CustomerController extends AbstractController
     }
 
 
-    #[Route('/back/customer-api', name: 'app_back_customer_browse_api', methods: ['GET'])]
-    public function browseApi(weezevent $weezevent)
+    #[Route('/back/api/weezevent/customers', name: 'app_back_customer_fetch_api', methods: ['GET'])]
+    public function fetchApi(weezevent $weezevent)
     {   
         // Va chercher la liste des commandes des clients
         $content = $weezevent->fetchCustomerList();
@@ -76,10 +77,20 @@ class CustomerController extends AbstractController
         // Va chercher la liste de types de billets
         $ticketList = $weezevent->fetchTicketList();
 
-        return $this->render('back/customer/browse.api.html.twig', [
+        // Renvoyer les données au format JSON
+        return new JsonResponse([
             'customerList' => $customerList,
             'ticketList' => $ticketList,
         ]);
+    }
+
+    #[Route('/back/customer-weezevent', name: 'app_back_customer_browse_api', methods: ['GET'])]
+    public function browseApi()
+    {           
+        return $this->render('back/customer/browse.api.html.twig', [
+            
+        ]);
     
     }
+
 }
