@@ -33,7 +33,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
-        /**
+    /**
      * Find users by role
      *
      * @param string $role
@@ -43,34 +43,29 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         return $this->createQueryBuilder('u')
             ->where('u.roles LIKE :role')
-            ->setParameter('role', '%"'.$role.'"%')
+            ->setParameter('role', '%"' . $role . '"%')
             ->getQuery()
             ->getResult();
     }
 
-
-    //    /**
-    //     * @return User[] Returns an array of User objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('u')
-    //            ->andWhere('u.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('u.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?User
-    //    {
-    //        return $this->createQueryBuilder('u')
-    //            ->andWhere('u.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * Recherche des utilisateurs par nom de famille.
+     *
+     * @param string $search Terme de recherche
+     * @return array Retourne un tableau d'objets User
+     */
+    public function findByLastNameSearch($search): array
+    {
+        // Création d'un QueryBuilder pour l'entité 'User' aliasée en 'u'
+        return $this->createQueryBuilder('u')
+            // Ajout d'une condition WHERE pour filtrer les utilisateurs par nom de famille
+            ->where('u.lastname LIKE :search')
+            // Définition du paramètre 'search' en ajoutant des wildcards (%) pour une recherche partielle
+            ->setParameter('search', '%' . $search . '%')
+            // Tri des résultats par nom de famille dans l'ordre croissant
+            ->orderBy('u.lastname', 'ASC')
+            // Exécution de la requête et récupération des résultats
+            ->getQuery()
+            ->getResult();
+    }
 }

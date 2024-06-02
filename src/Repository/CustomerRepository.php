@@ -16,28 +16,27 @@ class CustomerRepository extends ServiceEntityRepository
         parent::__construct($registry, Customer::class);
     }
 
-//    /**
-//     * @return Customer[] Returns an array of Customer objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Customer
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * Finds customers by their name using a partial match and includes ticket information.
+     *
+     * @param string $search The search term.
+     * @return Customer[] The customers matching the search term.
+     */
+    public function findByLastNameSearch($search): array
+    {
+        // Création d'un QueryBuilder pour l'entité 'Customer' aliasée en 'c'
+        return $this->createQueryBuilder('c')
+            // Ajout d'une sélection de l'entité Customer et les informations de la table pivot customer_ticket
+            ->select('c', 't')
+            ->leftJoin('c.tickets', 't') // Jointure avec la table des tickets
+            // Ajout d'une condition WHERE pour filtrer les clients dont le nom correspond au terme de recherche
+            ->where('c.lastname LIKE :search')
+            // Définition du paramètre 'search' en ajoutant des wildcards (%) pour une recherche partielle
+            ->setParameter('search', '%' . $search . '%')
+            // Tri des résultats par nom dans l'ordre croissant
+            ->orderBy('c.lastname', 'ASC')
+            // Exécution de la requête et récupération des résultats
+            ->getQuery()
+            ->getResult();
+    }
 }

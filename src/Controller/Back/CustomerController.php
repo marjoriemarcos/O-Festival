@@ -18,19 +18,23 @@ class CustomerController extends AbstractController
     #[Route('/back/customer', name: 'app_back_customer_browse', methods: ['GET'])]
     public function browse(CustomerRepository $customerRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // Récupère tous les clients triés par nom
-        $customerList = $customerRepository->findBy([], ['lastname' => 'ASC']);
+        // Récupération du terme de recherche depuis la requête
+        $search = $request->query->get('search');
 
-        // Paginer la requête
+        // Utilisation du repository pour obtenir les clients correspondant au terme de recherche
+        $customerList = $customerRepository->findByLastNameSearch($search);
+
+        // Paginer les résultats obtenus
         $customerList = $paginator->paginate(
-            $customerList,
-            $request->query->getInt('page', 1), // Utilisez la requête au lieu de genreList
-            5 // Limite par page
+            $customerList, // Query builder avec les résultats non paginés
+            $request->query->getInt('page', 1), // Numéro de la page actuelle, par défaut 1
+            5 // Nombre d'éléments par page
         );
-    
-        // Rend la vue avec la liste paginée
+
+        // Rendu du template avec la liste paginée des clients et le terme de recherche
         return $this->render('back/customer/browse.html.twig', [
-            'customerList' => $customerList,
+            'customerList' => $customerList, // Liste paginée des clients
+            'search' => $search, // Terme de recherche actuel pour remplir le champ de recherche
         ]);
     }
 

@@ -19,19 +19,23 @@ class ArtistController extends AbstractController
     #[Route('/back/artist', name: 'app_back_artist_browse', methods: ['GET'])]
     public function browse(ArtistRepository $artistRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // Récupère tous les artistes triés par nom
-        $artistList = $artistRepository->findBy([], ['name' => 'ASC']);
+        // Récupération du terme de recherche depuis la requête
+        $search = $request->query->get('search');
 
-        // Paginer la requête
+        // Utilisation du repository pour obtenir les artistes correspondant au terme de recherche
+        $artistList = $artistRepository->findByNameSearch($search);
+
+        // Paginer les résultats obtenus
         $artistList = $paginator->paginate(
-            $artistList,
-            $request->query->getInt('page', 1), // Utilisez la requête au lieu de artistList
-            5 // Limite par page
+            $artistList, // Query builder avec les résultats non paginés
+            $request->query->getInt('page', 1), // Numéro de la page actuelle, par défaut 1
+            5 // Nombre d'éléments par page
         );
 
-        // Rendre le template avec la liste paginée des artistes
+        // Rendu du template avec la liste paginée des artistes et le terme de recherche
         return $this->render('back/artist/browse.html.twig', [
-            'artistList' => $artistList,
+            'artistList' => $artistList, // Liste paginée des artistes
+            'search' => $search, // Terme de recherche actuel pour remplir le champ de recherche
         ]);
     }
 

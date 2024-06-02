@@ -18,19 +18,23 @@ class StageController extends AbstractController
     #[Route('/back/stage', name: 'app_back_stage_browse', methods: ['GET'])]
     public function list(StageRepository $stageRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // Récupère tous les scènes triés par nom
-        $stageList = $stageRepository->findBy([], ['name' => 'ASC']);
+        // Récupération du terme de recherche depuis la requête
+        $search = $request->query->get('search');
 
-        // Paginer la requête
+        // Utilisation du repository pour obtenir les scènes correspondant au terme de recherche
+        $stageList = $stageRepository->findByNameSearch($search);
+
+        // Paginer les résultats obtenus
         $stageList = $paginator->paginate(
-            $stageList,
-            $request->query->getInt('page', 1), // Utilisez la requête au lieu de stageList
-            5 // Limite par page
+            $stageList, // Query builder avec les résultats non paginés
+            $request->query->getInt('page', 1), // Numéro de la page actuelle, par défaut 1
+            5 // Nombre d'éléments par page
         );
 
-        // Rend la vue avec la liste paginée
+        // Rendu du template avec la liste paginée des scènes et le terme de recherche
         return $this->render('back/stage/browse.html.twig', [
-            'stageList' => $stageList,
+            'stageList' => $stageList, // Liste paginée des scènes
+            'search' => $search, // Terme de recherche actuel pour remplir le champ de recherche
         ]);
     }
 

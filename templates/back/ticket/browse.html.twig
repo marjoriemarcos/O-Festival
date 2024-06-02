@@ -9,9 +9,6 @@
     <div class="container">
         <h2 class="text-center my-5 fw-bold display-5">Liste des Billets</h2>
 
-        <!-- Barre de recherche -->
-        {{ include('back/fragments/_search_bar.html.twig')}}
-
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <!-- Filtrer par jour -->
@@ -38,8 +35,6 @@
                             <a class="btn btn-success fw-bold" type="button" href="{{path('app_back_ticket_add')}}">Ajouter un Billet</a>
                         </div>
                         <div class="card-body">
-                            <!-- Message en cas d'absence de résultats -->
-                            {{ include('back/fragments/_noResult_message.html.twig') }}
                             <table class="table table-bordered table-hover searchable-table" id="tableWrapper">
                                 <thead class="thead-dark">
                                     <tr>

@@ -18,19 +18,23 @@ class SponsorController extends AbstractController
     #[Route('/back/sponsor', name: 'app_back_sponsor_browse', methods: ['GET'])]
     public function browse(SponsorRepository $sponsorRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // Récupère tous les partenaires triés par nom
-        $sponsorList = $sponsorRepository->findBy([], ['name' => 'ASC']);
+        // Récupération du terme de recherche depuis la requête
+        $search = $request->query->get('search');
 
-        // Paginer la requête
+        // Utilisation du repository pour obtenir les sponsors correspondant au terme de recherche
+        $sponsorList = $sponsorRepository->findByNameSearch($search);
+
+        // Paginer les résultats obtenus
         $sponsorList = $paginator->paginate(
-            $sponsorList,
-            $request->query->getInt('page', 1), // Utilisez la requête au lieu de sponsorList
-            5 // Limite par page
+            $sponsorList, // Query builder avec les résultats non paginés
+            $request->query->getInt('page', 1), // Numéro de la page actuelle, par défaut 1
+            5 // Nombre d'éléments par page
         );
 
-        // Rendre le template avec la liste paginée des partenaires
+        // Rendu du template avec la liste paginée des sponsors et le terme de recherche
         return $this->render('back/sponsor/browse.html.twig', [
-            'sponsorList' => $sponsorList,
+            'sponsorList' => $sponsorList, // Liste paginée des sponsors
+            'search' => $search, // Terme de recherche actuel pour remplir le champ de recherche
         ]);
     }
     
