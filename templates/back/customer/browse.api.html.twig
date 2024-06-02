@@ -29,26 +29,8 @@
                                         <th scope="col"><i class="bi bi-ticket me-2"></i>Ticket_id</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <!-- Boucle à travers customerList et les afficher -->
-                                    {% for customer in customerList %}
-                                        <tr>
-                                            <!-- Affiche l'ID du participant -->
-                                            <td>{{ customer.id_participant }}</td>
-                                            
-                                            <!-- Affiche le prénom du propriétaire -->
-                                            <td>{{ customer.owner.first_name }}</td>
-                                            
-                                            <!-- Affiche le nom de famille du propriétaire -->
-                                            <td>{{ customer.owner.last_name }}</td>
-                                            
-                                            <!-- Affiche l'email du propriétaire -->
-                                            <td>{{ customer.owner.email }}</td>
-                                            
-                                            <!-- Affiche l'ID du ticket associé -->
-                                            <td>{{ ticketList[customer.id_ticket] }}</td>
-                                        </tr>
-                                    {% endfor %}
+                                <tbody class="customer-table">
+                                    
                                 </tbody>
                             </table>
                         </div>
