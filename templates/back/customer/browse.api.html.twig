@@ -4,6 +4,8 @@
 {# Définit le bloc 'customerActive' pour indiquer que cette page est active dans le menu de navigation #}
 {% block customerActive %}active{% endblock %}
 
+{% block body_class %}weezevent{% endblock %}
+
 {# Début du bloc 'main' qui contiendra le contenu principal de la page #}
 {% block main %}
     <div class="container">
@@ -29,7 +31,7 @@
                                         <th scope="col"><i class="bi bi-ticket me-2"></i>Ticket_id</th>
                                     </tr>
                                 </thead>
-                                <tbody class="customer-table">
+                                <tbody class="weezevent-customer-table-body">
                                     
                                 </tbody>
                             </table>
