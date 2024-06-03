@@ -25,7 +25,7 @@ class MainController extends AbstractController
 
             $passes[] = [
                 'data' => $tickets,
-                'title' => 'PASS ' . ($duration / 24) . ' DAY(S)',
+                'title' => 'PASS ' . ($duration / 24) . ' JOUR(S)',
                 'image' => 'pass-' . ($duration / 24) . '-jours.jpg',
             ];
         }

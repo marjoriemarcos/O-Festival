@@ -127,8 +127,8 @@ class AppFixtures extends Fixture
         ];
 
         // Dates du festival
-        $festivalStartDate = new DateTimeImmutable('2024-05-23');
-        $festivalEndDate = new DateTimeImmutable('2024-05-25');
+        $festivalStartDate = new DateTimeImmutable('2024-08-23');
+        $festivalEndDate = new DateTimeImmutable('2024-08-25');
 
         // Génération des tickets pour chaque jour (vendredi, samedi, dimanche)
         for ($i = 0; $i < 3; $i++) {
