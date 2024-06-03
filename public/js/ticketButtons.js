@@ -21,19 +21,23 @@ export const ticketButtons = {
     // Fonction de liaison des événements
     bind: function () {
         // Fonction pour mettre à jour le titre de la durée
-        const updateDurationTitle = (duration) => {
-            switch (duration) {
-                case '24':
+        const updateDurationTitle = (type) => {
+            switch (type) {
+                case 'Pass 1 JOUR':
                     ticketButtons.durationTitle.textContent = 'Pass 1 Jour';
+                    console.log(ticketButtons.durationTitle.textContent)
                     break;
-                case '48':
+                case 'Pass 2 JOURS':
                     ticketButtons.durationTitle.textContent = 'Pass 2 Jours';
+                    console.log(ticketButtons.durationTitle.textContent)
                     break;
-                case '72':
+                case 'Pass 3 JOURS':
                     ticketButtons.durationTitle.textContent = 'Pass 3 Jours';
+                    console.log(ticketButtons.durationTitle.textContent)
                     break;
                 default:
                     ticketButtons.durationTitle.textContent = 'Tous les pass';
+                    console.log(ticketButtons.durationTitle.textContent)
             }
         };
 
