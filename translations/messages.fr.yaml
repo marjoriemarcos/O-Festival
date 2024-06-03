@@ -71,6 +71,18 @@ sponsor:
     form:
         name: "Nom"
         icon: "Logo"
+
+user:
+    form:
+        mail: "E-mail"
+        mailPlaceholder: "Entrez votre e-mail"
+        password: "Mot de passe"
+        passwordPlaceholder: "Entrez votre mot de passe"
+        firstname: "Prénom"
+        lastname: "Nom"
+        roles: "Rôles"        
+        rolesAdmin: "Administrateur"
+
     
         
         

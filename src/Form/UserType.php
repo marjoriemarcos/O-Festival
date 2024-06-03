@@ -19,28 +19,32 @@ class UserType extends AbstractType
 
         $builder
             ->add('email', EmailType::class, [
-                'label' => 'Email',
+                'label' => 'user.form.mail',
                 'attr' => [
-                    'placehold' => 'laura06@gmail.com']
+                    'placehold' => 'user.form.mailPlaceholder']
             ])
             ->add('firstname',  TextType::class, [
-                'label' => 'Prénom',
+                'label' => 'user.form.firstname',
             ])
             ->add('lastname',  TextType::class, [
-                'label' => 'Nom',
+                'label' => 'user.form.lastname',
             ])
             ->add('roles', ChoiceType::class, [
-                'label' => 'Rôle',
+                'label' => 'user.form.roles',
                 'multiple' => true,
-                'expanded' => true, // Ajout de cette ligne pour afficher les choix comme des cases à cocher
+                'expanded' => true, // adding checkboxes for multiple choices
                 'choices' => [
-                    'Administrateur' => 'ROLE_ADMIN',
+                    'user.form.rolesAdmin' => 'ROLE_ADMIN',
                 ],
  
             ]);
             // Check if it's a form add or a form edit
              if ($options['is_add']) {
-                $builder->add('password', PasswordType::class);
+                $builder->add('password', PasswordType::class, [
+                    'label' => 'user.form.password',
+                    'attr' => [
+                        'placehold' => 'user.form.passwordPlaceholder']
+                ]);
             }
         ;
     }
