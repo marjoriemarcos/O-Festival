@@ -84,7 +84,7 @@ class ArtistRepository extends ServiceEntityRepository
             INNER JOIN stage 
             ON stage.id = slot.stage_id
         ';
-    
+
         $conditions = [];
         $params = [];
         // Si $date n'est pas null alors on le met dans $condition
@@ -111,10 +111,35 @@ class ArtistRepository extends ServiceEntityRepository
             GROUP BY artist.id, slot.id, slot.date, stage.name
             ORDER BY slot.date ASC
         ';
-    
+
         $resultSet = $conn->executeQuery($sql, $params);
-    
+
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();
+    }
+
+    /**
+     * Recherche des artistes par nom.
+     *
+     * @param string $search Terme de recherche
+     * @return array Retourne un tableau d'objets Artist
+     */
+    public function findByNameSearch($search): array
+    {
+        // Création d'un QueryBuilder pour l'entité 'Artist' aliasée en 'a'
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.genres', 'g') // Jointure avec la table des genres
+            ->leftJoin('a.slot', 's')   // Jointure avec la table des créneaux
+            ->addSelect('g')            // Sélectionnez les colonnes liées aux genres
+            ->addSelect('s')            // Sélectionnez les colonnes liées aux créneaux
+            // Ajout d'une condition WHERE pour filtrer les artistes dont le nom correspond au terme de recherche
+            ->where('a.name LIKE :search')
+            // Définition du paramètre 'search' en ajoutant des wildcards (%) pour une recherche partielle
+            ->setParameter('search', '%' . $search . '%')
+            // Tri des résultats par nom dans l'ordre croissant
+            ->orderBy('a.name', 'ASC')
+            // Exécution de la requête et récupération des résultats
+            ->getQuery()
+            ->getResult();
     }
 }

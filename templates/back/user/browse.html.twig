@@ -10,8 +10,16 @@
     <div class="container">
         <h2 class="text-center my-5 fw-bold display-5">Liste des administrateurs</h2>
         
-        {# Barre de recherche incluse à partir d'un fragment #}
-        {{ include('back/fragments/_search_bar.html.twig') }}
+    <!-- Search Bar -->
+    <div class="row mb-2">
+        <form class="d-flex justify-content-center" action="{{ path('app_back_user_browse') }}" method="get">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-4 me-2">
+                <input class="form-control me-sm-2 search-input" type="search" name="search" value="{{ search }}" placeholder="Rechercher...">
+            </div>
+            <button class="btn btn-primary bi bi-search my-2 my-sm-0" type="submit" id="searchButton"></button>
+            <button class="btn btn-secondary bi bi-x my-2 my-sm-0 ms-2" type="button" id="resetButton" style="display: {{ search ? 'block' : 'none' }};">Réinitialiser</button>
+        </form>
+    </div>
 
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -43,19 +51,19 @@
                                 </thead>
                                 <tbody>
                                     <!-- Boucle à travers la liste des administrateurs et les affiche -->
-                                    {% for admin in adminList %}
+                                    {% for user in userList %}
                                         <tr>
-                                            <td>{{ admin.lastname }}</td>
-                                            <td>{{ admin.firstname }}</td>
-                                            <td>{{ admin.email }}</td>
+                                            <td>{{ user.lastname }}</td>
+                                            <td>{{ user.firstname }}</td>
+                                            <td>{{ user.email }}</td>
                                             <td>*********</td> {# Mot de passe masqué #}
-                                            <td>{{ admin.roles | join(', ') }}</td>
+                                            <td>{{ user.roles | join(', ') }}</td>
                                             <td>
                                                 <div class="d-flex me-2">
-                                                    <a href="{{ path('app_back_user_edit', { id: admin.id }) }}" class="btn btn-primary bi bi-pencil me-2"></a>
-                                                    <!-- Bouton d'action pour supprimer un administrateur -->
-                                                    <form method="post" action="{{ path('app_back_user_browse', {'id': admin.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer {{ admin.lastname }} {{ admin.firstname }}?');">
-                                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ admin.id) }}">
+                                                    <a href="{{ path('app_back_user_edit', { id: user.id }) }}" class="btn btn-primary bi bi-pencil me-2"></a>
+                                                    <!-- Bouton d'action pour supprimer un useristrateur -->
+                                                    <form method="post" action="{{ path('app_back_user_browse', {'id': user.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer {{ user.lastname }} {{ user.firstname }}?');">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
                                                         <button class="btn btn-danger bi bi-trash">{{ button_label|default('')}}</button>
                                                     </form>
                                                 </div>

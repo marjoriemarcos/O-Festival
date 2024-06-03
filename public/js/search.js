@@ -18,70 +18,52 @@ export const search = {
         search.searchButton = document.getElementById('searchButton');
         search.resetButton = document.getElementById('resetButton');
         search.searchInput = document.querySelector('.search-input');
-        search.searchableTable = document.querySelector('.searchable-table');
+        search.tbody = document.querySelector('tbody');
         search.noResultsMessage = document.getElementById('noResultsMessage');
         search.tableWrapper = document.getElementById('tableWrapper');
     },
 
     // Gestion des événements
     bind: function() {
-        // Définition du gestionnaire d'événement pour la recherche
-        const searchHandler = (event) => {
-            event.preventDefault(); // Empêche le comportement par défaut du formulaire
-            const searchTerm = search.searchInput.value.trim().toLowerCase();
-            const rows = search.searchableTable.querySelectorAll('tbody tr');
-            let hasResults = false;
-
-            // Parcours de chaque ligne du tableau
-            rows.forEach(row => {
-                const cells = row.querySelectorAll('td');
-                let found = false;
-                cells.forEach(cell => {
-                    const text = cell.textContent.trim().toLowerCase();
-                    // Vérification si le terme de recherche est présent dans la cellule
-                    if (text.includes(searchTerm)) {
-                        found = true;
-                        hasResults = true;
-                    }
-                });
-                // Affichage ou masquage de la ligne en fonction des résultats de recherche
-                if (found) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-
-            // Affichage ou masquage du message de résultats vides et du conteneur du tableau
-            if (!hasResults) {
-                search.noResultsMessage.style.display = 'block';
-                search.tableWrapper.style.display = 'none';
-            } else {
-                search.noResultsMessage.style.display = 'none';
-                search.tableWrapper.style.display = '';
-            }
-
-            // Affichage du bouton de réinitialisation
-            search.resetButton.style.display = 'block';
-        };
-
         // Définition du gestionnaire d'événement pour la réinitialisation
         const resetHandler = (event) => {
             event.preventDefault(); // Empêche le comportement par défaut du bouton de réinitialisation
             search.searchInput.value = '';
-            const rows = search.searchableTable.querySelectorAll('tbody tr');
-            // Réinitialisation de l'affichage des lignes
-            rows.forEach(row => {
-                row.style.display = '';
-            });
-            // Masquage du message de résultats vides et du bouton de réinitialisation
-            search.noResultsMessage.style.display = 'none';
-            search.tableWrapper.style.display = '';
-            search.resetButton.style.display = 'none';
+            search.searchInput.form.submit();
         };
 
-        // Ajout des écouteurs d'événements pour la recherche et la réinitialisation
-        search.searchButton.addEventListener('click', searchHandler);
-        search.resetButton.addEventListener('click', resetHandler);
+        // Ajout des écouteurs d'événements pour la réinitialisation
+        if (search.resetButton) {
+            search.resetButton.addEventListener('click', resetHandler);
+        }
+
+        // Affichage du bouton de réinitialisation en fonction de la saisie
+        search.searchInput.addEventListener('input', () => {
+            if (search.searchInput.value.trim() !== '') {
+                search.resetButton.style.display = 'block';
+            } else {
+                search.resetButton.style.display = 'none';
+            }
+        });
+
+        // Vérification si le tbody est vide et basculement du style en conséquence
+        const checkTbody = () => {
+            if (search.tbody.children.length === 0) {
+                search.noResultsMessage.style.display = 'block'; // Affiche le message "Aucun résultat trouvé"
+                search.tableWrapper.style.display = 'none'; // Masque le conteneur du tableau
+            } else {
+                search.noResultsMessage.style.display = 'none'; // Masque le message "Aucun résultat trouvé"
+                search.tableWrapper.style.display = 'block'; // Affiche le conteneur du tableau
+            }
+        };
+
+        // Vérification initiale du tbody
+        checkTbody();
+
+        // Ajout de l'événement de changement du tbody
+        search.searchInput.addEventListener('input', checkTbody);
     }
 };
+
+// Initialisation du script après le chargement du DOM
+document.addEventListener('DOMContentLoaded', search.init);

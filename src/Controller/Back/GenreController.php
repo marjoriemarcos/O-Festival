@@ -17,19 +17,23 @@ class GenreController extends AbstractController
     #[Route('/back/genre', name: 'app_back_genre_browse', methods: ['GET'])]
     public function browse(GenreRepository $genreRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // Récupère tous les genres triés par nom
-        $genreList = $genreRepository->findBy([], ['name' => 'ASC']);
+        // Récupération du terme de recherche depuis la requête
+        $search = $request->query->get('search');
 
-        // Paginer la requête
+        // Utilisation du repository pour obtenir les genres correspondant au terme de recherche
+        $genreList = $genreRepository->findByNameSearch($search);
+
+        // Paginer les résultats obtenus
         $genreList = $paginator->paginate(
-            $genreList,
-            $request->query->getInt('page', 1), // Utilisez la requête au lieu de genreList
-            5 // Limite par page
+            $genreList, // Query builder avec les résultats non paginés
+            $request->query->getInt('page', 1), // Numéro de la page actuelle, par défaut 1
+            5 // Nombre d'éléments par page
         );
-    
-        // Rend la vue avec la liste paginée
+
+        // Rendu du template avec la liste paginée des genres et le terme de recherche
         return $this->render('back/genre/browse.html.twig', [
-            'genreList' => $genreList,
+            'genreList' => $genreList, // Liste paginée des genres
+            'search' => $search, // Terme de recherche actuel pour remplir le champ de recherche
         ]);
     }
 

@@ -16,19 +16,6 @@ class GenreRepository extends ServiceEntityRepository
         parent::__construct($registry, Genre::class);
     }
 
-   /**
-    * @return Genre[] Returns an array of 4 Genre objects
-    */
-   public function limitedGenre(): array
-   {
-    return $this->createQueryBuilder('g')
-           ->orderBy('g.id', 'ASC')
-           ->setMaxResults(4)
-           ->getQuery()
-           ->getResult()
-       ;
-   }
-
     /**
      * Récupère les genres des artistes présents dans les slots.
      *
@@ -43,13 +30,27 @@ class GenreRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-//    public function findOneBySomeField($value): ?Genre
-//    {
-//        return $this->createQueryBuilder('g')
-//            ->andWhere('g.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+
+    /**
+     * Finds genres by their name using a partial match.
+     *
+     * @param string $search The search term.
+     * @return Genre[] The genres matching the search term.
+     */
+    public function findByNameSearch($search): array
+    {
+        // Création d'un QueryBuilder pour l'entité 'Genre' aliasée en 'g'
+        return $this->createQueryBuilder('g')
+            // Ajout d'une sélection de l'entité Genre
+            ->select('g')
+            // Ajout d'une condition WHERE pour filtrer les genres dont le nom correspond au terme de recherche
+            ->where('g.name LIKE :search')
+            // Définition du paramètre 'search' en ajoutant des wildcards (%) pour une recherche partielle
+            ->setParameter('search', '%' . $search . '%')
+            // Tri des résultats par nom dans l'ordre croissant
+            ->orderBy('g.name', 'ASC')
+            // Exécution de la requête et récupération des résultats
+            ->getQuery()
+            ->getResult();
+    }
 }

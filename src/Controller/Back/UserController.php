@@ -9,6 +9,7 @@ use App\Repository\UserRepository;
 use App\Entity\User;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -16,14 +17,27 @@ class UserController extends AbstractController
 {
 
     #[Route('/back/user', name: 'app_back_user_browse')]
-    public function browse(UserRepository $userRepository): Response
+    public function browse(UserRepository $userRepository, Request $request, PaginatorInterface $paginator): Response
     {
-        // Fetch users with ROLE_ADMIN
-        $adminList = $userRepository->findAll();
+        // Récupération du terme de recherche depuis la requête
+        $search = $request->query->get('search');
 
+        // Utilisation du repository pour obtenir les utilisateurs correspondant au terme de recherche
+        $userList = $userRepository->findByLastNameSearch($search);
+
+        // Paginer les résultats obtenus
+        $userList = $paginator->paginate(
+            $userList, // Query builder avec les résultats non paginés
+            $request->query->getInt('page', 1), // Numéro de la page actuelle, par défaut 1
+            5 // Nombre d'éléments par page
+        );
+
+        // Rendu du template avec la liste paginée des utilisateurs et le terme de recherche
         return $this->render('back/user/browse.html.twig', [
-            'adminList' => $adminList,
-        ]);}
+            'userList' => $userList, // Liste paginée des utilisateurs
+            'search' => $search, // Terme de recherche actuel pour remplir le champ de recherche
+        ]);
+    }
 
         #[Route('/back/user/add', name: 'app_back_user_add', methods: ['GET', 'POST'])]
         public function add(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
@@ -95,4 +109,6 @@ class UserController extends AbstractController
         
             return $this->redirectToRoute('app_back_user_browse');
         }
+
+
 }

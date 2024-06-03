@@ -11,8 +11,16 @@
         <!-- Titre principal -->
         <h2 class="text-center my-5 fw-bold display-5">Liste des Genres musicaux</h2>
 
-        <!-- Barre de recherche -->
-        {{ include('back/fragments/_search_bar.html.twig') }}
+    <!-- Search Bar -->
+    <div class="row mb-2">
+        <form class="d-flex justify-content-center" action="{{ path('app_back_genre_browse') }}" method="get">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-4 me-2">
+                <input class="form-control me-sm-2 search-input" type="search" name="search" value="{{ search }}" placeholder="Rechercher...">
+            </div>
+            <button class="btn btn-primary bi bi-search my-2 my-sm-0" type="submit" id="searchButton"></button>
+            <button class="btn btn-secondary bi bi-x my-2 my-sm-0 ms-2" type="button" id="resetButton" style="display: {{ search ? 'block' : 'none' }};">Réinitialiser</button>
+        </form>
+    </div>
 
         <div class="row justify-content-center">
             <div class="col-md-8">
