@@ -124,7 +124,7 @@ class TicketType extends AbstractType
             }
             
         }
-        // Validate the duration for "Pass 1 JOUR"
+        // Validate if the befor date is lower that the end date"
         if ($dataFromForm->getStartAt() > $dataFromForm->getEndAt()) {
             $event->getForm()->addError(new FormError('La date début doit être inférieure à la date de fin.'));
         }

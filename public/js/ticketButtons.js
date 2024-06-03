@@ -25,19 +25,15 @@ export const ticketButtons = {
             switch (type) {
                 case 'Pass 1 JOUR':
                     ticketButtons.durationTitle.textContent = 'Pass 1 Jour';
-                    console.log(ticketButtons.durationTitle.textContent)
                     break;
                 case 'Pass 2 JOURS':
                     ticketButtons.durationTitle.textContent = 'Pass 2 Jours';
-                    console.log(ticketButtons.durationTitle.textContent)
                     break;
                 case 'Pass 3 JOURS':
                     ticketButtons.durationTitle.textContent = 'Pass 3 Jours';
-                    console.log(ticketButtons.durationTitle.textContent)
                     break;
                 default:
                     ticketButtons.durationTitle.textContent = 'Tous les pass';
-                    console.log(ticketButtons.durationTitle.textContent)
             }
         };
 
