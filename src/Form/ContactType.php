@@ -28,9 +28,9 @@ class ContactType extends AbstractType
                     'class' => 'form-control open-font',
                     'placeholder' => 'contact.form.name_placeholder',
                 ],
-                'constraints' => [
+                /*'constraints' => [
                     new NotBlank(['message' => 'contact.form.name_required']),
-                ],
+                ],*/
             ])
             ->add('email', EmailType::class, [
                 'label' => 'contact.form.email',
@@ -41,9 +41,9 @@ class ContactType extends AbstractType
                 'label_attr' => [
                     'class' => 'light-yellow-txt',
                 ],
-                'constraints' => [
+                /*'constraints' => [
                     new NotBlank(['message' => 'contact.form.email_required']),
-                ],
+                ],*/
             ])
             ->add('content', TextareaType::class, [
                 'label' => 'contact.form.message',
@@ -55,9 +55,9 @@ class ContactType extends AbstractType
                 'label_attr' => [
                     'class' => 'light-yellow-txt',
                 ],
-                'constraints' => [
+                /*'constraints' => [
                     new NotBlank(['message' => 'contact.form.message_required']),
-                ],
+                ],*/
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'contact.form.submit',
