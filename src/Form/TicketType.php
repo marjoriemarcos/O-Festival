@@ -131,24 +131,22 @@ class TicketType extends AbstractType
 
         // Validate the duration for "Pass 1 JOUR"
         if ($dataFromForm->getType() === 'Pass 1 JOUR') {
-            if ($dataFromForm->getDuration() != 24 || $dataFromForm->getStartAt() != $dataFromForm->getEndAt() ) {
-                $event->getForm()->addError(new FormError('Il y a une erreur dans la durée, veuillez à selectionner 24h ou les bonnes dates pour un Pass 1 JOUR'));
+            if ($dataFromForm->getStartAt() != $dataFromForm->getEndAt() ) {
+                $event->getForm()->addError(new FormError('Il y a une erreur dans la durée, veuillez selectionner les bonnes dates pour un Pass 1 JOUR'));
             }
         }
         // Validate the duration for "Pass 2 JOURS"
         if ($dataFromForm->getType() === 'Pass 2 JOURS') {
-            if ($dataFromForm->getDuration() != 48 || $dataFromForm->getStartAt()->modify('+1 day') != $dataFromForm->getEndAt()) {
-                $event->getForm()->addError(new FormError('Il y a une erreur dans la durée, veuillez à selectionner 48h ou les bonnes dates pour un Pass 2 JOURS'));
+            if ($dataFromForm->getStartAt()->modify('+1 day') != $dataFromForm->getEndAt()) {
+                $event->getForm()->addError(new FormError('Il y a une erreur dans la durée, veuillez selectionner les bonnes dates pour un Pass 2 JOURS'));
             }
         }
         // Validate the duration for "Pass 3 JOURS"
         if ($dataFromForm->getType() === 'Pass 3 JOURS') {
-            if ($dataFromForm->getDuration() != 72 || $dataFromForm->getStartAt()->modify('+2 day') != $dataFromForm->getEndAt()) {
-                $event->getForm()->addError(new FormError('Il y a une erreur dans la durée, veuillez à selectionner 72h ou les bonnes dates pour un Pass 3 JOURS'));
+            if ($dataFromForm->getStartAt()->modify('+2 day') != $dataFromForm->getEndAt()) {
+                $event->getForm()->addError(new FormError('Il y a une erreur dans la durée, veuillez selectionner les bonnes dates pour un Pass 3 JOURS'));
             }
         }
-
-        
     }
 
  
