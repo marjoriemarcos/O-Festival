@@ -85,31 +85,58 @@ class TicketType extends AbstractType
 
     public function validateData (FormEvent $event): void 
     {
-        // Récupère les data du formulaire qui vient d'etre envoyé
+        // Récupèration des données du formulaire
+        $form = $event->getForm();
         $dataFromForm = $event->getForm()->getData();
-        // Récupère le repository
-        //$ticketRepository = $this->entityManager->getRepository(Ticket::class);
-    
-        // Rechercher les tickets existants par les paramètres du formulaire
-        $existingTickets = $this->ticketRepo->findTicketsByParams(
-            $dataFromForm->getType(),
-            $dataFromForm->getStartAt(),
-            $dataFromForm->getEndAt(),
-            $dataFromForm->getFee()
-        );
-    
-        //dump($this->ticketRepo);die;
-        // Vérifier si des tickets existent
-        if (!empty($existingTickets)) {
+
+        // Test s'il s'agit d'un formulaire d'ajout 
+        if ($form->getConfig()->getOption('isNew') === true) {
+                
+            // Recherche en base de données pour savoir si les données du form sont déjà en base de données
+            $existingTickets = $this->ticketRepo->findTicketsByParams(
+                $dataFromForm->getType(),
+                $dataFromForm->getStartAt(),
+                $dataFromForm->getEndAt(),
+                $dataFromForm->getFee(),
+                null
+            );
+           
+            // Si la variable n'est pas vide c'est qu'il y a déjà un billet avec ces informations
+            if (!empty($existingTickets)) {
+                    $event->getForm()->addError(new FormError('Il y a déjà un billet avec ce titre, ces dates, et ce tarif.'));
+            }
+
+        }
+
+        // Test s'il s'agit d'un formulaire d'édition
+        if ($form->getConfig()->getOption('isNew') === false) {
+           
+            // Récupération des données du formulaire d'édition
+            $dataFromForm = $event->getForm()->getData();
+
+            // Récupèration des données sans 
+            $existingTickets = $this->ticketRepo->findTicketsByParams(
+                $dataFromForm->getType(),
+                $dataFromForm->getStartAt(),
+                $dataFromForm->getEndAt(),
+                $dataFromForm->getFee(),
+                $dataFromForm->getId()
+            );
+
+          // Si la variable n'est pas vide c'est qu'il y a déjà un billet avec ces informations
+          if (!empty($existingTickets)) {
             $event->getForm()->addError(new FormError('Il y a déjà un billet avec ce titre, ces dates, et ce tarif.'));
+            }
+            
         }
         // Vérifie si la date de début est bien inférieure à la date de fin
         if ($dataFromForm->getStartAt() > $dataFromForm->getEndAt()) {
             $event->getForm()->addError(new FormError('La date début doit être inférieure à la date de fin.'));
         }
-
+        
     }
 
+ 
     public function getLongTitle (FormEvent $event)
     {
         // Récupère le formulaire envoyé
@@ -149,6 +176,7 @@ class TicketType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Ticket::class,
+            'isNew' => true, // By default, it's the "new" form
         ]);
     }
 }

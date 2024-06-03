@@ -64,24 +64,12 @@ class TicketController extends AbstractController
         $ticket = new Ticket();
 
         // Crée le formulaire de création de billet
-        $form = $this->createForm(TicketType::class, $ticket);
+        $form = $this->createForm(TicketType::class, $ticket, ['isNew' => true]);
         $form->handleRequest($request);
 
         // Vérifie si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
-            // Génère le titre réel du billet
-            // $dataFromForm = $form->getData();
-            // $realTitle = $dataFromForm->setRealTitle();
-            // $ticket->setTitle($realTitle);
-
-            // Vérifie si un billet avec ce titre existe déjà
-            // $existingTicket = $ticketRepository->findOneBy(['title' => $realTitle]);
-
-            // if ($existingTicket) {
-            //     $this->addFlash('danger', 'Ce billet existe déjà!');
-            //     return $this->redirectToRoute('app_back_ticket_add', [], Response::HTTP_SEE_OTHER);
-            // }
-
+    
             // Persiste le nouveau billet et enregistre dans la base de données
             $entityManager->persist($ticket);
             $entityManager->flush();
@@ -106,7 +94,7 @@ class TicketController extends AbstractController
     public function edit(Request $request, Ticket $ticket, EntityManagerInterface $entityManager, TicketRepository $ticketRepository): Response
     {
         // Crée le formulaire d'édition de billet
-        $form = $this->createForm(TicketType::class, $ticket);
+        $form = $this->createForm(TicketType::class, $ticket, ['isNew' => false]);
         $form->handleRequest($request);
 
         // Vérifie si le formulaire est soumis et valide

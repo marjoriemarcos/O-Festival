@@ -30,11 +30,9 @@ class SlotType extends AbstractType
     {
         // Add fields to the form
         $builder
-            //??? pourquoi ne pas préciser le type ?
             ->add('date', null, [
                 'label' => 'Date',
                 'widget' => 'single_text',
-                // ???? pourquoi avoir mis un deuxime champs label ?
                 'label' => 'slot.form.date',
             ])
             ->add('day', ChoiceType::class, [

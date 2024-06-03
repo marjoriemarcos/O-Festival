@@ -72,44 +72,55 @@ class TicketRepository extends ServiceEntityRepository
 
 
 
-    public function findTicketsByParams($type, $startAt, $endAt, $fee)
+    public function findTicketsByParams($type, $startAt, $endAt, $fee, $id = null)
     {
-        $conn = $this->getEntityManager()->getConnection();
+        $entityManager = $this->getEntityManager();
     
-        // Construction de la requête SQL
-        $sql = '
-            SELECT * FROM ticket t
+        // Construction de la requête DQL
+        $dql = '
+            SELECT t
+            FROM App\Entity\Ticket t
             WHERE t.type = :type
-            AND t.start_at = :startAt
-            AND t.end_at = :endAt
+            AND t.startAt = :startAt
+            AND t.endAt = :endAt
             AND t.fee = :fee
         ';
-    //WHERE LEFT(t.title, 6) LIKE :title
-        // Formatage des dates en chaînes de caractères
+    
+        // Ajout conditionnel du paramètre id
+        if ($id !== null) {
+            $dql .= ' AND t.id != :id';
+        }
+    
+        $query = $entityManager->createQuery($dql);
+    
+        // Préparation des paramètres
+        $query->setParameter('type', $type);
+        
         if ($startAt instanceof \DateTimeInterface) {
-            $startAtFormatted = $startAt->format('Y-m-d H:i:s');
+            $query->setParameter('startAt', $startAt);
         } else {
             throw new \InvalidArgumentException('startAt doit être une instance de \DateTimeInterface.');
         }
-    
+        
         if ($endAt instanceof \DateTimeInterface) {
-            $endAtFormatted = $endAt->format('Y-m-d H:i:s');
+            $query->setParameter('endAt', $endAt);
         } else {
             throw new \InvalidArgumentException('endAt doit être une instance de \DateTimeInterface.');
         }
+        
+        $query->setParameter('fee', $fee);
     
-        // Préparation de la requête avec les paramètres
-        $stmt = $conn->prepare($sql);
-        $result = $stmt->executeQuery([
-            'type' => $type,
-            'startAt' => $startAtFormatted,
-            'endAt' => $endAtFormatted,
-            'fee' => $fee,
-        ]);
+        // Ajout conditionnel du paramètre id
+        if ($id !== null) {
+            $query->setParameter('id', $id);
+        }
     
-        // Retourne les résultats sous forme de tableau d'associations
-        return $result->fetchAllAssociative();
+        // Exécution de la requête et retour des résultats
+        return $query->getResult();
     }
+    
+
+
 }
 
 
