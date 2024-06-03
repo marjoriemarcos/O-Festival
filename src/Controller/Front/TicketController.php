@@ -24,16 +24,16 @@ class TicketController extends AbstractController
         foreach ([24, 48, 72] as $duration) {
             // Fetch tickets for the specified duration
             $tickets = $ticketRepository->findTicketsByDuration($duration);
-            
+
             // Format dates for each ticket
             foreach ($tickets as $ticket) {
-                $ticket->formattedStartAt = $formatter->format($ticket->getStartAt());
-                $ticket->formattedEndAt = $formatter->format($ticket->getEndAt());
+                $ticket->setFormattedStartAt($formatter->format($ticket->getStartAt()));
+                $ticket->setFormattedEndAt($formatter->format($ticket->getEndAt()));
             }
 
             // Add tickets to the passes list
             $passes[] = [
-                'data' => $tickets,
+                'data'  => $tickets,
                 'title' => 'PASS ' . ($duration / 24) . ' DAY(S)',
                 'image' => 'pass-' . ($duration / 24) . '-jours.jpg',
             ];

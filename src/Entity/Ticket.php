@@ -63,11 +63,15 @@ class Ticket
     #[ORM\Column(length: 64)]
     private ?string $type = null;
 
+    private ?string $formattedStartAt = null;
+    private ?string $formattedEndAt = null;
+
     public function __construct()
     {
         $this->customers = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
     }
+
 
     /**
      * Calculate the duration of the ticket in day
@@ -240,5 +244,25 @@ class Ticket
         $this->type = $type;
 
         return $this;
+    }
+
+    public function getFormattedStartAt(): ?string
+    {
+        return $this->formattedStartAt;
+    }
+
+    public function setFormattedStartAt(?string $formattedStartAt): void
+    {
+        $this->formattedStartAt = $formattedStartAt;
+    }
+
+    public function getFormattedEndAt(): ?string
+    {
+        return $this->formattedEndAt;
+    }
+
+    public function setFormattedEndAt(?string $formattedEndAt): void
+    {
+        $this->formattedEndAt = $formattedEndAt;
     }
 }
