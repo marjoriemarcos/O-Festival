@@ -7,7 +7,7 @@ use App\Form\ContactType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
 
-class ContactTypeValidationTest extends TypeTestCase
+class ContactTypeTest extends TypeTestCase
 {
     public function testSubmitValidData(): void
     {
