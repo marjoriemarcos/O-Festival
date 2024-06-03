@@ -6,13 +6,14 @@ use App\DTO\ContactDTO;
 use App\Form\ContactType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
+
 class ContactTypeValidationTest extends TypeTestCase
 {
     public function testSubmitValidData(): void
     {
         $formData = [
-            'name' => 'Ofestival',
-            'email' => 'ofestival@example.com',
+            'name'    => 'Ofestival',
+            'email'   => 'ofestival@example.com',
             'content' => 'Yo je suis un test',
         ];
 
@@ -30,4 +31,8 @@ class ContactTypeValidationTest extends TypeTestCase
         $this->assertSame($formData['email'], $model->email);
         $this->assertSame($formData['content'], $model->content);
     }
+
 }
+
+
+
