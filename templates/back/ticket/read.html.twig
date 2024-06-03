@@ -1,10 +1,9 @@
-{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-{# Définit le bloc 'ticketActive' pour indiquer que cette page est active dans le menu de navigation #}
 {% block ticketActive %}active{% endblock %}
 
-{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block title %}Détails du Billet{% endblock %}
+
 {% block main %}
 
 	<div class="container">
@@ -14,23 +13,22 @@
 				class="row justify-content-center">
 				<!-- Ticket Card -->
 				<div class="col-md-8">
-					<!-- Bouton de retour à la liste des billets -->
+					<!--Ticket List Button -->
 					<a href="{{ path('app_back_ticket_browse') }}" class="btn btn-primary fw-bold mb-4">
 						<i class="bi bi-arrow-left"></i>
 						Retour à la liste des billets
 					</a>
-					{# Inclusion du fragment pour afficher les messages de succès ou d'erreur #}
+					{# Flash Messages Fragment #}
 					{{ include('back/fragments/_message.html.twig') }}
 					<div
 						class="card">
 						<!-- Title Card -->
-						<div class="card-header d-flex justify-content-between align-items-center">
-							<!-- Titre du billet -->
+						<div class="card-header d-flex justify-content-between align-items-center">							
 							<span class="fs-2 fw-bold">
 								<i class="bi bi-ticket me-2"></i>
 								{{ ticket.title }}
 							</span>
-							<!-- Boutons d'édition et de suppression -->
+							<!-- Action Buttons -->
 							<div class="d-flex">
 								<a href="{{path('app_back_ticket_edit', {id: ticket.id})}}" class="btn btn-warning me-2 bi bi-pencil"></a>
 								<form method="post" action="{{ path('app_back_ticket_delete', {'id': ticket.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer {{ ticket.title }}?');">
@@ -40,12 +38,10 @@
 							</div>
 						</div>
 						<div
-							class="card-body">
-							<!-- Durée du billet -->
+							class="card-body">						
 							<div class="d-flex align-items-center mt-3">
 								<i class="bi bi-clock me-2" style="font-size: 1.5rem;"></i>
-								<h6 class="fw-bold mb-0">Durée :</h6>
-								<!-- Affiche la date de début et la date de fin si différentes -->
+								<h6 class="fw-bold mb-0">Durée :</h6>								
 								{% if ticket.startAt|date('d/m/Y') == ticket.endAt|date('d/m/Y') %}
 									<p class="mb-0 ms-2">le
 										{{ ticket.startAt|date('d/m/Y') }}</p>
@@ -55,20 +51,17 @@
 										au
 										{{ ticket.endAt|date('d/m/Y') }}</p>
 								{% endif %}
-							</div>
-							<!-- Type de forfait -->
+							</div>						
 							<div class="d-flex align-items-center mt-3">
 								<i class="bi bi-person-badge me-2" style="font-size: 1.5rem;"></i>
 								<h6 class="fw-bold mb-0">Type de Forfait :</h6>
 								<p class="mb-0 ms-2">{{ ticket.fee }}</p>
-							</div>
-							<!-- Prix -->
+							</div>						
 							<div class="d-flex align-items-center mt-3">
 								<i class="bi bi-currency-euro me-2" style="font-size: 1.5rem;"></i>
 								<h6 class="fw-bold mb-0">Prix :</h6>
 								<p class="mb-0 ms-2">{{ ticket.price }}</p>
-							</div>
-							<!-- Quantité -->
+							</div>							
 							<div class="d-flex align-items-center mt-3">
 								<i class="bi bi-box-seam me-2" style="font-size: 1.5rem;"></i>
 								<h6 class="fw-bold mb-0">Quantité :</h6>

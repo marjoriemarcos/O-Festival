@@ -1,11 +1,11 @@
-{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-{# Définit le bloc 'slotActive' pour indiquer que cette page est active dans le menu de navigation #}
 {% block slotActive %}active
 {% endblock %}
 
-{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block title %}Liste des Créneaux{% endblock %}
+
+
 {% block main %}
 	<div class="container">
 		<h2 class="text-center my-5 fw-bold display-5">Liste des Créneaux</h2>
@@ -13,8 +13,7 @@
 			<div class="row justify-content-center">
 				<!-- Sort per day -->
 				<div class="col-md-8 mb-3">
-					<div class="d-flex">
-						{# Boutons de filtre pour trier les créneaux par jour #}
+					<div class="d-flex">						
 						<button class="btn btn-primary fw-bold me-2 filter-button selected" data-day="all" type="button">Tous les jours</button>
 						<button class="btn btn-primary fw-bold me-2 filter-button" data-day="J1" type="button">Jour 1</button>
 						<button class="btn btn-primary fw-bold me-2 filter-button" data-day="J2" type="button">Jour 2</button>
@@ -23,7 +22,7 @@
 				</div>
 				<!-- Slot card -->
 				<div class="col-md-8">
-					{# Inclusion du fragment pour afficher les messages de succès ou d'erreur #}
+					{# Flash Messages Fragment #}					
 					{{ include('back/fragments/_message.html.twig') }}
 					<div class="card">
 						<!-- Card title -->
@@ -61,7 +60,7 @@
 										</tr>
 									</thead>
 									<tbody id="slots-table-body">
-										<!-- Boucle pour afficher les créneaux -->
+										<!-- Iterating through the slot list -->
 										{% for slot in slotList %}
 											<tr data-day="{{ slot.day }}">
 												<td>{{ slot.day }}-{{ slot.date|date('d/m/y') }}</td>
@@ -70,9 +69,9 @@
 												<td>{{ slot.stage.name }}</td>
 												<td>
 													<div class="d-flex">
-														<!-- Boutons d'action -->
+														<!-- Action button -->
 														<a href="{{ path('app_back_slot_read', {id: slot.id}) }}" class="btn btn-primary bi bi-search me-2"></a>
-														<!-- Formulaire de suppression du créneau -->
+														<!-- Delete form button -->
 														<form method="post" action="{{ path('app_back_slot_delete', {'id': slot.id}) }}" onsubmit="return confirm('Voulez-vous supprimer le créneau du {{ slot.date|date('d/m/y') }} de {{ slot.hour }}?');">
 															<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ slot.id) }}">
 															<button class="btn btn-danger bi bi-trash">{{ button_label|default('')}}</button>

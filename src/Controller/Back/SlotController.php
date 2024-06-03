@@ -16,10 +16,10 @@ class SlotController extends AbstractController
     #[Route('/back/slot', name: 'app_back_slot_browse', methods: ['GET'])]
     public function browse(SlotRepository $slotRepository): Response
     {
-        // Récupère tous les slots triés par date puis par heure avec les relations préchargées
+        // Retrieve all slots sorted by date and time with preloaded relationships
         $slotList = $slotRepository->findAllSorted();
     
-        // Rend la vue avec la liste des slots
+        // Render the view with the list of slots
         return $this->render('back/slot/browse.html.twig', [
             'slotList' => $slotList,
         ]);
@@ -43,26 +43,26 @@ class SlotController extends AbstractController
     #[Route('/back/slot/add', name: 'app_back_slot_add', methods: ['GET', 'POST'])]
     public function add(Request $request, EntityManagerInterface $entityManager): Response
     {
-        // Crée un nouvel objet Slot
+        // Create a new Slot object
         $slot = new Slot();
 
-        // Crée un formulaire pour le Slot
+        // Create a form for the Slot
         $form = $this->createForm(SlotType::class, $slot, ['isNew' => true]);
         $form->handleRequest($request);
 
-        // Vérifie si le formulaire est soumis et valide
+        // Check if the form is submitted and valid
         if ($form->isSubmitted() && $form->isValid()) {
-            // Persiste le Slot dans la base de données
+            // Persist the Slot to the database
             $entityManager->persist($slot);
             $entityManager->flush();
-            // Ajoute un message flash de succès
+            // Add a success flash message
             $this->addFlash('success', 'Le créneau a bien été créé.');
 
-            // Redirige vers la page de navigation des créneaus
+            // Redirect to the slots browsing page
             return $this->redirectToRoute('app_back_slot_browse', [], Response::HTTP_SEE_OTHER);
         }
 
-        // Rend la vue du formulaire d'ajout de Slot
+        // Render the view of the Slot add form
         return $this->render('back/slot/add.html.twig', [
             'slot' => $slot,
             'form' => $form,
@@ -72,26 +72,26 @@ class SlotController extends AbstractController
     #[Route('/back/slot/{id<\d+>}/edit', name: 'app_back_slot_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Slot $slot, EntityManagerInterface $entityManager): Response
     {
-        // Crée un formulaire pour le Slot existant
+        // Create a form for the existing Slot
         $form = $this->createForm(SlotType::class, $slot, ['isNew' => false]);
         $form->handleRequest($request);
 
-        // Vérifie si le formulaire est soumis et valide
+        // Check if the form is submitted and valid
         if ($form->isSubmitted() && $form->isValid()) {
-            // Persiste les modifications dans la base de données
+            // Persist the modifications to the database
             $entityManager->flush();
 
-            // Récupère l'ID du Slot modifié
+            // Get the ID of the modified Slot
             $editedSlotId = $slot->getId();
 
-            // Ajoute un message flash pour la modification réussie
+            // Add a success flash message for successful modification
             $this->addFlash('success', 'Le créneau a bien été modifié.');
 
-            // Redirige vers la page de lecture du Slot modifié
+            // Redirect to the page to read the modified Slot
             return $this->redirectToRoute('app_back_slot_read', ['id' => $editedSlotId], Response::HTTP_SEE_OTHER);
         }
 
-        // Rend la vue du formulaire d'édition de Slot
+        // Render the view of the Slot edit form
         return $this->render('back/slot/edit.html.twig', [
             'slot' => $slot,
             'form' => $form,
@@ -101,20 +101,20 @@ class SlotController extends AbstractController
     #[Route('/back/slot/{id<\d+>}/delete', name: 'app_back_slot_delete', methods: ['POST'])]
     public function delete(Request $request, Slot $slot, EntityManagerInterface $entityManager): Response
     {
-        // Vérifie si le jeton CSRF est valide
+        // Check if the CSRF token is valid
         if ($this->isCsrfTokenValid('delete' . $slot->getId(), $request->request->get('_token'))) {
-            // Supprime le Slot de la base de données
+            // Remove the Slot from the database
             $entityManager->remove($slot);
             $entityManager->flush();
 
-            // Ajoute un message flash de succès
+            // Add a success flash message
             $this->addFlash('success', 'Le créneau a été supprimé avec succès.');
         } else {
-            // Si le jeton CSRF n'est pas valide, ajoute un message flash d'erreur
+            // If CSRF token is not valid, add an error flash message
             $this->addFlash('error', 'La suppression du créneau a échoué. Le jeton CSRF est invalide.');
         }
 
-        // Redirige vers la page de navigation des créneaus
+        // Redirect to the slots browsing page
         return $this->redirectToRoute('app_back_slot_browse');
     }
 }

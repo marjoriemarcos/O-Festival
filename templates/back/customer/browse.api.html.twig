@@ -1,21 +1,18 @@
-{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-{# Définit le bloc 'customerActive' pour indiquer que cette page est active dans le menu de navigation #}
 {% block customerActive %}active{% endblock %}
+
+{% block title %}Liste des Participants{% endblock %}
 
 {% block body_class %}weezevent{% endblock %}
 
-{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
 {% block main %}
     <div class="container">
-        <!-- Titre principal -->
         <h2 class="text-center my-5 fw-bold display-5">Liste des participant</h2>
 
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <!-- Titre de la carte -->
+                <div class="card">                
                     <div class="card-header">
                         <h3 class="fs-2 fw-bold mb-0">Participant</h3>
                     </div>
@@ -31,8 +28,7 @@
                                         <th scope="col"><i class="bi bi-ticket me-2"></i>Ticket_id</th>
                                     </tr>
                                 </thead>
-                                <tbody class="weezevent-customer-table-body">
-                                    
+                                <tbody class="weezevent-customer-table-body"> {# Class for the JS script #}                                    
                                 </tbody>
                             </table>
                         </div>

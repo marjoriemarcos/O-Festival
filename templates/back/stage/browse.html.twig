@@ -1,10 +1,7 @@
-{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-{# Définit le bloc 'stageActive' pour indiquer que cette page est active dans le menu de navigation #}
 {% block stageActive %}active{% endblock %}
 
-{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
 {% block main %}
 
     <div class="container">
@@ -23,7 +20,7 @@
 
         <div class="row justify-content-center">
             <div class="col-md-8">
-                {# Inclusion du fragment pour afficher les messages de succès ou d'erreur #}
+                {# Flash Messages #}
                 {{ include('back/fragments/_message.html.twig') }}
                 <div class="card">
                     <!-- Card title -->

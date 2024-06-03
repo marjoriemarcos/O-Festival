@@ -1,20 +1,20 @@
 // search.js
 
-// Définition de l'objet search et de ses méthodes
+// Definition of the search object and its methods
 export const search = {
-    // Initialisation de la fonction
+    // Initialization function
     init: function() {
-        // Initialise les éléments HTML
+        // Initialize HTML elements
         search.initElements();
-        // Vérifie si les éléments nécessaires sont présents avant de lier les gestionnaires d'événements
+        // Check if the necessary elements are present before binding event handlers
         if (search.searchButton && search.searchInput) {
             search.bind();
         }
     },
 
-    // Initialisation des éléments HTML
+    // Initialization of HTML elements
     initElements: function() {
-        // Récupère les éléments HTML nécessaires
+        // Get the necessary HTML elements
         search.searchButton = document.getElementById('searchButton');
         search.resetButton = document.getElementById('resetButton');
         search.searchInput = document.querySelector('.search-input');
@@ -23,21 +23,21 @@ export const search = {
         search.tableWrapper = document.getElementById('tableWrapper');
     },
 
-    // Gestion des événements
+    // Event handling
     bind: function() {
-        // Définition du gestionnaire d'événement pour la réinitialisation
+        // Define the event handler for resetting
         const resetHandler = (event) => {
-            event.preventDefault(); // Empêche le comportement par défaut du bouton de réinitialisation
+            event.preventDefault(); // Prevent the default behavior of the reset button
             search.searchInput.value = '';
             search.searchInput.form.submit();
         };
 
-        // Ajout des écouteurs d'événements pour la réinitialisation
+        // Add event listeners for resetting
         if (search.resetButton) {
             search.resetButton.addEventListener('click', resetHandler);
         }
 
-        // Affichage du bouton de réinitialisation en fonction de la saisie
+        // Show the reset button based on the input
         search.searchInput.addEventListener('input', () => {
             if (search.searchInput.value.trim() !== '') {
                 search.resetButton.style.display = 'block';
@@ -46,24 +46,24 @@ export const search = {
             }
         });
 
-        // Vérification si le tbody est vide et basculement du style en conséquence
+        // Check if the tbody is empty and toggle the style accordingly
         const checkTbody = () => {
             if (search.tbody.children.length === 0) {
-                search.noResultsMessage.style.display = 'block'; // Affiche le message "Aucun résultat trouvé"
-                search.tableWrapper.style.display = 'none'; // Masque le conteneur du tableau
+                search.noResultsMessage.style.display = 'block'; // Show "No results found" message
+                search.tableWrapper.style.display = 'none'; // Hide the table container
             } else {
-                search.noResultsMessage.style.display = 'none'; // Masque le message "Aucun résultat trouvé"
-                search.tableWrapper.style.display = 'block'; // Affiche le conteneur du tableau
+                search.noResultsMessage.style.display = 'none'; // Hide "No results found" message
+                search.tableWrapper.style.display = 'block'; // Show the table container
             }
         };
 
-        // Vérification initiale du tbody
+        // Initial check of the tbody
         checkTbody();
 
-        // Ajout de l'événement de changement du tbody
+        // Add the input event listener to check the tbody
         search.searchInput.addEventListener('input', checkTbody);
     }
 };
 
-// Initialisation du script après le chargement du DOM
+// Initialize the script after the DOM has loaded
 document.addEventListener('DOMContentLoaded', search.init);

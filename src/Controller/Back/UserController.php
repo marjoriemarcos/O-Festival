@@ -19,23 +19,23 @@ class UserController extends AbstractController
     #[Route('/back/user', name: 'app_back_user_browse')]
     public function browse(UserRepository $userRepository, Request $request, PaginatorInterface $paginator): Response
     {
-        // Récupération du terme de recherche depuis la requête
+        // Get the search term from the request
         $search = $request->query->get('search');
 
-        // Utilisation du repository pour obtenir les utilisateurs correspondant au terme de recherche
+        // Use the repository to get users matching the search term
         $userList = $userRepository->findByLastNameSearch($search);
 
-        // Paginer les résultats obtenus
+        // Paginate the obtained results
         $userList = $paginator->paginate(
-            $userList, // Query builder avec les résultats non paginés
-            $request->query->getInt('page', 1), // Numéro de la page actuelle, par défaut 1
-            5 // Nombre d'éléments par page
+            $userList, // Query builder with non-paginated results
+            $request->query->getInt('page', 1), // Current page number, default is 1
+            5 // Number of items per page
         );
 
-        // Rendu du template avec la liste paginée des utilisateurs et le terme de recherche
+        // Render the template with the paginated list of users and the search term
         return $this->render('back/user/browse.html.twig', [
-            'userList' => $userList, // Liste paginée des utilisateurs
-            'search' => $search, // Terme de recherche actuel pour remplir le champ de recherche
+            'userList' => $userList, // Paginated list of users
+            'search' => $search, // Current search term to populate the search field
         ]);
     }
 
@@ -48,7 +48,7 @@ class UserController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                // Hash du password     
+                // Hash the password     
                 $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
 
                 $entityManager->persist($user);

@@ -17,41 +17,50 @@ class GenreController extends AbstractController
     #[Route('/back/genre', name: 'app_back_genre_browse', methods: ['GET'])]
     public function browse(GenreRepository $genreRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // Récupération du terme de recherche depuis la requête
+        // Get the search term from the request
         $search = $request->query->get('search');
 
-        // Utilisation du repository pour obtenir les genres correspondant au terme de recherche
+        // Use the repository to get genres matching the search term
         $genreList = $genreRepository->findByNameSearch($search);
 
-        // Paginer les résultats obtenus
+        // Paginate the obtained results
         $genreList = $paginator->paginate(
-            $genreList, // Query builder avec les résultats non paginés
-            $request->query->getInt('page', 1), // Numéro de la page actuelle, par défaut 1
-            5 // Nombre d'éléments par page
+            $genreList, // Query builder with non-paginated results
+            $request->query->getInt('page', 1), // Current page number, default is 1
+            5 // Number of items per page
         );
 
-        // Rendu du template avec la liste paginée des genres et le terme de recherche
+        // Render the template with the paginated list of genres and the search term
         return $this->render('back/genre/browse.html.twig', [
-            'genreList' => $genreList, // Liste paginée des genres
-            'search' => $search, // Terme de recherche actuel pour remplir le champ de recherche
+            'genreList' => $genreList, // Paginated list of genres
+            'search' => $search, // Current search term to fill the search field
         ]);
     }
 
     #[Route('/back/genre/add', name: 'app_back_genre_add', methods: ['GET', 'POST'])]
     public function add(Request $request, EntityManagerInterface $entityManager): Response
     {
+        // Create a new Genre object
         $genre = new Genre();
+
+        // Create a form for the genre
         $form = $this->createForm(GenreType::class, $genre);
         $form->handleRequest($request);
 
+        // Check if the form is submitted and valid
         if ($form->isSubmitted() && $form->isValid()) {
+            // Persist the genre to the database
             $entityManager->persist($genre);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Le genre a bien été créé.');            
+            // Add a flash message for successful creation
+            $this->addFlash('success', 'Le genre a été créé avec succès.');
+
+            // Redirect to the genres browsing page
             return $this->redirectToRoute('app_back_genre_browse', [], Response::HTTP_SEE_OTHER);
         }
 
+        // Render the form to add the genre
         return $this->render('back/genre/add.html.twig', [
             'genre' => $genre,
             'form' => $form,
@@ -61,16 +70,23 @@ class GenreController extends AbstractController
     #[Route('/back/genre/{id<\d+>}/edit', name: 'app_back_genre_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Genre $genre, EntityManagerInterface $entityManager): Response
     {
+        // Create a form for the existing genre
         $form = $this->createForm(GenreType::class, $genre);
         $form->handleRequest($request);
 
+        // Check if the form is submitted and valid
         if ($form->isSubmitted() && $form->isValid()) {
+            // Persist the modifications to the database
             $entityManager->flush();
 
-            $this->addFlash('success', 'Le genre a bien été modifié.');   
+            // Add a flash message for successful modification
+            $this->addFlash('success', 'Le genre a été modifié avec succès.');
+
+            // Redirect to the genres browsing page
             return $this->redirectToRoute('app_back_genre_browse', [], Response::HTTP_SEE_OTHER);
         }
 
+        // Render the form to edit the genre
         return $this->render('back/genre/edit.html.twig', [
             'genre' => $genre,
             'form' => $form,
@@ -80,14 +96,20 @@ class GenreController extends AbstractController
     #[Route('/back/genre/{id<\d+>}/delete', name: 'app_back_genre_delete', methods: ['POST'])]
     public function delete(Request $request, Genre $genre, EntityManagerInterface $entityManager): Response
     {
+        // Check if the CSRF token is valid
         if ($this->isCsrfTokenValid('delete'.$genre->getId(), $request->getPayload()->get('_token'))) {
+            // Remove the genre from the database
             $entityManager->remove($genre);
             $entityManager->flush();
-            $this->addFlash('success', 'Le genre a bien été supprimé.');   
+
+            // Add a flash message for successful deletion
+            $this->addFlash('success', 'Le genre a été supprimé avec succès.');
         } else {
+            // Add a flash message in case of deletion failure
             $this->addFlash('error', 'La suppression du genre a échoué. Le jeton CSRF est invalide.');
         }      
 
+        // Redirect to the genres browsing page
         return $this->redirectToRoute('app_back_genre_browse', [], Response::HTTP_SEE_OTHER);
     }
 }

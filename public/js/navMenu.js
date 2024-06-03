@@ -1,39 +1,38 @@
 // navMenu.js
 
 export const navMenu = {
-    // Éléments du menu burger et de la barre de navigation
+    // Elements for the burger menu and the navigation bar
     menuBurgerElement: null,
     navBarreElement: null,
 
-    // Initialisation de la fonction
+    // Initialization function
     init: function () {
-        // Initialisation des éléments HTML
+        // Initialize HTML elements
         navMenu.initElements();
-        // Vérification que les éléments ont bien été trouvés avant de gérer les événements
+        // Check if elements have been successfully found before handling events
         if (navMenu.menuBurgerElement && navMenu.navBarreElement) {
-            // Gestion des événements
+            // Bind event handlers
             navMenu.bind();
         }
     },
 
-    // Initialisation des éléments HTML
+    // Initialize HTML elements
     initElements: function () {
-        navMenu.menuBurgerElement = document.querySelector(".hamburger");
-        navMenu.navBarreElement = document.querySelector(".nav-menu");
+        navMenu.menuBurgerElement = document.querySelector(".hamburger");  // Select the burger menu element
+        navMenu.navBarreElement = document.querySelector(".nav-menu");    // Select the navigation bar element
     },
 
-    // Gestion des événements
+    // Bind event handlers
     bind: function () {
-        // Ajout d'un écouteur d'événement au clic sur le menu burger
+        // Add a click event listener to the burger menu
         navMenu.menuBurgerElement.addEventListener("click", navMenu.toggleMenu);
     },
 
-    // Gestionnaire d'événements pour le clic sur le menu burger
+    // Event handler for the burger menu click
     toggleMenu: function () {
-        // Ajout/Suppression de la classe "active" pour le menu burger
+        // Toggle the "active" class on the burger menu element
         navMenu.menuBurgerElement.classList.toggle("active");
-        // Ajout/Suppression de la classe "active" pour la barre de navigation
+        // Toggle the "active" class on the navigation bar element
         navMenu.navBarreElement.classList.toggle("active");
     }
 };
-

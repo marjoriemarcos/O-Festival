@@ -1,10 +1,9 @@
-{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-{# Définit le bloc 'slotActive' pour indiquer que cette page est active dans le menu de navigation #}
+{% block title %}Éditer le Créneau{% endblock %}
+
 {% block slotActive %}active{% endblock %}
 
-{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
 {% block main %}
     <div class="container">
         <h2 class="text-center my-5 fw-bold display-5">Éditer le Créneau</h2>
@@ -15,22 +14,21 @@
                         <i class="bi bi-arrow-left"></i>
                         Retour au détails du créneau
                     </a>
-                    {# Inclusion du fragment pour afficher les messages de succès ou d'erreur #}
+                    {# Flash Messages Fragment #}
                     {{ include('back/fragments/_message.html.twig') }}
                     <div class="card">
                         <!-- Card header -->
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <span class="fs-2 fw-bold">{{ slot.day }}-{{ slot.date|date('d/m/y') }} {{ slot.hour }}</span>
                             <div class="d-flex">
-                                <!-- Formulaire de suppression du créneau -->
+                                <!-- Edit Slot Form -->
                                 <form method="post" action="{{ path('app_back_slot_delete', {'id': slot.id}) }}" onsubmit="return confirm('Voulez-vous supprimer le créneau du {{ slot.date|date('d/m/y') }} de {{ slot.hour }}?');">
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ slot.id) }}">
                                     <button class="btn btn-danger bi bi-trash">{{ button_label|default('')}}</button>
                                 </form>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <!-- Inclusion du formulaire pour éditer le créneau -->
+                        <div class="card-body">                            
                             {{ include('back/fragments/_form.html.twig', {'slot': slot, 'button_label': 'Mettre à jour'}) }}
                         </div>
                     </div>

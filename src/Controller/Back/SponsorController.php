@@ -18,23 +18,23 @@ class SponsorController extends AbstractController
     #[Route('/back/sponsor', name: 'app_back_sponsor_browse', methods: ['GET'])]
     public function browse(SponsorRepository $sponsorRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // Récupération du terme de recherche depuis la requête
+        // Retrieve the search term from the request
         $search = $request->query->get('search');
 
-        // Utilisation du repository pour obtenir les sponsors correspondant au terme de recherche
+        // Use the repository to get sponsors matching the search term
         $sponsorList = $sponsorRepository->findByNameSearch($search);
 
-        // Paginer les résultats obtenus
+        // Paginate the retrieved results
         $sponsorList = $paginator->paginate(
-            $sponsorList, // Query builder avec les résultats non paginés
-            $request->query->getInt('page', 1), // Numéro de la page actuelle, par défaut 1
-            5 // Nombre d'éléments par page
+            $sponsorList, // Query builder with non-paginated results
+            $request->query->getInt('page', 1), // Current page number, default 1
+            5 // Number of items per page
         );
 
-        // Rendu du template avec la liste paginée des sponsors et le terme de recherche
+        // Render the template with the paginated list of sponsors and the search term
         return $this->render('back/sponsor/browse.html.twig', [
-            'sponsorList' => $sponsorList, // Liste paginée des sponsors
-            'search' => $search, // Terme de recherche actuel pour remplir le champ de recherche
+            'sponsorList' => $sponsorList, // Paginated list of sponsors
+            'search' => $search, // Current search term to fill the search field
         ]);
     }
     
@@ -42,32 +42,32 @@ class SponsorController extends AbstractController
     #[Route('/back/sponsor/add', name: 'app_back_sponsor_add', methods: ['GET', 'POST'])]
     public function add(Request $request, EntityManagerInterface $entityManager): Response
     {
-        // Crée un nouvel objet Sponsor
+        // Create a new Sponsor object
         $sponsor = new Sponsor();
 
-        // Crée un formulaire pour le partenaire
+        // Create a form for the sponsor
         $form = $this->createForm(SponsorType::class, $sponsor);
         $form->handleRequest($request);
 
-        // Vérifie si le formulaire est soumis et valide
+        // Check if the form is submitted and valid
         if ($form->isSubmitted() && $form->isValid()) {
-            // Persiste le partenaire dans la base de données
+            // Persist the sponsor to the database
             $entityManager->persist($sponsor);
             $entityManager->flush();
 
-            // Ajoute un message flash pour la création réussie
+            // Add a flash message for successful creation
             $this->addFlash('success', 'Le partenaire a bien été créé.');
 
-            // Redirige vers la page de navigation des partenaires
+            // Redirect to the sponsors browsing page
             return $this->redirectToRoute('app_back_sponsor_browse', [], Response::HTTP_SEE_OTHER);
         }
 
-        // Affiche un message flash en cas d'erreur de validation
+        // Add a flash message in case of validation error
         if ($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash('error', 'Erreur de validation : veuillez corriger les erreurs dans le formulaire.');
         }
 
-        // Rend le formulaire d'ajout de le partenaire
+        // Render the sponsor add form
         return $this->render('back/sponsor/add.html.twig', [
             'sponsor' => $sponsor,
             'form' => $form->createView(),
@@ -78,28 +78,28 @@ class SponsorController extends AbstractController
     #[Route('/back/sponsor/{id<\d+>}/edit', name: 'app_back_sponsor_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Sponsor $sponsor, EntityManagerInterface $entityManager): Response
     {
-        // Crée un formulaire pour le partenaire existant
+        // Create a form for the existing sponsor
         $form = $this->createForm(SponsorType::class, $sponsor);
         $form->handleRequest($request);
 
-        // Vérifie si le formulaire est soumis et valide
+        // Check if the form is submitted and valid
         if ($form->isSubmitted() && $form->isValid()) {
-            // Persiste les modifications dans la base de données
+            // Persist the modifications to the database
             $entityManager->flush();          
 
-            // Ajoute un message flash pour la modification réussie    
+            // Add a flash message for successful modification
             $this->addFlash('success', 'Le partenaire a bien été modifié.');
 
-            // Redirige vers la page de lecture de le partenaire modifié
+            // Redirect to the page to read the modified sponsor
             return $this->redirectToRoute('app_back_sponsor_browse', [], Response::HTTP_SEE_OTHER);
         }
 
-        // Affiche un message flash en cas d'erreur de validation
+        // Add a flash message in case of validation error
         if ($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash('error', 'Erreur de validation : veuillez corriger les erreurs dans le formulaire.');
         }
 
-        // Rend le formulaire d'édition de le partenaire
+        // Render the sponsor edit form
         return $this->render('back/sponsor/edit.html.twig', [
             'sponsor' => $sponsor,
             'form' => $form->createView(),
@@ -109,20 +109,20 @@ class SponsorController extends AbstractController
     #[Route('/back/sponsor/{id<\d+>}/delete', name: 'app_back_sponsor_delete', methods: ['POST'])]
     public function delete(Request $request, Sponsor $sponsor, EntityManagerInterface $entityManager): Response
     {
-        // Vérifie si le jeton CSRF est valide
+        // Check if the CSRF token is valid
         if ($this->isCsrfTokenValid('delete' . $sponsor->getId(), $request->getPayload()->get('_token'))) {
-            // Supprime le partenaire de la base de données
+            // Remove the sponsor from the database
             $entityManager->remove($sponsor);
             $entityManager->flush();
 
-            // Ajoute un message flash pour la suppression réussie
+            // Add a flash message for successful deletion
             $this->addFlash('success', 'Le partenaire a bien été supprimé.');
         } else {
-            // Ajoute un message flash en cas d'échec de la suppression
-            $this->addFlash('error', 'La suppression de l\'sponsore a échoué. Le jeton CSRF est invalide.');
+            // Add a flash message in case of deletion failure due to invalid CSRF token
+            $this->addFlash('error', 'La suppression du partenaire a échoué. Le jeton CSRF est invalide.');
         }
 
-        // Redirige vers la page de navigation des partenaires
+        // Redirect to the sponsors browsing page
         return $this->redirectToRoute('app_back_sponsor_browse', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -42,12 +42,12 @@ class InfosController extends AbstractController
     #[Route('/infos-pratiques', name: 'app_infos_browse')]
     public function browse(Request $request, TicketRepository $ticketRepository, EntityManagerInterface $entityManager): Response
     {
-        // Récupérer les dates d'ouverture et de fermeture depuis la base de données
+        // Get the opening and closing dates from the database
         $openingClosingDates = $ticketRepository->findOpeningAndClosingDates();
         $openingDate = new DateTimeImmutable($openingClosingDates['openingDate']);
         $closingDate = new DateTimeImmutable($openingClosingDates['closingDate']);
 
-        // Formater les dates en français
+        // Format the dates in French style
         $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
         $openingFormatted = $formatter->format($openingDate);
         $closingFormatted = $formatter->format($closingDate);
@@ -80,7 +80,7 @@ class InfosController extends AbstractController
 
             $this->addFlash('success_contact', 'Votre message a bien été envoyé');
 
-            // RENVOYER MAIL DE CONFIRMATION mais solution payante par mailgun
+            // Send a confirmation email to the user
             $this->sendEmailService->sendConfirmationEmail(
                 $data->email,
                 'ofestival2024@gmail.com',

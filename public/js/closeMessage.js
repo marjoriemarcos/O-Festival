@@ -1,6 +1,6 @@
 const closeMessage = {
     init: function () {
-        // selection du btn
+        // Button Selector
         const closeButtons = document.querySelector(".btn-close");
         if (closeButtons) {
             closeButtons.forEach(function (closeButton) {

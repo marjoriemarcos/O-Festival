@@ -1,30 +1,27 @@
-{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-{# Définit le bloc 'userActive' pour indiquer que cette page est active dans le menu de navigation #}
 {% block userActive %}active{% endblock %}
 
-{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block title %} Ajouter un administrateur {% endblock %}
+
 {% block main %}
 	<div class="container">
-		{# Titre de la page #}
 		<h2 class="text-center my-5 fw-bold display-5">Ajouter un administrateur</h2>
 		<div class="row justify-content-center">
 			<div class="col-md-8">
-				{# Lien de retour à la liste des artistes #}
+				{# User List Link #}
 				<a href="{{ path('app_back_user_browse') }}" class="btn btn-primary fw-bold mb-4">
 					<i class="bi bi-arrow-left"></i>
 					Retour à la liste des administrateur
 				</a>
-				{# Inclusion du fragment pour afficher les messages de succès ou d'erreur #}
+				{# Flash Messages Fragment #}
 				{{ include('back/fragments/_message.html.twig') }}
-				<div class="card">
-					{# En-tête de la carte avec l'icône et le titre #}
+				<div class="card">					
 					<div class="card-header fs-2 fw-bold">
 						<i class="bi bi-person-plus me-2"></i>Nouvel administrateur
 					</div>
 					<div class="card-body">
-						{# Inclusion du formulaire pour ajouter un nouvel artiste, avec le label du bouton défini #}
+						{# Add User Form #}
 						{{ include('back/fragments/_form.html.twig', {'button_label': 'Ajouter l\'administrateur'}) }}
 					</div>
 				</div>
