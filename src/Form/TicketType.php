@@ -18,12 +18,10 @@ use Symfony\Component\Form\FormEvents;
 
 class TicketType extends AbstractType
 {
-    private EntityManagerInterface $entityManager;
     private TicketRepository $ticketRepo;
 
-    public function __construct (EntityManagerInterface $entityManager, TicketRepository $ticketRepo) {
-        $this->entityManager = $entityManager;
-        $this->ticketRepo = $ticketRepo;
+    public function __construct ( TicketRepository $ticketRepo) {
+            $this->ticketRepo = $ticketRepo;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -78,21 +76,21 @@ class TicketType extends AbstractType
             ],
         ]);
 
-        // Ajout des écouteurs sur les deux fonctions lors de l'envoie du formulaire
+        // Add event listener on sent form
         $builder->addEventListener(FormEvents::SUBMIT, [$this, 'validateData']);
         $builder->addEventListener(FormEvents::SUBMIT, [$this, 'getLongTitle']);
     }
 
     public function validateData (FormEvent $event): void 
     {
-        // Récupèration des données du formulaire
+        // Retrieve the form data
         $form = $event->getForm();
         $dataFromForm = $event->getForm()->getData();
 
-        // Test s'il s'agit d'un formulaire d'ajout 
+        // Check if it's an add form
         if ($form->getConfig()->getOption('isNew') === true) {
                 
-            // Recherche en base de données pour savoir si les données du form sont déjà en base de données
+            // Query the database to check if the form data already exists
             $existingTickets = $this->ticketRepo->findTicketsByParams(
                 $dataFromForm->getType(),
                 $dataFromForm->getStartAt(),
@@ -101,20 +99,17 @@ class TicketType extends AbstractType
                 null
             );
            
-            // Si la variable n'est pas vide c'est qu'il y a déjà un billet avec ces informations
+            // If the variable is not empty, it means there is already a ticket with these details
             if (!empty($existingTickets)) {
                     $event->getForm()->addError(new FormError('Il y a déjà un billet avec ce titre, ces dates, et ce tarif.'));
             }
 
         }
 
-        // Test s'il s'agit d'un formulaire d'édition
+        // Check if it's an edit form
         if ($form->getConfig()->getOption('isNew') === false) {
            
-            // Récupération des données du formulaire d'édition
-            $dataFromForm = $event->getForm()->getData();
-
-            // Récupèration des données sans 
+            // Query the database without considering the current ticket's ID
             $existingTickets = $this->ticketRepo->findTicketsByParams(
                 $dataFromForm->getType(),
                 $dataFromForm->getStartAt(),
@@ -123,33 +118,53 @@ class TicketType extends AbstractType
                 $dataFromForm->getId()
             );
 
-          // Si la variable n'est pas vide c'est qu'il y a déjà un billet avec ces informations
+          // If the variable is not empty, it means there is already a ticket with these details
           if (!empty($existingTickets)) {
             $event->getForm()->addError(new FormError('Il y a déjà un billet avec ce titre, ces dates, et ce tarif.'));
             }
             
         }
-        // Vérifie si la date de début est bien inférieure à la date de fin
+        // Validate the duration for "Pass 1 JOUR"
         if ($dataFromForm->getStartAt() > $dataFromForm->getEndAt()) {
             $event->getForm()->addError(new FormError('La date début doit être inférieure à la date de fin.'));
         }
+
+        // Validate the duration for "Pass 1 JOUR"
+        if ($dataFromForm->getType() === 'Pass 1 JOUR') {
+            if ($dataFromForm->getDuration() != 24 || $dataFromForm->getStartAt() != $dataFromForm->getEndAt() ) {
+                $event->getForm()->addError(new FormError('Il y a une erreur dans la durée, veuillez à selectionner 24h ou les bonnes dates pour un Pass 1 JOUR'));
+            }
+        }
+        // Validate the duration for "Pass 2 JOURS"
+        if ($dataFromForm->getType() === 'Pass 2 JOURS') {
+            if ($dataFromForm->getDuration() != 48 || $dataFromForm->getStartAt()->modify('+1 day') != $dataFromForm->getEndAt()) {
+                $event->getForm()->addError(new FormError('Il y a une erreur dans la durée, veuillez à selectionner 48h ou les bonnes dates pour un Pass 2 JOURS'));
+            }
+        }
+        // Validate the duration for "Pass 3 JOURS"
+        if ($dataFromForm->getType() === 'Pass 3 JOURS') {
+            if ($dataFromForm->getDuration() != 72 || $dataFromForm->getStartAt()->modify('+2 day') != $dataFromForm->getEndAt()) {
+                $event->getForm()->addError(new FormError('Il y a une erreur dans la durée, veuillez à selectionner 72h ou les bonnes dates pour un Pass 3 JOURS'));
+            }
+        }
+
         
     }
 
  
     public function getLongTitle (FormEvent $event)
     {
-        // Récupère le formulaire envoyé
+        // Retrieve the form data
         $dataFromForm = $event->getForm()->getData();
 
-        // Récupère les données envoyés via le formulaire
+        // Extract form data
         $type = $dataFromForm->getType();
         $startAt = $dataFromForm->getStartAt()->format('d/m/Y');
         $endAt = $dataFromForm->getEndAt()->format('d/m/Y');
         $fee = $dataFromForm->getFee();
 
         if ($startAt === $endAt) {
-            // Met en forme le titre qui sera envoyé en base de données
+            // Format the title to be saved in the database
             $dataFromForm->setTitle(sprintf(
                 '%s %s le %s',
                 $type,
@@ -159,7 +174,7 @@ class TicketType extends AbstractType
 
         } else {
 
-            // Met en forme le titre qui sera envoyé en base de données
+            // Format the title to be saved in the database
             $dataFromForm->setTitle(sprintf(
                 '%s %s du %s au %s',
                 $type,
