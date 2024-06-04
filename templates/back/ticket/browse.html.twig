@@ -16,9 +16,9 @@
                     <div class="d-flex">
                         <!-- Sorting buttons -->
                         <button class="btn btn-primary fw-bold me-2 filter-button selected" data-duration="all" type="button">Tous les billets</button>
-                        <button class="btn btn-primary fw-bold me-2 filter-button" data-duration="24" type="button">Pass 1 Jour</button>
-                        <button class="btn btn-primary fw-bold me-2 filter-button" data-duration="48" type="button">Pass 2 Jours</button>
-                        <button class="btn btn-primary fw-bold filter-button" data-duration="72" type="button">Pass 3 Jours</button>
+                        <button class="btn btn-primary fw-bold me-2 filter-button" data-duration="Pass 1 JOUR" type="button">Pass 1 Jour</button>
+                        <button class="btn btn-primary fw-bold me-2 filter-button" data-duration="Pass 2 JOURS" type="button">Pass 2 Jours</button>
+                        <button class="btn btn-primary fw-bold filter-button" data-duration="Pass 3 JOURS" type="button">Pass 3 Jours</button>
                     </div>
                 </div>                
                 <div class="col-md-8">
@@ -51,7 +51,7 @@
                                 <tbody id="tickets-table-body">
                                     <!-- Iterating throught the ticket list -->
                                     {% for ticket in ticketList %}
-                                        <tr data-duration="{{ ticket.duration }}">
+                                        <tr data-duration="{{ ticket.type }}">
                                             <td>{{ ticket.title }}</td>
                                             <td>{{ ticket.price }}€</td>
                                             <td>{{ ticket.quantity }}</td>

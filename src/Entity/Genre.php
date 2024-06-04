@@ -19,7 +19,8 @@ class Genre
     private ?int $id = null;
 
     #[ORM\Column(length: 64)]
-    #[Assert\Length(max: 64)]    
+    #[Assert\Length(max: 64)]
+    #[Assert\NotBlank(message: 'Merci d\'indiquer un genre')]
     private ?string $name = null;
 
     #[ORM\Column]

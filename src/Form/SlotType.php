@@ -31,7 +31,8 @@ class SlotType extends AbstractType
     {
         // Add fields to the form
         $builder
-            ->add('date', DateType::class, [
+            ->add('date', DateType::class, [          
+                'widget' => 'single_text',
                 'label' => 'slot.form.date',
                 'widget' => 'single_text',              
                 ])

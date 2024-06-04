@@ -21,15 +21,15 @@ export const ticketButtons = {
     // Function to bind event handlers
     bind: function () {
         // Function to update the duration title
-        const updateDurationTitle = (duration) => {
-            switch (duration) {
-                case '24':
+        const updateDurationTitle = (type) => {
+            switch (type) {
+                case 'Pass 1 JOUR':
                     ticketButtons.durationTitle.textContent = 'Pass 1 Jour';
                     break;
-                case '48':
+                case 'Pass 2 JOURS':
                     ticketButtons.durationTitle.textContent = 'Pass 2 Jours';
                     break;
-                case '72':
+                case 'Pass 3 JOURS':
                     ticketButtons.durationTitle.textContent = 'Pass 3 Jours';
                     break;
                 default:

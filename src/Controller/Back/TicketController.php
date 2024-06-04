@@ -61,13 +61,13 @@ class TicketController extends AbstractController
         // Create a new Ticket instance
         $ticket = new Ticket();
 
-        // Create the ticket creation form
-        $form = $this->createForm(TicketType::class, $ticket);
+        // Create the new ticket Form
+        $form = $this->createForm(TicketType::class, $ticket, ['isNew' => true]);
         $form->handleRequest($request);
 
         // Check if the form is submitted and valid
         if ($form->isSubmitted() && $form->isValid()) {
-            // Persist the new ticket and save it in the database
+            // Persist the new ticket and save it in the database    
             $entityManager->persist($ticket);
             $entityManager->flush();
 
@@ -90,8 +90,9 @@ class TicketController extends AbstractController
     #[Route('/back/ticket/{id<\d+>}/edit', name: 'app_back_ticket_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Ticket $ticket, EntityManagerInterface $entityManager, TicketRepository $ticketRepository): Response
     {
-        // Create the ticket edit form
-        $form = $this->createForm(TicketType::class, $ticket);
+
+        // Create the ticket edit form  
+        $form = $this->createForm(TicketType::class, $ticket, ['isNew' => false]);
         $form->handleRequest($request);
 
         // Check if the form is submitted and valid
