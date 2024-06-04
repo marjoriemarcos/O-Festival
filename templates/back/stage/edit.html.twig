@@ -1,19 +1,17 @@
-{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-{# Définit le bloc 'stageEditActive' pour indiquer que cette page est active dans le menu de navigation #}
 {% block stageActive %}active
 {% endblock %}
 
+{% block title %}Éditer la Scène{% endblock %}
 
-{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
 {% block main %}
 	<div class="container">
 		<h2 class="text-center my-5 fw-bold display-5">Éditer la Scène</h2>
 		<div class="row justify-content-center">
 			<div
 				class="col-md-8">
-				<!-- Bouton de retour à la liste des scènes -->
+				<!-- Stage List Link -->
 				<a href="{{ path('app_back_stage_browse') }}" class="btn btn-primary fw-bold mb-4">
 					<i class="bi bi-arrow-left"></i>
 					Retour à la liste des scènes
@@ -25,7 +23,7 @@
 							<form method="post" action="{{ path('app_back_stage_delete', {'id': stage.id}) }}" onsubmit="return confirm('Souhaitez-vous vraiment supprimer {{ stage.name }}?');">
 								<input
 								type="hidden" name="_token" value="{{ csrf_token('delete' ~ stage.id) }}">
-								<!-- Bouton pour supprimer le stage -->
+								<!-- Delete Stage Button  -->
 								<button class="btn btn-danger bi bi-trash">{{ button_label|default('')}}</button>
 							</form>
 						</div>

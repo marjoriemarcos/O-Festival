@@ -15,21 +15,26 @@ class MainController extends AbstractController
         ServicesFetchDataFromRepo $fetchDataFromRepo,
         TicketRepository $ticketRepository
     ): Response {
+        // Fetch data from repository service
         $data = $fetchDataFromRepo->fetchDataFromRepo();
 
+        // Define pass durations
         $durations = [24, 48, 72];
         $passes = [];
 
+        // Iterate through each duration to fetch corresponding tickets
         foreach ($durations as $duration) {
             $tickets = $ticketRepository->findTicketsByDuration($duration);
 
+            // Prepare pass data
             $passes[] = [
                 'data' => $tickets,
-                'title' => 'PASS ' . ($duration / 24) . ' JOUR(S)',
-                'image' => 'pass-' . ($duration / 24) . '-jours.jpg',
+                'title' => 'PASS ' . ($duration / 24) . ' DAY(S)',
+                'image' => 'pass-' . ($duration / 24) . '-days.jpg',
             ];
         }
 
+        // Render the homepage with fetched data and pass information
         return $this->render('front/main/home.html.twig', [
             'artistList' => $data['artistList'], 
             'slots' => $data['slotList'],

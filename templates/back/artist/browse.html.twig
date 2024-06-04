@@ -1,14 +1,11 @@
-{# Étend la mise en page de base #}
+
 {% extends 'back/base.html.twig' %}
 
-{# Définit le bloc 'artistBrowseActive' pour indiquer que cette page est active dans le menu de navigation #}
 {% block artistActive %}active{% endblock %}
 
-
-{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block title %}Liste des Artistes{% endblock %}
 {% block main %}
-    <div class="container">
-        {# Titre de la page #}
+    <div class="container">        
         <h2 class="text-center my-5 fw-bold display-5">Liste des Artistes</h2>
 
     <!-- Search Bar -->
@@ -23,16 +20,16 @@
     </div>
         <div class="row justify-content-center">
             <div class="col-md-10">
-                {# Inclusion du fragment pour afficher les messages de succès ou d'erreur #}
+                {# Flash Messages #}
                 {{ include('back/fragments/_message.html.twig') }}
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span class="fs-2 fw-bold">Artistes</span>
-                        {# Lien pour ajouter un nouvel artiste #}
+                        {# New artist form #}
                         <a class="btn btn-success fw-bold" href="{{ path('app_back_artist_add') }}">Ajouter un Artiste</a>
                     </div>
                     <div class="card-body">
-                        {# Inclusion du fragment pour afficher un message si aucun résultat n'est trouvé #}
+                        {# No Result Fragment For Search Bar #}
                         {{ include('back/fragments/_noResult_message.html.twig') }}
                         <div class="table-responsive" id="tableWrapper">
                             <table class="table table-bordered searchable-table">
@@ -61,14 +58,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {# Boucle sur la liste des artistes #}
+                                    {# Iterating through the artist list #}
                                     {% for artist in artistList %}
                                         <tr>
-                                            {# Affiche la photo de l'artiste #}
+                                            {# Artist's pic #}
                                             <td><img src="{{ artist.picture }}" alt="Image de l'artiste {{ artist.name }}" class="img-thumbnail" style="max-width: 100px;"></td>
-                                            {# Affiche le nom de l'artiste #}
+                                            {# Artist's name #}
                                             <td>{{ artist.name }}</td>
-                                            {# Affiche les genres musicaux de l'artiste #}
+                                            {# Artist's musical genres #}
                                             <td>
                                                 {% for genre in artist.genres %}
                                                     <span class="badge bg-primary">{{ genre.name }}</span>
@@ -90,7 +87,7 @@
                                                     <span class="text-muted">Pas de créneau</span>
                                                 {% endif %}
                                             </td>
-                                            {# Affiche les actions possibles pour chaque artiste (voir, supprimer) #}
+                                            {# Actions #}
                                             <td>
                                                 <div class="d-flex">
                                                     <a href="{{ path('app_back_artist_read', { id: artist.id }) }}" class="btn btn-primary bi bi-search me-2"></a>
@@ -105,7 +102,7 @@
                                 </tbody>
                             </table>
 
-                            {# Affiche la pagination #}
+                            {# Pagination #}
                             <div id="pagination-container" class="pagination justify-content-center">
                                 {{ knp_pagination_render(artistList) }}
                             </div>

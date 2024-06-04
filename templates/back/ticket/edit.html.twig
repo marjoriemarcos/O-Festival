@@ -1,28 +1,26 @@
-{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-{# Définit le bloc 'ticketActive' pour indiquer que cette page est active dans le menu de navigation #}
 {% block ticketActive %}active{% endblock %}
 
-{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block title %}Éditer un billet{% endblock %}
+
 {% block main %}
 	<div class="container">
 		<h2 class="text-center my-5 fw-bold display-5">Éditer le billet</h2>
 		<div class="row justify-content-center">
 			<div class="col-md-8">
-				<!-- Bouton de retour aux détails du billet -->
+				<!-- Link to ticket -->
 				<a href="{{ path('app_back_ticket_read', { id: ticket.id }) }}" class="btn btn-primary fw-bold mb-4">
 					<i class="bi bi-arrow-left"></i>
 					Retour au détails du billet
 				</a>
-                    {# Inclusion du fragment pour afficher les messages de succès ou d'erreur #}
+                    {# Flash Messages Fragment #}
                     {{ include('back/fragments/_message.html.twig') }}
                     <div class="card">
                         <!-- Card header -->
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <!-- Titre du billet -->
+                        <div class="card-header d-flex justify-content-between align-items-center">                          
                             <span class="fs-2 fw-bold">{{ ticket.title }}</span>
-                            <!-- Bouton de suppression -->
+                            <!-- Delete Button -->
                             <div class="d-flex">
                                 <form method="post" action="{{ path('app_back_ticket_delete', {'id': ticket.id}) }}" onsubmit="return confirm('Voulez-vous supprimer {{ ticket.title}}?');">
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ticket.id) }}">
@@ -31,7 +29,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <!-- Inclusion du formulaire pour éditer le billet -->
+                            <!-- Edit Form Ticket -->
                             {{ include('back/fragments/_form.html.twig', {'ticket': ticket, 'button_label': 'Mettre à jour'}) }}
                         </div>
                     </div>

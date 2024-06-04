@@ -1,32 +1,34 @@
-// Définition de l'objet slotButtons
+// Definition of the slotButtons object
 export const slotButtons = {
-    // Propriétés pour stocker les éléments HTML
+    // Properties to store HTML elements
     filterButtons: null,
     tableRows: null,
     dayTitle: null,
 
-    // Méthode d'initialisation
+    // Initialization method
     init: function () {
-        // Initialisation des éléments HTML
+        // Initialize HTML elements
         slotButtons.filterButtons = document.querySelectorAll('.filter-button');
         slotButtons.tableRows = document.querySelectorAll('#slots-table-body tr');
         slotButtons.dayTitle = document.getElementById('day-title');
 
-        // Vérifiez si les éléments spécifiques à la page sont présents avant d'initialiser slotButtons
+        // Check if the page-specific elements are present before initializing slotButtons
         if (slotButtons.dayTitle) {
-            slotButtons.bind(); // Initialise slotButtons si les éléments sont présents
+            slotButtons.bind(); // Initialize slotButtons if the elements are present
         }
     },
 
-    // Méthode pour lier les gestionnaires d'événements
+    // Method to bind event handlers
     bind: function () {
         let btnFilter = document.querySelectorAll('.filter-button');
-                
+        
+        // Array to hold the text content of the filter buttons
         let tabBtnContent = [];
         for (let i = 0; i < btnFilter.length; i++) {
             tabBtnContent.push(btnFilter[i].textContent);
         }
-        // Fonction pour mettre à jour le titre du jour
+
+        // Function to update the day title
         const updateDayTitle = (day) => {
             switch (day) {
                 case 'J1':
@@ -40,24 +42,24 @@ export const slotButtons = {
                     break;
                 default:
                     slotButtons.dayTitle.textContent = 'Tous les jours';
-
             }
         };
 
-        // Ajout des écouteurs d'événements aux boutons de filtre
+        // Add event listeners to the filter buttons
         slotButtons.filterButtons.forEach(button => {
             button.addEventListener('click', (event) => {
-                event.preventDefault(); // Empêche le comportement par défaut du lien
-            
+                event.preventDefault(); // Prevent the default behavior of the link
+
                 const day = button.getAttribute('data-day');
 
-                // Changement de l'apparence du bouton
+                // Change button appearance
                 slotButtons.filterButtons.forEach(btn => btn.classList.remove('selected'));
                 button.classList.add('selected');
 
-                // Mise à jour du titre du jour
+                // Update the day title
                 updateDayTitle(day);
-                // Filtrage des lignes de tableau
+
+                // Filter table rows
                 slotButtons.tableRows.forEach(row => {
                     if (day === 'all' || row.getAttribute('data-day') === day) {
                         row.style.display = '';
@@ -70,5 +72,5 @@ export const slotButtons = {
     }
 };
 
-// Initialiser le module slotButtons
+// Initialize the slotButtons module
 slotButtons.init();

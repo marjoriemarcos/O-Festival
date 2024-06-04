@@ -1,10 +1,9 @@
-{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-{# Définit le bloc 'userActive' pour indiquer que cette page est active dans le menu de navigation #}
 {% block userActive %}active{% endblock %}
 
-{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block title %} Liste des administrateurs {% endblock %}
+
 {% block main %}
 
     <div class="container">
@@ -23,13 +22,13 @@
 
         <div class="row justify-content-center">
             <div class="col-md-8">
-                {# Inclusion du fragment pour afficher les messages de succès ou d'erreur #}
+                {# Flash Messages Fragment #}
                 {{ include('back/fragments/_message.html.twig') }}
                 <div class="card">
                     <!-- Card title -->
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span class="fs-2 fw-bold">Administrateurs</span>
-                        {# Lien pour ajouter un nouvel administrateur #}
+                        {# New Admin Button #}
                         <a class="btn btn-success fw-bold" href="{{ path('app_back_user_add') }}">Ajouter un administrateur</a>
                     </div>
                     <div class="card-body">
@@ -50,18 +49,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Boucle à travers la liste des administrateurs et les affiche -->
+                                    <!-- Iterating through the Admin List -->
                                     {% for user in userList %}
                                         <tr>
                                             <td>{{ user.lastname }}</td>
                                             <td>{{ user.firstname }}</td>
                                             <td>{{ user.email }}</td>
-                                            <td>*********</td> {# Mot de passe masqué #}
+                                            <td>*********</td> {# Hidden password #}
                                             <td>{{ user.roles | join(', ') }}</td>
                                             <td>
                                                 <div class="d-flex me-2">
                                                     <a href="{{ path('app_back_user_edit', { id: user.id }) }}" class="btn btn-primary bi bi-pencil me-2"></a>
-                                                    <!-- Bouton d'action pour supprimer un useristrateur -->
+                                                    <!-- Action Buttons -->
                                                     <form method="post" action="{{ path('app_back_user_browse', {'id': user.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer {{ user.lastname }} {{ user.firstname }}?');">
                                                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
                                                         <button class="btn btn-danger bi bi-trash">{{ button_label|default('')}}</button>

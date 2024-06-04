@@ -1,11 +1,11 @@
-{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-{# Définit le bloc 'slotActive' pour indiquer que cette page est active dans le menu de navigation #}
 {% block slotActive %}active
 {% endblock %}
 
-{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block title %}Détails du Créneau
+{% endblock %}
+
 {% block main %}
 	<div class="container">
 		<h2 class="text-center my-5 fw-bold display-5">Détails du Créneau</h2>
@@ -18,7 +18,7 @@
 						<i class="bi bi-arrow-left"></i>
 						Retour à la programmation
 					</a>
-					{# Inclusion du fragment pour afficher les messages de succès ou d'erreur #}
+					{# Flash Messages Fragment #}
 					{{ include('back/fragments/_message.html.twig') }}
 					<div
 						class="card">
@@ -31,7 +31,7 @@
 							</span>
 							<div class="d-flex">
 								<a href="{{path('app_back_slot_edit', {id: slot.id})}}" class="btn btn-warning me-2 bi bi-pencil"></a>
-								<!-- Formulaire de suppression du créneau -->
+								<!-- Delete Form -->
 								<form method="post" action="{{ path('app_back_slot_delete', {'id': slot.id}) }}" onsubmit="return confirm('Voulez-vous supprimer le créneau du {{ slot.date|date('d/m/y') }} de {{ slot.hour }}?');">
 									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ slot.id) }}">
 									<button class="btn btn-danger bi bi-trash">{{ button_label|default('')}}</button>

@@ -1,48 +1,52 @@
-// tableSort.js
-
+// Define the tableSort object
 export const tableSort = {
-    // Propriétés du module
+    // Properties of the module
     sortableColumns: null,
 
-    // Fonction d'initialisation
+    // Initialization function
     init: function () {
-        tableSort.sortableColumns = document.querySelectorAll('[data-sortable]'); // Initialisation des colonnes triables
-        tableSort.bind(); // Appel de la fonction bind lors de l'initialisation
+        // Initialize sortable columns
+        tableSort.sortableColumns = document.querySelectorAll('.data-sortable');
+        // Call the bind function during initialization
+        tableSort.bind();
     },
 
-    // Fonction de liaison des événements
+    // Function to bind event listeners
     bind: function () {
+        // Add click event listener to each sortable column
         tableSort.sortableColumns.forEach(column => {
             column.addEventListener('click', () => {
+                // Determine the sort order: toggle between ascending and descending
                 const sortOrder = column.dataset.order === 'asc' ? 'desc' : 'asc';
 
-                // Réinitialiser les attributs de tri de toutes les colonnes
+                // Reset the sort attributes for all columns
                 tableSort.sortableColumns.forEach(col => {
                     col.dataset.order = '';
                 });
 
-                // Mettre à jour l'attribut de tri de la colonne cliquée
+                // Update the sort attribute of the clicked column
                 column.dataset.order = sortOrder;
 
-                // Obtenir l'index de la colonne cliquée
+                // Get the index of the clicked column
                 const columnIndex = Array.from(column.parentNode.children).indexOf(column);
 
-                // Obtenir les lignes du tableau
+                // Get the table rows
                 const rows = Array.from(document.querySelectorAll('tbody > tr'));
 
-                // Trier les lignes en fonction de la valeur de la colonne cliquée
+                // Sort the rows based on the value of the clicked column
                 const sortedRows = rows.sort((a, b) => {
                     const aValue = a.children[columnIndex].innerText.trim();
                     const bValue = b.children[columnIndex].innerText.trim();
 
+                    // Compare values based on the sort order
                     if (sortOrder === 'asc') {
-                        return bValue.localeCompare(aValue);
-                    } else {
                         return aValue.localeCompare(bValue);
+                    } else {
+                        return bValue.localeCompare(aValue);
                     }
                 });
 
-                // Remplacer les lignes dans le tableau par les lignes triées
+                // Replace the rows in the table with the sorted rows
                 const tbody = document.querySelector('tbody');
                 while (tbody.firstChild) {
                     tbody.removeChild(tbody.firstChild);
@@ -53,5 +57,5 @@ export const tableSort = {
     }
 };
 
-// Initialiser le module tableSort
+// Initialize the tableSort module
 tableSort.init();

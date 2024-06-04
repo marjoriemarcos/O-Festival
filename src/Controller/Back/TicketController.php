@@ -11,22 +11,20 @@ use App\Repository\TicketRepository;
 use App\Form\TicketType;
 use App\Entity\Ticket;
 
-
-
 class TicketController extends AbstractController
 {
 
     /**
      * @Route("/back/ticket", name="app_back_ticket_browse", methods={"GET"})
-     * Méthode pour afficher tous les billets triés par titre
+     * Method to display all tickets sorted by title
      */
     #[Route('/back/ticket', name: 'app_back_ticket_browse', methods: ['GET'])]
     public function browse(TicketRepository $ticketRepository): Response
     {
-        // Récupère tous les billets triés par titre
+        // Retrieve all tickets sorted by title
         $ticketList = $ticketRepository->findBy([], ['title' => 'ASC']);
 
-        // Rend la vue avec la liste des billets
+        // Render the view with the list of tickets
         return $this->render('back/ticket/browse.html.twig', [
             'ticketList' => $ticketList,
         ]);
@@ -34,20 +32,20 @@ class TicketController extends AbstractController
 
     /**
      * @Route("/back/ticket/{id<\d+>}", name="app_back_ticket_read", methods={"GET"})
-     * Méthode pour afficher les détails d'un billet par son ID
+     * Method to display the details of a ticket by its ID
      */
     #[Route('/back/ticket/{id<\d+>}', name: 'app_back_ticket_read', methods: ['GET'])]
     public function read(int $id, TicketRepository $ticketRepository): Response
     {
-        // Récupère le billet par son ID
+        // Retrieve the ticket by its ID
         $ticket = $ticketRepository->find($id);
 
-        // Vérifie si le billet existe
+        // Check if the ticket exists
         if (!$ticket) {
             throw $this->createNotFoundException('The ticket does not exist.');
         }
 
-        // Rend la vue avec les détails du billet
+        // Render the view with the ticket details
         return $this->render('back/ticket/read.html.twig', [
             'ticket' => $ticket,
         ]);
@@ -55,31 +53,30 @@ class TicketController extends AbstractController
 
     /**
      * @Route("/back/ticket/add", name="app_back_ticket_add", methods={"GET", "POST"})
-     * Méthode pour ajouter un nouveau billet
+     * Method to add a new ticket
      */
     #[Route('/back/ticket/add', name: 'app_back_ticket_add', methods: ['GET', 'POST'])]
     public function add(Request $request, EntityManagerInterface $entityManager, TicketRepository $ticketRepository): Response
     {
-        // Crée une nouvelle instance de Ticket
+        // Create a new Ticket instance
         $ticket = new Ticket();
 
-        // Crée le formulaire de création de billet
+        // Create the new ticket Form
         $form = $this->createForm(TicketType::class, $ticket, ['isNew' => true]);
         $form->handleRequest($request);
 
-        // Vérifie si le formulaire est soumis et valide
+        // Check if the form is submitted and valid
         if ($form->isSubmitted() && $form->isValid()) {
-    
-            // Persiste le nouveau billet et enregistre dans la base de données
+            // Persist the new ticket and save it in the database    
             $entityManager->persist($ticket);
             $entityManager->flush();
 
-            // Ajoute un message flash de succès et redirige vers la liste des billets
+            // Add a success flash message and redirect to the tickets list
             $this->addFlash('success', 'Le billet a bien été créé.');
             return $this->redirectToRoute('app_back_ticket_browse', [], Response::HTTP_SEE_OTHER);
         }
 
-        // Rend la vue du formulaire de création de billet
+        // Render the ticket creation form view
         return $this->render('back/ticket/add.html.twig', [
             'ticket' => $ticket,
             'form' => $form->createView(),
@@ -88,27 +85,27 @@ class TicketController extends AbstractController
 
     /**
      * @Route("/back/ticket/{id<\d+>}/edit", name="app_back_ticket_edit", methods={"GET", "POST"})
-     * Méthode pour éditer un billet existant
+     * Method to edit an existing ticket
      */
     #[Route('/back/ticket/{id<\d+>}/edit', name: 'app_back_ticket_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Ticket $ticket, EntityManagerInterface $entityManager, TicketRepository $ticketRepository): Response
     {
-        // Crée le formulaire d'édition de billet
+
+        // Create the ticket edit form  
         $form = $this->createForm(TicketType::class, $ticket, ['isNew' => false]);
         $form->handleRequest($request);
 
-        // Vérifie si le formulaire est soumis et valide
+        // Check if the form is submitted and valid
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            // Enregistre les modifications dans la base de données
+            // Save the modifications in the database
             $entityManager->flush();
 
-            // Ajoute un message flash de succès et redirige vers la page de détails du billet
+            // Add a success flash message and redirect to the ticket details page
             $this->addFlash('success', 'Le billet a bien été modifié.');
             return $this->redirectToRoute('app_back_ticket_read', ['id' => $ticket->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        // Rend la vue du formulaire d'édition de billet
+        // Render the ticket edit form view
         return $this->render('back/ticket/edit.html.twig', [
             'ticket' => $ticket,
             'form' => $form->createView(),
@@ -117,25 +114,25 @@ class TicketController extends AbstractController
 
     /**
      * @Route("/back/ticket/{id<\d+>}/delete", name="app_back_ticket_delete", methods={"POST"})
-     * Méthode pour supprimer un billet existant
+     * Method to delete an existing ticket
      */
     #[Route('/back/ticket/{id<\d+>}/delete', name: 'app_back_ticket_delete', methods: ['POST'])]
     public function delete(Request $request, Ticket $ticket, EntityManagerInterface $entityManager): Response
     {
-        // Vérifie si le jeton CSRF est valide
+        // Check if the CSRF token is valid
         if ($this->isCsrfTokenValid('delete' . $ticket->getId(), $request->request->get('_token'))) {
-            // Supprime le billet de la base de données
+            // Remove the ticket from the database
             $entityManager->remove($ticket);
             $entityManager->flush();
 
-            // Ajoute un message flash de succès
+            // Add a success flash message
             $this->addFlash('success', 'Le billet a été supprimé avec succès.');
         } else {
-            // Si le jeton CSRF n'est pas valide, ajoute un message flash d'erreur
+            // If the CSRF token is not valid, add an error flash message
             $this->addFlash('error', 'La suppression du billet a échoué. Le jeton CSRF est invalide.');
         }
 
-        // Redirige vers la page de navigation des billets
+        // Redirect to the tickets navigation page
         return $this->redirectToRoute('app_back_ticket_browse');
     }
 }

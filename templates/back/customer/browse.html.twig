@@ -1,13 +1,11 @@
-{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-{# Définit le bloc 'customerActive' pour indiquer que cette page est active dans le menu de navigation #}
 {% block customerActive %}active{% endblock %}
 
-{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block title %}Liste des Clients{% endblock %}
+
 {% block main %}
-	<div class="container">
-		{# Titre principal de la page #}
+	<div class="container">		
 		<h2 class="text-center my-5 fw-bold display-5">Liste des Clients</h2>
 		
     <!-- Search Bar -->
@@ -23,15 +21,14 @@
 
 		<div class="row justify-content-center">
 			<div class="col-md-8">
-				{# Inclusion du fragment pour afficher les messages de succès ou d'erreur #}
+				{# Flash messages fragment #}
 				{{ include('back/fragments/_message.html.twig') }}
-				<div class="card">
-					{# Titre de la carte #}
+				<div class="card">				
 					<div class="card-header">
 						<h3 class="fs-2 fw-bold mb-0">Clients</h3>
 					</div>
 					<div class="card-body">
-						{# Message à afficher si aucun résultat n'est trouvé, inclus à partir d'un fragment #}
+						{# No Result Message Fragment #}
 						{{ include('back/fragments/_noResult_message.html.twig') }}
 						<div class="table-responsive" id="tableWrapper">
 							<table class="table table-bordered searchable-table">
@@ -52,13 +49,13 @@
 									</tr>
 								</thead>
 								<tbody>
-									{# Boucle pour afficher chaque client dans customerList #}
+									{# Iterating through customerList #}
 									{% for customer in customerList %}
 										<tr>
 											<td>{{ customer.lastname }}</td>
 											<td>{{ customer.firstname }}</td>
 											<td>
-												{# Boucle pour afficher les tickets achetés par le client #}
+												{# Iterating through the tickets #}
 												{% for ticket in customer.getTickets %}
 													<li>{{ ticket.Title }}</li>
 												{% else %}
@@ -67,7 +64,7 @@
 											</td>
 											<td>
 												<div class="d-flex">
-													{# Boutons d'action : voir et supprimer #}
+													{# Actions #}
 													<a href="{{ path('app_back_customer_read', {id: customer.id}) }}" class="btn btn-primary bi bi-search me-2"></a>
 													<form method="post" action="{{ path('app_back_customer_delete', {'id': customer.id}) }}" onsubmit="return confirm('Voulez-vous supprimer {{ customer.lastname }} {{ customer.firstname }}?');">
 														<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ customer.id) }}">
@@ -80,7 +77,7 @@
 								</tbody>
 							</table>
 
-							{# Pagination pour naviguer entre les pages de résultats #}
+							{# Pagination #}
 							<div id="pagination-container" class="pagination justify-content-center">
 								{{ knp_pagination_render(customerList) }}
 							</div>

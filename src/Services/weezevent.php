@@ -5,13 +5,12 @@ namespace App\Services;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-
 /***
  * 
- * Class which allows you to manage the api with Weezevent
+ * Class which allows you to manage the API with Weezevent
  * 
  */
-class weezevent
+class Weezevent
 {
     private HttpClientInterface $client;
     private string $token;
@@ -38,7 +37,7 @@ class weezevent
     public function fetchToken (): string
     {
         try {
-            // Va se connecter à l'API pour générer un token avec les informations passés dans le dossier .env.local + service.yaml
+            // Connect to the API to generate a token with the information provided in the .env.local file + service.yaml
             $response = $this->client->request(
                 'POST',
                 'https://api.weezevent.com/auth/access_token', [
@@ -49,85 +48,85 @@ class weezevent
                     ],
                 ]);
 
-                // Si le statut est différent de 200 j'envoie une exception
+                // If the status is different from 200, throw an exception
                 if ($response->getStatusCode() !== 200) {
-                    throw new \Exception('Erreur lors de la récupération du token');
+                    throw new \Exception('Error while retrieving the token');
                 }
 
-                // Met la réponse dabs une variable
+                // Store the response in a variable
                 $tokenData = $response->toArray();
 
-                // S'il n'y a pas de token dans le tableau alors j'envoie une exception
+                // If there is no token in the array, throw an exception
                 if (!isset($tokenData['accessToken'])) {
-                    throw new \Exception('La clé "accessToken" est manquante dans la réponse');
+                    throw new \Exception('The key "accessToken" is missing in the response');
                 };
 
-                // Je retourne le token
+                // Return the token
                 return $tokenData['accessToken'];
     
 
         } catch (\Exception $e) {
-            return new Response('Erreur : ' . $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+            return new Response('Error: ' . $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
     /**
-     * Fetch all customer via API with Weezevent
+     * Fetch all customers via API with Weezevent
      *
-     * @return array customer
+     * @return array customers
      */
     public function fetchCustomerList(): array
     {
-        // Je custom mon url avec les informations demandée clé API, token et IdEvent
+        // Customize the URL with the requested information: API key, token, and Event ID
         $baseUrl = 'https://api.weezevent.com/participant/list?api_key=' . $this->apiKey . '&access_token=' . $this->token . '&id_event[]=' . $this->idEvent . '&full=1';
         
         try { 
-            // J'envoie ma requete à l'API
+            // Send the request to the API
             $response = $this->client->request(
                 'GET',
                 $baseUrl);
 
-            // Si le statut est différent de 200 j'envoie une exception
+            // If the status is different from 200, throw an exception
             if ($response->getStatusCode() !== 200) {
-                throw new \Exception('Erreur lors de la récupération de la liste');
+                throw new \Exception('Error while retrieving the list');
             }
-            // Je mets le contenu dans un tableau
+            // Put the content into an array
             $content = $response->toArray();
 
             return $content;
 
             } catch (\Exception $e) {
-                throw new \Exception('Erreur lors de la récupération de la liste des clients: ' . $e->getMessage());
+                throw new \Exception('Error while retrieving the customer list: ' . $e->getMessage());
             }
 
     }
 
     /**
-     * Fetch all kind of ticket via API with Weezevent
+     * Fetch all kinds of tickets via API with Weezevent
      *
      * @return array tickets
      */
     public function fetchTicketList(): array
     {
-        // Je custom mon url avec les informations demandée clé API, token et IdEvent
+        // Customize the URL with the requested information: API key, token, and Event ID
         $baseUrl = 'https://api.weezevent.com/tickets?api_key=' . $this->apiKey . '&access_token=' . $this->token . '&id_event[]=' . $this->idEvent . '&full=1';
         
         try {
-            // J'envoie ma requete à l'API
+            // Send the request to the API
             $response = $this->client->request(
                 'GET',
                 $baseUrl);
 
-            // Si le statut est différent de 200 j'envoie une exception
+            // If the status is different from 200, throw an exception
             if ($response->getStatusCode() !== 200) {
-                throw new \Exception('Erreur lors de la récupération de la liste');
+                throw new \Exception('Error while retrieving the list');
             }
 
-            // Je mets le contenu dans un tableau
+            // Put the content into an array
             $content = $response->toArray();
 
-            // j'extrait du tableau uniquement les identifiant de chaque ticket et je les mets dans un tableau
-            // Cela me servira dans le controlleur et dans la vue à afficher le type de billet (Pass 1 jour ...) et non pas juste l'identifiant (12589)
+            // Extract only the identifiers of each ticket from the array and put them into another array
+            // This will be useful in the controller and in the view to display the type of ticket (1-day Pass, etc.) instead of just the identifier (12589)
             $ticketList = [];
             foreach ($content['events'] as $event) {
                 foreach ($event['categories'] as $category  ) {
@@ -145,7 +144,7 @@ class weezevent
             return $ticketList;
 
             } catch (\Exception $e) {
-                throw new \Exception('Erreur lors de la récupération de la liste des tickets: ' . $e->getMessage());
+                throw new \Exception('Error while retrieving the ticket list: ' . $e->getMessage());
             }
 
     }

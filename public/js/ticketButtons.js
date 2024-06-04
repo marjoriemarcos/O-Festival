@@ -1,26 +1,26 @@
-// Définition du module ticketButtons
+// Definition of the ticketButtons module
 export const ticketButtons = {
-    // Propriétés du module
+    // Module properties
     filterButtons: null,
     tableRows: null,
     durationTitle: null,
 
-    // Fonction d'initialisation
+    // Initialization function
     init: function () {
-        // Initialisation des éléments
+        // Initialize elements
         ticketButtons.filterButtons = document.querySelectorAll('.filter-button');
         ticketButtons.tableRows = document.querySelectorAll('#tickets-table-body tr');
         ticketButtons.durationTitle = document.getElementById('duration-title');
 
-        // Vérifiez si les éléments spécifiques à la page sont présents avant d'initialiser ticketButtons
+        // Check if the page-specific elements are present before initializing ticketButtons
         if (ticketButtons.durationTitle) {
-            ticketButtons.bind(); // Initialise ticketButtons si les éléments sont présents
+            ticketButtons.bind(); // Initialize ticketButtons if the elements are present
         }
     },
 
-    // Fonction de liaison des événements
+    // Function to bind event handlers
     bind: function () {
-        // Fonction pour mettre à jour le titre de la durée
+        // Function to update the duration title
         const updateDurationTitle = (type) => {
             switch (type) {
                 case 'Pass 1 JOUR':
@@ -37,22 +37,22 @@ export const ticketButtons = {
             }
         };
 
-        // Parcourir les boutons de filtre et ajouter des écouteurs d'événements
+        // Loop through filter buttons and add event listeners
         ticketButtons.filterButtons.forEach(button => {
             button.addEventListener('click', (event) => {
-                event.preventDefault(); // Empêcher le comportement par défaut du lien
+                event.preventDefault(); // Prevent the default link behavior
 
-                // Obtenir la durée à partir de l'attribut data-duration du bouton
+                // Get the duration from the button's data-duration attribute
                 const duration = button.getAttribute('data-duration');
 
-                // Changement de l'apparence du bouton
+                // Change the button appearance
                 ticketButtons.filterButtons.forEach(btn => btn.classList.remove('selected'));
                 button.classList.add('selected');
 
-                // Mise à jour du titre de la durée
+                // Update the duration title
                 updateDurationTitle(duration);
 
-                // Filtrer les lignes de tableau en fonction de la durée sélectionnée
+                // Filter table rows based on the selected duration
                 ticketButtons.tableRows.forEach(row => {
                     if (duration === 'all' || row.getAttribute('data-duration') === duration) {
                         row.style.display = '';
@@ -65,5 +65,5 @@ export const ticketButtons = {
     }
 };
 
-// Initialiser le module ticketButtons
+// Initialize the ticketButtons module
 ticketButtons.init();

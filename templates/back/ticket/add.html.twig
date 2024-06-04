@@ -1,32 +1,27 @@
-{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-{# Définit le bloc 'ticketActive' pour indiquer que cette page est active dans le menu de navigation #}
 {% block ticketActive %}active{% endblock %}
 
-{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block title %} Ajouter un billet {% endblock %}
+
 {% block main %}
-    <div class="container">
-        <!-- Titre de la page -->
+    <div class="container">        
         <h2 class="text-center my-5 fw-bold display-5">Ajouter un Billet</h2>
         <div class="container mt-5">
-            <div class="row justify-content-center">
-                <!-- Carte principale -->
+            <div class="row justify-content-center">            
                 <div class="col-md-8">
-                    {# Inclusion du fragment pour afficher les messages de succès ou d'erreur #}
+                    {# Flash Messages Fragment #}
                     {{ include('back/fragments/_message.html.twig') }}
-                    <!-- Bouton de retour à la liste des billets -->
+                    <!-- Ticket List Button -->
                     <a href="{{ path('app_back_ticket_browse') }}" class="btn btn-primary fw-bold mb-4">
                         <i class="bi bi-arrow-left"></i> Retour à la liste des billets
                     </a>
-                    <div class="card">
-                        <!-- Titre de la carte -->
-                        <div class="card-header fs-2 fw-bold">
-                            <!-- Icône et texte pour indiquer qu'il s'agit d'un nouveau billet -->
+                    <div class="card">                        
+                        <div class="card-header fs-2 fw-bold">                            
                             <i class="bi bi-person-plus me-2"></i>Nouveau billet
                         </div>
                         <div class="card-body">
-                            <!-- Inclusion du formulaire pour créer un nouveau billet -->
+                            <!-- New Ticket Form  -->
                             {{ include('back/fragments/_form.html.twig', {'button_label': 'Créer le billet'}) }}
                         </div>
                     </div>

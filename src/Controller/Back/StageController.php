@@ -18,23 +18,23 @@ class StageController extends AbstractController
     #[Route('/back/stage', name: 'app_back_stage_browse', methods: ['GET'])]
     public function list(StageRepository $stageRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // Récupération du terme de recherche depuis la requête
+        // Retrieve the search term from the request
         $search = $request->query->get('search');
 
-        // Utilisation du repository pour obtenir les scènes correspondant au terme de recherche
+        // Use the repository to get stages matching the search term
         $stageList = $stageRepository->findByNameSearch($search);
 
-        // Paginer les résultats obtenus
+        // Paginate the retrieved results
         $stageList = $paginator->paginate(
-            $stageList, // Query builder avec les résultats non paginés
-            $request->query->getInt('page', 1), // Numéro de la page actuelle, par défaut 1
-            5 // Nombre d'éléments par page
+            $stageList, // Query builder with non-paginated results
+            $request->query->getInt('page', 1), // Current page number, default 1
+            5 // Number of items per page
         );
 
-        // Rendu du template avec la liste paginée des scènes et le terme de recherche
+        // Render the template with the paginated list of stages and the search term
         return $this->render('back/stage/browse.html.twig', [
-            'stageList' => $stageList, // Liste paginée des scènes
-            'search' => $search, // Terme de recherche actuel pour remplir le champ de recherche
+            'stageList' => $stageList, // Paginated list of stages
+            'search' => $search, // Current search term to fill the search field
         ]);
     }
 
@@ -82,16 +82,16 @@ class StageController extends AbstractController
     public function delete(Request $request, Stage $stage, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $stage->getId(), $request->request->get('_token'))) {
-            // Récupérer tous les slots liés à la scène
+            // Get all slots related to the stage
             $slotRepository = $entityManager->getRepository(Slot::class);
             $slots = $slotRepository->findBy(['stage' => $stage]);
 
-            // Supprimer chaque slot lié à la scène
+            // Remove each slot related to the stage
             foreach ($slots as $slot) {
                 $entityManager->remove($slot);
             }
 
-            // Supprimer la scène elle-même
+            // Remove the stage itself
             $entityManager->remove($stage);
             $entityManager->flush();
 

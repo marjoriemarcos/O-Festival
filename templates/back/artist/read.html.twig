@@ -1,33 +1,32 @@
-{# Étend la mise en page de base #}
+
 {% extends 'back/base.html.twig' %}
 
-{# Définit le bloc 'artistActive' pour indiquer que cette page est active dans le menu de navigation #}
 {% block artistActive %}active{% endblock %}
 
-{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block title %}Détails de l'Artiste{% endblock %}
+
+
 {% block main %}
-    <div class="container">
-        {# Titre de la page #}
+    <div class="container">        
         <h2 class="text-center my-5 fw-bold display-5">Détails de l'Artiste</h2>
         <div class="container mt-5">
-            <div class="row justify-content-center">
-                {# Colonne principale pour le contenu #}
+            <div class="row justify-content-center">                
                 <div class="col-md-8">
-                    {# Lien de retour à la liste des artistes #}
+                    {# Artist List Path #}
                     <a href="{{ path('app_back_artist_browse') }}" class="btn btn-primary fw-bold mb-4">
                         <i class="bi bi-arrow-left"></i>
                         Retour à la liste des artistes
                     </a>
-                    {# Inclusion des messages flash #}
+                    {# Flash Messages Fragment #}
                     {{ include('back/fragments/_message.html.twig') }}
 
-                    {# Carte pour les informations de créneau #}
+                    {# Slot Info #}
                     <div class="card mb-4">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <span class="fs-4 fw-bold">Informations du Créneau</span>
                             {% if slot %}
                                 <div class="d-flex">
-                                    {# Lien pour voir les détails du créneau #}
+                                    {# Slot Link #}
                                     <a href="{{ path('app_back_slot_read', {id: slot.id}) }}" class="btn btn-primary bi bi-search me-2"></a>
                                 </div>
                             </div>
@@ -48,7 +47,7 @@
                                 </div>
                             {% else %}
                                 <div class="d-flex">
-                                    {# Lien pour ajouter un créneau #}
+                                    {# Add a slot #}
                                     <a class="btn btn-success fw-bold" type="button" href="{{ path('app_back_slot_add') }}">Ajouter un créneau</a>
                                 </div>
                             </div>
@@ -58,15 +57,15 @@
                         </div>
                     </div>
 
-                    {# Carte principale pour les détails de l'artiste #}
+                    
                     <div class="card">
-                        {# En-tête de la carte avec le nom de l'artiste et les actions d'édition et de suppression #}
+                        {# Artist Info #}                       
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <span class="fs-2 fw-bold">{{ artist.name }}</span>
                             <div class="d-flex">
-                                {# Lien pour éditer l'artiste #}
+                                {# Edit Artist #}
                                 <a href="{{ path('app_back_artist_edit', {id: artist.id}) }}" class="btn btn-warning me-2 bi bi-pencil"></a>
-                                {# Formulaire pour supprimer l'artiste #}
+                                {# Delete Artist #}
                                 <form method="post" action="{{ path('app_back_artist_delete', {'id': artist.id}) }}" onsubmit="return confirm('Voulez-vous supprimer {{ artist.name }}?');">
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ artist.id) }}">
                                     <button class="btn btn-danger bi bi-trash">{{ button_label|default('') }}</button>
@@ -74,28 +73,28 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            {# Image de l'artiste #}
+                            {# Artist Pic #}
                             <img src="{{ artist.picture }}" alt="Image de l'artiste {{ artist.name }}" class="card-img-top" style="width: 100%;">
                             
-                            {# Genres musicaux de l'artiste #}
+                            {# Artist's Genres #}
                             <h6 class="fw-bold mt-4">Genres Musicaux</h6>
                             {% for genre in artist.genres %}
                                 <span class="badge bg-primary">{{ genre.name }}</span>
                             {% endfor %}
                             
-                            {# Description de l'artiste #}
+                            {# Artist Description #}
                             <div class="mb-4">
                                 <h6 class="fw-bold">Description</h6>
                                 <p>{{ artist.description }}</p>
                             </div>
                             
-                            {# Lien vers la vidéo YouTube de l'artiste #}
+                            {# Artist's Video #}
                             <h6 class="fw-bold">Vidéo YouTube</h6>
                             <div class="my-2">
                                 <a href="{{ artist.video }}" target="_blank" class="badge bg-danger me-0">Vidéo</a>
                             </div>
                             
-                            {# Réseaux sociaux de l'artiste #}
+                            {# Social Links #}
                             <h6 class="fw-bold">Réseaux Sociaux</h6>
                             <div class="d-flex">
                                 <ul class="list-inline mb-0">

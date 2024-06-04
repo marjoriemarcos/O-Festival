@@ -1,41 +1,37 @@
-{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-
-{# Définit le bloc 'homeActive' pour indiquer que cette page est active dans le menu de navigation #}
 {% block homeActive %}active
 {% endblock %}
 
-{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block title %}Back Office O'festival
+{% endblock %}
+
 {% block main %}
-	<div class="container">
-		<!-- Titre principal -->
+	<div class="container">		
 		<h2 class="text-center my-5 fw-bold display-5">Accueil Back Office O'festival</h2>
-		<div class="container mt-5">
-			<!-- Bouton pour voir la programmation -->
+		<div class="container mt-5">			
 			<a href="{{ path('app_back_slot_browse') }}" class="btn btn-primary fw-bold mb-4">
 				Voir la programmation
 				<i class="bi bi-arrow-right"></i>
 			</a>
-			<!-- Liste des jours de la programmation avec les créneaux horaires -->
+			<!-- Days list -->
 			<div class="row">
 				{% for day, slots in {'JOUR 1': slotsDay1, 'JOUR 2': slotsDay2, 'JOUR 3': slotsDay3} %}
 					<div class="col-md-4">
-						<div class="card">
-							<!-- En-tête de la carte avec le jour et la date -->
+						<div class="card">							
 							<div class="card-header fs-2 fw-bold">{{ day }}
 								-
 								{{slots.0.date|date('d/m/Y')}}</div>
 							<div class="card-body">
-								<!-- Liste des créneaux horaires pour le jour donné -->
+								<!-- Slot List -->
 								<ul class="list-group list-group-flush">
 									{% for slot in slots %}
 										<li class="list-group-item">
 											<div class="d-flex justify-content-between align-items-center">
-												<!-- Image de l'artiste -->
+												<!-- Artist Image -->
 												<img
 												src="{{ asset(slot.artist.picture) }}" alt="Image de l'artiste {{ slot.artist.name }}" class="img-thumbnail me-4" style="max-width: 100px;">
-												<!-- Informations sur l'artiste et le créneau horaire -->
+												<!-- Artist and Slot Info -->
 												<div>
 													<h6 class="fw-bold mb-0">{{ slot.artist.name }}</h6>
 													<p class="mb-0">{{ slot.stage.name }}</p>
@@ -43,10 +39,10 @@
 														<br>
 														{{ slot.hour }}</p>
 												</div>
-												<!-- Boutons d'action pour voir les détails du créneau et supprimer -->
+												<!-- Read and Delete Slot Buttons -->
 												<div class="d-flex">
 													<a href="{{ path('app_back_slot_read', {id: slot.id}) }}" class="btn btn-primary bi bi-search me-2"></a>
-													<!-- Formulaire de suppression du créneau -->
+													<!-- Delete Form -->
 													<form method="post" action="{{ path('app_back_slot_delete', {'id': slot.id}) }}" onsubmit="return confirm('Voulez-vous supprimer le créneau du {{ slot.date|date('d/m/y') }} de {{ slot.hour }}?');">
 														<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ slot.id) }}">
 														<button class="btn btn-danger bi bi-trash">{{ button_label|default('')}}</button>

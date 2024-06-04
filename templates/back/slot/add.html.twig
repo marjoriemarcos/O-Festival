@@ -1,10 +1,11 @@
-{# Étend la mise en page de base #}
 {% extends 'back/base.html.twig' %}
 
-{# Définit le bloc 'slotActive' pour indiquer que cette page est active dans le menu de navigation #}
 {% block slotActive %}active{% endblock %}
 
-{# Début du bloc 'main' qui contiendra le contenu principal de la page #}
+{% block title %}Ajouter un Créneau{% endblock %}
+
+
+
 {% block main %}
     <div class="container">
         <h2 class="text-center my-5 fw-bold display-5">Ajouter un Créneau</h2>
@@ -21,7 +22,7 @@
                             <i class="bi bi-calendar3 me-2"></i>Nouveau Créneau
                         </div>
                         <div class="card-body">
-                            <!-- Inclusion du formulaire pour créer un nouveau créneau -->
+                            <!-- New slot form -->
                             {{ include('back/fragments/_form.html.twig', {'button_label': 'Créer le créneau'}) }}
                         </div>
                     </div>
