@@ -10,7 +10,7 @@ use App\Repository\CustomerRepository;
 use App\Entity\Customer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use App\Services\weezevent;
+use App\Services\Weezevent;
 use Knp\Component\Pager\PaginatorInterface;
 
 class CustomerController extends AbstractController
@@ -78,7 +78,7 @@ class CustomerController extends AbstractController
 
     // Route to fetch customers from Weezevent API
     #[Route('/back/api/weezevent/customers', name: 'app_back_customer_fetch_api', methods: ['GET'])]
-    public function fetchApi(weezevent $weezevent)
+    public function fetchApi(Weezevent $weezevent)
     {   
         // Fetching customer orders list
         $content = $weezevent->fetchCustomerList();
