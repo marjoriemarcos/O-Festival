@@ -19,7 +19,7 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
-    App\Services\weezevent:
+    App\Services\Weezevent:
         arguments:
             $username: '%env(resolve:USERNAME)%'
             $password: '%env(resolve:PASSWORD)%'
