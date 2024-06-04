@@ -1,0 +1,39 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}Éditer le Créneau{% endblock %}
+
+{% block slotActive %}active{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <h2 class="text-center my-5 fw-bold display-5">Éditer le Créneau</h2>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <a href="{{ path('app_back_slot_read', { id: slot.id }) }}" class="btn btn-primary fw-bold mb-4">
+                        <i class="bi bi-arrow-left"></i>
+                        Retour au détails du créneau
+                    </a>
+                    {# Flash Messages Fragment #}
+                    {{ include('back/fragments/_message.html.twig') }}
+                    <div class="card">
+                        <!-- Card header -->
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span class="fs-2 fw-bold">{{ slot.day }}-{{ slot.date|date('d/m/y') }} {{ slot.hour }}</span>
+                            <div class="d-flex">
+                                <!-- Edit Slot Form -->
+                                <form method="post" action="{{ path('app_back_slot_delete', {'id': slot.id}) }}" onsubmit="return confirm('Voulez-vous supprimer le créneau du {{ slot.date|date('d/m/y') }} de {{ slot.hour }}?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ slot.id) }}">
+                                    <button class="btn btn-danger bi bi-trash">{{ button_label|default('')}}</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-body">                            
+                            {{ include('back/fragments/_form.html.twig', {'slot': slot, 'button_label': 'Mettre à jour'}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

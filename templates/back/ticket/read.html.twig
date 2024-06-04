@@ -1,70 +1,77 @@
-{% extends "back/base.html.twig" %}
+{% extends 'back/base.html.twig' %}
 
-{% block title%}Billet X{% endblock %}
+{% block ticketActive %}active{% endblock %}
 
-{% block main%}
+{% block title %}Détails du Billet{% endblock %}
 
-<main>
-    <div class="container">
-      <h2 class="text-center my-5 fw-bold display-5">Détails du Ticket</h2>
-      <div class="container mt-5">
-        <div class="row justify-content-center">
-          <!-- Ticket Card -->
-          <div class="col-md-8">
-            <a href="{{path('ticketBackBrowse')}}" class="btn btn-primary fw-bold mb-4">
-              <i class="bi bi-arrow-left"></i> Retour à la liste des tickets
-            </a>
-            <div class="card">
-              <!-- Title Card -->
-              <div class="card-header d-flex justify-content-between align-items-center">
-                <span class="fs-2 fw-bold">
-                  <i class="bi bi-ticket me-2"></i>Pass 1 Jour | Vendredi | Plein Tarif
-                </span>
-                <div class="d-flex">
-                  <a href="#" class="btn btn-warning me-2 bi bi-pencil"></a>
-                  <form action="#" method="post">
-                    <button onclick="return confirm('Souhaitez-vous supprimer ce ticket ?');" type="submit"
-                      class="btn btn-danger bi bi-trash"></button>
-                  </form>
-                </div>
-              </div>
-              <div class="card-body">
-                <!-- Duration -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-clock me-2" style="font-size: 1.5rem;"></i>
-                  <h6 class="fw-bold mb-0">Durée :</h6>
-                  <p class="mb-0 ms-2">1 Jour</p>
-                </div>
-                <!-- Days -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-calendar-date me-2" style="font-size: 1.5rem;"></i>
-                  <h6 class="fw-bold mb-0">Jours :</h6>
-                  <p class="mb-0 ms-2">Vendredi</p>
-                </div>
-                <!-- Fee -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-person-badge me-2" style="font-size: 1.5rem;"></i>
-                  <h6 class="fw-bold mb-0">Type de Forfait :</h6>
-                  <p class="mb-0 ms-2">Plein Tarif</p>
-                </div>
-                <!-- Price -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-currency-euro me-2" style="font-size: 1.5rem;"></i>
-                  <h6 class="fw-bold mb-0">Prix :</h6>
-                  <p class="mb-0 ms-2">80 €</p>
-                </div>
-                <!-- Quantity -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-box-seam me-2" style="font-size: 1.5rem;"></i>
-                  <h6 class="fw-bold mb-0">Quantité :</h6>
-                  <p class="mb-0 ms-2">100</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
+{% block main %}
+
+	<div class="container">
+		<h2 class="text-center my-5 fw-bold display-5">Détails du Billet</h2>
+		<div class="container mt-5">
+			<div
+				class="row justify-content-center">
+				<!-- Ticket Card -->
+				<div class="col-md-8">
+					<!--Ticket List Button -->
+					<a href="{{ path('app_back_ticket_browse') }}" class="btn btn-primary fw-bold mb-4">
+						<i class="bi bi-arrow-left"></i>
+						Retour à la liste des billets
+					</a>
+					{# Flash Messages Fragment #}
+					{{ include('back/fragments/_message.html.twig') }}
+					<div
+						class="card">
+						<!-- Title Card -->
+						<div class="card-header d-flex justify-content-between align-items-center">							
+							<span class="fs-2 fw-bold">
+								<i class="bi bi-ticket me-2"></i>
+								{{ ticket.title }}
+							</span>
+							<!-- Action Buttons -->
+							<div class="d-flex">
+								<a href="{{path('app_back_ticket_edit', {id: ticket.id})}}" class="btn btn-warning me-2 bi bi-pencil"></a>
+								<form method="post" action="{{ path('app_back_ticket_delete', {'id': ticket.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer {{ ticket.title }}?');">
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ticket.id) }}">
+									<button class="btn btn-danger bi bi-trash">{{ button_label|default('')}}</button>
+								</form>
+							</div>
+						</div>
+						<div
+							class="card-body">						
+							<div class="d-flex align-items-center mt-3">
+								<i class="bi bi-clock me-2" style="font-size: 1.5rem;"></i>
+								<h6 class="fw-bold mb-0">Durée :</h6>								
+								{% if ticket.startAt|date('d/m/Y') == ticket.endAt|date('d/m/Y') %}
+									<p class="mb-0 ms-2">le
+										{{ ticket.startAt|date('d/m/Y') }}</p>
+								{% else %}
+									<p class="mb-0 ms-2">du
+										{{ ticket.startAt|date('d/m/Y') }}
+										au
+										{{ ticket.endAt|date('d/m/Y') }}</p>
+								{% endif %}
+							</div>						
+							<div class="d-flex align-items-center mt-3">
+								<i class="bi bi-person-badge me-2" style="font-size: 1.5rem;"></i>
+								<h6 class="fw-bold mb-0">Type de Forfait :</h6>
+								<p class="mb-0 ms-2">{{ ticket.fee }}</p>
+							</div>						
+							<div class="d-flex align-items-center mt-3">
+								<i class="bi bi-currency-euro me-2" style="font-size: 1.5rem;"></i>
+								<h6 class="fw-bold mb-0">Prix :</h6>
+								<p class="mb-0 ms-2">{{ ticket.price }}</p>
+							</div>							
+							<div class="d-flex align-items-center mt-3">
+								<i class="bi bi-box-seam me-2" style="font-size: 1.5rem;"></i>
+								<h6 class="fw-bold mb-0">Quantité :</h6>
+								<p class="mb-0 ms-2">{{ ticket.quantity }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 {% endblock %}

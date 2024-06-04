@@ -85,9 +85,8 @@ body {
 }
 
 /** --------- GENERAL --------- **/
-
-.navbar-brand > .img-fluid {
-    width: 15%;
+.navbar-logo img {
+    height: 7vh;
 }
 
 /** ARTIST **/
@@ -95,6 +94,11 @@ body {
 .img-artist {
    max-width: 300px;
 }
+
+.selected {
+    background-color: #007bff; 
+    color: white;
+  }
 
 /* .navbar {
     height: ;

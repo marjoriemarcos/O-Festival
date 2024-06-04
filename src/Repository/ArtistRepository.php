@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Artist;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,28 +17,129 @@ class ArtistRepository extends ServiceEntityRepository
         parent::__construct($registry, Artist::class);
     }
 
-//    /**
-//     * @return Artist[] Returns an array of Artist objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
 
-//    public function findOneBySomeField($value): ?Artist
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * Récupère un artiste avec des slots associés par son ID.
+     *
+     * @param int $id
+     * @return Artist|null
+     */
+    public function findArtistBySlot(int $id): ?Artist
+    {
+        return $this->createQueryBuilder('artist')
+            // Utilisation d'une jointure interne pour inclure uniquement les artistes avec des slots
+            ->innerJoin('App\Entity\Slot', 'slot', 'WITH', 'slot.artist = artist.id')
+            // Filtre pour inclure uniquement l'artiste avec l'ID spécifié
+            ->where('artist.id = :id')
+            // Attribution de la valeur du paramètre ID
+            ->setParameter('id', $id)
+            // Récupération de la requête
+            ->getQuery()
+            // Exécution de la requête et récupération d'un seul résultat ou null
+            ->getOneOrNullResult();
+    }
+
+    /**
+     * Retrieves all artists who are associated with at least one slot.
+     *
+     * This method uses an inner join between the Artist entity and the Slot entity,
+     * ensuring that only artists who have an associated slot are returned.
+     *
+     * @return Artist[] Returns an array of Artist entities that have associated slots.
+     */
+    public function findArtistsWithSlots(): array
+    {
+        return $this->createQueryBuilder('artist')
+            ->innerJoin('App\Entity\Slot', 'slot', 'WITH', 'slot.artist = artist.id')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Récupère slot et genre de tous les artiste 
+     *
+     * @param string $date format date
+     * @param int $genre id d'un genre
+     * @param int $stage id d'une scène
+     * @return Artist|null
+     */
+    public function findAllArtistByParams($date = null, $genre = null, $stage = null): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        // La requetes SQL qui permet de récupèrer les slot + les genres d'un artiste
+        $sql = '
+            SELECT artist.*,
+                   GROUP_CONCAT(genre.name SEPARATOR ", ") AS genres,
+                   slot.id AS slot_id,
+                   slot.date,
+                   stage.name AS stage_name
+            FROM artist
+            INNER JOIN genre_artist 
+            ON artist.id = genre_artist.artist_id
+            INNER JOIN genre 
+            ON genre.id = genre_artist.genre_id
+            INNER JOIN slot 
+            ON artist.id = slot.artist_id
+            INNER JOIN stage 
+            ON stage.id = slot.stage_id
+        ';
+
+        $conditions = [];
+        $params = [];
+        // Si $date n'est pas null alors on le met dans $condition
+        if ($date !== null) {
+            $conditions[] = 'slot.date = :date';
+            $params['date'] = $date;
+        }
+        // Si $genre n'est pas null alors on le met dans $condition
+        if ($genre !== null) {
+            $conditions[] = 'genre.id = :genre';
+            $params['genre'] = $genre;
+        }
+        // Si $genre n'est pas null alors on le met dans $condition
+        if ($stage !== null) {
+            $conditions[] = 'stage.id = :stage';
+            $params['stage'] = $stage;
+        }
+        // Si $condition est supérieur à 0 alors on ajoute à $sql la fin de la requete
+        if (count($conditions) > 0) {
+            $sql .= ' WHERE ' . implode(' AND ', $conditions);
+        }
+        // Puis ont rajoute la fin de la requete SQL
+        $sql .= '
+            GROUP BY artist.id, slot.id, slot.date, stage.name
+            ORDER BY slot.date ASC
+        ';
+
+        $resultSet = $conn->executeQuery($sql, $params);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+    /**
+     * Recherche des artistes par nom.
+     *
+     * @param string $search Terme de recherche
+     * @return array Retourne un tableau d'objets Artist
+     */
+    public function findByNameSearch($search): array
+    {
+        // Création d'un QueryBuilder pour l'entité 'Artist' aliasée en 'a'
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.genres', 'g') // Jointure avec la table des genres
+            ->leftJoin('a.slot', 's')   // Jointure avec la table des créneaux
+            ->addSelect('g')            // Sélectionnez les colonnes liées aux genres
+            ->addSelect('s')            // Sélectionnez les colonnes liées aux créneaux
+            // Ajout d'une condition WHERE pour filtrer les artistes dont le nom correspond au terme de recherche
+            ->where('a.name LIKE :search')
+            // Définition du paramètre 'search' en ajoutant des wildcards (%) pour une recherche partielle
+            ->setParameter('search', '%' . $search . '%')
+            // Tri des résultats par nom dans l'ordre croissant
+            ->orderBy('a.name', 'ASC')
+            // Exécution de la requête et récupération des résultats
+            ->getQuery()
+            ->getResult();
+    }
 }

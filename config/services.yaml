@@ -19,6 +19,12 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+    App\Services\Weezevent:
+        arguments:
+            $username: '%env(resolve:USERNAME)%'
+            $password: '%env(resolve:PASSWORD)%'
+            $key: '%env(resolve:APIKEY)%'
+            $event: '%env(resolve:EVENT)%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

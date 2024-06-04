@@ -1,51 +1,74 @@
-# O'Festival - Apothéose
+# O'Festival 🪇
 
 Le **O'Festival** est un événement de 3 jours qui célèbre la diversité des univers musicaux.
 
 En tant qu'organisateurs, nous cherchons à créer une expérience immersive pour nos participants, en mettant en avant la richesse de la programmation, la facilité d'accès aux informations pratiques et la possibilité d'acheter des billets et des articles de merchandising en ligne.
+Notre projet a été designé en nous inspirant des célèbres sites de Festival tels que le Cabaret Vert, Les Vieilles Charrues...
 
-## Sprint 0 - Conception
+<div style="text-align:center;">
+    <img src="./docs/integration html-css/images/logo.png" alt="Description de l'image">
+</div>
 
-### 1. Cahier des charges
+## Installation
 
-Le cahier des charges définit les objectifs et les exigences du projet.
+- Cloner le projet avec l'instruction ```git clone git@github.com:O-clock-Liegeois/projet-15-o-festival.git```
+- Ouvrir le projet dans votre IDE,
+- Ouvrir un Terminal depuis votre IDE et faire un ```composer install```. Dans le cas où ```composer install```ne fonctionne pas, faire ```composer update``` puis ```composer install```.
 
-Ce document servira de référence tout au long du processus de conception et de développement, garantissant que toutes les parties prenantes sont alignées sur les mêmes objectifs.
+## Base de données
 
-Il contient :
+### Création du dossier ```.env.local```
 
-1. Une présentation du projet
-2. Les fonctionnalités du projets
-3. La liste des technologies utilisées
-4. La définition de la cible du projet
-5. Les navigateurs compatibles
-6. L’arborescence de l’application
-7. La liste des routes
-8. Les user stories
-9. Les rôles pour notre projet Apothéose
+Pour créer la base de données, il faudra copier/coller le fichier ```.env```et le renommer en ```.env.local```(ce fichier contiendra des données sensibles à ne pas envoyer sur le repository distant).
 
-### 2. Documents relatifs à la BDD
+Dans ce fichier, il faudra copier/coller l'une de ces syntaxes se trouvant initiallement dans le fichier ```.env``` dans le fichier ```.env.local```
 
-La base de données (BDD) du O'Festival est le cœur de notre système d'information.
+```DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=8.0.32&charset=utf8mb4``` (correspond à Mysql)
+```DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=10.11.2-MariaDB&charset=utf8mb4``` (correspond à MariaDB)
+```DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=16&charset=utf8"``` (correspond à PostgreSQL)
 
-Elle contiendra des informations essentielles sur les artistes, les horaires des concerts, les lieux, les billets, et bien plus encore.
+- **Nom d'utilisateur** (```app```): Changez ```app``` pour le nom d'utilisateur de votre base de données.
+- **Mot de passe** (```!ChangeMe!```): Changez ```!ChangeMe!``` pour le mot de passe de votre base de données.
+- **Adresse IP** (```127.0.0.1```): Si votre base de données n'est pas en local, changez cette adresse pour celle de votre serveur de base de données.
+- **Port** (```3306```): Assurez-vous que ce port est correct pour votre base de données.
+- **Nom de la base de données** (```app```): Changez ```app``` pour le nom de votre base de données.
+- **Version du serveur** (```10.11.2-MariaDB```): Modifiez cette version pour correspondre à la version de votre serveur MariaDB/MySQL si nécessaire.
 
-Documents :
+### Création de la base de données
 
-1. Le MCD
-2. Le MLD
-3. Le dictionnaire des données
+Dans le Terminal mettre l'instruction suivante pour créer votre base de données : 
+```php bin/console doctrine:database:create```
+```php bin/console doctrine:migrations:migrate```
 
-### 3. Wireframes et maquettes
 
-Les wireframes sont des maquettes visuelles qui définissent la structure et la disposition des éléments clés de l'interface utilisateur du site web du O'Festival.
+### Fixtures
 
-Ils permettent de visualiser l'agencement des différentes pages, les fonctionnalités interactives, et la navigation entre les sections.
+Pour visualiser les fixtures présentes dans ```src > DataFixtures > AppFixtures.php``` dans les vues faire ```php bin/console doctrine:fixture:load```
 
-Les maquettes sont des représentations à taille de réelle de ce que va représenter le site.
+## Weezevent
 
-## Sprint 1 - Développement
+Le paiement des billets de O'Festival se fait avec l'intégration **Weezevent**
+Il faudra donc créer un compte sur ```https://www.weezevent.com/``` puis créer l'évènement avec les billets, les templates pour les ticket... 
+Pour cela, il faudra se référer à la documentation de **Weezevent** (```https://support.weezevent.com/fr/weezticket```).
 
-### 1. Installation du framework _Symfony_
+Afin de faire le lien entre l'interface et l'API de **Weezevent**, il faudra renseigner les informations dans le dossier ```.env.local``` : 
 
-En utilisant le framework _Symfony_, nous pourrions rapidement mettre en place les fonctionnalités clés telles que la vente de billets et la programmation musicale, tout en garantissant la protection des données des utilisateurs. En résumé, _Symfony_ nous permettrait de créer un site web pour **O'Festival** efficace, sécurisé et évolutif.
+```USERNAME=``` : va correspondre au login de connexion.
+```PASSWORD=``` : va correspondre au mot de passe.
+```APIKEY=``` : va correspondre à la clés API à récupèrer sur le site de **Weezevent**
+```EVENT=``` : l'identifiant de l'évènement (ex : 1146829)
+
+
+## Mailgun
+
+Lors de l'envoie d'une requete par l'utilisateur depuis notre foamulaire de contact, un mail est automatiquement envoyé à l'utilisateur afin de signaler qu'un administrateur y répondra très prochainnement.
+Ce mail est automatiquement envoyé via **Mailgun**.
+
+Ici aussi, il faudra créer un compte sur ```https://app.mailgun.com/``` et il faudra vérifier une adresse email si l'option "gratuite" est choisie.
+Puis il faudra renseigner encore dans le fichier ```.env.local```l'instruction suivante : 
+
+```MAILER_DSN=mailgun+api://KEY:DOMAIN@default?region=us```
+
+Il faudra mettre à la place de: 
+- ```KEY```: La clés API trouvée sur le site de **Mailgun**,
+- ```DOMAIN```: Le nom de domaine généré sur le site de **Mailgun**

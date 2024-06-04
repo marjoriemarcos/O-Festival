@@ -18,14 +18,14 @@ security:
             lazy: true
             provider: app_user_provider
             form_login:
-                login_path: app_login
-                check_path: app_login
+                login_path: app_back_login
+                check_path: app_back_login
                 enable_csrf: true
                 default_target_path: /back # Specify the route to redirect to after login
             logout:
-                path: app_logout
+                path: app_back_logout
                 # where to redirect after logout
-                target: app_login
+                target: app_back_login
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

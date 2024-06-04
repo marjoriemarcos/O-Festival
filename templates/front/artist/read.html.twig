@@ -1,0 +1,123 @@
+{% extends 'front/base.html.twig' %}
+
+{% block programmationActive %}light-yellow-txt{% endblock %}
+
+{% block title %}{{artist.name}}{% endblock %}
+
+{% block main %}
+<div class="container-artist background-img-fixed-bg">
+    <div class="row pt-5 gx-0 ">
+        <!-- Picture of the artist -->
+        <div class="artist-image col-lg-6">
+            <img src="{{ artist.picture }}" alt="Photo de {{ artist.name }}" class="img-fluid">
+        </div>
+
+        <!-- Information on the artist -->
+        <div class="col-lg-6">
+            <div class="artist-informations p-4">
+                <!-- Artist's name -->
+                <h1 class="artist-informations-name roboto-font display-8">{{ artist.name|upper }}</h1>
+
+                <!-- Day and time of the artist's performance -->
+                <div class="artist-informations-show-day roboto-font mb-2">
+                    <h3>
+                        <p>LE {{ artist.slot.getFormattedDate()|upper }}</p>
+                    </h3>
+                    <h3>
+                        <p>DE {{ artist.slot.hour|upper }}</p>
+                    </h3>
+                </div>
+
+                <!-- Stage's name -->
+                <h3 class="artist-informations-stage roboto-font h5 mb-3">{{ artist.slot.stage.name|upper }}</h3>
+                
+				<!-- Musical genres -->
+				{% if artist.genres|length > 0 %}
+					<ul class="list-inline">
+						{% for genre in artist.genres %}
+							<li class="list-inline-item">
+								<a href="{{ path('app_artist_browse_by_genre', { 'genre': genre.id }) }}" class="btn btn-secondary btn-genre px-4 mr-2 mb-2">
+									{{ genre.name }}
+								</a>
+							</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+
+
+                <!-- Artist's description -->
+                <div class="artist-informations-description open-font my-4">
+                    <p>{{ artist.description }}</p>
+                </div>
+
+                <!-- Artist's socials -->
+                {% if artist.website or artist.spotify or artist.facebook or artist.twitter or artist.instagram or artist.snapchat or artist.tiktok %}
+                    <div class="artist-informations-social-networks">
+                        <ul class="list-inline mb-0">
+                            {% if artist.website %}
+                                <li class="list-inline-item">
+                                    <a href="{{ artist.website }}" aria-label="Website">
+                                        <i class="bi bi-globe"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if artist.spotify %}
+                                <li class="list-inline-item">
+                                    <a href="{{ artist.spotify }}" aria-label="Spotify">
+                                        <i class="fa-brands fa-spotify"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if artist.facebook %}
+                                <li class="list-inline-item">
+                                    <a href="{{ artist.facebook }}" aria-label="Facebook">
+                                        <i class="fa-brands fa-facebook"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if artist.twitter %}
+                                <li class="list-inline-item">
+                                    <a href="{{ artist.twitter }}" aria-label="Twitter">
+                                        <i class="fa-brands fa-x-twitter"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if artist.instagram %}
+                                <li class="list-inline-item">
+                                    <a href="{{ artist.instagram }}" aria-label="Instagram">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if artist.snapchat %}
+                                <li class="list-inline-item">
+                                    <a href="{{ artist.snapchat }}" aria-label="Snapchat">
+                                        <i class="fa-brands fa-snapchat"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if artist.tiktok %}
+                                <li class="list-inline-item">
+                                    <a href="{{ artist.tiktok }}" aria-label="TikTok">
+                                        <i class="fa-brands fa-tiktoks"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5 text-center">
+        <!-- Video -->
+        <div class="artist-video embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item w-100 h-100 rounded" src="{{ artist.video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <!-- Link to the ticket shop -->
+        {{ include('front/fragments/_ticket_button.html.twig') }}
+    </div>
+</div>
+{% endblock %}

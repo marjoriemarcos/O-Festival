@@ -1,108 +1,151 @@
+
 {% extends 'back/base.html.twig' %}
 
-{%block title%}Artiste X{%endblock%}
+{% block artistActive %}active{% endblock %}
+
+{% block title %}Détails de l'Artiste{% endblock %}
+
 
 {% block main %}
-  <main>
-    <div class="container">      
-      <h2 class="text-center my-5 fw-bold display-5">Détails de l'Artiste</h2>
-      <div class="container mt-5">
-        <div class="row justify-content-center">
-          <!-- Artist card -->
-          <div class="col-md-8">
-            <a href="{{path('artistBackBrowse')}}" class="btn btn-primary fw-bold mb-4">
-              <i class="bi bi-arrow-left"></i> Retour à la liste des artistes
-            </a>
-            <div class="card">
-              <!-- Card title -->
-              <div class="card-header d-flex justify-content-between align-items-center">
-                <span class="fs-2 fw-bold">Arthur</span>
-                <div class="d-flex">
-                  <a href="#" class="btn btn-warning me-2 bi bi-pencil"></a>
-                  <form action="#" method="post">
-                    <button onclick="return confirm('Souhaitez-vous supprimer cet artiste ?');" type="submit"
-                      class="btn btn-danger bi bi-trash"></button>
-                  </form>
+    <div class="container">        
+        <h2 class="text-center my-5 fw-bold display-5">Détails de l'Artiste</h2>
+        <div class="container mt-5">
+            <div class="row justify-content-center">                
+                <div class="col-md-8">
+                    {# Artist List Path #}
+                    <a href="{{ path('app_back_artist_browse') }}" class="btn btn-primary fw-bold mb-4">
+                        <i class="bi bi-arrow-left"></i>
+                        Retour à la liste des artistes
+                    </a>
+                    {# Flash Messages Fragment #}
+                    {{ include('back/fragments/_message.html.twig') }}
+
+                    {# Slot Info #}
+                    <div class="card mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span class="fs-4 fw-bold">Informations du Créneau</span>
+                            {% if slot %}
+                                <div class="d-flex">
+                                    {# Slot Link #}
+                                    <a href="{{ path('app_back_slot_read', {id: slot.id}) }}" class="btn btn-primary bi bi-search me-2"></a>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="slot-details">
+                                    <p class="mb-1">
+                                        <strong><i class="bi bi-calendar-date me-2" style="font-size: 1.5rem;"></i>Date:</strong>
+                                        {{ artist.slot.day }}-{{ artist.slot.date|date('d/m/Y') }}</p>
+
+                                    <p class="mb-1">
+                                        <strong><i class="bi bi-clock me-2" style="font-size: 1.5rem;"></i>Heure:</strong>
+                                        {{ artist.slot.hour }}
+                                    </p>
+                                    <p class="mb-1">
+                                        <strong><i class="bi bi-music-note me-2" style="font-size: 1.5rem;"></i>Scène:</strong>
+                                        {{ artist.slot.stage.name }}</p>
+                                </div>
+                            {% else %}
+                                <div class="d-flex">
+                                    {# Add a slot #}
+                                    <a class="btn btn-success fw-bold" type="button" href="{{ path('app_back_slot_add') }}">Ajouter un créneau</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted mb-3">Pas de créneau</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    
+                    <div class="card">
+                        {# Artist Info #}                       
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span class="fs-2 fw-bold">{{ artist.name }}</span>
+                            <div class="d-flex">
+                                {# Edit Artist #}
+                                <a href="{{ path('app_back_artist_edit', {id: artist.id}) }}" class="btn btn-warning me-2 bi bi-pencil"></a>
+                                {# Delete Artist #}
+                                <form method="post" action="{{ path('app_back_artist_delete', {'id': artist.id}) }}" onsubmit="return confirm('Voulez-vous supprimer {{ artist.name }}?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ artist.id) }}">
+                                    <button class="btn btn-danger bi bi-trash">{{ button_label|default('') }}</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {# Artist Pic #}
+                            <img src="{{ artist.picture }}" alt="Image de l'artiste {{ artist.name }}" class="card-img-top" style="width: 100%;">
+                            
+                            {# Artist's Genres #}
+                            <h6 class="fw-bold mt-4">Genres Musicaux</h6>
+                            {% for genre in artist.genres %}
+                                <span class="badge bg-primary">{{ genre.name }}</span>
+                            {% endfor %}
+                            
+                            {# Artist Description #}
+                            <div class="mb-4">
+                                <h6 class="fw-bold">Description</h6>
+                                <p>{{ artist.description }}</p>
+                            </div>
+                            
+                            {# Artist's Video #}
+                            <h6 class="fw-bold">Vidéo YouTube</h6>
+                            <div class="my-2">
+                                <a href="{{ artist.video }}" target="_blank" class="badge bg-danger me-0">Vidéo</a>
+                            </div>
+                            
+                            {# Social Links #}
+                            <h6 class="fw-bold">Réseaux Sociaux</h6>
+                            <div class="d-flex">
+                                <ul class="list-inline mb-0">
+                                    {% if artist.website %}
+                                        <li class="list-inline-item">
+                                            <a href="{{ artist.website }}">
+                                                <i class="bi bi-globe fs-3 dark-blue-txt"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if artist.spotify %}
+                                        <li class="list-inline-item">
+                                            <a href="{{ artist.spotify }}">
+                                                <i class="fa-brands fa-spotify fs-3 dark-blue-txt"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if artist.facebook %}
+                                        <li class="list-inline-item">
+                                            <a href="{{ artist.facebook }}">
+                                                <i class="fa-brands fa-facebook fs-3 dark-blue-txt"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if artist.instagram %}
+                                        <li class="list-inline-item">
+                                            <a href="{{ artist.instagram }}">
+                                                <i class="fa-brands fa-instagram fs-3 dark-blue-txt"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if artist.snapchat %}
+                                        <li class="list-inline-item">
+                                            <a href="{{ artist.snapchat }}">
+                                                <i class="fa-brands fa-snapchat fs-3 dark-blue-txt"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if artist.tiktok %}
+                                        <li class="list-inline-item">
+                                            <a href="{{ artist.tiktok }}">
+                                                <i class="fa-brands fa-tiktok fs-3 dark-blue-txt"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="card-body">
-                <!-- Artist picture -->
-                <img src="{{asset('images/chanteur.jpg')}}" alt="Image de l'artiste Arthur" class="card-img-top"
-                  style="width: 100%;">
-                <!-- Musical genres -->
-                <h6 class="fw-bold mt-4">Genres Musicaux</h6>
-                
-                <div class="my-2">
-                  <span class="badge bg-primary me-2">Pop</span>
-                  <span class="badge bg-secondary">Rock</span>
-                </div>
-                <!-- Description -->
-                <div class="mb-4">
-                  <h6 class="fw-bold">Description</h6>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ipsam sed exercitationem quia.
-                    Placeat, rerum vel! Labore explicabo harum dolor numquam magni consectetur deleniti vitae eligendi
-                    sit, suscipit similique totam. Corrupti voluptatum, maxime est at quasi quisquam commodi doloribus
-                    vero! Non perferendis earum pariatur, nam provident voluptates dicta sequi eligendi ex aspernatur
-                    iusto quisquam maiores unde eveniet ut id itaque sed dolorum voluptas? Hic, quos eaque iure alias
-                    ea, ducimus doloremque molestiae quisquam similique, magnam nihil qui aut natus deleniti accusamus
-                    voluptatibus. Recusandae quis consequuntur similique voluptate rerum illo repellendus nostrum
-                    suscipit id, odit officiis eligendi quo minus consectetur nobis explicabo aperiam quod laborum
-                    repudiandae illum soluta dolore. Laboriosam eius molestias quas officia maiores impedit a optio ab
-                    inventore quis odio, modi rem nisi doloribus provident, ad velit mollitia, incidunt ex doloremque
-                    laudantium et cupiditate eos unde? Officiis mollitia corrupti harum vitae nostrum accusamus a beatae
-                    adipisci esse. Quibusdam, molestias.</p>
-                </div>
-                <!-- YouTube Video Link -->
-                <h6 class="fw-bold">Vidéo YouTube</h6>
-                <div class="my-2">
-                  <a href="https://youtu.be/UvEwfQvVSGg" target="_blank" class="badge bg-danger me-0">Vidéo</a>
-                </div>
-                <!-- Socials -->
-                <h6 class="fw-bold">Réseaux Sociaux</h6>
-                <div class="d-flex">
-                  <ul class="list-inline mb-0">                    
-                    <li class="list-inline-item">
-                      <a href="#">
-                        <i class="bi bi-globe fs-3 dark-blue-txt"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#">
-                        <i class="fa-brands fa-spotify fs-3 dark-blue-txt"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#">
-                        <i class="fa-brands fa-facebook fs-3 dark-blue-txt"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#">
-                        <i class="fa-brands fa-instagram fs-3 dark-blue-txt"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#">
-                        <i class="fa-brands fa-youtube fs-3 dark-blue-txt"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#">
-                        <i class="fa-brands fa-snapchat fs-3 dark-blue-txt"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#">
-                        <i class="fa-brands fa-tiktok fs-3 dark-blue-txt"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </main>
 {% endblock %}

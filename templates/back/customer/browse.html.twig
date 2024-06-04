@@ -1,0 +1,90 @@
+{% extends 'back/base.html.twig' %}
+
+{% block customerActive %}active{% endblock %}
+
+{% block title %}Liste des Clients{% endblock %}
+
+{% block main %}
+	<div class="container">		
+		<h2 class="text-center my-5 fw-bold display-5">Liste des Clients</h2>
+		
+    <!-- Search Bar -->
+    <div class="row mb-2">
+        <form class="d-flex justify-content-center" action="{{ path('app_back_customer_browse') }}" method="get">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-4 me-2">
+                <input class="form-control me-sm-2 search-input" type="search" name="search" value="{{ search }}" placeholder="Rechercher...">
+            </div>
+            <button class="btn btn-primary bi bi-search my-2 my-sm-0" type="submit" id="searchButton"></button>
+            <button class="btn btn-secondary bi bi-x my-2 my-sm-0 ms-2" type="button" id="resetButton" style="display: {{ search ? 'block' : 'none' }};">Réinitialiser</button>
+        </form>
+    </div>
+
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				{# Flash messages fragment #}
+				{{ include('back/fragments/_message.html.twig') }}
+				<div class="card">				
+					<div class="card-header">
+						<h3 class="fs-2 fw-bold mb-0">Clients</h3>
+					</div>
+					<div class="card-body">
+						{# No Result Message Fragment #}
+						{{ include('back/fragments/_noResult_message.html.twig') }}
+						<div class="table-responsive" id="tableWrapper">
+							<table class="table table-bordered searchable-table">
+								<thead class="thead-dark">
+									<tr>
+										<th scope="col" data-sortable>
+											<i class="bi bi-person me-2"></i>Nom
+										</th>
+										<th scope="col" data-sortable>
+											<i class="bi bi-person me-2"></i>Prénom
+										</th>
+										<th scope="col">
+											<i class="bi bi-ticket me-2"></i>Tickets achetés
+										</th>
+										<th class="col-1">
+											<i class="bi bi-gear me-2"></i>Actions
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									{# Iterating through customerList #}
+									{% for customer in customerList %}
+										<tr>
+											<td>{{ customer.lastname }}</td>
+											<td>{{ customer.firstname }}</td>
+											<td>
+												{# Iterating through the tickets #}
+												{% for ticket in customer.getTickets %}
+													<li>{{ ticket.Title }}</li>
+												{% else %}
+													<li>Ce client n'a pas acheté de tickets</li>
+												{% endfor %}
+											</td>
+											<td>
+												<div class="d-flex">
+													{# Actions #}
+													<a href="{{ path('app_back_customer_read', {id: customer.id}) }}" class="btn btn-primary bi bi-search me-2"></a>
+													<form method="post" action="{{ path('app_back_customer_delete', {'id': customer.id}) }}" onsubmit="return confirm('Voulez-vous supprimer {{ customer.lastname }} {{ customer.firstname }}?');">
+														<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ customer.id) }}">
+														<button class="btn btn-danger bi bi-trash">{{ button_label|default('') }}</button>
+													</form>
+												</div>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+
+							{# Pagination #}
+							<div id="pagination-container" class="pagination justify-content-center">
+								{{ knp_pagination_render(customerList) }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

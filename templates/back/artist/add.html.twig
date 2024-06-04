@@ -1,0 +1,38 @@
+{# Extend the base layout #}
+{% extends 'back/base.html.twig' %}
+
+{# Define the title of the page #}
+{% block title %}Ajouter un artiste{% endblock %}
+
+{# Define the 'artistActive' block to indicate that this page is active in the navigation menu #}
+{% block artistActive %}active{% endblock %}
+
+{# Begin the 'main' block which will contain the main content of the page #}
+{% block main %}
+	<div class="container">
+		{# Page title #}
+		<h2 class="text-center my-5 fw-bold display-5">Ajouter un artiste</h2>
+		<div class="row justify-content-center">
+		{% dump(form) %}
+			<div class="col-md-8">
+				{# Link to return to the list of artists #}
+				<a href="{{ path('app_back_artist_browse') }}" class="btn btn-primary fw-bold mb-4">
+					<i class="bi bi-arrow-left"></i>
+					Retour à la liste des artistes
+				</a>
+				{# Include the fragment to display success or error messages #}
+				{{ include('back/fragments/_message.html.twig') }}
+				<div class="card">
+					{# Card header with icon and title #}
+					<div class="card-header fs-2 fw-bold">
+						<i class="bi bi-person-plus me-2"></i>Nouvel artiste
+					</div>
+					<div class="card-body">
+						{# Include the form to add a new artist, with the button label defined #}
+						{{ include('back/fragments/_form.html.twig', {'button_label': 'Ajouter un artiste'}) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

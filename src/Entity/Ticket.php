@@ -6,6 +6,7 @@ use App\Repository\TicketRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TicketRepository::class)]
 class Ticket
@@ -15,10 +16,15 @@ class Ticket
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 64)]
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     private ?string $title = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Assert\Type(type: 'float')]
+    #[Assert\GreaterThanOrEqual(0)]
     private ?float $price = null;
 
     #[ORM\Column]
@@ -28,15 +34,21 @@ class Ticket
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Type(type: 'datetimeinterface')]
     private ?\DateTimeImmutable $startAt = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Type(type: 'datetimeinterface')]
     private ?\DateTimeImmutable $endAt = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\NotNull]
+    #[Assert\Type(type: 'integer')]
+    #[Assert\GreaterThanOrEqual(0)]
     private ?int $quantity = null;
 
-    #[ORM\Column(length: 64)]
+    #[ORM\Column(length: 64, nullable: true)]
+    #[Assert\Length(max: 64)]
     private ?string $fee = null;
 
     /**
@@ -45,9 +57,31 @@ class Ticket
     #[ORM\ManyToMany(targetEntity: Customer::class, mappedBy: 'tickets')]
     private Collection $customers;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $duration = null;
+
+    #[ORM\Column(length: 64)]
+    private ?string $type = null;
+
+    private ?string $formattedStartAt = null;
+    private ?string $formattedEndAt = null;
+
     public function __construct()
     {
         $this->customers = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
+    }
+
+
+    /**
+     * Calculate the duration of the ticket in day
+     *
+     * @return void
+     */
+    public function calculateDuration(): int
+    {
+        $interval = $this->startAt->diff($this->endAt);
+        return $interval->h / 24;
     }
 
     public function getId(): ?int
@@ -125,7 +159,7 @@ class Ticket
         $this->endAt = $endAt;
 
         return $this;
-    }   
+    }
 
     public function getQuantity(): ?int
     {
@@ -176,5 +210,59 @@ class Ticket
         }
 
         return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(?int $duration): static
+    {
+        $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function formatedDateStart(): string
+    {
+        return $this->startAt->format('d/m/Y');
+    }
+
+    public function formatedDateEnd(): string
+    {
+        return $this->endAt->format('d/m/Y');
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): static
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getFormattedStartAt(): ?string
+    {
+        return $this->formattedStartAt;
+    }
+
+    public function setFormattedStartAt(?string $formattedStartAt): void
+    {
+        $this->formattedStartAt = $formattedStartAt;
+    }
+
+    public function getFormattedEndAt(): ?string
+    {
+        return $this->formattedEndAt;
+    }
+
+    public function setFormattedEndAt(?string $formattedEndAt): void
+    {
+        $this->formattedEndAt = $formattedEndAt;
     }
 }

@@ -1,82 +1,103 @@
 {% extends 'back/base.html.twig' %}
 
-{% block title %}Client X{% endblock %}
+{% block customerActive %}active{% endblock %}
+
+{% block title %}Détails du Client{% endblock %}
 
 {% block main %}
 
-<main>
-    <div class="container">     
-      <h2 class="text-center my-5 fw-bold display-5">Détails du Client</h2>
-      <div class="container mt-5">
-        <div class="row justify-content-center">
-          <!-- Customer Card -->
-          <div class="col-md-8">
-            <a href="{{path('customerBrowse')}}" class="btn btn-primary fw-bold mb-4">
-              <i class="bi bi-arrow-left"></i> Retour à la liste des clients
-            </a>
-            <div class="card">
-              <!--Card Title -->
-              <div class="card-header d-flex justify-content-between align-items-center">
-                <span class="fs-2 fw-bold">
-                  <i class="bi bi-person me-2"></i> Jean Dupont
-                </span>
-                <div class="d-flex">
-                  <form action="#" method="post">
-                    <button onclick="return confirm('Souhaitez-vous supprimer ce client ?');" type="submit"
-                      class="btn btn-danger bi bi-trash"></button>
-                  </form>
+    <div class="container">        
+        <h2 class="text-center my-5 fw-bold display-5">Détails du Client</h2>
+        
+        <div class="container mt-5">
+            <div class="row justify-content-center">                
+                <div class="col-md-8">
+                    {# Customer List Link #}
+                    <a href="{{ path('app_back_customer_browse') }}" class="btn btn-primary fw-bold mb-4">
+                        <i class="bi bi-arrow-left"></i> Retour à la liste des clients
+                    </a>
+                    
+                    <div class="card">                        
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span class="fs-2 fw-bold">
+                                <i class="bi bi-person me-2"></i>
+                                {{ customer.firstname }} {{ customer.lastname }}
+                            </span>
+                            <div class="d-flex">
+                                <form method="post" action="{{ path('app_back_customer_delete', {'id': customer.id}) }}" onsubmit="return confirm('Voulez-vous supprimer {{ customer.lastname }} {{ customer.firstname }}?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ customer.id) }}">
+                                    <button class="btn btn-danger bi bi-trash">{{ button_label|default('') }}</button>
+                                </form>
+                            </div>
+                        </div>                        
+                       
+                        <div class="card-body">
+                            {# Birthdate #}
+                            <div class="d-flex align-items-center mt-3">
+                                <i class="bi bi-calendar3 me-2"></i>
+                                <h6 class="fw-bold mb-0">Date de naissance :</h6>
+                                <p class="mb-0 ms-2">{{ customer.birthdate | date('d/m/Y') }}</p>
+                            </div>
+                            
+                            {# Email #}
+                            <div class="d-flex align-items-center mt-3">
+                                <i class="bi bi-envelope me-2"></i>
+                                <h6 class="fw-bold mb-0">Email :</h6>
+                                <p class="mb-0 ms-2">{{ customer.email }}</p>
+                            </div>
+                            
+                            {# Phone Number #}
+                            <div class="d-flex align-items-center mt-3">
+                                <i class="bi bi-phone me-2"></i>
+                                <h6 class="fw-bold mb-0">Numéro de téléphone :</h6>
+                                <p class="mb-0 ms-2">{{ customer.phoneNumber }}</p>
+                            </div>
+                            
+                            {# Address #}
+                            <div class="d-flex align-items-center mt-3">
+                                <i class="bi bi-geo-alt me-2"></i>
+                                <h6 class="fw-bold mb-0">Adresse :</h6>
+                                <p class="mb-0 ms-2">{{ customer.adress }}</p>
+                            </div>
+                            
+                            {# Post Code #}
+                            <div class="d-flex align-items-center mt-3">
+                                <i class="bi bi-geo-alt me-2"></i>
+                                <h6 class="fw-bold mb-0">Code postal :</h6>
+                                <p class="mb-0 ms-2">{{ customer.postcode }}</p>
+                            </div>
+                            
+                            {# Ville #}
+                            <div class="d-flex align-items-center mt-3">
+                                <i class="bi bi-geo-alt me-2"></i>
+                                <h6 class="fw-bold mb-0">Ville :</h6>
+                                <p class="mb-0 ms-2">{{ customer.town }}</p>
+                            </div>
+                            
+                            {# Tickets #}
+                            <div class="d-flex align-items-center mt-3">
+                                <i class="bi bi-ticket me-2"></i>
+                                <h6 class="fw-bold mb-0">Tickets achetés :</h6>
+                            </div>
+                            
+                            {# Tickets bought by the customer #}
+                            <ul class="list-group mt-3">
+                                {% for ticket in customer.getTickets %}
+                                    <li class="list-group-item">
+                                        <a href="{{ path('app_ticket_read_admin', {id: ticket.id}) }}">
+                                            <i class="bi bi-ticket me-2"></i>
+                                            {{ ticket.title }}
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="list-group-item">Ce client n'a pas acheté de tickets</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="card-body">
-                <!-- Birthdate -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-calendar3 me-2"></i>
-                  <h6 class="fw-bold mb-0">Date de naissance :</h6>
-                  <p class="mb-0 ms-2">01/01/1990</p>
-                </div>
-                <!-- Email -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-envelope me-2"></i>
-                  <h6 class="fw-bold mb-0">Email :</h6>
-                  <p class="mb-0 ms-2">jean.dupont@example.com</p>
-                </div>
-                <!-- Phone number -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-phone me-2"></i>
-                  <h6 class="fw-bold mb-0">Numéro de téléphone :</h6>
-                  <p class="mb-0 ms-2">0123456789</p>
-                </div>
-                <!-- Address -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-geo-alt me-2"></i>
-                  <h6 class="fw-bold mb-0">Adresse :</h6>
-                  <p class="mb-0 ms-2">123 Rue de la Liberté</p>
-                </div>
-                <!-- Postcode -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-geo-alt me-2"></i>
-                  <h6 class="fw-bold mb-0">Code postal :</h6>
-                  <p class="mb-0 ms-2">75001</p>
-                </div>
-                <!-- City -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-geo-alt me-2"></i>
-                  <h6 class="fw-bold mb-0">Ville :</h6>
-                  <p class="mb-0 ms-2">Paris</p>
-                </div>
-                <!-- Bought tickets -->
-                <div class="d-flex align-items-center mt-3">
-                  <i class="bi bi-ticket me-2"></i>
-                  <h6 class="fw-bold mb-0">Tickets achetés :</h6>
-                  <p class="mb-0 ms-2">Pass 1 Jour, Pass 2 Jours</p>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </main>
 
 {% endblock %}
-

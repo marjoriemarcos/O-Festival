@@ -1,6 +1,0 @@
-POST https://api.weezevent.com/auth/access_token HTTP/1.0
-content-type:application/x-www-form-urlencoded;charset=utf-8
-
-&username=marjorie.marcos@oclock.school
-&password=.ybqeN3VAL2bd!H
-&api_key=O502448

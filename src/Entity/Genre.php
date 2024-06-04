@@ -6,8 +6,11 @@ use App\Repository\GenreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: GenreRepository::class)]
+#[UniqueEntity('name')]
 class Genre
 {
     #[ORM\Id]
@@ -16,6 +19,8 @@ class Genre
     private ?int $id = null;
 
     #[ORM\Column(length: 64)]
+    #[Assert\Length(max: 64)]
+    #[Assert\NotBlank(message: 'Merci d\'indiquer un genre')]
     private ?string $name = null;
 
     #[ORM\Column]
@@ -33,6 +38,7 @@ class Genre
     public function __construct()
     {
         $this->artists = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
