@@ -31,7 +31,7 @@
         <header>
             <div class="header roboto-font text-white">
                 <!-- Navbar -->
-                <nav class="navbar dark-blue-bg px-5">
+                <nav class="navbar dark-blue-bg px-4">
                     <a class="navbar-brand navbar-logo" href="{{ path('app_main_home') }}">
                         <img src="{{ asset('images/logoNav.png') }}" alt="Logo de O'Festival" class="img-fluid">
                     </a>
@@ -54,13 +54,10 @@
                             {% endif %}
                         </li>
                     </ul>
-                    <div class="hamburger me-0">
+                    <div class="hamburger">
                         <span class="bar dark-yellow-bg"></span>
                         <span class="bar dark-yellow-bg"></span>
                         <span class="bar dark-yellow-bg"></span>
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <span class="bar"></span>
-                        {% endif %}
                     </div>
                 </nav>
             </div>

@@ -7,12 +7,12 @@ content-type:application/x-www-form-urlencoded;charset=utf-8
 
 ###
 
-GET https://api.weezevent.com/events?api_key=4af7c955bdb1fb64c42597994b0a8cf5&access_token=d0fab73be003c9f1440a5c11713b856c HTTP/1.0
+GET https://api.weezevent.com/events?api_key=4af7c955bdb1fb64c42597994b0a8cf5&access_token=45c16ef47ea3fe6ff75b55596dba0149 HTTP/1.0
 
 ###
 
-GET https://api.weezevent.com/participant/list?api_key=4af7c955bdb1fb64c42597994b0a8cf5&access_token=d0fab73be003c9f1440a5c11713b856c&id_event[]=1146829&full=1 HTTP/1.0
+GET https://api.weezevent.com/participant/list?api_key=4af7c955bdb1fb64c42597994b0a8cf5&access_token=45c16ef47ea3fe6ff75b55596dba0149&id_event[]=1146829&full=1 HTTP/1.0
 
 ###
 
-GET https://api.weezevent.com/tickets?api_key=4af7c955bdb1fb64c42597994b0a8cf5&access_token=d0fab73be003c9f1440a5c11713b856c&id_event[]=1146829&full=1 HTTP/1.0
+GET https://api.weezevent.com/tickets?api_key=4af7c955bdb1fb64c42597994b0a8cf5&access_token=45c16ef47ea3fe6ff75b55596dba0149&id_event[]=1146829&full=1 HTTP/1.0

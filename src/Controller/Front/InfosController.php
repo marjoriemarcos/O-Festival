@@ -21,10 +21,12 @@ class InfosController extends AbstractController
 {
     // Constructor method to inject the SendEmailService dependency
     private SendEmailService $sendEmailService;
+    private string $email;
 
-    public function __construct(SendEmailService $sendEmailService)
+    public function __construct(SendEmailService $sendEmailService, string $email)
     {
         $this->sendEmailService = $sendEmailService;
+        $this->email = $email;
     }
 
     /**
@@ -72,7 +74,7 @@ class InfosController extends AbstractController
 
             // Send the contact email using the SendEmailService
             $this->sendEmailService->sendContactEmail(
-                'ofestival2024@gmail.com',
+                $this->email,
                 $data->email,
                 'Information',
                 ['data' => $data]
@@ -83,7 +85,7 @@ class InfosController extends AbstractController
             // Send a confirmation email to the user
             $this->sendEmailService->sendConfirmationEmail(
                 $data->email,
-                'ofestival2024@gmail.com',
+                $this->email,
                 'Confirmation de réception de votre message',
                 ['data' => $data]);
             return $this->redirectToRoute('app_infos_browse');
