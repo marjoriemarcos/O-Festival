@@ -19,7 +19,7 @@ Notre projet a été designé en nous inspirant des célèbres sites de Festival
 
 ### Création du dossier ```.env.local```
 
-Pour créer la base de données, il faudra copier/coller le fichier ```.env```et le renommer en ```.env.local```(ce fichier contiendra des données sensibles à ne pas envoyer sur le repository distant).
+Pour créer la base de données, il faudra copier/coller le fichier ```.env.test```et le renommer en ```.env.local```(ce fichier contiendra des données sensibles à ne pas envoyer sur le repository distant).
 
 Dans ce fichier, il faudra copier/coller l'une de ces syntaxes se trouvant initiallement dans le fichier ```.env``` dans le fichier ```.env.local```
 
@@ -53,10 +53,10 @@ Pour cela, il faudra se référer à la documentation de **Weezevent** (```https
 
 Afin de faire le lien entre l'interface et l'API de **Weezevent**, il faudra renseigner les informations dans le dossier ```.env.local``` : 
 
-```USERNAME=``` : va correspondre au login de connexion.
-```PASSWORD=``` : va correspondre au mot de passe.
-```APIKEY=``` : va correspondre à la clés API à récupèrer sur le site de **Weezevent**
-```EVENT=``` : l'identifiant de l'évènement (ex : 1146829)
+- ```USERNAME=``` : va correspondre au login de connexion.
+- ```PASSWORD=``` : va correspondre au mot de passe.
+- ```APIKEY=``` : va correspondre à la clés API à récupèrer sur le site de **Weezevent**
+- ```EVENT=``` : l'identifiant de l'évènement (ex : 1146829)
 
 
 ## Mailgun
@@ -72,3 +72,6 @@ Puis il faudra renseigner encore dans le fichier ```.env.local```l'instruction s
 Il faudra mettre à la place de: 
 - ```KEY```: La clés API trouvée sur le site de **Mailgun**,
 - ```DOMAIN```: Le nom de domaine généré sur le site de **Mailgun**
+
+Puis dans le fichier ```.env.local``` renseigner votre adresse mail à la place de ```yourEmail```pour l'envoie automatique des mail depuis la page "infos Pratiques".
+- ```EMAIL=yourEmail```

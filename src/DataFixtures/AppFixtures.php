@@ -37,10 +37,17 @@ class AppFixtures extends Fixture
         };
 
         // Stage
+        $stageName = [
+            'Etoile',
+            'Vibration',
+            'Horizon',
+            'Electrique',
+        ];
+
         $stageList = [];
-        for ($i = 1; $i < 5; $i++) {
+        for ($i = 0; $i < 4; $i++) {
             $stage = (new Stage())
-                ->setName('Scène' . $i)
+                ->setName('Scène : ' . $stageName[$i])
                 ->setCreatedAt(new DateTimeImmutable('now', $timezone));
             $manager->persist($stage);
             $stageList[] = $stage;
@@ -53,9 +60,16 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 20; $i++) {
             $artist = (new Artist())
                 ->setName($faker->unique()->singerName())
-                ->setDescription($faker->text())
+                ->setDescription($faker->text(1000))
                 ->setPicture($faker->unique()->singerPicture())
                 ->setVideo('https://www.youtube.com/embed/UvEwfQvVSGg?si=ZSXsQd_1zxTxu6jX')
+                ->setFacebook('https://www.facebook.com/')
+                ->setInstagram('https://www.instagram.com/')
+                ->setTwitter('https://x.com/')
+                ->setSnapchat('https://www.snapchat.com/')
+                ->setTiktok('https://www.tiktok.com/')
+                ->setSpotify('https://open.spotify.com/intl-fr/artist/78BWF7oHqaEiQAtmLgZAnm/')
+                ->setWebsite('https://www.musicscreen.be/')
                 ->setCreatedAt(new DateTimeImmutable('now', $timezone));
 
             for ($j = 1; $j <= mt_rand(1, 2); $j++) {
@@ -121,8 +135,8 @@ class AppFixtures extends Fixture
 
         // Liste des fees et leurs prix
         $feeList = [
-            'Plein Tarif' => 200,
-            'Tarif Etudiant' => 100,
+            'Plein Tarif' => 100,
+            'Tarif Etudiant' => 80,
             'Tarif Enfant (-12 ans)' => 0,
         ];
 
@@ -141,7 +155,7 @@ class AppFixtures extends Fixture
                 $ticket->setType('Pass 1 JOUR');
                 $ticket->setFee($fee);
                 $ticket->setPrice($price);
-                $ticket->setQuantity(mt_rand(0, 30)); // Quantité aléatoire entre 0 et 30
+                $ticket->setQuantity(mt_rand(0, 500)); // Quantité aléatoire entre 0 et 30
                 $ticket->setCreatedAt(new DateTimeImmutable('now', $timezone));
                 // Persister le ticket
                 $manager->persist($ticket);
@@ -159,8 +173,12 @@ class AppFixtures extends Fixture
             $ticket->setDuration(48);
             $ticket->setFee($fee);
             $ticket->setType('Pass 2 JOURS');
-            $ticket->setPrice($price * 1.75); // Prix plus cher pour 2 jours
-            $ticket->setQuantity(mt_rand(0, 30)); // Quantité aléatoire entre 0 et 30
+            if ($fee === 'Tarif Etudiant') {
+                $ticket->setPrice(150);
+            } else {
+                $ticket->setPrice($price * 1.80); // Prix plus cher pour 2 jours
+            }
+            $ticket->setQuantity(mt_rand(0, 500)); // Quantité aléatoire entre 0 et 30
             $ticket->setCreatedAt(new DateTimeImmutable('now', $timezone));
             // Persister le ticket
             $manager->persist($ticket);
@@ -176,8 +194,12 @@ class AppFixtures extends Fixture
             $ticket->setDuration(72);
             $ticket->setFee($fee);
             $ticket->setType('Pass 3 JOURS');
-            $ticket->setPrice($price * 2.5); // Prix le plus cher pour 3 jours
-            $ticket->setQuantity(mt_rand(0, 30)); // Quantité aléatoire entre 0 et 30
+            if ($fee === 'Tarif Etudiant') {
+                $ticket->setPrice(200);
+            } else {
+                $ticket->setPrice($price * 2.50); // Prix plus cher pour 2 jours
+            }; // Prix le plus cher pour 3 jours
+            $ticket->setQuantity(mt_rand(0, 500)); // Quantité aléatoire entre 0 et 30
             $ticket->setCreatedAt(new DateTimeImmutable('now', $timezone));
             // Persister le ticket
             $manager->persist($ticket);

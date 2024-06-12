@@ -7,10 +7,7 @@
             <div class="card-img-overlay d-flex flex-column justify-content-end align-items-start"> 
                 <h3 class="card-title text-white roboto-font mb-0">{{ artist.name|upper }}</h3>
                 <p class="card-text mb-0 white-background dark-blue-txt roboto-font">
-                    {{ artist.date|date("d/m") }} - 
-                    {% for genre in artist.genres %}
-                        {{ genre.name|upper }}{% if not loop.last %} - {% endif %}
-                    {% endfor %}
+                    {{ artist.date|date("d/m") }} - {{artist.genres}}    
                 </p>
             </div>
         </a>

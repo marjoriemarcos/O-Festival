@@ -21,7 +21,6 @@ class CustomerController extends AbstractController
     {
         // Retrieving search term from the request
         $search = $request->query->get('search');
-
         // Using the repository to get customers matching the search term
         $customerList = $customerRepository->findByLastNameSearch($search);
 
@@ -29,7 +28,7 @@ class CustomerController extends AbstractController
         $customerList = $paginator->paginate(
             $customerList, // Query builder with unpaged results
             $request->query->getInt('page', 1), // Current page number, default to 1
-            5 // Number of items per page
+            10 // Number of items per page
         );
 
         // Rendering the template with the paginated list of customers and the search term
@@ -76,30 +75,21 @@ class CustomerController extends AbstractController
         return $this->redirectToRoute('app_back_customer_browse');
     }
 
-    // Route to fetch customers from Weezevent API
-    #[Route('/back/api/weezevent/customers', name: 'app_back_customer_fetch_api', methods: ['GET'])]
-    public function fetchApi(Weezevent $weezevent)
-    {   
-        // Fetching customer orders list
+
+    // Route to browse customers via Weezevent API
+    #[Route('/back/customer-weezevent', name: 'app_back_customer_browse_api', methods: ['GET'])]
+    public function browseApi(Weezevent $weezevent)
+{       // Fetching customer orders list
         $content = $weezevent->fetchCustomerList();
         $customerList = $content['participants'];
 
         // Fetching ticket types list
         $ticketList = $weezevent->fetchTicketList();
 
-        // Returning data in JSON format
-        return new JsonResponse([
+        // Returning data in template
+        return $this->render('back/customer/browse.api.html.twig', [
             'customerList' => $customerList,
             'ticketList' => $ticketList,
-        ]);
-    }
-
-    // Route to browse customers via Weezevent API
-    #[Route('/back/customer-weezevent', name: 'app_back_customer_browse_api', methods: ['GET'])]
-    public function browseApi()
-    {           
-        return $this->render('back/customer/browse.api.html.twig', [
-            // Data can be passed to the template if needed
         ]);
     
     }

@@ -37,6 +37,8 @@ class TicketController extends AbstractController
                 'title' => 'PASS ' . ($duration / 24) . ' JOUR(S)',
                 'image' => 'pass-' . ($duration / 24) . '-jours.jpg',
             ];
+
+            dump($passes);
         }
 
         // Pass data to the view
@@ -45,13 +47,4 @@ class TicketController extends AbstractController
         ]);
     }
 
-    // Placeholder method for adding tickets (currently not implemented)
-    #[Route('/billetterie', name: 'app_ticket_add', methods: 'POST')]
-    public function add(): Response
-    {
-        // Placeholder method, currently not implemented
-        return $this->render('front/ticket/browse.html.twig', [
-            'controller_name' => 'TicketController',
-        ]);
-    }
 }

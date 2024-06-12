@@ -2,108 +2,57 @@
 
 namespace App\Services;
 
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ArtistRepository;
+use App\Repository\GenreRepository;
+use App\Repository\SlotRepository;
+use App\Repository\StageRepository;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
+
+/***
+ * 
+ * Class that allows you to retrieve data from sevrals repo
+ * 
+ */
 class fetchDataFromRepo
 {
-    private EntityManagerInterface $entityManager;
+    private ArtistRepository $artistRepository;
+    private SlotRepository $slotRepository;
+    private StageRepository $stageRepository;
+    private GenreRepository $genreRepository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(ArtistRepository $artistRepository, SlotRepository $slotRepository, StageRepository $stageRepository, GenreRepository $genreRepository)
     {
-        $this->entityManager = $entityManager;
+        $this->artistRepository = $artistRepository;
+        $this->slotRepository = $slotRepository;
+        $this->stageRepository = $stageRepository;
+        $this->genreRepository = $genreRepository;
     }
 
     /**
-     * Method that retrieves data from multiple repositories efficiently.
+     * 
+     * Method that allows you to retrieve data from ArtistRepository, SlotRepository, StageRepository, GenreRepository
      *
-     * @param string|null $date Optional parameter to filter by date.
-     * @param int|null $genre Optional parameter to filter by genre ID.
-     * @param int|null $stage Optional parameter to filter by stage ID.
-     * @return array Fetched data including artists, slots, stages, and genres.
+     * @return array of data
      */
-    public function fetchDataFromRepo(?string $date = null, ?int $genre = null, ?int $stage = null): array
+    public function fetchDataFromRepo ($date = null, $genre = null, $stage = null): array
     {
-        // Create a query to fetch required entities
-        $query = $this->entityManager->createQuery(
-            'SELECT artist, slot, stage, genre
-            FROM App\Entity\Artist artist
-            JOIN artist.slot slot
-            JOIN slot.stage stage
-            JOIN artist.genres genre'
-        );
-
-        // Execute the query and get the results
-        $results = $query->getResult();
-
-        // Initialize an array to store fetched data
-        $data = [
-            'artistList' => [],
-            'slotList' => [],
-            'stageList' => [],
-            'genreList' => []
-        ];
-
-        // Loop through the results and populate the data array
-        foreach ($results as $result) {
-            $includeResult = true;
-
-            // Format and compare dates if a date filter is provided
-            if ($date !== null) {
-                $slotDate = $result->getSlot()->getDate()->format('Y-m-d');
-                if ($slotDate !== $date) {
-                    $includeResult = false;
-                }
-            }
-
-            // Check if the result should be included based on the genre filter
-            if ($genre !== null) {
-                $genreFound = false;
-                foreach ($result->getGenres() as $g) {
-                    if ($g->getId() === $genre) {
-                        $genreFound = true;
-                        break;
-                    }
-                }
-                if (!$genreFound) {
-                    $includeResult = false;
-                }
-            }
-
-            // Check if the result should be included based on the stage filter
-            if ($stage !== null && $result->getSlot()->getStage()->getId() !== $stage) {
-                $includeResult = false;
-            }
-
-            // Add the result to the artist list if it should be included
-            if ($includeResult) {
-                $data['artistList'][] = [
-                    'id' => $result->getId(),
-                    'picture' => $result->getPicture(),
-                    'name' => $result->getName(),
-                    'date' => $result->getSlot()->getDate()->format('Y-m-d'),
-                    'genres' => $result->getGenres(),
-                    'stage' => $result->getSlot()->getStage()
-                ];
-            }
-
-            // Add the slot to the slot list if it's not already included
-            if (!in_array($result->getSlot(), $data['slotList'], true)) {
-                $data['slotList'][] = $result->getSlot();
-            }
-
-            // Add the stage to the stage list if it's not already included
-            if (!in_array($result->getSlot()->getStage(), $data['stageList'], true)) {
-                $data['stageList'][] = $result->getSlot()->getStage();
-            }
-
-            // Add each genre to the genre list if it's not already included
-            foreach ($result->getGenres() as $g) {
-                if (!in_array($g, $data['genreList'], true)) {
-                    $data['genreList'][] = $g;
-                }
-            }
-        }
+        $paramDate = $date;
+        $paramGenre = $genre;
+        $paramStage = $stage;
+        $data = [];
+        // Récupération de tous les artistes avec des slots associés
+        $data['artistList'] = $this->artistRepository->findAllArtistByParams($paramDate, $paramGenre, $paramStage);
+        // Récupération de tous les slots
+        $data['slotList'] = $this->slotRepository->findAll();
+        // Récupération de tous les stages
+        $data['stageList'] = $this->stageRepository->findAll();
+        // Récupération de 4 des genre
+        $data['genreList'] = $this->genreRepository->findGenresOfArtistsWithSlot();
 
         return $data;
     }
+
+
 }
