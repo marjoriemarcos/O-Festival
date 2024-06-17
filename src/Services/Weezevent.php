@@ -30,7 +30,7 @@ class Weezevent
     }
 
     /**
-     * Generate a token
+     * Generate a token and
      *
      * @return string token
      */
@@ -79,7 +79,6 @@ class Weezevent
     {
         // Customize the URL with the requested information: API key, token, and Event ID
         $baseUrl = 'https://api.weezevent.com/participant/list?api_key=' . $this->apiKey . '&access_token=' . $this->token . '&id_event[]=' . $this->idEvent . '&full=1';
-        
         try { 
             // Send the request to the API
             $response = $this->client->request(
